@@ -1,0 +1,1 @@
+export type Entity = {name: string, initiative: number}
