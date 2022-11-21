@@ -1,1 +1,1 @@
-export type Entity = {name: string, initiative: number}
+export type Entity = {name: string, initiative: number, quantity?: number}

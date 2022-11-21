@@ -1,0 +1,18 @@
+main {
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+td, th {
+    padding: 5px;
+}
+
+th.value-col, th.fn-col {
+    width: 3em;
+}

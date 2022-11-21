@@ -1,5 +1,6 @@
 <script lang="ts">
-    import Entity from "./components/entity/Entity.svelte";
+    import Entities from "./components/entity/Entities.svelte";
+import LockPage from "./components/tools/LockPage.svelte";
     import { entities } from "./store";
   
   const addEntity = () => {
@@ -9,25 +10,23 @@
     }]
   }
 
-  const removeEntity = () => {
+  const removeLastEntity = () => {
     $entities = $entities.slice(0, $entities.length - 2);
   }
+
 </script>
 
 <main>
-  <div class="controls">
-    <button on:click={addEntity}>+</button>
-    <button on:click={removeEntity}>-</button>
-  </div>
-  <div class="headers">
-    <div>Name</div>
-    <div>Initiative</div>
-  </div>
   <div>
-    {#each $entities as entity}
-      <Entity entity={entity}/>
-    {/each}
+    <LockPage/>
+    <button class="add-remove" on:click={addEntity}>+</button>
+    <button class="add-remove" on:click={removeLastEntity}>-</button>
   </div>
+  {#if $entities.length > 0}
+    <Entities/>
+  {:else}
+    <div>Slap some creatures in there!</div>
+  {/if}
 </main>
 
 <style>
@@ -37,15 +36,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-  }
-
-  .controls {
-    display: flex;
+    border: 1px solid brown;
   }
 
   button {
-    height: 30px;
-    width: 70px;
     background: burlywood;
     margin: 2px;
     font-weight: bold;
@@ -54,9 +48,13 @@
     border-radius: 2px;
   }
 
-  .headers {
-    display: grid;
-    grid-template-columns: 90% 1fr;
-    text-align: left;
+  button:hover {
+    background: blanchedalmond;
+    outline: 1px solid brown;
+  }
+
+  .add-remove {
+    height: 40px;
+    width: 40px;
   }
 </style>
