@@ -1,5 +1,13 @@
-main {
+:root {
+    --primary: brown;
+    --secondary: burlywood;
+    --bkg-dark: rgb(37, 38, 39);
+}
+
+body {
+    background-color: var(--bkg-dark);
     font-family: Georgia, 'Times New Roman', Times, serif;
+    color: antiquewhite;
 }
 
 table {

@@ -4,6 +4,7 @@
     import { dRoll } from "../../lib/dieRoll";
     import D20 from "../../assets/d20.svelte";
     import EntityTableData from "./EntityTableData.svelte";
+    import EntityInput from "./EntityInput.svelte";
     
     const removeEntity = (entity: Entity) => {
         $entities = $entities.filter(e => e !== entity);
@@ -20,29 +21,7 @@
         {#each $entities.sort((e1, e2) => e1.initiative - e2.initiative) as entity}
             <tr>
                 <td class="entity-row">
-                    <div class="flex-row">
-                        {#if !$isLocked}
-                            <button class="remove" on:click={() => removeEntity(entity)}>x</button>
-                        {/if}
-                        <input class="entity-input" type="text" bind:value={entity.name} placeholder="Entity"/>
-                        {#if !$isLocked}
-                            {#if !entity.quantity}
-                                <button class="multiply-entities" on:click={() => entity.quantity = 1}>multiply</button>
-                            {:else}
-                                <div>
-                                    <button on:click={() => entity.quantity += 1}>+</button>
-                                    <button on:click={() => entity.quantity -= 1}>-</button>
-                                </div>
-                            {/if}
-                        {/if}
-                    </div>
-                    {#if entity.quantity}
-                        <div>
-                            {#each Array(entity.quantity) as subEntity, i}
-                                <input class="sub-entity" type="text" value={`${entity.name} #${i}`}/>
-                            {/each}
-                        </div>
-                    {/if}
+                   <EntityInput entity={entity} removeEntity={removeEntity}/>
                 </td>
                 <td>
                     <input class="initiative-value" type="number" bind:value={entity.initiative}/>
@@ -73,39 +52,10 @@
         color: brown;
     }
 
-    input[type="text"] {
-        font-style: italic;
-    }
-
     input[type=number]::-webkit-inner-spin-button, 
     input[type=number]::-webkit-outer-spin-button { 
         -webkit-appearance: none; 
         margin: 0; 
-    }
-
-    .entity-row {
-
-    }
-
-    .sub-entity {
-        width: 80%;
-        margin-left: 10%;
-    }
-
-    .flex-row {
-        display: flex;
-        align-items: center;
-        column-gap: 0.5em;
-    }
-
-    .remove {
-        font-weight: bold;
-        background: brown;
-        color: burlywood;
-        border: none;
-        border-radius: 4px;
-        width: 1.5em;
-        height: 1.5em;
     }
 
     .d20 {
