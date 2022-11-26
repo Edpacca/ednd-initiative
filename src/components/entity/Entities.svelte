@@ -3,7 +3,6 @@
     import type { Entity } from "./entity";
     import { dRoll } from "../../lib/dieRoll";
     import D20 from "../../assets/d20.svelte";
-    import EntityTableData from "./EntityTableData.svelte";
     import EntityInput from "./EntityInput.svelte";
     
     const removeEntity = (entity: Entity) => {
@@ -18,13 +17,13 @@
         <th class="fn-col"></th>
     </thead>
     <tbody>
-        {#each $entities.sort((e1, e2) => e1.initiative - e2.initiative) as entity}
+        {#each $entities.sort((e1, e2) => e2.initiative - e1.initiative) as entity}
             <tr>
                 <td class="entity-row">
                    <EntityInput entity={entity} removeEntity={removeEntity}/>
                 </td>
                 <td>
-                    <input class="initiative-value" type="number" bind:value={entity.initiative}/>
+                    <input class="initiative-value" type="number" bind:value={entity.initiative} on:change={() => $entities = $entities}/>
                 </td>
                 <td>
                     {#if !$isLocked} 

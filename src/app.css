@@ -6,7 +6,7 @@
 
 body {
     background-color: var(--bkg-dark);
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: 'Roboto Condensed';
     color: antiquewhite;
 }
 
@@ -19,6 +19,7 @@ table {
 
 td, th {
     padding: 5px;
+    vertical-align: top;
 }
 
 th.value-col, th.fn-col {

@@ -1,7 +1,8 @@
 <script lang="ts">
-    import Entities from "./components/entity/Entities.svelte";
-import LockPage from "./components/tools/LockPage.svelte";
-    import { entities } from "./store";
+  import PlusMinusButton from "./components/common/PlusMinusButton.svelte";
+  import Entities from "./components/entity/Entities.svelte";
+  import LockPage from "./components/tools/LockPage.svelte";
+  import { entities } from "./store";
   
   const addEntity = () => {
     $entities = [...$entities, {
@@ -11,16 +12,18 @@ import LockPage from "./components/tools/LockPage.svelte";
   }
 
   const removeLastEntity = () => {
-    $entities = $entities.slice(0, $entities.length - 2);
+    $entities = $entities.slice(0, $entities.length - 1);
   }
 
 </script>
 
 <main>
-  <div>
+  <div class="top-left-icon">
     <LockPage/>
-    <button class="add-remove" on:click={addEntity}>+</button>
-    <button class="add-remove" on:click={removeLastEntity}>-</button>
+  </div>
+  <div class="buttons">
+    <PlusMinusButton type="+" onClick={addEntity}/>
+    <PlusMinusButton type="-" onClick={removeLastEntity}/>
   </div>
   {#if $entities.length > 0}
     <Entities/>
@@ -37,24 +40,14 @@ import LockPage from "./components/tools/LockPage.svelte";
     align-items: center;
     justify-content: center;
     border: 1px solid brown;
+    position: relative;
   }
 
-  button {
-    background: burlywood;
-    margin: 2px;
-    font-weight: bold;
-    color: brown;
-    border: 2px solid brown;
-    border-radius: 2px;
+  .top-left-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 4px;
   }
 
-  button:hover {
-    background: blanchedalmond;
-    outline: 1px solid brown;
-  }
-
-  .add-remove {
-    height: 40px;
-    width: 40px;
-  }
 </style>
