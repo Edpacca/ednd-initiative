@@ -2,8 +2,13 @@
     import { entities, isLocked } from "../../store";
     import type { Entity } from "./entity";
     import { dRoll } from "../../lib/dieRoll";
-    import D20 from "../../assets/d20.svelte";
     import EntityInput from "./EntityInput.svelte";
+    import D20Button from "../common/D20Button.svelte";
+    import Speed from "../../assets/speed.svelte";
+    import Heart from "../../assets/heart.svelte";
+    import InitiativeValue from "./InitiativeValue.svelte";
+    import BonusValue from "./BonusValue.svelte";
+    import NumberInput from "../common/NumberInput.svelte";
     
     const removeEntity = (entity: Entity) => {
         $entities = $entities.filter(e => e !== entity);
@@ -13,21 +18,29 @@
 <table>
     <thead>
         <th>Name</th>
-        <th class="value-col">Initiative</th>
+        <th class="value-col secondary"><div class="icon-header"><Heart/></div></th>
+        <th class="value-col secondary"><div class="icon-header"><Speed/></div></th>
+        <th class="value-col">Bonus</th>
         <th class="fn-col"></th>
     </thead>
     <tbody>
         {#each $entities.sort((e1, e2) => e2.initiative - e1.initiative) as entity}
             <tr>
                 <td class="entity-row">
-                   <EntityInput entity={entity} removeEntity={removeEntity}/>
+                   <EntityInput bind:entity={entity} removeEntity={removeEntity}/>
                 </td>
                 <td>
-                    <input class="initiative-value" type="number" bind:value={entity.initiative} on:change={() => $entities = $entities}/>
+                    <NumberInput bind:value={entity.hp} isDisabled={$isLocked && !!entity.quantity}/>
+                </td>
+                <td>
+                    <InitiativeValue bind:initiative={entity.initiative} bind:bonus={entity.bonus}/>
+                </td>
+                <td>
+                    <NumberInput bind:value={entity.bonus} showPlus={true}/>
                 </td>
                 <td>
                     {#if !$isLocked} 
-                        <button on:click={() => entity.initiative = dRoll(20)} class="d20"><D20/></button>
+                        <D20Button onClick={() => entity.initiative = dRoll(20)}/>
                     {/if}
                 </td>
             </tr>
@@ -37,37 +50,8 @@
 
 
 <style>
-
-    input {
-        height: 2.5em;
-        text-align: center;
-        width: 100%;
-        box-sizing: border-box;
-        font-size: 18px;
-        font-weight: bold;
+    .icon-header {
+        height: 1.5rem;
     }
 
-    input[type=number] {
-        color: brown;
-    }
-
-    input[type=number]::-webkit-inner-spin-button, 
-    input[type=number]::-webkit-outer-spin-button { 
-        -webkit-appearance: none; 
-        margin: 0; 
-    }
-
-    .d20 {
-        width: 3em;
-        height: 3em;
-        border: none;
-        background: none;
-        fill: brown;
-    }
-
-  .d20:hover {
-        background: none;
-        fill: burlywood;
-        outline: none;
-    }
 </style>

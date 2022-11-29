@@ -17,11 +17,49 @@ table {
     border-spacing: 0;
 }
 
-td, th {
+th {
+    padding: 5px;
+    vertical-align: bottom;
+}
+
+td {
     padding: 5px;
     vertical-align: top;
 }
 
 th.value-col, th.fn-col {
     width: 3em;
+}
+
+button:disabled, .disabled {
+    display: none;
+    visibility: hidden;
+}
+
+.secondary {
+    color: var(--secondary);
+    fill: var(--secondary);
+}
+
+.svg-fit {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.svg-fit-container {
+    position: relative;
+}
+
+input {
+    height: 2.5rem;
+    border-radius: 0.2rem;
+    border: none;
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box;
+    font-size: 18px;
+    font-weight: bold;
 }

@@ -1,34 +1,41 @@
 <script>
+    import { isLocked } from "../../store";
+    import NumberInput from "../common/NumberInput.svelte";
+
+
     export let quantity;
     export let name;
+    export let hp;
 </script>
 
 {#if quantity}
     <div>
         {#each Array(quantity) as e, i}
-        <div class="sub-entity">
-            <div class="number">#{i}</div>
-            <input type="text" value={`${name} #${i}`}/>
-        </div>
+            <div class="sub-entity">
+                <div class="number">#{i}</div>
+                <input type="text" value={`${name} #${i + 1}`}/>
+                <NumberInput isDisabled={!$isLocked} value={hp}/>
+            </div>
         {/each}
     </div>
 {/if}
 
 <style>
     input {
-        height: 2.5em;
         text-align: center;
         width: 100%;
         box-sizing: border-box;
         font-size: 18px;
         font-weight: bold;
+        border: 1px solid grey;
     }
 
     .sub-entity {
         display: grid;
-        grid-template-columns: 2em 1fr;
+        grid-template-columns: 2em 1fr 3em;
         column-gap: 0.5em;
         align-items: center;
+        width: calc(100% + 3em + 10px)
     }
 
     .number {

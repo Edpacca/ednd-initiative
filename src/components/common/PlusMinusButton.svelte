@@ -17,14 +17,14 @@
     button {
         background: var(--secondary);
         border: 2px solid var(--primary);
-        margin: 2px;
         font-weight: bold;
         color: var(--primary);
         border-radius: 2px;
-        height: 32px;
-        width: 32px;
-        border-radius: 4px;
+        height: 2.5em;
+        width: 2.5em;
+        border-radius: 0.3em;
         stroke: var(--primary);
+        transition: 0.3s ease-out;
     }
 
   button:hover {

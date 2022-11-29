@@ -2,12 +2,14 @@
   import PlusMinusButton from "./components/common/PlusMinusButton.svelte";
   import Entities from "./components/entity/Entities.svelte";
   import LockPage from "./components/tools/LockPage.svelte";
-  import { entities } from "./store";
+  import { entities, isLocked } from "./store";
   
   const addEntity = () => {
     $entities = [...$entities, {
       name: "",
-      initiative: undefined
+      initiative: undefined,
+      hp: undefined,
+      bonus: undefined
     }]
   }
 
@@ -21,7 +23,7 @@
   <div class="top-left-icon">
     <LockPage/>
   </div>
-  <div class="buttons">
+  <div class="buttons" class:disabled={$isLocked}>
     <PlusMinusButton type="+" onClick={addEntity}/>
     <PlusMinusButton type="-" onClick={removeLastEntity}/>
   </div>

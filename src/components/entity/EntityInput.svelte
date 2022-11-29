@@ -1,7 +1,8 @@
 <script lang="ts">
     import Goblin from "../../assets/goblin.svelte";
-import { isLocked } from "../../store";
+import { entities, isLocked } from "../../store";
     import PlusMinusButton from "../common/PlusMinusButton.svelte";
+    import RemoveButton from "../common/RemoveButton.svelte";
     import type { Entity } from "./entity";
     import SubEntities from "./SubEntities.svelte";
     export let removeEntity: (e: Entity) => void;
@@ -9,23 +10,21 @@ import { isLocked } from "../../store";
 
 </script>
 
-<div class="entity-area">
-    {#if !$isLocked}
-        <button class="remove" on:click={() => removeEntity(entity)}>x</button>
-    {/if}
-    <div>
-        <input class="entity-input" type="text" bind:value={entity.name} placeholder="Entity"/>
-        <SubEntities bind:name={entity.name} bind:quantity={entity.quantity}/>
+<div class="entity-area" class:unlocked-grid={!$isLocked}>
+    <div class="xbutton" class:disabled={$isLocked}>
+        <RemoveButton onClick={() => removeEntity(entity)} isDisabled={$isLocked}/>
     </div>
-    {#if !$isLocked}
-        {#if !entity.quantity}
-            <button class="multiply" on:click={() => entity.quantity = 1}><Goblin/></button>
-        {:else}
-            <div>
-                <PlusMinusButton type="+" onClick={() => entity.quantity += 1}/>
-                <PlusMinusButton type="-" onClick={() => entity.quantity -= 1}/>
-            </div>
-        {/if}
+    <div class:mob-inputs={!!entity.quantity}>
+        <input class="entity-input" class:mob-input={!!entity.quantity} type="text" bind:value={entity.name} placeholder="Entity"/>
+        <SubEntities bind:name={entity.name} bind:quantity={entity.quantity} hp={entity.hp}/>
+    </div>
+    {#if !entity.quantity}
+        <button class="mob-button" disabled={$isLocked} on:click={() => entity.quantity = 1}><Goblin/></button>
+    {:else}
+        <div class="pm-pad" class:disabled={$isLocked}>
+            <PlusMinusButton type="+" onClick={() => entity.quantity += 1}/>
+            <PlusMinusButton type="-" onClick={() => entity.quantity -= 1}/>
+        </div>
     {/if}
 </div>
 
@@ -35,8 +34,17 @@ import { isLocked } from "../../store";
         font-style: italic;
     }
 
+    .entity-area {
+        width: 100%;
+    }
+
+    .unlocked-grid {
+        display: grid;
+        grid-template-columns: 1.5em 1fr 3em;
+        column-gap: calc((2.5em - 1.5em) / 2);
+    }
+
     input {
-        height: 2.5em;
         text-align: center;
         width: 100%;
         box-sizing: border-box;
@@ -44,26 +52,24 @@ import { isLocked } from "../../store";
         font-weight: bold;
     }
 
-    .remove {
-        font-weight: bold;
-        background: brown;
-        color: burlywood;
-        border: none;
-        border-radius: 4px;
-        width: 1.5em;
-        height: 1.5em;
+    .mob-input {
+        background: none;
+        color: var(--secondary);
     }
 
-    .multiply {
+    .mob-inputs {
+        border: 1px solid var(--secondary);
+    }
+
+    .mob-button {
         height: 3em;
         background: none;
         border: none;
-        fill: var(--secondary)
+        fill: var(--secondary);
     }
 
-    .entity-area {
-        width: 100%;
-        display: grid;
-        grid-template-columns: 2em 1fr 3em;
+    .xbutton {
+        padding-top: calc((2.5em - 1.5em) / 2);
+        text-align: center;
     }
 </style>
