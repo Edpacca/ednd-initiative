@@ -2,20 +2,14 @@
     import { isLocked } from "../../store";
     import PlusMinusButton from "../common/PlusMinusButton.svelte";
     import RemoveButton from "../common/RemoveButton.svelte";
+    import PlayerIcon from "../player-table/PlayerIcon.svelte";
     import { EntityType, type Entity } from "./entity";
     import EntityTypeButton from "./EntityTypeButton.svelte";
     import SubEntities from "./SubEntities.svelte";
     export let removeEntity: (e: Entity) => void;
     export let entity: Entity;
-    
-    const setType = (q) => { if (q === 0) entity.type = EntityType.Enemy; }
-    const setQuantity = (t) => { if (t === EntityType.Minion) entity.quantity = 1; }
-    
-    $: type = entity.type;
-    $: quantity = entity.quantity;
-    $: setQuantity(type);
-    $: setType(quantity);
 
+    $: isMinion = entity.type === EntityType.Minion;
 </script>
 
 <div class="entity-area" class:unlocked-grid={!$isLocked}>
@@ -24,14 +18,20 @@
     </div>
     <div class:minion-inputs={entity.type === EntityType.Minion}>
         <input class="entity-input" class:minion-input={entity.type === EntityType.Minion} type="text" bind:value={entity.name} placeholder="Entity"/>
-        <SubEntities bind:name={entity.name} bind:quantity={entity.quantity} hp={entity.hp}/>
+        {#if isMinion}
+            <SubEntities bind:name={entity.name} bind:quantity={entity.quantity} hp={entity.hp}/>
+        {/if}
     </div>
     <div>
-        <EntityTypeButton bind:type={entity.type}/>
-        {#if entity.quantity > 0}
+        {#if entity.type === EntityType.Player}
+            <PlayerIcon bind:icon={entity.icon}/>
+        {:else}
+            <EntityTypeButton bind:type={entity.type}/>
+        {/if}
+        {#if isMinion}
             <div class="pm-pad" class:disabled={$isLocked}>
                 <PlusMinusButton type="+" onClick={() => entity.quantity += 1}/>
-                <PlusMinusButton type="-" onClick={() => entity.quantity -= 1}/>
+                <PlusMinusButton type="-" onClick={() => {entity.quantity = Math.max(1, entity.quantity - 1)}}/>
             </div>
         {/if}
     </div>

@@ -1,5 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
+    import { isLocked } from "../../store";
     import type { PlayerIconType } from "./PlayerIconType";
 
     export let icon: PlayerIconType | undefined;
@@ -30,7 +31,7 @@
     }
 </script>
 
-<button class="type-button" on:click={() => rotate()}>
+<button class="type-button" on:click={() => rotate()} disabled={$isLocked}>
     {#if icon}
         <svelte:component this={iconComponent}>
             <slot></slot>    

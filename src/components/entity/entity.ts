@@ -13,6 +13,7 @@ export class Entity {
     constructor(type: EntityType) {
         this.type = type;
         this.ac = 10;
+        this.quantity = 1;
         if (type === EntityType.Player) {
             this.icon = "Barbarian";
         }

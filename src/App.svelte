@@ -1,13 +1,8 @@
 <script lang="ts">
-  import PlusMinusButton from "./components/common/PlusMinusButton.svelte";
-    import { EntityType } from "./components/entity/entity";
+  import { EntityType } from "./components/entity/entity";
   import InitiativeTable from "./components/initiative-table/InitiativeTable.svelte";
-    import PlayerTable from "./components/player-table/PlayerTable.svelte";
   import LockPage from "./components/tools/LockPage.svelte";
   import { entities, isLocked } from "./store";
-  
-
-
 </script>
 
 <main>
@@ -16,10 +11,10 @@
   </div>
   <div class="table-container">
     {#if !$isLocked}
-      <PlayerTable/>
+      <InitiativeTable isPlayerTable={true}/>
+      <hr>
     {/if}
-    <hr>
-    <InitiativeTable/>
+      <InitiativeTable/>
   </div>
 </main>
 
