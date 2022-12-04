@@ -1,6 +1,7 @@
 :root {
     --primary: brown;
     --secondary: burlywood;
+    --green: rgb(80, 182, 36);
     --bkg-dark: rgb(37, 38, 39);
 }
 
@@ -41,6 +42,11 @@ button:disabled, .disabled {
     fill: var(--secondary);
 }
 
+.green {
+    color: var(--green);
+    fill: var(--green);
+}
+
 .svg-fit {
     position: absolute;
     left: 0;
@@ -62,4 +68,14 @@ input {
     box-sizing: border-box;
     font-size: 18px;
     font-weight: bold;
+}
+
+.icon-header {
+    height: 1.5rem;
+}
+
+
+.xbutton {
+    padding-top: calc((2.5em - 1.5em) / 2);
+    text-align: center;
 }

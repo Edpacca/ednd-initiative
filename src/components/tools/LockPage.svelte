@@ -1,7 +1,7 @@
 <script lang="ts">
     import { isLocked } from "../../store";
-    import PadlockClosed from "../../assets/padlock-closed.svelte";
-    import PadlockOpen from "../../assets/padlock-open.svelte";
+    import PadlockClosed from "../../assets/icons/padlock-closed.svelte";
+    import PadlockOpen from "../../assets/icons/padlock-open.svelte";
 </script>
 
 <button class="lock-button" on:click={() => $isLocked = !$isLocked}>

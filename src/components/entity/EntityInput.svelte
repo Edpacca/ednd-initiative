@@ -1,12 +1,20 @@
 <script lang="ts">
-    import Goblin from "../../assets/goblin.svelte";
-import { entities, isLocked } from "../../store";
+    import { isLocked } from "../../store";
     import PlusMinusButton from "../common/PlusMinusButton.svelte";
     import RemoveButton from "../common/RemoveButton.svelte";
-    import type { Entity } from "./entity";
+    import { EntityType, type Entity } from "./entity";
+    import EntityTypeButton from "./EntityTypeButton.svelte";
     import SubEntities from "./SubEntities.svelte";
     export let removeEntity: (e: Entity) => void;
     export let entity: Entity;
+    
+    const setType = (q) => { if (q === 0) entity.type = EntityType.Enemy; }
+    const setQuantity = (t) => { if (t === EntityType.Minion) entity.quantity = 1; }
+    
+    $: type = entity.type;
+    $: quantity = entity.quantity;
+    $: setQuantity(type);
+    $: setType(quantity);
 
 </script>
 
@@ -14,18 +22,19 @@ import { entities, isLocked } from "../../store";
     <div class="xbutton" class:disabled={$isLocked}>
         <RemoveButton onClick={() => removeEntity(entity)} isDisabled={$isLocked}/>
     </div>
-    <div class:mob-inputs={!!entity.quantity}>
-        <input class="entity-input" class:mob-input={!!entity.quantity} type="text" bind:value={entity.name} placeholder="Entity"/>
+    <div class:minion-inputs={entity.type === EntityType.Minion}>
+        <input class="entity-input" class:minion-input={entity.type === EntityType.Minion} type="text" bind:value={entity.name} placeholder="Entity"/>
         <SubEntities bind:name={entity.name} bind:quantity={entity.quantity} hp={entity.hp}/>
     </div>
-    {#if !entity.quantity}
-        <button class="mob-button" disabled={$isLocked} on:click={() => entity.quantity = 1}><Goblin/></button>
-    {:else}
-        <div class="pm-pad" class:disabled={$isLocked}>
-            <PlusMinusButton type="+" onClick={() => entity.quantity += 1}/>
-            <PlusMinusButton type="-" onClick={() => entity.quantity -= 1}/>
-        </div>
-    {/if}
+    <div>
+        <EntityTypeButton bind:type={entity.type}/>
+        {#if entity.quantity > 0}
+            <div class="pm-pad" class:disabled={$isLocked}>
+                <PlusMinusButton type="+" onClick={() => entity.quantity += 1}/>
+                <PlusMinusButton type="-" onClick={() => entity.quantity -= 1}/>
+            </div>
+        {/if}
+    </div>
 </div>
 
 
@@ -33,6 +42,7 @@ import { entities, isLocked } from "../../store";
       input[type="text"] {
         font-style: italic;
     }
+
 
     .entity-area {
         width: 100%;
@@ -52,24 +62,12 @@ import { entities, isLocked } from "../../store";
         font-weight: bold;
     }
 
-    .mob-input {
+    .minion-input {
         background: none;
         color: var(--secondary);
     }
 
-    .mob-inputs {
+    .minion-inputs {
         border: 1px solid var(--secondary);
-    }
-
-    .mob-button {
-        height: 3em;
-        background: none;
-        border: none;
-        fill: var(--secondary);
-    }
-
-    .xbutton {
-        padding-top: calc((2.5em - 1.5em) / 2);
-        text-align: center;
     }
 </style>

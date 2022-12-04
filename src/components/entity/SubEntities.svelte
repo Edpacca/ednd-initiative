@@ -2,7 +2,6 @@
     import { isLocked } from "../../store";
     import NumberInput from "../common/NumberInput.svelte";
 
-
     export let quantity;
     export let name;
     export let hp;

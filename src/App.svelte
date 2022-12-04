@@ -1,21 +1,12 @@
 <script lang="ts">
   import PlusMinusButton from "./components/common/PlusMinusButton.svelte";
-  import Entities from "./components/entity/Entities.svelte";
+    import { EntityType } from "./components/entity/entity";
+  import InitiativeTable from "./components/initiative-table/InitiativeTable.svelte";
+    import PlayerTable from "./components/player-table/PlayerTable.svelte";
   import LockPage from "./components/tools/LockPage.svelte";
   import { entities, isLocked } from "./store";
   
-  const addEntity = () => {
-    $entities = [...$entities, {
-      name: "",
-      initiative: undefined,
-      hp: undefined,
-      bonus: undefined
-    }]
-  }
 
-  const removeLastEntity = () => {
-    $entities = $entities.slice(0, $entities.length - 1);
-  }
 
 </script>
 
@@ -23,15 +14,13 @@
   <div class="top-left-icon">
     <LockPage/>
   </div>
-  <div class="buttons" class:disabled={$isLocked}>
-    <PlusMinusButton type="+" onClick={addEntity}/>
-    <PlusMinusButton type="-" onClick={removeLastEntity}/>
+  <div class="table-container">
+    {#if !$isLocked}
+      <PlayerTable/>
+    {/if}
+    <hr>
+    <InitiativeTable/>
   </div>
-  {#if $entities.length > 0}
-    <Entities/>
-  {:else}
-    <div>Slap some creatures in there!</div>
-  {/if}
 </main>
 
 <style>
@@ -50,6 +39,14 @@
     top: 0;
     left: 0;
     margin: 4px;
+  }
+
+  .table-container {
+    max-width: 60vw
+  }
+
+  hr {
+    margin: 2em 0
   }
 
 </style>

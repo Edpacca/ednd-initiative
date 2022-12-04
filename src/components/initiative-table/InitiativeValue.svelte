@@ -6,7 +6,7 @@
     $: total = initiative + bonus;
 </script>
 
-<input type="number" bind:value={total} on:change={() => $entities = $entities}/>
+<input type="number" bind:value={total}/>
 
 <style>
     input[type=number] {
