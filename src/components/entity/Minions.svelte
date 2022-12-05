@@ -11,9 +11,8 @@
     <div>
         {#each Array(quantity) as e, i}
             <div class="sub-entity">
-                <div class="number">#{i}</div>
+                <div class="number">#{i + 1}</div>
                 <input type="text" value={`${name} #${i + 1}`}/>
-                <NumberInput isDisabled={!$isLocked} value={hp}/>
             </div>
         {/each}
     </div>

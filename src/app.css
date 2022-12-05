@@ -1,7 +1,12 @@
 :root {
     --primary: brown;
     --secondary: burlywood;
+    --white: antiquewhite;
+    --black: rgb(30, 30, 30);
+    --dark-grey: rgb(75, 75, 75);
+    --light-grey: rgb(150, 150, 150);
     --green: rgb(80, 182, 36);
+    --gold: goldenrod;
     --bkg-dark: rgb(37, 38, 39);
 }
 
@@ -28,11 +33,18 @@ td {
     vertical-align: top;
 }
 
+.flex-col-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 th.value-col, th.fn-col {
     width: 3em;
 }
 
-button:disabled, .disabled {
+
+.hidden {
     display: none;
     visibility: hidden;
 }
@@ -74,8 +86,20 @@ input {
     height: 1.5rem;
 }
 
+.entity-type-button {
+    background: none;
+    border: none;
+    height: 3em;
+    width: 3em;
+    border-radius: 8px;
+    padding: 0;
+}
 
-.xbutton {
-    padding-top: calc((2.5em - 1.5em) / 2);
-    text-align: center;
+.entity-type-button:hover:not(:disabled) {
+    fill: var(--white);
+}
+
+.header {
+    font-weight: bold;
+    font-size: 32px;
 }

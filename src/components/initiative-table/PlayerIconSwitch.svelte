@@ -21,6 +21,7 @@
             icon === "Druid" ? "Fighter" :
             icon === "Fighter" ? "Monk" :
             icon === "Monk" ? "Paladin" :
+            icon === "Paladin" ? "Ranger" :
             icon === "Ranger" ? "Rogue" :
             icon === "Rogue" ? "Sorcerer" :
             icon === "Sorcerer" ? "Warlock" :
@@ -31,7 +32,7 @@
     }
 </script>
 
-<button class="type-button" on:click={() => rotate()} disabled={$isLocked}>
+<button class="entity-type-button" on:click={() => rotate()} disabled={$isLocked}>
     {#if icon}
         <svelte:component this={iconComponent}>
             <slot></slot>    
@@ -41,16 +42,6 @@
 
 <style>
     button {
-        background: none;
-        border: none;
-        height: 3em;
-        width: 3em;
-        fill: goldenrod;
-        border-radius: 8px;
+        fill: var(--gold);
     }
-
-    button:hover {
-        background-color: brown;
-    }
-
 </style>

@@ -1,9 +1,9 @@
 <script lang="ts">
     export let onClick: () => void;
-    export let isDisabled: boolean = false;
+    export let isHidden: boolean = false;
 </script>
 
-<button class="remove" disabled={isDisabled} on:click={onClick}>x</button>
+<button class="remove" class:hidden={isHidden} on:click={onClick}>x</button>
 
 <style>
     .remove {

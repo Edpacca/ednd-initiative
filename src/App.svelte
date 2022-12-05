@@ -11,10 +11,12 @@
   </div>
   <div class="table-container">
     {#if !$isLocked}
+      <h2>Players</h2>
       <InitiativeTable isPlayerTable={true}/>
       <hr>
+      <h2>Enemies</h2>
     {/if}
-      <InitiativeTable/>
+    <InitiativeTable/>
   </div>
 </main>
 

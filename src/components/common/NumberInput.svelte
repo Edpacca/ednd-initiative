@@ -1,13 +1,13 @@
 <script lang="ts">
     export let value = 0;
     export let showPlus = false;
-    export let isDisabled = false;
+    export let isHidden = false;
 
     $: valueString = showPlus && value > 0 ? "+"+value : value;
 </script>
 
-<div class="value-container" class:disabled={isDisabled}>
-    <input type="text" bind:value={valueString} disabled={isDisabled}/>
+<div class="value-container" class:hidden={isHidden}>
+    <input type="text" bind:value={valueString} hidden={isHidden}/>
     <div class="spinners">
         <button on:click={() => value++}>+</button>
         <button on:click={() => value--}>-</button>
@@ -45,14 +45,14 @@
         align-items: center;
         padding: 0;
         margin: 0;
-        background: var(--secondary);
-        color: var(--primary);
+        background: var(--dark-grey);
+        color: var(--white);
         border-width: 0px;
         width: 0.7rem;
     }  
     
     .value-container:hover button:hover {
-        background: blanchedalmond;
+        background: var(--light-grey);
     }
 
     .spinners button:first-child {

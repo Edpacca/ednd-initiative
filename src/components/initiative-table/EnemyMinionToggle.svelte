@@ -3,7 +3,7 @@
     import Minion from "../../assets/entity-types/minion.svelte";
     import Player from "../../assets/entity-types/player.svelte";
     import { isLocked } from "../../store";
-    import { EntityType } from "./entity";
+    import { EntityType } from "../entity/entity";
     export let type: EntityType;
 
     const rotateType = () => {
@@ -12,7 +12,7 @@
     }
 </script>
 
-<button class="type-button" disabled={$isLocked} on:click={rotateType}>
+<button class="entity-type-button" disabled={$isLocked} on:click={rotateType}>
     {#if type === EntityType.Enemy}
         <Enemy/>
     {:else if type === EntityType.Player}
@@ -23,10 +23,7 @@
 </button>
 
 <style>
-    .type-button {
-        height: 3em;
-        background: none;
-        border: none;
+    button {
         fill: var(--secondary);
     }
 </style>
