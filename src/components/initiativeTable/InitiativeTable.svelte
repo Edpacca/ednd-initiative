@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { isLocked, entities } from "../../store";
+    import { isLocked, entities, currentEntityIndex } from "../../store";
     import { Entity, EntityType } from "../entity/entity";
     import Speed from "../../assets/icons/speed.svelte";
     import Heart from "../../assets/icons/heart.svelte";
@@ -26,12 +26,9 @@
     const removeEntity = (entity: Entity) => {
         $entities = $entities.filter(e => e !== entity);
     }
-
-    let currentEntity = 0;
-    
 </script>
 
-<TurnTracker bind:currentTurn={currentEntity}/>
+<TurnTracker/>
 
 <AddRemove isHidden={$isLocked} add={addEntity} remove={removeLastEntity}/>
 <table>
@@ -47,7 +44,7 @@
     </thead>
     <tbody>
         {#each tableEntities as entity, index}
-            <EntityRow {entity} removeEntity={() => removeEntity(entity)} isActive={index === currentEntity}/>
+            <EntityRow {entity} removeEntity={() => removeEntity(entity)} isActive={index === $currentEntityIndex}/>
         {/each}
     </tbody>
 </table>

@@ -1,21 +1,22 @@
 <script lang="ts">
-    import { currentRound, entities, isLocked } from "../../store";
-    export let currentTurn;
+    import { currentRound, currentEntityIndex, entities, isLocked } from "../../store";
     $: max = $entities.length - 1;
 
     const next = () => {
-        currentTurn++;
-        if (currentTurn > max) {
-            currentTurn = 0;
+        $currentEntityIndex++;
+        if ($currentEntityIndex > max) {
+            $currentEntityIndex = 0;
             $currentRound++;
         }
     }
 
     const previous = () => {
-        currentTurn--;
-        if (currentTurn < 0) {
-            currentTurn = max;
-            $currentRound--;
+        if ($currentRound === 1 && $currentEntityIndex === 0) return;
+
+        $currentEntityIndex--;
+        if ($currentEntityIndex < 0) {
+            $currentEntityIndex = max;
+            $currentRound = Math.max($currentRound - 1, 1);
         }
     }
 </script>

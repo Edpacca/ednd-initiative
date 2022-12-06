@@ -1,4 +1,4 @@
-import type { PlayerClass } from "../initiative-table/PlayerClass";
+import type { PlayerClass } from "../initiativeTable/PlayerClass";
 
 export class Entity {
     name: string = ""; 
@@ -6,7 +6,8 @@ export class Entity {
     class?: PlayerClass;
     initiative?: number; 
     quantity?: number;
-    hp?: number;
+    hpMax?: number;
+    hpCurrent?: number;
     bonus?: number;
     ac?: number
 

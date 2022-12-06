@@ -1,20 +1,26 @@
 <script lang="ts">
     import { EntityType, type Entity } from "./entity";
-    import { isLocked } from "../../store";
+    import { isLocked, isStarted } from "../../store";
     import EntityInput from "./EntityInput.svelte";
     import NumberInput from "../common/NumberInput.svelte";
-    import InitiativeValue from "../initiative-table/InitiativeValue.svelte";
+    import InitiativeValue from "../initiativeTable/InitiativeValue.svelte";
     import D20Button from "../common/D20Button.svelte";
     import { dRoll } from "../../lib/dieRoll";
-    import PlayerIcon from "../initiative-table/PlayerIconSwitch.svelte";
-    import EntityTypeButton from "../initiative-table/EnemyMinionToggle.svelte";
+    import PlayerIcon from "../initiativeTable/PlayerIconSwitch.svelte";
+    import EntityTypeButton from "../initiativeTable/EnemyMinionToggle.svelte";
+    import NumberStringInput from "../common/NumberStringInput.svelte";
+    import { onMount } from "svelte";
 
     export let entity: Entity;
     export let removeEntity: () => void;
     export let isActive = false;
 
     $: isMinion = entity.type === EntityType.Minion;
-    $: minionHp = entity.hp;
+    const setHp = () => entity.hpCurrent = entity.hpMax;
+
+    onMount(async() => {
+        if (!$isStarted) setHp();
+    })
 </script>
 
 <tr>
@@ -30,15 +36,19 @@
        <EntityInput bind:isActive bind:entity removeEntity={removeEntity}/>
     </td>
     <td>
-        <NumberInput bind:value={entity.hp} isHidden={$isLocked && isMinion}/>
+        {#if $isLocked}
+            <NumberInput bind:value={entity.hpCurrent} isHidden={$isLocked && isMinion}/>
+        {:else}
+            <NumberInput bind:value={entity.hpMax} isHidden={$isLocked && isMinion} onInput={setHp}/>
+        {/if}
         {#if isMinion}
             {#each Array(entity.quantity) as m}
-                <NumberInput isHidden={!$isLocked} value={minionHp}/>
+                <NumberInput isHidden={!$isLocked} value={entity.hpCurrent}/>
             {/each}
         {/if}
     </td>
     <td>
-        <NumberInput bind:value={entity.bonus} showPlus={true}/>
+        <NumberStringInput bind:value={entity.bonus} showPlus={true}/>
     </td>
     <td>
         <InitiativeValue bind:initiative={entity.initiative} bind:bonus={entity.bonus}/>

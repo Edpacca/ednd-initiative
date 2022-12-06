@@ -48,6 +48,7 @@
     }
 
 
+
     .entity-area {
         width: 100%;
     }

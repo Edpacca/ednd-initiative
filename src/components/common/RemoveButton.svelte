@@ -8,8 +8,8 @@
 <style>
     .remove {
         font-weight: bold;
-        background-color: brown;
-        color: burlywood;
+        background-color: var(--primary);
+        color: var(--secondary);
         border: none;
         border-radius: 0.1em;
         width: 1.5em;
@@ -18,6 +18,6 @@
     }
 
     .remove:hover {
-        background-color: red;
+        background-color: var(--red);
     }
 </style>
