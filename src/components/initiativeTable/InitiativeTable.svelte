@@ -36,10 +36,10 @@
     <thead class="secondary" class:green={isPlayerTable}>
         <th class="value-col"></th>
         <th>Name</th>
-        <th class="value-col"><div class="icon-header"><Heart/></div></th>
-        <th class="value-col"><div class="icon-header"><Shield/></div></th>
+        <th class="value-col"><div class="icon-header svg-fit-container"><Heart/></div></th>
+        <th class="value-col"><div class="icon-header svg-fit-container"><Shield/></div></th>
         <th class="value-col">Bonus</th>
-        <th class="value-col"><div class="icon-header"><Speed/></div></th>
+        <th class="value-col"><div class="icon-header svg-fit-containe"><Speed/></div></th>
         {#if !$isLocked}
             <th class="fn-col"></th>
         {/if}

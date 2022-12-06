@@ -16,10 +16,13 @@
     export let removeEntity: () => void;
     export let isActive = false;
     $: isMinion = entity.type === EntityType.Minion;
+    $: isBloodied = entity.hpCurrent <= entity.hpMax / 2;
 
     const setHp = () => entity.hpCurrent = entity.hpMax;
     onMount(async() => { if (!$isStarted) setHp()});
-
+    
+    $: console.log(entity.name + " " + entity.hpCurrent);
+    $: console.log(isBloodied);
     $: entity, setLocalStorageEntities($entities);
 </script>
 
@@ -37,7 +40,7 @@
     </td>
     <td>
         {#if $isLocked}
-            <NumberInput bind:value={entity.hpCurrent} isHidden={$isLocked && isMinion}/>
+            <NumberInput bind:value={entity.hpCurrent} extraClasses={isBloodied ? "bloodied" : ""} isHidden={$isLocked && isMinion}/>
         {:else}
             <NumberInput bind:value={entity.hpMax} isHidden={$isLocked && isMinion} onInput={setHp}/>
         {/if}

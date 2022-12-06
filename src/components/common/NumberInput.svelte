@@ -2,17 +2,19 @@
     import { onMount } from "svelte";
     export let value = 0;
     export let isHidden = false;
+    export let extraClasses = "";
+
     export let onInput = () => {};
 
     const onChange = () => {if (isLoaded) onInput()}
     let isLoaded = false;
-    $: value, onChange();
     onMount(async() => isLoaded = true);
+    $: value, onChange();
 
 </script>
 
 <div class="value-container" class:hidden={isHidden}>
-    <input type="number nospinner" bind:value={value} hidden={isHidden}/>
+    <input type="number" class={extraClasses} bind:value={value} hidden={isHidden}/>
     <div class="spinners">
         <button on:click={() => value++}>+</button>
         <button on:click={() => value--}>-</button>
@@ -21,15 +23,27 @@
 
 <style>
 
-    input {
-        width: 100%;
-    }
     .value-container {
         position: relative;
         display: flex;
         flex-direction: row;
         height: 2.5rem;
     }
+
+    input {
+        width: 100%;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+
     .spinners {
         position: absolute;
         right: 0;
@@ -38,9 +52,11 @@
         justify-content: center;
         height: 100%;
     }
+
     button {
         display: none;
     }
+
     .value-container:hover button {
         display: flex;
         justify-content: center;
@@ -52,12 +68,15 @@
         border-width: 0px;
         width: 0.7rem;
     }  
+
     .value-container:hover button:hover {
         background: var(--light-grey);
     }
+
     .spinners button:first-child {
         border-radius: 0 0.2rem 0 0;
     }
+    
     .spinners  button:last-child {
         border-radius: 0 0 0.2rem 0;
     }

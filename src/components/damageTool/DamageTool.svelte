@@ -1,30 +1,43 @@
 <script lang="ts">
-    import { currentEntityIndex, currentRound, entities, isLocked } from "../../store";
-
-
+    import Blood from "../../assets/icons/blood.svelte";
+    import Heart from "../../assets/icons/heart.svelte";
+    import { currentEntityIndex, entities, isLocked } from "../../store";
 
     let damage: number;
     let healing: number;
 
-    const apply = () => {
-        if (damage > 0) {
-            $entities[$currentEntityIndex].hpCurrent -= damage;
-        } else if (healing > 0) {
-            $entities[$currentEntityIndex].hpCurrent += damage;
-        }
+    const applyDamage = () => {
+        const currentHp = $entities[$currentEntityIndex].hpCurrent;
+        console.log(currentHp);
+        if (damage && currentHp) {
+            $entities[$currentEntityIndex].hpCurrent = currentHp - damage;
+        } 
     }
+
+    const applyHealing = () => {
+        if (!!healing) $entities[$currentEntityIndex].hpCurrent += healing;
+    }
+    
+    const resetDamage = () => damage = undefined;
+    const resetHealing = () => healing = undefined;
 
 </script>
 
-{#if $isLocked && $currentRound > 0}
+{#if $isLocked}
     <div class="damage-tool-container">
-        <div class="damage">
-            <input type="number nospinner" bind:value={damage}/>
-        </div>
-        <div class="heal">
-            <input type="number nospinner" bind:value={healing}/>
-        </div>
-        <button on:click={apply}>Apply</button>
+        <button class="damage relative" on:click={() => applyDamage()}>
+            <div class="input-icon" class:active={!!damage}>
+                <Blood/>
+            </div>
+            <input type="number" bind:value={damage} on:input={resetHealing}/>
+        </button>
+        <button class="heal relative" on:click={() => applyHealing()}>
+            <div class="input-icon" class:active={!!healing}>
+                <Heart/>
+            </div>
+            <input type="number" bind:value={healing} on:input={resetDamage}/>
+        </button>
+        <!-- <button on:click={apply}></button> -->
     </div>
 {/if}
 
@@ -35,42 +48,90 @@
         flex-direction: row;
         row-gap: 1em;
         align-items: center;
+        column-gap: 8px;
     }
 
     button {
-        width: 100%;
-        height: 4rem;
-        border-radius: 8px;
-        background-color: var(--secondary);
-        font-size: 20px;
-        font-weight: bold;
-    }
-
-    button:hover {
-        background-color: var(--white);
-    }
-
-    .damage input {
-        background-color: var(--red);
-        border: 6px solid var(--dark-red);
-        color: var(--dark-red);
-    }
-
-    .heal input {
-        background-color: var(--green);
-        border: 6px solid var(--dark-green);
-        color: var(--dark-green);
+        background: none;
+        border: none;
     }
 
     input {
-        height: 5rem;
-        width: 5rem;
-        border-radius: 1rem;
+        height: 6rem;
+        width: 6rem;
         font-size: 34px;
         font-weight: bold;
+        z-index: 1;
+        background: none;
     }
 
     input:focus {
         outline: none;
     }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+
+    input[type=number] {
+        -moz-appearance: textfield;
+    }
+
+    .input-icon {
+        position: absolute;
+        width: 6rem;
+        height: 6rem;
+        z-index: -1;
+        stroke-width: 5px;
+    }
+
+    .damage {
+        fill: var(--red);
+        stroke: var(--dark-red);
+    }
+
+    .damage .input-icon {
+        bottom: 10px;
+    }
+
+    .damage input {
+        color: var(--dark-red);
+    }
+
+    .damage:hover .active {
+        fill: var(--dark-red);
+        stroke: var(--red);
+    }
+
+    .damage:hover .active+input {
+        cursor: pointer;
+        color: var(--white);
+    }
+
+    .heal {
+        color: var(--dark-green);
+        fill: var(--green);
+        stroke: var(--dark-green);
+    }
+
+    .heal .input-icon {
+        top: 2px;
+    }
+
+    .heal input {
+        color: var(--dark-green);
+    }
+
+    .heal:hover .active {
+        fill: var(--dark-green);
+        stroke: var(--green);
+    }
+
+    .heal:hover .active+input {
+        cursor: pointer;
+        color: var(--white);
+    }
+
 </style>

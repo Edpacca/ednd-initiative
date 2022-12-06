@@ -28,6 +28,8 @@
 
     .d20:focus {
         animation: roll 1s cubic-bezier( 0, 0, 0.09, 1 );
+        border: none;
+        outline: none;
     }
 
     .d20:active {
