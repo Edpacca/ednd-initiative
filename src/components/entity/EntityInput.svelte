@@ -31,7 +31,7 @@
     </div>
     {#if isMinion}
         <div class="flex-col-center" class:hidden={$isLocked}>
-            <PlusMinusButton type="+" onClick={() => entity.quantity += 1}/>
+            <PlusMinusButton type="+" onClick={() => entity.quantity++}/>
             <PlusMinusButton type="-" onClick={() => {entity.quantity = Math.max(1, entity.quantity - 1)}}/>
         </div>
     {/if}

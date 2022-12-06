@@ -1,26 +1,26 @@
 <script lang="ts">
-    import { EntityType, type Entity } from "./entity";
-    import { isLocked, isStarted } from "../../store";
-    import EntityInput from "./EntityInput.svelte";
-    import NumberInput from "../common/NumberInput.svelte";
-    import InitiativeValue from "../initiativeTable/InitiativeValue.svelte";
-    import D20Button from "../common/D20Button.svelte";
-    import { dRoll } from "../../lib/dieRoll";
-    import PlayerIcon from "../initiativeTable/PlayerIconSwitch.svelte";
-    import EntityTypeButton from "../initiativeTable/EnemyMinionToggle.svelte";
-    import NumberStringInput from "../common/NumberStringInput.svelte";
     import { onMount } from "svelte";
+    import { dRoll } from "../../lib/dieRoll";
+    import { EntityType, type Entity } from "./entity";
+    import { entities, isLocked, isStarted } from "../../store";
+    import EntityInput from "./EntityInput.svelte";
+    import EntityTypeButton from "../initiativeTable/EnemyMinionToggle.svelte";
+    import InitiativeValue from "../initiativeTable/InitiativeValue.svelte";
+    import PlayerIcon from "../initiativeTable/PlayerIconSwitch.svelte";
+    import NumberStringInput from "../common/NumberStringInput.svelte";
+    import NumberInput from "../common/NumberInput.svelte";
+    import D20Button from "../common/D20Button.svelte";
+    import { setLocalStorageEntities } from "../../lib/persistance";
 
     export let entity: Entity;
     export let removeEntity: () => void;
     export let isActive = false;
-
     $: isMinion = entity.type === EntityType.Minion;
-    const setHp = () => entity.hpCurrent = entity.hpMax;
 
-    onMount(async() => {
-        if (!$isStarted) setHp();
-    })
+    const setHp = () => entity.hpCurrent = entity.hpMax;
+    onMount(async() => { if (!$isStarted) setHp()});
+
+    $: entity, setLocalStorageEntities($entities);
 </script>
 
 <tr>
@@ -48,6 +48,9 @@
         {/if}
     </td>
     <td>
+        <NumberInput bind:value={entity.ac}/>
+    </td>
+    <td>
         <NumberStringInput bind:value={entity.bonus} showPlus={true}/>
     </td>
     <td>
@@ -65,13 +68,14 @@
     tr {
         position: relative;
     }
+
     .active {
         position: absolute;
         width: 100%;
         height: calc(100% - 5px);
+        background-color: var(--dark-grey);
         border: 3px solid var(--gold);
         border-radius: 8px;
-        background-color: var(--dark-grey);
         z-index: -1;
     }
 </style>

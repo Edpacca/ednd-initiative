@@ -17,22 +17,22 @@
 </script>
 
 {#if $isLocked && $currentRound > 0}
-    <div class="damage-tool">
-        <button on:click={apply}>Apply</button>
+    <div class="damage-tool-container">
         <div class="damage">
-            <input type="number" bind:value={damage}/>
+            <input type="number nospinner" bind:value={damage}/>
         </div>
         <div class="heal">
-            <input type="number" bind:value={healing}/>
+            <input type="number nospinner" bind:value={healing}/>
         </div>
+        <button on:click={apply}>Apply</button>
     </div>
 {/if}
 
 <style>
 
-    .damage-tool {
+    .damage-tool-container {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         row-gap: 1em;
         align-items: center;
     }

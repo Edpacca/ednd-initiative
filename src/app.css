@@ -1,20 +1,27 @@
 :root {
     --primary: brown;
     --secondary: burlywood;
+
     --white: antiquewhite;
     --black: rgb(30, 30, 30);
-    --dark-grey: rgb(75, 75, 75);
+
     --light-grey: rgb(150, 150, 150);
+    --grey: rgb(75, 75, 75);
+    --dark-grey: rgb(37, 38, 39);
+
     --green: rgb(80, 182, 36);
     --dark-green: rgb(35, 77, 17);
+
     --red: rgb(220, 15, 45);
     --dark-red: rgb(94, 5, 18);
+
     --gold: goldenrod;
-    --bkg-dark: rgb(37, 38, 39);
+
+
 }
 
 body {
-    background-color: var(--bkg-dark);
+    background-color: var(--dark-grey);
     font-family: 'Roboto Condensed';
     color: antiquewhite;
 }
@@ -111,4 +118,14 @@ input:focus {
 .header {
     font-weight: bold;
     font-size: 32px;
+}
+
+input::-webkit-outer-spin-button.nospinner,
+input::-webkit-inner-spin-button.nospinner {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number].nospinner {
+    -moz-appearance: textfield;
 }

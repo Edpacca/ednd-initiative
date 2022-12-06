@@ -33,7 +33,7 @@
     button {
         width: 42px;
         height: 42px;
-        background-color: var(--dark-grey);
+        background-color: var(--grey);
         border: none;
         border-radius: 8px;
         font-size: 32px;

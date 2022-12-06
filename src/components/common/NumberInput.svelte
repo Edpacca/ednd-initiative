@@ -12,7 +12,7 @@
 </script>
 
 <div class="value-container" class:hidden={isHidden}>
-    <input type="number" bind:value={value} hidden={isHidden}/>
+    <input type="number nospinner" bind:value={value} hidden={isHidden}/>
     <div class="spinners">
         <button on:click={() => value++}>+</button>
         <button on:click={() => value--}>-</button>
@@ -20,15 +20,7 @@
 </div>
 
 <style>
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-    }
 
-    input[type=number] {
-    -moz-appearance: textfield;
-    }
     input {
         width: 100%;
     }

@@ -5,7 +5,8 @@
     import Heart from "../../assets/icons/heart.svelte";
     import EntityRow from "../entity/EntityRow.svelte";
     import AddRemove from "../common/AddRemove.svelte";
-    import TurnTracker from "../common/TurnTracker.svelte";
+    import Shield from "../../assets/icons/shield.svelte";
+    import { setLocalStorageEntities } from "../../lib/persistance";
     
     export let isPlayerTable = false;
 
@@ -21,6 +22,7 @@
     const removeLastEntity = () => {
         const lastEntity = tableEntities[tableEntities.length - 1];
         removeEntity(lastEntity);
+        setLocalStorageEntities($entities);
     }
 
     const removeEntity = (entity: Entity) => {
@@ -28,7 +30,6 @@
     }
 </script>
 
-<TurnTracker/>
 
 <AddRemove isHidden={$isLocked} add={addEntity} remove={removeLastEntity}/>
 <table>
@@ -36,6 +37,7 @@
         <th class="value-col"></th>
         <th>Name</th>
         <th class="value-col"><div class="icon-header"><Heart/></div></th>
+        <th class="value-col"><div class="icon-header"><Shield/></div></th>
         <th class="value-col">Bonus</th>
         <th class="value-col"><div class="icon-header"><Speed/></div></th>
         {#if !$isLocked}
