@@ -24,6 +24,6 @@
 
 <style>
     button {
-        fill: var(--secondary);
+        fill: var(--primary);
     }
 </style>

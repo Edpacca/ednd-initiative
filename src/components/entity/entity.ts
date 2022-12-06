@@ -1,9 +1,9 @@
-import type { PlayerIconType } from "../player-table/PlayerIconType";
+import type { PlayerClass } from "../initiative-table/PlayerClass";
 
 export class Entity {
     name: string = ""; 
     type: EntityType;
-    icon?: PlayerIconType;
+    class?: PlayerClass;
     initiative?: number; 
     quantity?: number;
     hp?: number;
@@ -15,7 +15,7 @@ export class Entity {
         this.ac = 10;
         this.quantity = 1;
         if (type === EntityType.Player) {
-            this.icon = "Barbarian";
+            this.class = "Barbarian";
         }
     }
 }

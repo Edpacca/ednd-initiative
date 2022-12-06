@@ -6,7 +6,7 @@
     $: total = initiative + bonus;
 </script>
 
-<input type="number" bind:value={total}/>
+<input type="number" bind:value={total} tabindex={1}/>
 
 <style>
     input[type=number] {

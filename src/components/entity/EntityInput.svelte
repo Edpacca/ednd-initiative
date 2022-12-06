@@ -7,19 +7,26 @@
 
     export let removeEntity: (e: Entity) => void;
     export let entity: Entity;
+    export let isActive = false;
 
     $: isMinion = entity.type === EntityType.Minion;
     $: isPlayer = entity.type === EntityType.Player;
 </script>
 
-<div class="entity-area" class:unlocked-grid={!$isLocked}>
-    <div class="name-input-container" class:minion-inputs={entity.type === EntityType.Minion}>
-        <input class:minion-input={entity.type === EntityType.Minion} type="text" bind:value={entity.name} placeholder={isPlayer ? "Player" : "Entity"}/>
+<div class="entity-area" class:unlocked-grid={!$isLocked && isMinion}>
+    <div class="name-input-container">
+        <input 
+            bind:value={entity.name}
+            type="text"
+            class:active-player={$isLocked && isActive && isPlayer}
+            class:active-enemy={$isLocked && isActive && !isPlayer}
+            class:minion-input={entity.type === EntityType.Minion}
+            placeholder={isPlayer ? "Player" : "Entity"}/>
         <div class="xbutton" class:disabled={$isLocked}>
             <RemoveButton onClick={() => removeEntity(entity)} isHidden={$isLocked}/>
         </div>
         {#if isMinion}
-            <Minions bind:name={entity.name} bind:quantity={entity.quantity} hp={entity.hp}/>
+            <Minions bind:name={entity.name} bind:quantity={entity.quantity}/>
         {/if}
     </div>
     {#if isMinion}
@@ -55,15 +62,22 @@
         color: var(--secondary);
     }
 
-    .minion-inputs {
-        /* border: 1px solid var(--secondary); */
-        padding: 0.5rem;
-    }
+
 
     .xbutton {
         position: absolute;
         top: 0;
         right: 0;
         margin: 0.625rem;
+    }
+
+    .active-player {
+        background-color: var(--gold);
+        color: black;
+    }
+
+    .active-enemy {
+        background-color: var(--primary);
+        color: var(--white)
     }
 </style>

@@ -1,4 +1,4 @@
-export type PlayerIconType = 
+export type PlayerClass = 
 "Barbarian" |
 "Bard" |
 "Cleric" |

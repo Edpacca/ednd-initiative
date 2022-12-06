@@ -39,9 +39,11 @@
         <th class="value-col"></th>
         <th>Name</th>
         <th class="value-col"><div class="icon-header"><Heart/></div></th>
-        <th class="value-col"><div class="icon-header"><Speed/></div></th>
         <th class="value-col">Bonus</th>
-        <th class="fn-col"></th>
+        <th class="value-col"><div class="icon-header"><Speed/></div></th>
+        {#if !$isLocked}
+            <th class="fn-col"></th>
+        {/if}
     </thead>
     <tbody>
         {#each tableEntities as entity, index}

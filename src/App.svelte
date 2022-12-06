@@ -6,7 +6,7 @@
 </script>
 
 <main>
-  <div class="top-left-icon">
+  <div class="top-right-icon">
     <LockPage/>
   </div>
   <div class="table-container">
@@ -31,15 +31,15 @@
     position: relative;
   }
 
-  .top-left-icon {
+  .top-right-icon {
     position: absolute;
     top: 0;
-    left: 0;
+    right: 0;
     margin: 4px;
   }
 
   .table-container {
-    max-width: 60vw
+    max-width: 50em;
   }
 
   hr {

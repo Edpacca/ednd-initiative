@@ -4,21 +4,22 @@
 
     export let quantity;
     export let name;
-    export let hp;
 </script>
 
 {#if quantity}
-    <div>
-        {#each Array(quantity) as e, i}
-            <div class="sub-entity">
-                <div class="number">#{i + 1}</div>
-                <input type="text" value={`${name} #${i + 1}`}/>
-            </div>
-        {/each}
-    </div>
+    {#each Array(quantity) as e, i}
+        <div class="minion-container">
+            <div class="minion-number">#{i + 1}</div>
+            <input type="text" value={`${name} #${i + 1}`}/>
+        </div>
+    {/each}
 {/if}
 
 <style>
+    .minion-container {
+        position: relative;
+    }
+
     input {
         text-align: center;
         width: 100%;
@@ -28,15 +29,10 @@
         border: 1px solid grey;
     }
 
-    .sub-entity {
-        display: grid;
-        grid-template-columns: 2em 1fr 3em;
-        column-gap: 0.5em;
-        align-items: center;
-        width: calc(100% + 3em + 10px)
-    }
-
-    .number {
+    .minion-number {
+        position: absolute;
+        top: 0.2em;
+        left: -2em;
         font-size: 1.5em;
         font-weight: bold;
         text-align: right;

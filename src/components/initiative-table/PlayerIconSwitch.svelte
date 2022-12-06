@@ -1,20 +1,14 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import { isLocked } from "../../store";
-    import type { PlayerIconType } from "./PlayerIconType";
+    import type { PlayerClass } from "./PlayerClass";
 
-    export let icon: PlayerIconType | undefined;
-
-    let iconComponent;
-
-    const load = async () => {
-        iconComponent = (await import(`../../assets/icons/classes/${icon.toLowerCase()}.svelte`)).default;
-    }
-
-    onMount(async () => await load());
+    export let icon: PlayerClass | undefined;
+    $: path = `classes/${icon.toLowerCase()}.svg#icon`;
 
     const rotate = async () => {
-        icon = icon === "Artificer" ? "Barbarian" :
+        icon = 
+            icon === "Artificer" ? "Barbarian" :
             icon ==="Barbarian" ? "Bard" :
             icon === "Bard" ? "Cleric" :
             icon === "Cleric" ? "Druid" :
@@ -27,16 +21,14 @@
             icon === "Sorcerer" ? "Warlock" :
             icon === "Warlock" ? "Wizard" :
             "Artificer";
-
-        await load();
     }
 </script>
 
-<button class="entity-type-button" on:click={() => rotate()} disabled={$isLocked}>
+<button class="entity-type-button svg-fit-container" on:click={() => rotate()} disabled={$isLocked}>
     {#if icon}
-        <svelte:component this={iconComponent}>
-            <slot></slot>    
-        </svelte:component>
+    <svg class="svg-fit">
+        <use xlink:href={path} href={path}></use>
+     </svg>
     {/if}
 </button>
 
