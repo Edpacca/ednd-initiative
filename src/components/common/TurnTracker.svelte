@@ -21,15 +21,19 @@
     }
 </script>
 
-<div class:hidden={!$isLocked}>
-    <div class="header">Round: {$currentRound}</div>
-    <div class="buttons" >
+<div class="turn-tracker" class:hidden={!$isLocked}>
+    <div class="header">Round {$currentRound}</div>
+    <div class="tt-buttons flex-row" >
         <button on:click={previous}>{"<"}</button>
         <button on:click={next}>{">"}</button>
     </div>
 </div>
 
 <style>
+    .turn-tracker {
+        width: fit-content;
+    }
+
     button {
         width: 42px;
         height: 42px;
@@ -42,5 +46,9 @@
 
     button:hover {
         background-color: var(--light-grey);
+    }
+
+    .tt-buttons {
+        column-gap: 8px;
     }
 </style>

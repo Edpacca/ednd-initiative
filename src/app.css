@@ -10,19 +10,20 @@
     --dark-grey: rgb(37, 38, 39);
 
     --green: rgb(80, 182, 36);
+    --green-50: rgba(80, 182, 36, 0.5);
     --dark-green: rgb(35, 77, 17);
 
     --red: rgb(220, 15, 45);
+    --red-50: rgba(220, 15, 45, 0.5);
     --dark-red: rgb(94, 5, 18);
 
     --gold: goldenrod;
-
 
 }
 
 body {
     background-color: var(--dark-grey);
-    font-family: 'Roboto Condensed';
+    font-family: 'Roboto Condensed, Arial, sans-serif';
     color: antiquewhite;
 }
 
@@ -31,6 +32,8 @@ table {
     width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
+    font-family: 'Roboto Condensed';
+
 }
 
 th {
@@ -43,10 +46,9 @@ td {
     vertical-align: top;
 }
 
-.flex-col-center {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.table-text {
+    font-size: 20px;
+    font-weight: bold;
 }
 
 th.value-col, th.fn-col {
@@ -96,7 +98,6 @@ input {
 input:focus {
     outline: 3px solid var(--gold);
     background-color: white;
-    /* outline-offset: 2px; */
 }
 
 .icon-header {
@@ -136,4 +137,18 @@ input:focus {
     } to {
         background-color: var(--red);
     }
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }

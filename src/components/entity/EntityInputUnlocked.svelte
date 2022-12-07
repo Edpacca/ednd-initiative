@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { isLocked } from "../../store";
     import PlusMinusButton from "../common/PlusMinusButton.svelte";
     import RemoveButton from "../common/RemoveButton.svelte";
     import { EntityType, type Entity } from "./entity";
@@ -7,30 +6,27 @@
 
     export let removeEntity: (e: Entity) => void;
     export let entity: Entity;
-    export let isActive = false;
 
     $: isMinion = entity.type === EntityType.Minion;
     $: isPlayer = entity.type === EntityType.Player;
 </script>
 
-<div class="entity-area" class:unlocked-grid={!$isLocked && isMinion}>
+<div class="entity-area" class:minion-grid={isMinion}>
     <div class="name-input-container">
         <input 
             bind:value={entity.name}
             type="text"
-            class:active-player={$isLocked && isActive && isPlayer}
-            class:active-enemy={$isLocked && isActive && !isPlayer}
             class:minion-input={entity.type === EntityType.Minion}
             placeholder={isPlayer ? "Player" : "Entity"}/>
-        <div class="xbutton" class:disabled={$isLocked}>
-            <RemoveButton onClick={() => removeEntity(entity)} isHidden={$isLocked}/>
+        <div class="xbutton">
+            <RemoveButton onClick={() => removeEntity(entity)}/>
         </div>
         {#if isMinion}
             <Minions bind:name={entity.name} bind:quantity={entity.quantity}/>
         {/if}
     </div>
     {#if isMinion}
-        <div class="flex-col-center" class:hidden={$isLocked}>
+        <div class="flex-col">
             <PlusMinusButton type="+" onClick={() => entity.quantity++}/>
             <PlusMinusButton type="-" onClick={() => {entity.quantity = Math.max(1, entity.quantity - 1)}}/>
         </div>
@@ -47,13 +43,11 @@
         font-style: italic;
     }
 
-
-
     .entity-area {
         width: 100%;
     }
 
-    .unlocked-grid {
+    .minion-grid {
         display: grid;
         grid-template-columns: 1fr 3em;
     }

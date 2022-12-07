@@ -3,10 +3,11 @@
     import { Entity, EntityType } from "../entity/entity";
     import Speed from "../../assets/icons/speed.svelte";
     import Heart from "../../assets/icons/heart.svelte";
-    import EntityRow from "../entity/EntityRow.svelte";
     import AddRemove from "../common/AddRemove.svelte";
     import Shield from "../../assets/icons/shield.svelte";
     import { setLocalStorageEntities } from "../../lib/persistance";
+    import EntityRowLocked from "../entity/EntityRowLocked.svelte";
+    import EntityRowUnlocked from "../entity/EntityRowUnlocked.svelte";
     
     export let isPlayerTable = false;
 
@@ -36,9 +37,24 @@
     <thead class="secondary" class:green={isPlayerTable}>
         <th class="value-col"></th>
         <th>Name</th>
-        <th class="value-col"><div class="icon-header svg-fit-container"><Heart/></div></th>
-        <th class="value-col"><div class="icon-header svg-fit-container"><Shield/></div></th>
-        <th class="value-col">Bonus</th>
+        <th class="value-col">
+            <div class="icon-header svg-fit-container">
+                <div class="svg-fit">
+                    <Heart/>
+                </div>
+                {#if !$isLocked}
+                    <span class="icon-text">max</span>
+                {/if}
+            </div>
+        </th>
+        <th class="value-col">
+            <div class="icon-header svg-fit-container" class:hidden={$isLocked}>
+                <Shield/>
+            </div>
+        </th>
+        {#if !$isLocked}
+            <th class="value-col">Bonus</th>
+        {/if}
         <th class="value-col"><div class="icon-header svg-fit-containe"><Speed/></div></th>
         {#if !$isLocked}
             <th class="fn-col"></th>
@@ -46,7 +62,18 @@
     </thead>
     <tbody>
         {#each tableEntities as entity, index}
-            <EntityRow {entity} removeEntity={() => removeEntity(entity)} isActive={index === $currentEntityIndex}/>
+            {#if $isLocked}
+                <EntityRowLocked {entity} isActive={index === $currentEntityIndex}/>
+            {:else}
+                <EntityRowUnlocked {entity} removeEntity={() => removeEntity(entity)}/>
+            {/if}
         {/each}
     </tbody>
 </table>
+
+<style>
+    .icon-text {
+        position: inherit;
+        top: -1.2em;
+    }
+</style>

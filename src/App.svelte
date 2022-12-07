@@ -3,13 +3,15 @@
     import DamageTool from "./components/damageTool/DamageTool.svelte";
     import InitiativeTable from "./components/initiativeTable/InitiativeTable.svelte";
     import LockPage from "./components/tools/LockPage.svelte";
-    import { isLocked } from "./store";
+    import { entities, isLocked } from "./store";
 </script>
 
 <main>
-  <div class="top-right-icon">
-      <LockPage/>
-  </div>
+  {#if $entities.length > 0}
+    <div class="top-right-icon">
+        <LockPage/>
+    </div>
+  {/if}
   <div class="toolbar">
     <TurnTracker/>
     <DamageTool/>
@@ -27,19 +29,22 @@
 
 <style>
   main {
-    padding: 2em;
+    padding: 2em 3em;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     border: 1px solid brown;
     position: relative;
-    column-gap: 2em;
+    row-gap: 2em;
+    max-width: 50em;
+    margin: auto;
   }
 
   .toolbar {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr auto;
+    width: 100%;
   }
 
   .top-right-icon {
@@ -50,7 +55,7 @@
   }
 
   .table-container {
-    max-width: 50em;
+
   }
 
   hr {

@@ -25,18 +25,20 @@
 
 {#if $isLocked}
     <div class="damage-tool-container">
-        <button class="damage relative" on:click={() => applyDamage()}>
+        <div class="damage relative flex-col">
             <div class="input-icon" class:active={!!damage}>
                 <Blood/>
             </div>
             <input type="number" bind:value={damage} on:input={resetHealing}/>
-        </button>
-        <button class="heal relative" on:click={() => applyHealing()}>
+            <button on:click={() => applyDamage()} class:active={!!damage}>Damage</button>
+        </div>
+        <div class="heal relative flex-col">
             <div class="input-icon" class:active={!!healing}>
                 <Heart/>
             </div>
             <input type="number" bind:value={healing} on:input={resetDamage}/>
-        </button>
+            <button on:click={() => applyHealing()} class:active={!!healing}>Heal</button>
+        </div>
         <!-- <button on:click={apply}></button> -->
     </div>
 {/if}
@@ -49,11 +51,6 @@
         row-gap: 1em;
         align-items: center;
         column-gap: 8px;
-    }
-
-    button {
-        background: none;
-        border: none;
     }
 
     input {
@@ -88,50 +85,67 @@
     }
 
     .damage {
-        fill: var(--red);
+        fill: var(--red-50);
         stroke: var(--dark-red);
+    }
+    .heal {
+        fill: var(--green-50);
+        stroke: var(--dark-green);
     }
 
     .damage .input-icon {
-        bottom: 10px;
+        bottom: 45px;
+    }
+    .heal .input-icon {
+        top: 2px;
+    }
+
+    .damage .input-icon.active {
+        fill: var(--red);
+    }
+    .heal .input-icon.active {
+        fill: var(--green);
     }
 
     .damage input {
         color: var(--dark-red);
     }
-
-    .damage:hover .active {
-        fill: var(--dark-red);
-        stroke: var(--red);
-    }
-
-    .damage:hover .active+input {
-        cursor: pointer;
-        color: var(--white);
-    }
-
-    .heal {
-        color: var(--dark-green);
-        fill: var(--green);
-        stroke: var(--dark-green);
-    }
-
-    .heal .input-icon {
-        top: 2px;
-    }
-
     .heal input {
         color: var(--dark-green);
     }
 
-    .heal:hover .active {
-        fill: var(--dark-green);
-        stroke: var(--green);
+    button {
+        font-weight: bold;
+        font-size: 16px;
+        background: none;
+        border: none;
+        width: 100%;
+        height: 2rem;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
-    .heal:hover .active+input {
+    button.active {
         cursor: pointer;
-        color: var(--white);
+    }
+
+    .damage > button {
+        color: var(--red);
+    }
+
+    .heal > button {
+        color: var(--green);
+    }
+
+    .damage > button.active {
+        background: var(--dark-red);
+        border: 3px solid var(--red);
+    }
+    .heal > button.active {
+        background: var(--dark-green);
+        border: 3px solid var(--green);
     }
 
 </style>

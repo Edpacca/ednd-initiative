@@ -1,16 +1,7 @@
 <script lang="ts">
-    import { onMount } from "svelte";
     export let value = 0;
     export let isHidden = false;
     export let extraClasses = "";
-
-    export let onInput = () => {};
-
-    const onChange = () => {if (isLoaded) onInput()}
-    let isLoaded = false;
-    onMount(async() => isLoaded = true);
-    $: value, onChange();
-
 </script>
 
 <div class="value-container" class:hidden={isHidden}>
