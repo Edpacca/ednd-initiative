@@ -8,14 +8,18 @@
 
     const applyDamage = () => {
         const currentHp = $entities[$currentEntityIndex].hpCurrent;
-        console.log(currentHp);
         if (damage && currentHp) {
-            $entities[$currentEntityIndex].hpCurrent = currentHp - damage;
+            $entities[$currentEntityIndex].hpCurrent -= damage;
+            resetDamage();
         } 
     }
 
     const applyHealing = () => {
-        if (!!healing) $entities[$currentEntityIndex].hpCurrent += healing;
+        const currentHp = $entities[$currentEntityIndex].hpCurrent;
+        if (healing && currentHp) {
+            $entities[$currentEntityIndex].hpCurrent += healing;
+            resetHealing();
+        } 
     }
     
     const resetDamage = () => damage = undefined;
@@ -39,7 +43,6 @@
             <input type="number" bind:value={healing} on:input={resetDamage}/>
             <button on:click={() => applyHealing()} class:active={!!healing}>Heal</button>
         </div>
-        <!-- <button on:click={apply}></button> -->
     </div>
 {/if}
 

@@ -1,11 +1,12 @@
 <script lang="ts">
     import Cross from "../../assets/symbols/cross.svelte";
-
     export let onClick: () => void;
     export let isHidden: boolean = false;
 </script>
 
-<button class="remove flex-col" class:hidden={isHidden} on:click={onClick}><Cross/></button>
+<button class="remove flex-col" class:hidden={isHidden} on:click={onClick}>
+    <Cross/>
+</button>
 
 <style>
     .remove {
