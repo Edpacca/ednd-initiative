@@ -13,7 +13,7 @@
     export let isActive = false;
     $: isMinion = entity.type === EntityType.Minion;
     $: isBloodied = entity.hpCurrent <= entity.hpMax / 2;
-
+    $: isDead = entity.hpCurrent <= 0;
     $: entity, setLocalStorageEntities($entities);
 </script>
 

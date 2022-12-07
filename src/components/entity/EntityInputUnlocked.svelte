@@ -21,7 +21,7 @@
             bind:value={entity.name}
             type="text"
             class:minion-input={entity.type === EntityType.Minion}
-            placeholder={isPlayer ? "Player" : "Entity"}/>
+            placeholder={isPlayer ? entity.class : "Entity"}/>
         <div class="xbutton">
             <RemoveButton onClick={() => removeEntity(entity)}/>
         </div>

@@ -17,7 +17,7 @@
             class:active-player={isActive && isPlayer}
             class:active-enemy={isActive && !isPlayer}
             class:minion-main-name={entity.type === EntityType.Minion}
-            placeholder={isPlayer ? "Player" : "Entity"}/>
+            placeholder={isPlayer ? entity.class : "Entity"}/>
         {#if isMinion}
             <Minions bind:name={entity.name} bind:quantity={entity.quantity}/>
         {/if}
