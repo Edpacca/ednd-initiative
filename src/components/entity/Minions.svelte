@@ -1,7 +1,4 @@
 <script>
-    import { isLocked } from "../../store";
-    import NumberInput from "../common/NumberInput.svelte";
-
     export let quantity;
     export let name;
 </script>
@@ -10,7 +7,7 @@
     {#each Array(quantity) as e, i}
         <div class="minion-container">
             <div class="minion-number">#{i + 1}</div>
-            <input type="text" value={`${name} #${i + 1}`}/>
+            <input type="text" class="minion-input" value={`${name} #${i + 1}`}/>
         </div>
     {/each}
 {/if}
@@ -26,7 +23,7 @@
         box-sizing: border-box;
         font-size: 18px;
         font-weight: bold;
-        border: 1px solid grey;
+
     }
 
     .minion-number {

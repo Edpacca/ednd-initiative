@@ -33,7 +33,7 @@
         <NumberInput bind:value={entity.hpCurrent} extraClasses={isBloodied ? "bloodied" : ""} isHidden={isMinion}/>
         {#if isMinion}
             {#each Array(entity.quantity) as m}
-                <NumberInput value={entity.hpCurrent}/>
+                <NumberInput value={entity.hpCurrent} extraClasses={"minion-input"}/>
             {/each}
         {/if}
     </td>

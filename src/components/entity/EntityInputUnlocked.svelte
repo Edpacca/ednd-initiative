@@ -1,4 +1,6 @@
 <script lang="ts">
+    import { setLocalStorageEntities } from "../../lib/persistance";
+    import { entities } from "../../store";
     import PlusMinusButton from "../common/PlusMinusButton.svelte";
     import RemoveButton from "../common/RemoveButton.svelte";
     import { EntityType, type Entity } from "./entity";
@@ -9,6 +11,8 @@
 
     $: isMinion = entity.type === EntityType.Minion;
     $: isPlayer = entity.type === EntityType.Player;
+
+    $: entity, setLocalStorageEntities($entities);
 </script>
 
 <div class="entity-area" class:minion-grid={isMinion}>

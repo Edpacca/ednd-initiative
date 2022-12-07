@@ -6,17 +6,17 @@
     let damage: number;
     let healing: number;
 
+    $: currentEntity = $entities[$currentEntityIndex];
+
     const applyDamage = () => {
-        const currentHp = $entities[$currentEntityIndex].hpCurrent;
-        if (damage && currentHp) {
+        if (damage && currentEntity.hpCurrent) {
             $entities[$currentEntityIndex].hpCurrent -= damage;
             resetDamage();
         } 
     }
 
     const applyHealing = () => {
-        const currentHp = $entities[$currentEntityIndex].hpCurrent;
-        if (healing && currentHp) {
+        if (healing && currentEntity.hpCurrent) {
             $entities[$currentEntityIndex].hpCurrent += healing;
             resetHealing();
         } 
@@ -24,7 +24,11 @@
     
     const resetDamage = () => damage = undefined;
     const resetHealing = () => healing = undefined;
+    const resetDamageAtZero = () => { if (damage === 0) resetDamage(); }
+    const resetHealingAtZero = () => { if (healing === 0) resetHealing(); }
 
+    $: damage, resetDamageAtZero();
+    $: healing, resetHealingAtZero();
 </script>
 
 {#if $isLocked}
@@ -33,14 +37,14 @@
             <div class="input-icon" class:active={!!damage}>
                 <Blood/>
             </div>
-            <input type="number" bind:value={damage} on:input={resetHealing}/>
+            <input type="number" min={0} bind:value={damage} on:input={resetHealing}/>
             <button on:click={() => applyDamage()} class:active={!!damage}>Damage</button>
         </div>
         <div class="heal relative flex-col">
             <div class="input-icon" class:active={!!healing}>
                 <Heart/>
             </div>
-            <input type="number" bind:value={healing} on:input={resetDamage}/>
+            <input type="number" min={0} bind:value={healing} on:input={resetDamage}/>
             <button on:click={() => applyHealing()} class:active={!!healing}>Heal</button>
         </div>
     </div>

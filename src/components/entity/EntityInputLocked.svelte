@@ -16,7 +16,7 @@
             type="text"
             class:active-player={isActive && isPlayer}
             class:active-enemy={isActive && !isPlayer}
-            class:minion-input={entity.type === EntityType.Minion}
+            class:minion-main-name={entity.type === EntityType.Minion}
             placeholder={isPlayer ? "Player" : "Entity"}/>
         {#if isMinion}
             <Minions bind:name={entity.name} bind:quantity={entity.quantity}/>
@@ -38,7 +38,7 @@
         width: 100%;
     }
 
-    .minion-input {
+    .minion-main-name {
         background: none;
         color: var(--secondary);
     }

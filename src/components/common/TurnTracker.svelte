@@ -1,11 +1,13 @@
 <script lang="ts">
-    import { currentRound, currentEntityIndex, entities, isLocked } from "../../store";
+    import { currentRound, currentEntityIndex, entities, isLocked, currentMinionIndex } from "../../store";
+    
     $: max = $entities.length - 1;
-
+    
     const next = () => {
         $currentEntityIndex++;
         if ($currentEntityIndex > max) {
             $currentEntityIndex = 0;
+            $currentMinionIndex = 0;
             $currentRound++;
         }
     }
@@ -16,9 +18,12 @@
         $currentEntityIndex--;
         if ($currentEntityIndex < 0) {
             $currentEntityIndex = max;
+            $currentMinionIndex = 0;
             $currentRound = Math.max($currentRound - 1, 1);
         }
     }
+
+
 </script>
 
 <div class="turn-tracker" class:hidden={!$isLocked}>

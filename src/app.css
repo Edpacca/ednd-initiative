@@ -163,3 +163,7 @@ input:focus {
 .value-container input {
     width: 100%;
 }
+
+.minion-input {
+    border: 1px solid grey;
+}

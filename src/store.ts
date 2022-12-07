@@ -7,3 +7,4 @@ export const isLocked: Writable<boolean> = writable(false);
 export const isStarted: Writable<boolean> = writable(false);
 export const currentRound: Writable<number> = writable(1);
 export const currentEntityIndex: Writable<number> = writable(0);
+export const currentMinionIndex: Writable<number> = writable(0);

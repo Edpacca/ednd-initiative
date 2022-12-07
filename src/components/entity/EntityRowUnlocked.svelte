@@ -40,7 +40,7 @@
         <NumberStringInput bind:value={entity.bonus} showPlus={true}/>
     </td>
     <td>
-        <InitiativeValue bind:initiative={entity.initiative} bind:bonus={entity.bonus}/>
+        <InitiativeValue bind:initiative={entity.initiative} bonus={entity.bonus}/>
     </td>
     <td>
         <D20Button onClick={() => entity.initiative = dRoll(20)}/>

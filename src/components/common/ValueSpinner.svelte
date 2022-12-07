@@ -17,19 +17,7 @@
         justify-content: center;
         height: 100%;
     }
-
-    button {
-        display: none;
-    }
-
-    .spinners button:first-child {
-        border-radius: 0 0.2rem 0 0;
-    }
-
-    .spinners  button:last-child {
-        border-radius: 0 0 0.2rem 0;
-    }
-
+    
     button {
         display: flex;
         justify-content: center;
@@ -40,5 +28,18 @@
         color: var(--white);
         border-width: 0px;
         width: 0.7rem;
-    }  
+        font-weight: bold;
+    }
+
+    button:hover {
+        background: var(--light-grey);
+    }
+
+    .spinners button:first-child {
+        border-radius: 0 0.2rem 0 0;
+    }
+
+    .spinners  button:last-child {
+        border-radius: 0 0 0.2rem 0;
+    }
 </style>

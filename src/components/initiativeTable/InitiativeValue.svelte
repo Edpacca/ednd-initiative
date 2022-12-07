@@ -1,12 +1,21 @@
-<script>
-    import { entities } from "../../store";
+<script lang="ts">
     export let initiative;
     export let bonus = 0;
 
     $: total = initiative + bonus;
+
+    const setInitiative = (event: Event) => {
+        const target = event.target as HTMLInputElement;
+        try {
+            initiative = Number(target.value) - bonus;
+        } catch {
+            target.value = undefined;
+            return;
+        }
+    }
 </script>
 
-<input type="number" bind:value={total} tabindex={1}/>
+<input type="number" value={total} on:input={e => setInitiative(e)} tabindex={1}/>
 
 <style>
     input[type=number] {
