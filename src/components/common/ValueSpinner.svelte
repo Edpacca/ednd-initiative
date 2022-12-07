@@ -1,8 +1,9 @@
 <script lang="ts">
     export let value: number;
+    export let isHidden = false;
 </script>
 
-<div class="spinners">
+<div class="spinners" class:hidden={isHidden}>
     <button on:click={() => value++}>+</button>
     <button on:click={() => value--}>-</button>
 </div>
@@ -28,4 +29,16 @@
     .spinners  button:last-child {
         border-radius: 0 0 0.2rem 0;
     }
+
+    button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+        background: var(--dark-grey);
+        color: var(--white);
+        border-width: 0px;
+        width: 0.7rem;
+    }  
 </style>

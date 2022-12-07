@@ -1,15 +1,16 @@
 <script lang="ts">
     import D20 from "../../assets/icons/d20.svelte";
     export let onClick: () => void;
-
     let isRolling = false;
     const animation = () => {
+        onClick();
         isRolling = true;
     }
-    
 </script>
 
-<button on:click={() => { onClick(); animation();}} class="d20" class:rolly={isRolling}><D20/></button>
+<button on:click={animation} class="d20" class:rolly={isRolling}>
+    <D20/>
+</button>
 
 <style>
     .d20 {
@@ -40,7 +41,6 @@
         from {
             transform:rotate(0deg);
         }
-
         to {
             transform: rotate(1080deg)
         }

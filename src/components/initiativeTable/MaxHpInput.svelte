@@ -1,5 +1,4 @@
 <script lang="ts">
-    import { onMount } from "svelte";
     import NumberInput from "../common/NumberInput.svelte";
     import type { Entity } from "../entity/entity";
     export let entity: Entity;

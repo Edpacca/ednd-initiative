@@ -152,3 +152,14 @@ input:focus {
     align-items: center;
     justify-content: center;
 }
+
+.value-container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    height: 2.5rem;
+}
+
+.value-container input {
+    width: 100%;
+}
