@@ -23,14 +23,14 @@
             class:minion-input={entity.type === EntityType.Minion}
             placeholder={isPlayer ? entity.class : "Entity"}/>
         <div class="xbutton">
-            <RemoveButton onClick={() => removeEntity(entity)}/>
+            <RemoveButton onClick={() => removeEntity(entity)} isinverted={isMinion}/>
         </div>
         {#if isMinion}
             <Minions bind:name={entity.name} bind:quantity={entity.quantity}/>
         {/if}
     </div>
     {#if isMinion}
-        <div class="flex-col">
+        <div class="buttons">
             <PlusMinusButton type="+" onClick={() => entity.quantity++}/>
             <PlusMinusButton type="-" onClick={() => {entity.quantity = Math.max(1, entity.quantity - 1)}}/>
         </div>
@@ -61,22 +61,16 @@
         color: var(--secondary);
     }
 
-
+    .buttons {
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+    }
 
     .xbutton {
         position: absolute;
         top: 0;
         right: 0;
         margin: 0.625rem;
-    }
-
-    .active-player {
-        background-color: var(--gold);
-        color: black;
-    }
-
-    .active-enemy {
-        background-color: var(--primary);
-        color: var(--white)
     }
 </style>

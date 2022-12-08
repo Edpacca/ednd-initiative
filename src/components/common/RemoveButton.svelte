@@ -1,10 +1,15 @@
 <script lang="ts">
     import Cross from "../../assets/symbols/cross.svelte";
     export let onClick: () => void;
-    export let isHidden: boolean = false;
+    export let isHidden = false;
+    export let isinverted = false;
 </script>
 
-<button class="remove flex-col" class:hidden={isHidden} on:click={onClick}>
+<button 
+    class="remove flex-col"
+    class:hidden={isHidden}
+    class:inverted={isinverted}
+    on:click={onClick}>
     <Cross/>
 </button>
 
@@ -12,7 +17,6 @@
     .remove {
         font-weight: bold;
         background-color: var(--dark-grey);
-        color: var(--secondary);
         border: none;
         border-radius: 4px;
         width: 1.5em;
@@ -23,5 +27,10 @@
 
     .remove:hover {
         background-color: var(--red);
+    }
+
+    .inverted {
+        background-color: var(--secondary);
+        stroke: var(--dark-grey);
     }
 </style>

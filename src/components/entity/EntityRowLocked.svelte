@@ -8,6 +8,7 @@
     import AcValue from "../initiativeTable/AcValue.svelte";
     import EntityInputLocked from "./EntityInputLocked.svelte";
     import { entities } from "../../store";
+    import CurrentHpInput from "../initiativeTable/CurrentHpInput.svelte";
 
     export let entity: Entity;
     export let isActive = false;
@@ -30,12 +31,7 @@
        <EntityInputLocked bind:isActive bind:entity/>
     </td>
     <td>
-        <NumberInput bind:value={entity.hpCurrent} extraClasses={isBloodied ? "bloodied" : ""} isHidden={isMinion}/>
-        {#if isMinion}
-            {#each Array(entity.quantity) as m}
-                <NumberInput value={entity.hpCurrent} extraClasses={"minion-input"}/>
-            {/each}
-        {/if}
+        <CurrentHpInput bind:entity/>
     </td>
     <td>
         <AcValue value={entity.ac}/>
