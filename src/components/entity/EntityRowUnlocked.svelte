@@ -2,7 +2,7 @@
     import { setLocalStorageEntities } from "../../lib/persistance";
     import { EntityType, type Entity } from "./entity";
     import { dRoll } from "../../lib/dieRoll";
-    import { entities } from "../../store";
+    import { currentEntityIndex, entities } from "../../store";
     import D20Button from "../common/D20Button.svelte";
     import EntityInputUnlocked from "./EntityInputUnlocked.svelte";
     import EntityTypeButton from "../initiativeTable/EnemyMinionToggle.svelte";
@@ -15,7 +15,7 @@
     export let entity: Entity;
     export let removeEntity: () => void;
     
-    const setHpCurrent = (value: number) => entity.hpCurrent = value;
+    const setHpCurrent = (value: number) => entity.hpCurrent.fill(value);
     $: entity, setLocalStorageEntities($entities);
 </script>
 

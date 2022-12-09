@@ -23,7 +23,18 @@
         }
     }
 
-
+    const onArrows = (event: KeyboardEvent) => {
+        switch(event.key) {
+            case "ArrowLeft":
+                previous();
+                return;
+            case "ArrowRight":
+                next();
+                return;
+            default:
+                return;
+        }
+    }
 </script>
 
 <div class="turn-tracker" class:hidden={!$isLocked}>
@@ -33,6 +44,7 @@
         <button on:click={next}>{">"}</button>
     </div>
 </div>
+<svelte:window on:keydown={e => onArrows(e)}/>
 
 <style>
     .turn-tracker {

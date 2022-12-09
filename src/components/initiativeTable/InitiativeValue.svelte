@@ -15,7 +15,7 @@
     }
 </script>
 
-<input type="number" value={total} on:input={e => setInitiative(e)} tabindex={1}/>
+<input type="number" value={total} on:input={e => setInitiative(e)}/>
 
 <style>
     input[type=number] {

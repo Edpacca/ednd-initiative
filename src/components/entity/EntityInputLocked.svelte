@@ -14,12 +14,11 @@
         <input 
             bind:value={entity.name}
             type="text"
-            class:active-player={isActive && isPlayer}
-            class:active-enemy={isActive && !isPlayer}
+            class:active={isActive && !isMinion}
             class:minion-main-name={entity.type === EntityType.Minion}
             placeholder={isPlayer ? entity.class : "Entity"}/>
         {#if isMinion}
-            <Minions bind:name={entity.name} bind:quantity={entity.quantity}/>
+            <Minions bind:name={entity.name} bind:quantity={entity.quantity} isActive={isActive}/>
         {/if}
     </div>
 </div>
@@ -32,24 +31,26 @@
     }
       input[type="text"] {
         font-style: italic;
+        background-color: var(--grey);
+        color: var(--white);
+    }
+    
+    input::placeholder {
+        color: var(--white);
     }
 
     .entity-area {
-        width: 100%;
+        width: 100%;    
     }
 
     .minion-main-name {
-        background: none;
-        color: var(--secondary);
+        background-color: var(--dark-grey) !important;
+        color: var(--grey) !important;
     }
 
-    .active-player {
-        background-color: var(--gold);
-        color: black;
+    .active, input.active::placeholder  {
+        background-color: var(--dark-grey) !important;
+        color: var(--gold) !important;
     }
-
-    .active-enemy {
-        background-color: var(--primary);
-        color: var(--white)
-    }
+    
 </style>

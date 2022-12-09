@@ -54,10 +54,6 @@
     margin: 4px;
   }
 
-  .table-container {
-
-  }
-
   hr {
     margin: 2em 0
   }

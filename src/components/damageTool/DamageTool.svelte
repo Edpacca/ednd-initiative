@@ -1,23 +1,27 @@
 <script lang="ts">
-    import Blood from "../../assets/icons/blood.svelte";
+    import { onMount } from "svelte";
+import Blood from "../../assets/icons/blood.svelte";
     import Heart from "../../assets/icons/heart.svelte";
-    import { currentEntityIndex, entities, isLocked } from "../../store";
+    import { currentEntityIndex, currentMinionIndex, entities, isLocked } from "../../store";
 
     let damage: number;
     let healing: number;
+    let damageInputElement: HTMLInputElement;
+    let healingInputElement: HTMLInputElement;
 
     $: currentEntity = $entities[$currentEntityIndex];
 
+
     const applyDamage = () => {
         if (damage && currentEntity.hpCurrent) {
-            $entities[$currentEntityIndex].hpCurrent -= damage;
+            $entities[$currentEntityIndex].hpCurrent[$currentMinionIndex] -= damage;
             resetDamage();
         } 
     }
 
     const applyHealing = () => {
         if (healing && currentEntity.hpCurrent) {
-            $entities[$currentEntityIndex].hpCurrent += healing;
+            $entities[$currentEntityIndex].hpCurrent[$currentMinionIndex] += healing;
             resetHealing();
         } 
     }
@@ -29,26 +33,85 @@
 
     $: damage, resetDamageAtZero();
     $: healing, resetHealingAtZero();
+    let damageFocused = false;
+    let healingFocused = false;
+
+    const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+    const keyboardInput = async (event: KeyboardEvent) => {
+        if (event.key === "Tab") {
+            if (!damageFocused) {
+                document.getElementById("damage-input").focus();
+                document.getElementById("healing-input").blur();
+                damageFocused = true;
+                healingFocused = false;
+            } else {
+                document.getElementById("healing-input").focus();
+                document.getElementById("damage-input").blur();
+                healingFocused = true;
+                damageFocused = false;
+            }
+            // if (!damageFocused) {
+            //     healingInputElement.blur();
+            //     damageInputElement.focus();
+            //     console.log("damage");
+            // } else {
+            //     damageInputElement.blur();
+            //     healingInputElement.focus();
+            //     console.log("healing");
+            // }
+        } else if (event.key === "Enter") {
+            submitEnter("damage");
+        }
+        // } else if (!damageFocused && !healingFocused && numbers.includes(event.key)) {
+        //     console.log(event.key);
+        //     if (!damageFocused) {
+        //         damageInputElement.focus();
+        //         damageInputElement.value = event.key;
+        //     } else if (healingFocused) {
+        //         healingInputElement.value = event.key;
+        //     }
+        // }
+    }
+    
+    const submitEnter = (type: "damage" | "healing") => {
+        if (type === "damage") applyDamage();
+        else if (type === "healing") applyHealing();
+    }
 </script>
 
 {#if $isLocked}
     <div class="damage-tool-container">
         <div class="damage relative flex-col">
-            <div class="input-icon" class:active={!!damage}>
+            <div class="input-icon" class:active={damageFocused}>
                 <Blood/>
             </div>
-            <input type="number" min={0} bind:value={damage} on:input={resetHealing}/>
+            <input
+                id="damage-input"
+                bind:this={damageInputElement}
+                type="number"
+                min={0} bind:value={damage}
+                on:input={resetHealing}
+                tabindex={0}
+                on:keydown={e => keyboardInput(e)}/>
             <button on:click={() => applyDamage()} class:active={!!damage}>Damage</button>
         </div>
         <div class="heal relative flex-col">
-            <div class="input-icon" class:active={!!healing}>
+            <div class="input-icon" class:active={healingFocused}>
                 <Heart/>
             </div>
-            <input type="number" min={0} bind:value={healing} on:input={resetDamage}/>
+            <input
+                bind:this={healingInputElement}
+                id="healing-input"
+                type="number"
+                min={0} bind:value={healing}
+                on:input={resetDamage}
+                tabindex={0}
+                on:keydown={e => submitEnter(e, "healing")}/>
             <button on:click={() => applyHealing()} class:active={!!healing}>Heal</button>
         </div>
     </div>
-{/if}
+    {/if}
+
 
 <style>
 

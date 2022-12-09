@@ -7,7 +7,7 @@ export class Entity {
     initiative?: number; 
     quantity?: number;
     hpMax?: number;
-    hpCurrent?: number;
+    hpCurrent?: number[];
     bonus?: number;
     ac?: number
 
@@ -15,6 +15,7 @@ export class Entity {
         this.type = type;
         this.ac = 10;
         this.quantity = 1;
+        this.hpCurrent = [0];
         if (type === EntityType.Player) {
             this.class = "Barbarian";
         }

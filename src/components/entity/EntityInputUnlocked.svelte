@@ -8,11 +8,21 @@
 
     export let removeEntity: (e: Entity) => void;
     export let entity: Entity;
+    const addMinion = () => {
+        entity.quantity++;
+        entity.hpCurrent = [...entity.hpCurrent, 0];
+    }
+
+    const removeMinion = () => {
+        entity.quantity = Math.max(1, entity.quantity - 1)
+        entity.hpCurrent = entity.hpCurrent.slice(0, -1);
+    }
 
     $: isMinion = entity.type === EntityType.Minion;
     $: isPlayer = entity.type === EntityType.Player;
 
     $: entity, setLocalStorageEntities($entities);
+
 </script>
 
 <div class="entity-area" class:minion-grid={isMinion}>
@@ -31,8 +41,8 @@
     </div>
     {#if isMinion}
         <div class="buttons">
-            <PlusMinusButton type="+" onClick={() => entity.quantity++}/>
-            <PlusMinusButton type="-" onClick={() => {entity.quantity = Math.max(1, entity.quantity - 1)}}/>
+            <PlusMinusButton type="+" onClick={addMinion}/>
+            <PlusMinusButton type="-" onClick={removeMinion}/>
         </div>
     {/if}
 </div>
