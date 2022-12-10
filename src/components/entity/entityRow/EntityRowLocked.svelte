@@ -1,14 +1,13 @@
 <script lang="ts">
-    import { EntityType, type Entity } from "./entity";
-    import EntityTypeButton from "../initiativeTable/EnemyMinionToggle.svelte";
-    import InitiativeValue from "../initiativeTable/InitiativeValue.svelte";
-    import PlayerIcon from "../initiativeTable/PlayerIconSwitch.svelte";
-    import NumberInput from "../common/NumberInput.svelte";
-    import { setLocalStorageEntities } from "../../lib/persistance";
-    import AcValue from "../initiativeTable/AcValue.svelte";
-    import EntityInputLocked from "./EntityInputLocked.svelte";
-    import { entities } from "../../store";
-    import CurrentHpInput from "../initiativeTable/CurrentHpInput.svelte";
+    import { EntityType, type Entity } from "../entity";
+    import EntityTypeButton from "../../initiativeTable/EnemyMinionToggle.svelte";
+    import InitiativeValue from "../../initiativeTable/InitiativeValue.svelte";
+    import PlayerIcon from "../../initiativeTable/PlayerIconSwitch.svelte";
+    import { setLocalStorageEntities } from "../../../lib/persistance";
+    import AcValue from "../../initiativeTable/AcValue.svelte";
+    import EntityInputLocked from "../entityInput/EntityInputLocked.svelte";
+    import { entities } from "../../../store";
+    import CurrentHpInput from "../../initiativeTable/CurrentHpInput.svelte";
 
     export let entity: Entity;
     export let isActive = false;

@@ -6,8 +6,8 @@
     import AddRemove from "../common/AddRemove.svelte";
     import Shield from "../../assets/icons/shield.svelte";
     import { setLocalStorageEntities } from "../../lib/persistance";
-    import EntityRowLocked from "../entity/EntityRowLocked.svelte";
-    import EntityRowUnlocked from "../entity/EntityRowUnlocked.svelte";
+    import EntityRowLocked from "../entity/entityRow/EntityRowLocked.svelte";
+    import EntityRowUnlocked from "../entity/entityRow/EntityRowUnlocked.svelte";
     
     export let isPlayerTable = false;
 
@@ -23,11 +23,11 @@
     const removeLastEntity = () => {
         const lastEntity = tableEntities[tableEntities.length - 1];
         removeEntity(lastEntity);
-        setLocalStorageEntities($entities);
     }
 
     const removeEntity = (entity: Entity) => {
         $entities = $entities.filter(e => e !== entity);
+        setLocalStorageEntities($entities);
     }
 
     const sortByInitiative = () => {

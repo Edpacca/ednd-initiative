@@ -1,6 +1,7 @@
 <script lang="ts">
-    import { EntityType, type Entity } from "./entity";
-    import Minions from "./Minions.svelte";
+    import HealthBar from "../../common/HealthBar.svelte";
+    import { EntityType, type Entity } from "../entity";
+    import Minions from "../Minions.svelte";
 
     export let entity: Entity;
     export let isActive = false;
@@ -17,9 +18,11 @@
             class:active={isActive && !isMinion}
             class:minion-main-name={entity.type === EntityType.Minion}
             placeholder={isPlayer ? entity.class : "Entity"}/>
-        {#if isMinion}
-            <Minions bind:name={entity.name} bind:quantity={entity.quantity} isActive={isActive}/>
-        {/if}
+            {#if isMinion}
+            <Minions bind:name={entity.name} bind:quantity={entity.quantity} hpMax={entity.hpMax} hpCurrent={entity.hpCurrent} isActive={isActive}/>
+            {:else}
+                <HealthBar max={entity.hpMax} current={entity.hpCurrent[0]}/>
+            {/if}
     </div>
 </div>
 

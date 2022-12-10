@@ -1,6 +1,9 @@
 <script>
     import { currentMinionIndex, isLocked } from "../../store";
+    import HealthBar from "../common/HealthBar.svelte";
     export let quantity;
+    export let hpMax;
+    export let hpCurrent;
     export let name;
     export let isActive = false;
 </script>
@@ -16,6 +19,7 @@
                 class:active-minion={isActive && i === $currentMinionIndex}
                 value={`${name} #${i + 1}`}
                 on:click={() => $currentMinionIndex = i}/>
+                <HealthBar max={hpMax} current={hpCurrent[i]}/>
         </div>
     {/each}
 {/if}

@@ -1,16 +1,16 @@
 <script lang="ts">
-    import { setLocalStorageEntities } from "../../lib/persistance";
-    import { EntityType, type Entity } from "./entity";
-    import { dRoll } from "../../lib/dieRoll";
-    import { currentEntityIndex, entities } from "../../store";
-    import D20Button from "../common/D20Button.svelte";
-    import EntityInputUnlocked from "./EntityInputUnlocked.svelte";
-    import EntityTypeButton from "../initiativeTable/EnemyMinionToggle.svelte";
-    import InitiativeValue from "../initiativeTable/InitiativeValue.svelte";
-    import NumberStringInput from "../common/NumberStringInput.svelte";
-    import NumberInput from "../common/NumberInput.svelte";
-    import MaxHpInput from "../initiativeTable/MaxHpInput.svelte";
-    import PlayerIcon from "../initiativeTable/PlayerIconSwitch.svelte";
+    import { setLocalStorageEntities } from "../../../lib/persistance";
+    import { EntityType, type Entity } from "../entity";
+    import { dRoll } from "../../../lib/dieRoll";
+    import {    entities } from "../../../store";
+    import D20Button from "../../common/D20Button.svelte";
+    import EntityInputUnlocked from "../entityInput/EntityInputUnlocked.svelte";
+    import EntityTypeButton from "../../initiativeTable/EnemyMinionToggle.svelte";
+    import InitiativeValue from "../../initiativeTable/InitiativeValue.svelte";
+    import NumberStringInput from "../../common/NumberStringInput.svelte";
+    import NumberInput from "../../common/NumberInput.svelte";
+    import MaxHpInput from "../../initiativeTable/MaxHpInput.svelte";
+    import PlayerIcon from "../../initiativeTable/PlayerIconSwitch.svelte";
 
     export let entity: Entity;
     export let removeEntity: () => void;

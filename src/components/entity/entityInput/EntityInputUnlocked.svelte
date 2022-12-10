@@ -1,10 +1,11 @@
 <script lang="ts">
-    import { setLocalStorageEntities } from "../../lib/persistance";
-    import { entities } from "../../store";
-    import PlusMinusButton from "../common/PlusMinusButton.svelte";
-    import RemoveButton from "../common/RemoveButton.svelte";
-    import { EntityType, type Entity } from "./entity";
-    import Minions from "./Minions.svelte";
+    import { setLocalStorageEntities } from "../../../lib/persistance";
+    import { entities } from "../../../store";
+    import HealthBar from "../../common/HealthBar.svelte";
+    import PlusMinusButton from "../../common/PlusMinusButton.svelte";
+    import RemoveButton from "../../common/RemoveButton.svelte";
+    import { EntityType, type Entity } from "../entity";
+    import Minions from "../Minions.svelte";
 
     export let removeEntity: (e: Entity) => void;
     export let entity: Entity;
@@ -32,11 +33,12 @@
             type="text"
             class:minion-input={entity.type === EntityType.Minion}
             placeholder={isPlayer ? entity.class : "Entity"}/>
+        <HealthBar max={entity.hpMax} current={entity.hpCurrent}/>
         <div class="xbutton">
             <RemoveButton onClick={() => removeEntity(entity)} isinverted={isMinion}/>
         </div>
         {#if isMinion}
-            <Minions bind:name={entity.name} bind:quantity={entity.quantity}/>
+            <Minions bind:name={entity.name} bind:quantity={entity.quantity} bind:hpMax={entity.hpMax} bind:hpCurrent={entity.hpCurrent}/>
         {/if}
     </div>
     {#if isMinion}

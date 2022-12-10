@@ -167,3 +167,7 @@ input:focus {
 .minion-input {
     border: 1px solid grey;
 }
+
+.dead {
+    background: var(--dark-grey);
+}
