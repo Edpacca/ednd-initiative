@@ -2,10 +2,12 @@
     import TurnTracker from "./components/common/TurnTracker.svelte";
     import DamageTool from "./components/damageTool/DamageTool.svelte";
     import InitiativeTable from "./components/initiativeTable/InitiativeTable.svelte";
+    import Toolbar from "./components/toolbar/Toolbar.svelte";
     import LockPage from "./components/tools/LockPage.svelte";
     import { entities, isLocked } from "./store";
 </script>
 
+<Toolbar/>
 <main>
   {#if $entities.length > 0}
     <div class="top-right-icon">
@@ -34,11 +36,15 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 1px solid brown;
+    border: 2px solid var(--primary);
+    border-radius: 4px;
     position: relative;
     row-gap: 2em;
     max-width: 50em;
     margin: auto;
+    background: var(--dark-grey-90);
+    z-index: 0;
+
   }
 
   .toolbar {

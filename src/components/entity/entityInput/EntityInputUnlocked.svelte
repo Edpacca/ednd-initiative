@@ -33,7 +33,9 @@
             type="text"
             class:minion-input={entity.type === EntityType.Minion}
             placeholder={isPlayer ? entity.class : "Entity"}/>
-        <HealthBar max={entity.hpMax} current={entity.hpCurrent}/>
+        {#if !isMinion}
+            <HealthBar max={entity.hpMax} current={entity.hpCurrent}/>
+        {/if}
         <div class="xbutton">
             <RemoveButton onClick={() => removeEntity(entity)} isinverted={isMinion}/>
         </div>
@@ -69,7 +71,7 @@
     }
 
     .minion-input {
-        background: none;
+        background: var(--dark-grey);
         color: var(--secondary);
     }
 

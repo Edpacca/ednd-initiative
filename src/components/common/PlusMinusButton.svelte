@@ -22,7 +22,7 @@
         border-radius: 2px;
         height: 2.5em;
         width: 2.5em;
-        border-radius: 0.3em;
+        border-radius: var(--border-radius);
         stroke: var(--primary);
         transition: 0.3s ease-out;
     }

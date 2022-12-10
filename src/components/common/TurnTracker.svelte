@@ -56,7 +56,7 @@
         height: 42px;
         background-color: var(--grey);
         border: none;
-        border-radius: 8px;
+        border-radius: var(--border-radius);
         font-size: 32px;
         color: var(--white);
     }

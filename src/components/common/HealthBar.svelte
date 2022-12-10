@@ -2,7 +2,6 @@
     export let max;
     export let current;
     $: percentage = Math.max(Math.round(100 * current / max), 0);
-    $: console.log(percentage);
     $: color = percentage <= 50 ? "red" : percentage < 100 ? "orange" : "green";
     $: cssVars = `--width: ${Math.min(percentage, 100)}%; --color: ${color}`
 </script>
@@ -18,5 +17,6 @@
         background-color: var(--color);
         height: 4px;
         transition: 0.8s ease-out;
+        border-radius: 2px;
     }
 </style>

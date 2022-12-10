@@ -36,10 +36,10 @@
     }
 
     .spinners button:first-child {
-        border-radius: 0 0.2rem 0 0;
+        border-radius: 0 var(--border-radius) 0 0;
     }
 
     .spinners  button:last-child {
-        border-radius: 0 0 0.2rem 0;
+        border-radius: 0 0 var(--border-radius) 0;
     }
 </style>

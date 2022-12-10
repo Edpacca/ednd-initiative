@@ -8,6 +8,7 @@
     --light-grey: rgb(150, 150, 150);
     --grey: rgb(75, 75, 75);
     --dark-grey: rgb(37, 38, 39);
+    --dark-grey-90: rgba(37, 38, 39, 0.9);
 
     --green: rgb(80, 182, 36);
     --green-50: rgba(80, 182, 36, 0.5);
@@ -19,10 +20,12 @@
 
     --gold: goldenrod;
 
+
+    --border-radius: 4px;
 }
 
 body {
-    background-color: var(--dark-grey);
+    background: url('/background/stone.webp'), var(--dark-grey);
     font-family: 'Roboto Condensed, Arial, sans-serif';
     color: antiquewhite;
 }
@@ -85,7 +88,7 @@ th.value-col, th.fn-col {
 
 input {
     height: 2.5rem;
-    border-radius: 0.2rem;
+    border-radius: var(--border-radius);
     border: none;
     text-align: center;
     width: 100%;
@@ -109,7 +112,6 @@ input:focus {
     border: none;
     height: 3em;
     width: 3em;
-    border-radius: 8px;
     padding: 0;
 }
 

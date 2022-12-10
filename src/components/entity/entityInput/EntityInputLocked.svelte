@@ -47,7 +47,7 @@
     }
 
     .minion-main-name {
-        background-color: var(--dark-grey) !important;
+        background-color: var(--dark-grey);
         color: var(--grey) !important;
     }
 

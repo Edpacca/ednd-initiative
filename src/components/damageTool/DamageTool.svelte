@@ -191,7 +191,6 @@ import Blood from "../../assets/icons/blood.svelte";
         border: none;
         width: 100%;
         height: 2rem;
-        border-radius: 8px;
         display: flex;
         align-items: center;
         justify-content: center;

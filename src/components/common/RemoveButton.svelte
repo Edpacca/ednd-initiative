@@ -18,7 +18,7 @@
         font-weight: bold;
         background-color: var(--dark-grey);
         border: none;
-        border-radius: 4px;
+        border-radius: var(--border-radius);
         width: 1.5em;
         height: 1.5em;
         transition: 0.3s ease-out;
