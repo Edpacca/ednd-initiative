@@ -1,7 +1,7 @@
 <script lang="ts">
     import HealthBar from "../../common/HealthBar.svelte";
     import { EntityType, type Entity } from "../entity";
-    import Minions from "../Minions.svelte";
+    import Minions from "./Minions.svelte";
 
     export let entity: Entity;
     export let isActive = false;

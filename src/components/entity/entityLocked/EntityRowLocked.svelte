@@ -4,7 +4,7 @@
     import PlayerIcon from "../../initiativeTable/PlayerIconSwitch.svelte";
     import { setLocalStorageEntities } from "../../../lib/persistance";
     import AcValue from "../../initiativeTable/AcValue.svelte";
-    import EntityInputLocked from "../entityInput/EntityInputLocked.svelte";
+    import EntityInputLocked from "./EntityInputLocked.svelte";
     import { entities } from "../../../store";
     import CurrentHpInput from "../../initiativeTable/CurrentHpInput.svelte";
     import EntityToggle from "../../common/EntityToggle.svelte";

@@ -1,11 +1,12 @@
 <script lang="ts">
     import { setLocalStorageEntities } from "../../../lib/persistance";
     import { entities } from "../../../store";
+    import AddRemove from "../../common/AddRemove.svelte";
     import HealthBar from "../../common/HealthBar.svelte";
     import PlusMinusButton from "../../common/PlusMinusButton.svelte";
     import RemoveButton from "../../common/RemoveButton.svelte";
     import { EntityType, type Entity } from "../entity";
-    import Minions from "../Minions.svelte";
+    import Minions from "../entityLocked/Minions.svelte";
 
     export let removeEntity: (e: Entity) => void;
     export let entity: Entity;
@@ -44,10 +45,7 @@
         {/if}
     </div>
     {#if isMinion}
-        <div class="buttons">
-            <PlusMinusButton type="+" onClick={addMinion}/>
-            <PlusMinusButton type="-" onClick={removeMinion}/>
-        </div>
+        <AddRemove add={addMinion} remove={removeMinion} isVertial={true}/>
     {/if}
 </div>
 
@@ -75,11 +73,7 @@
         color: var(--secondary);
     }
 
-    .buttons {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-    }
+
 
     .xbutton {
         position: absolute;

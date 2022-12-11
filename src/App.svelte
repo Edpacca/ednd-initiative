@@ -2,6 +2,7 @@
     import { onMount } from "svelte";
     import TurnTracker from "./components/common/TurnTracker.svelte";
     import DamageTool from "./components/damageTool/DamageTool.svelte";
+    import EffectTable from "./components/effects/EffectTable.svelte";
     import InitiativeTable from "./components/initiativeTable/InitiativeTable.svelte";
     import { setTheme } from "./components/toolbar/selectTheme/setTheme";
     import Toolbar from "./components/toolbar/Toolbar.svelte";
@@ -32,6 +33,11 @@
       <h2>Enemies</h2>
     {/if}
     <InitiativeTable/>
+    {#if !$isLocked}
+      <hr>
+      <h2>Effects</h2>
+      <EffectTable/>
+    {/if}
   </div>
 </main>
 

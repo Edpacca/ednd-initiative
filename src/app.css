@@ -20,6 +20,8 @@
 
     --gold: goldenrod;
 
+    --blue: rgb(80, 42, 146);
+    --light-blue: rgb(108, 80, 156);
 
     --border-radius: 4px;
     --margin: 8px;
@@ -77,6 +79,12 @@ th.value-col, th.fn-col {
     color: var(--green);
     fill: var(--green);
 }
+
+.blue {
+    color: var(--blue);
+    fill: var(--blue);
+}
+
 
 .svg-fit {
     position: absolute;

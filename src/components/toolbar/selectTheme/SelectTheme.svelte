@@ -2,17 +2,7 @@
     import { setLocalStorageTheme } from "../../../lib/persistance";
     import { currentTheme } from "../../../store";
     import { setTheme } from "./setTheme";
-
-    const THEMES = [
-        "cobbles",
-        "dirt",
-        "hell",
-        "ice",
-        "lava",
-        "sand",
-        "stone",
-        "water"
-    ]
+    import { THEMES } from "./themes";
 
     const selectTheme = (theme: string) => {
         setTheme(theme);

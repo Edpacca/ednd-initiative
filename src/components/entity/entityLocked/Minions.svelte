@@ -1,6 +1,6 @@
 <script>
-    import { currentMinionIndex, isLocked } from "../../store";
-    import HealthBar from "../common/HealthBar.svelte";
+    import { currentMinionIndex, isLocked } from "../../../store";
+    import HealthBar from "../../common/HealthBar.svelte";
     export let quantity;
     export let hpMax;
     export let hpCurrent;

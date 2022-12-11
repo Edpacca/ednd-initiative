@@ -25,5 +25,6 @@ export class Entity {
 export enum EntityType {
     Player,
     Enemy,
-    Minion
+    Minion,
+    Boss
 }

@@ -6,8 +6,8 @@
     import AddRemove from "../common/AddRemove.svelte";
     import Shield from "../../assets/icons/shield.svelte";
     import { setLocalStorageEntities } from "../../lib/persistance";
-    import EntityRowLocked from "../entity/entityRow/EntityRowLocked.svelte";
-    import EntityRowUnlocked from "../entity/entityRow/EntityRowUnlocked.svelte";
+    import EntityRowLocked from "../entity/entityLocked/EntityRowLocked.svelte";
+    import EntityRowUnlocked from "../entity/entityUnlocked/EntityRowUnlocked.svelte";
     
     export let isPlayerTable = false;
 
@@ -45,7 +45,7 @@
 
 <AddRemove isHidden={$isLocked} add={addEntity} remove={removeLastEntity}/>
 <table>
-    <thead class="secondary" class:green={isPlayerTable}>
+    <thead class="secondary">
         <th class="value-col"></th>
         <th>Name</th>
         <th class="value-col">
