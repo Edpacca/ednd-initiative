@@ -1,10 +1,16 @@
 <script lang="ts">
+    import { onMount } from "svelte";
     import TurnTracker from "./components/common/TurnTracker.svelte";
     import DamageTool from "./components/damageTool/DamageTool.svelte";
     import InitiativeTable from "./components/initiativeTable/InitiativeTable.svelte";
+    import { setTheme } from "./components/toolbar/selectTheme/setTheme";
     import Toolbar from "./components/toolbar/Toolbar.svelte";
     import LockPage from "./components/tools/LockPage.svelte";
-    import { entities, isLocked } from "./store";
+    import { currentTheme, entities, isLocked } from "./store";
+
+    onMount(async () => {
+      setTheme($currentTheme);
+    })
 </script>
 
 <Toolbar/>
@@ -44,7 +50,6 @@
     margin: auto;
     background: var(--dark-grey-90);
     z-index: 0;
-
   }
 
   .toolbar {
@@ -63,4 +68,5 @@
   hr {
     margin: 2em 0
   }
+
 </style>

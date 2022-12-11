@@ -15,7 +15,7 @@
         background: var(--dark-grey);
         width: 2rem;
         height: 2rem;
-        border: 1px solid var(--secondary);
+        border: 1px solid var(--grey);
         border-radius: var(--border-radius);
         outline: none;
     }

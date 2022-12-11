@@ -22,12 +22,17 @@
 
 
     --border-radius: 4px;
+    --margin: 8px;
+
+    --mobile-breakpoint: 480px;
+    --tablet-breakpoint: 769px;
 }
 
 body {
     background: url('/background/stone.webp'), var(--dark-grey);
-    font-family: 'Roboto Condensed, Arial, sans-serif';
+    font-family: 'Roboto Condensed', 'Arial', 'sans-serif';
     color: antiquewhite;
+    margin: var(--margin);
 }
 
 table {
@@ -172,4 +177,42 @@ input:focus {
 
 .dead {
     background: var(--dark-grey);
+}
+
+.setting-toggle-button {
+    background: none;
+    border: none;
+    border-top: 2px solid var(--light-grey);
+    color: var(--white);
+    font-size: 16px;
+    height: 2rem;
+    width: 100%;
+}
+
+.setting-toggle-button:hover {
+    background-color: var(--light-grey);
+}
+
+select {
+    height: 2rem;
+    width: 100%;
+    background: var(--dark-grey);
+    color: var(--secondary);
+    text-align: center;
+    font-size: 16px;
+    border-radius: var(--border-radius);
+}
+
+.submit-button {
+    background: var(--dark-gray);
+    height: 2rem;
+    color: var(--secondary);
+    border: 1px solid var(--grey);
+    border-radius: var(--border-radius);
+    font-weight: bold;
+}
+
+.submit-button:hover {
+    border-color: var(--light-grey);
+    color: var(--white);
 }

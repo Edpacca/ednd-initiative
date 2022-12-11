@@ -1,6 +1,5 @@
 <script lang="ts">
     import { EntityType, type Entity } from "../entity";
-    import EntityTypeButton from "../../initiativeTable/EnemyMinionToggle.svelte";
     import InitiativeValue from "../../initiativeTable/InitiativeValue.svelte";
     import PlayerIcon from "../../initiativeTable/PlayerIconSwitch.svelte";
     import { setLocalStorageEntities } from "../../../lib/persistance";
@@ -8,6 +7,8 @@
     import EntityInputLocked from "../entityInput/EntityInputLocked.svelte";
     import { entities } from "../../../store";
     import CurrentHpInput from "../../initiativeTable/CurrentHpInput.svelte";
+    import EntityToggle from "../../common/EntityToggle.svelte";
+    import { ALL_ENEMIES } from "../../common/EntityFilters";
 
     export let entity: Entity;
     export let isActive = false;
@@ -20,7 +21,7 @@
         {#if entity.type === EntityType.Player}
             <PlayerIcon bind:icon={entity.class}/>
         {:else}
-            <EntityTypeButton bind:type={entity.type}/>
+            <EntityToggle bind:type={entity.type} allowedTypes={ALL_ENEMIES}/>
         {/if}
     </td>
     <td>

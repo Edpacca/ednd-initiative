@@ -1,5 +1,7 @@
 <script lang="ts">
+    import { setLocalStorageTheme } from "../../../lib/persistance";
     import { currentTheme } from "../../../store";
+    import { setTheme } from "./setTheme";
 
     const THEMES = [
         "cobbles",
@@ -12,15 +14,14 @@
         "water"
     ]
 
-    const setBackgroundCssVar = (theme: string) => {
-        const path = `url(/background/${$currentTheme}.webp)`
-        document.body.style.background = path;
+    const selectTheme = (theme: string) => {
+        setTheme(theme);
+        setLocalStorageTheme(theme);
     }
 
-    $: setBackgroundCssVar($currentTheme);
+    $: selectTheme($currentTheme);
 </script>
 
-<div>Theme</div>
 <select bind:value={$currentTheme}>
     {#each THEMES as theme}
         <option value={theme}>
@@ -30,14 +31,6 @@
 </select>
 
 <style>
-    select {
-        height: 2rem;
-        width: 10rem;
-        background: var(--dark-grey);
-        color: var(--secondary);
-        text-align: center;
-        font-size: 16px;
-        border-radius: var(--border-radius);
-    }
+
 </style>
 

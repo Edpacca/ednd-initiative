@@ -11,7 +11,7 @@
     export let entity: Entity;
     const addMinion = () => {
         entity.quantity++;
-        entity.hpCurrent = [...entity.hpCurrent, 0];
+        entity.hpCurrent = [...entity.hpCurrent, 10];
     }
 
     const removeMinion = () => {

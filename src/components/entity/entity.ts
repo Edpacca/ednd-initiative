@@ -15,9 +15,9 @@ export class Entity {
         this.type = type;
         this.ac = 10;
         this.quantity = 1;
-        this.hpCurrent = [0];
+        this.hpCurrent = [10];
         if (type === EntityType.Player) {
-            this.class = "Barbarian";
+            this.class = "Paladin";
         }
     }
 }
