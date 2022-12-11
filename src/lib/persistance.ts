@@ -1,57 +1,64 @@
-import type { Entity, EntityType } from "../components/entity/entity";
-import type { Party } from "../components/toolbar/save/Party";
+import type { Creature, CreatureType } from "../models/creature";
+import type { Encounter } from "../models/encounter";
+import type { Entity, EntityType } from "../models/entity";
 
 export class SaveError extends Error {}
 
+enum StorageType {
+    Entity = "entities",
+    Encounter = "encounters",
+    Theme = "theme"
+}
+
 export function getLocalStorageEntities(): Entity[] {
-    return getLocalStorageArr("entities");
+    return getLocalStorageArr(StorageType.Entity);
 }
 
 export function setLocalStorageEntities(entities: Entity[]) {
-    setLocalStorageArr("entities", entities);
+    setLocalStorageArr(StorageType.Entity, entities);
 }
 
-export function getLocalStorageParties(): Party[] {
-    return getLocalStorageArr("parties");
+export function getLocalStorageEncounters(): Encounter[] {
+    return getLocalStorageArr(StorageType.Encounter);
 }
 
-export function getLocalStorageParty(name: string): Party | undefined {
-    return getLocalStorageParties().find(p => p.name === name);
+export function getLocalStorageParty(name: string): Encounter | undefined {
+    return getLocalStorageEncounters().find(p => p.name === name);
 }
 
-export function setLocalStorageParty(name: string, entities: Entity[], filteredTypes: EntityType[], override = false) {
+export function setLocalStorageEncounter(name: string, entities: Entity[], filteredTypes: EntityType[], override = false) {
     
     let party = entities.filter(e => filteredTypes.includes(e.type));
     party.forEach(e => e.initiative === undefined);
-    const existingParties: Party[] = getLocalStorageArr("parties");
+    const existingParties: Encounter[] = getLocalStorageArr(StorageType.Encounter);
 
     if (!existingParties) {
-        setLocalStorageArr("parties", []);
+        setLocalStorageArr(StorageType.Encounter, []);
     } else if (existingParties.find(p => p.name === name)) {
         if (!override) {
             throw new SaveError("A party already exists with that name. Are you sure you want to overwrite it?");
         } else {
-            setLocalStorageArr("parties", [
+            setLocalStorageArr(StorageType.Encounter, [
                 ...existingParties.filter(p => p.name !== name),
                 { name, party, filteredTypes }
             ]);
         }
     } else {
-        setLocalStorageArr("parties", [...existingParties, { name, party, filteredTypes }]);
+        setLocalStorageArr(StorageType.Encounter, [...existingParties, { name, party, filteredTypes }]);
     } 
 }
 
 export function removeLocalStorageParty(name: string) {
-    const parties = getLocalStorageArr("parties").filter(p => p.name !== name);
-    setLocalStorageArr("parties", [...parties]);
+    const parties = getLocalStorageArr(StorageType.Encounter).filter(p => p.name !== name);
+    setLocalStorageArr(StorageType.Encounter, [...parties]);
 }
 
 export function setLocalStorageTheme(theme: string) {
-    setLocalStorage("theme", theme);
+    setLocalStorage(StorageType.Theme, theme);
 }
 
 export function getLocalStorageTheme(): string {
-    return getLocalStorage("theme");
+    return getLocalStorage(StorageType.Theme);
 }
 
 export function clearLocalStorage() {

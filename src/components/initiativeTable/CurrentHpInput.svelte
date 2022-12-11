@@ -1,9 +1,9 @@
 <script lang="ts">
     import Skull from "../../assets/icons/skull.svelte";
     import NumberInput from "../common/NumberInput.svelte";
-    import { EntityType } from "../entity/entity";
+    import { CreatureType } from "../../models/creature";
     export let entity;
-    $: isMinion = entity.type === EntityType.Minion;
+    $: isMinion = entity.type === CreatureType.Minion;
     $: isDead = entity.hpCurrent <= 0;
     $: isBloodied = entity.hpCurrent <= entity.hpMax / 2 && !isDead;
     $: extraClass = isBloodied ? "bloodied" : isDead ? "dead" : "";

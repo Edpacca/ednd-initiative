@@ -1,11 +1,11 @@
-<script>
-    import { currentMinionIndex, isLocked } from "../../../store";
+<script lang="ts">
+    import { isLocked, selectedEntityIndex } from "../../../store";
     import HealthBar from "../../common/HealthBar.svelte";
-    export let quantity;
-    export let hpMax;
-    export let hpCurrent;
-    export let name;
-    export let isActive = false;
+    export let quantity: number;
+    export let hpMax: number;
+    export let hpCurrent: number[];
+    export let name: string;
+    export let entityIndex: number;
 </script>
 
 {#if quantity}
@@ -16,9 +16,9 @@
                 type="text"
                 class="minion-input"
                 class:locked={$isLocked}
-                class:active-minion={isActive && i === $currentMinionIndex}
+                class:selected-minion={$selectedEntityIndex[0] === entityIndex && $selectedEntityIndex[1] === i}
                 value={`${name} #${i + 1}`}
-                on:click={() => $currentMinionIndex = i}/>
+                on:click={() => $selectedEntityIndex = [entityIndex, i]}/>
                 <HealthBar max={hpMax} current={hpCurrent[i]}/>
         </div>
     {/each}
@@ -51,12 +51,12 @@
         text-align: right;
     }
 
-    .active-minion {
-        color: var(--gold);
+    .selected-minion {
+        color: var(--primary);
         background-color: var(--dark-grey);
     }
 
-    input:hover:not(.active-minion) {
+    input:hover:not(.selected-minion) {
         background-color: var(--light-grey)
     }
 </style>

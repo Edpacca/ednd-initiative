@@ -1,24 +1,22 @@
 <script lang="ts">
-    import { currentRound, currentEntityIndex, entities, isLocked, currentMinionIndex } from "../../store";
+    import { currentRound, entities, isLocked, activeEntityTurnIndex } from "../../store";
     
     $: max = $entities.length - 1;
     
     const next = () => {
-        $currentEntityIndex++;
-        if ($currentEntityIndex > max) {
-            $currentEntityIndex = 0;
-            $currentMinionIndex = 0;
+        $activeEntityTurnIndex++;
+        if ($activeEntityTurnIndex > max) {
+            $activeEntityTurnIndex = 0;
             $currentRound++;
         }
     }
 
     const previous = () => {
-        if ($currentRound === 1 && $currentEntityIndex === 0) return;
+        if ($currentRound === 1 && $activeEntityTurnIndex === 0) return;
 
-        $currentEntityIndex--;
-        if ($currentEntityIndex < 0) {
-            $currentEntityIndex = max;
-            $currentMinionIndex = 0;
+        $activeEntityTurnIndex--;
+        if ($activeEntityTurnIndex < 0) {
+            $activeEntityTurnIndex = max;
             $currentRound = Math.max($currentRound - 1, 1);
         }
     }

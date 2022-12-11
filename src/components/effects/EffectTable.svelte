@@ -1,17 +1,19 @@
 <script lang="ts">
     import Speed from "../../assets/icons/speed.svelte";
-    import { effects } from "../../store";
+    import { entities } from "../../store";
     import AddRemove from "../common/AddRemove.svelte";
-    import { Effect } from "./effect";
+    import { Effect, EffectType } from "../../models/effect";
     import EffectRowUnlocked from "./EffectRowUnlocked.svelte";
 
     const addEffect = () => {
-        $effects = [...$effects, new Effect()]
+        $entities = [...$entities, new Effect()]
     }
 
     const removeLastEffect = () => {
-        $effects = [ ...$effects.slice(0, -1) ]
+        $entities = [ ...$entities.slice(0, -1) ]
     }
+
+    $: effects = $entities.filter(e => e.type === EffectType.Effect);
 </script>
 
 <AddRemove add={addEffect} remove={removeLastEffect}/>
@@ -24,7 +26,7 @@
         <th class="value-col"></th>
     </thead>
     <tbody>
-        {#each $effects as effect}
+        {#each effects as effect}
             <EffectRowUnlocked effect={effect}/>
         {/each}
     </tbody>

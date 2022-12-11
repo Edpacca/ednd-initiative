@@ -1,40 +1,39 @@
 <script lang="ts">
-    import { EntityType, type Entity } from "../entity";
+    import { CreatureType, type Creature } from "../../../models/creature";
     import InitiativeValue from "../../initiativeTable/InitiativeValue.svelte";
     import PlayerIcon from "../../initiativeTable/PlayerIconSwitch.svelte";
     import { setLocalStorageEntities } from "../../../lib/persistance";
     import AcValue from "../../initiativeTable/AcValue.svelte";
-    import EntityInputLocked from "./EntityInputLocked.svelte";
+    import CreatureInputLocked from "./CreatureInputLocked.svelte";
     import { entities } from "../../../store";
     import CurrentHpInput from "../../initiativeTable/CurrentHpInput.svelte";
-    import EntityToggle from "../../common/EntityToggle.svelte";
-    import { ALL_ENEMIES } from "../../common/EntityFilters";
+    import CreatureToggle from "../../common/CreatureToggle.svelte";
 
-    export let entity: Entity;
+    export let creature: Creature;
     export let isActive = false;
-    $: entity, setLocalStorageEntities($entities);
+    $: creature, setLocalStorageEntities($entities);
 </script>
 
 <tr>
     <div class:active={isActive}></div>
     <td class="flex-col">
-        {#if entity.type === EntityType.Player}
-            <PlayerIcon bind:icon={entity.class}/>
+        {#if creature.type === CreatureType.Player}
+            <PlayerIcon bind:icon={creature.class}/>
         {:else}
-            <EntityToggle bind:type={entity.type} allowedTypes={ALL_ENEMIES}/>
+            <CreatureToggle bind:type={creature.type} allowedTypes={[CreatureType.Enemy, CreatureType.Minion, CreatureType.Boss]}/>
         {/if}
     </td>
     <td>
-       <EntityInputLocked bind:isActive bind:entity/>
+       <CreatureInputLocked bind:isActive bind:creature={creature}/>
     </td>
     <td>
-        <CurrentHpInput bind:entity/>
+        <CurrentHpInput bind:entity={creature}/>
     </td>
     <td>
-        <AcValue value={entity.ac}/>
+        <AcValue value={creature.ac}/>
     </td>   
     <td>
-        <InitiativeValue bind:initiative={entity.initiative} bind:bonus={entity.bonus}/>
+        <InitiativeValue bind:initiative={creature.initiative} bind:bonus={creature.bonus}/>
     </td>
 </tr>
 

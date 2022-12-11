@@ -2,11 +2,11 @@
     import Enemy from "../../assets/entity-types/enemy.svelte";
     import Minion from "../../assets/entity-types/minion.svelte";
     import Player from "../../assets/entity-types/player.svelte";
-    import { EntityType } from "../entity/entity";
+    import { CreatureType } from "../../models/creature";
 
 
-    export let type: EntityType;
-    export let allowedTypes: EntityType[];
+    export let type: CreatureType;
+    export let allowedTypes: CreatureType[];
     let typeIndex = 0;
 
     const rotateType = () => {
@@ -16,11 +16,11 @@
 </script>
 
 <button class="entity-type-button" on:click={rotateType}>
-    {#if type === EntityType.Enemy}
+    {#if type === CreatureType.Enemy}
         <Enemy/>
-    {:else if type === EntityType.Player}
+    {:else if type === CreatureType.Player}
         <Player/>
-    {:else if type === EntityType.Minion}
+    {:else if type === CreatureType.Minion}
         <Minion/>
     {/if}
 </button>

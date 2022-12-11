@@ -2,20 +2,17 @@
     import Enemy from "../../../assets/entity-types/enemy.svelte";
     import Minion from "../../../assets/entity-types/minion.svelte";
     import Player from "../../../assets/entity-types/player.svelte";
-    import { getLocalStorageParties } from "../../../lib/persistance";
+    import { getLocalStorageEncounters } from "../../../lib/persistance";
     import RemoveButton from "../../common/RemoveButton.svelte";
-    import { EntityType } from "../../entity/entity";
-    import type { Party } from "../save/Party";
+    import { CreatureType } from "../../../models/creature";
+    import type { Encounter } from "../../../models/encounter";
     import ConfirmDelete from "./ConfirmDelete.svelte";
     import ConfirmLoad from "./ConfirmLoad.svelte";
-    let parties: Party[];
+    let encounters: Encounter[];
     
-    const getParties = () => {
-        parties = getLocalStorageParties();
-        console.log("got em");
+    const getEncounters = () => {
+        encounters = getLocalStorageEncounters();
     }
-    
-    getParties();
 
     enum State {
         None,
@@ -24,42 +21,42 @@
     }
 
     let state: State = State.None;
-    let selectedParty: Party | undefined = undefined;
+    let slecectedEncounter: Encounter | undefined = undefined;
 
-    const loadParty = (party: Party) => {
-        selectedParty = party;
+    const loadEncounter = (party: Encounter) => {
+        slecectedEncounter = party;
         state = State.Load;
     }
 
-    const deleteParty = (party: Party) => {
-        selectedParty = party;
+    const deleteEncounter = (party: Encounter) => {
+        slecectedEncounter = party;
         state = State.Delete;
     }
 
     $: if (state === State.None) {
-        getParties();
+        getEncounters();
     } 
 
     const cancel = () => {
-        selectedParty = undefined;
+        slecectedEncounter = undefined;
         state = State.None;
     }
 </script>
 
 <div class="load-container">
     <div>Saved groups</div>
-    {#if parties.length > 0}
-        {#each parties as party}
+    {#if encounters.length > 0}
+        {#each encounters as party}
             <div class="party-container">
-                <button class="party-button" on:click={() => loadParty(party)}>
+                <button class="party-button" on:click={() => loadEncounter(party)}>
                     <div class="name">{party.name}</div>
                     <div class="icons">
                         {#each party.filteredTypes as type}
-                            {#if type === EntityType.Player}
+                            {#if type === CreatureType.Player}
                                 <span class="player">
                                     <Player/>
                                 </span>
-                            {:else if type === EntityType.Enemy}
+                            {:else if type === CreatureType.Enemy}
                                 <span class="enemy">
                                     <Enemy/>
                                 </span>
@@ -71,7 +68,7 @@
                         {/each}
                     </div>
                 </button>
-                <RemoveButton onClick={() => deleteParty(party)}/>
+                <RemoveButton onClick={() => deleteEncounter(party)}/>
             </div>
         {/each}
     {:else}
@@ -79,8 +76,8 @@
     {/if}
 </div>
 
-<ConfirmDelete party={selectedParty} isOpen={state === State.Delete} cancel={cancel}/>
-<ConfirmLoad party={selectedParty} isOpen={state === State.Load} cancel={cancel}/>
+<ConfirmDelete party={slecectedEncounter} isOpen={state === State.Delete} cancel={cancel}/>
+<ConfirmLoad encounter={slecectedEncounter} isOpen={state === State.Load} cancel={cancel}/>
 
 <style>
     .load-container {

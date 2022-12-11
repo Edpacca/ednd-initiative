@@ -1,12 +1,14 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import TurnTracker from "./components/common/TurnTracker.svelte";
-    import DamageTool from "./components/damageTool/DamageTool.svelte";
+    import DamageTool from "./components/damage/Damage.svelte";
     import EffectTable from "./components/effects/EffectTable.svelte";
+    import CreatureTable from "./components/initiativeTable/CreatureTable.svelte";
     import InitiativeTable from "./components/initiativeTable/InitiativeTable.svelte";
     import { setTheme } from "./components/toolbar/selectTheme/setTheme";
     import Toolbar from "./components/toolbar/Toolbar.svelte";
     import LockPage from "./components/tools/LockPage.svelte";
+    import { CreatureType } from "./models/creature";
     import { currentTheme, entities, isLocked } from "./store";
 
     onMount(async () => {
@@ -28,15 +30,15 @@
   <div class="table-container">
     {#if !$isLocked}
       <h2>Players</h2>
-      <InitiativeTable isPlayerTable={true}/>
+      <CreatureTable typeFilter={[CreatureType.Player]}/>
       <hr>
       <h2>Enemies</h2>
-    {/if}
-    <InitiativeTable/>
-    {#if !$isLocked}
+      <CreatureTable typeFilter={[CreatureType.Enemy, CreatureType.Minion, CreatureType.Boss]}/>
       <hr>
       <h2>Effects</h2>
       <EffectTable/>
+    {:else}
+      <InitiativeTable/>
     {/if}
   </div>
 </main>

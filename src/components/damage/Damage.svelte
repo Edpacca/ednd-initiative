@@ -2,26 +2,28 @@
     import { onMount } from "svelte";
 import Blood from "../../assets/icons/blood.svelte";
     import Heart from "../../assets/icons/heart.svelte";
-    import { currentEntityIndex, currentMinionIndex, entities, isLocked } from "../../store";
+    import { Creature } from "../../models/creature";
+    import { entities, isLocked, selectedEntityIndex } from "../../store";
 
     let damage: number;
     let healing: number;
     let damageInputElement: HTMLInputElement;
     let healingInputElement: HTMLInputElement;
 
-    $: currentEntity = $entities[$currentEntityIndex];
+    $: currentEntity = $entities[$selectedEntityIndex[0]];
 
+    $: isCreature = currentEntity instanceof Creature;
 
     const applyDamage = () => {
-        if (damage && currentEntity.hpCurrent) {
-            $entities[$currentEntityIndex].hpCurrent[$currentMinionIndex] -= damage;
+        if (isCreature && (currentEntity as Creature).hpCurrent && damage) {
+            ($entities[$selectedEntityIndex[0]] as Creature).hpCurrent[$selectedEntityIndex[1]] -= damage;
             resetDamage();
         } 
     }
 
     const applyHealing = () => {
-        if (healing && currentEntity.hpCurrent) {
-            $entities[$currentEntityIndex].hpCurrent[$currentMinionIndex] += healing;
+        if (isCreature && healing && (currentEntity as Creature).hpCurrent) {
+            ($entities[$selectedEntityIndex[0]] as Creature).hpCurrent[$selectedEntityIndex[1]] += healing;
             resetHealing();
         } 
     }
@@ -106,7 +108,7 @@ import Blood from "../../assets/icons/blood.svelte";
                 min={0} bind:value={healing}
                 on:input={resetDamage}
                 tabindex={0}
-                on:keydown={e => submitEnter(e, "healing")}/>
+                on:keydown={e => submitEnter("healing")}/>
             <button on:click={() => applyHealing()} class:active={!!healing}>Heal</button>
         </div>
     </div>

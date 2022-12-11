@@ -1,11 +1,11 @@
 <script lang="ts">
     import { removeLocalStorageParty } from "../../../lib/persistance";
     import ConfirmationModal from "../../common/ConfirmationModal.svelte";
-    import type { Party } from "../save/Party";
+    import type { Encounter } from "../../../models/encounter";
 
-    export let party: Party | undefined = undefined;
-    export let isOpen;
+    export let party: Encounter | undefined = undefined;
     export let cancel: () => void;
+    export let isOpen;
 
     const deleteParty = () => {
         if (party) {

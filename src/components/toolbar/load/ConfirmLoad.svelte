@@ -1,21 +1,21 @@
 <script lang="ts">
     import { entities } from "../../../store";
     import ConfirmationModal from "../../common/ConfirmationModal.svelte";
-    import type { Party } from "../save/Party";
+    import type { Encounter } from "../../../models/encounter";
 
-    export let party: Party | undefined = undefined;
+    export let encounter: Encounter | undefined = undefined;
     export let isOpen;
     export let cancel: () => void;
 
-    const loadParty = () => {
-        if (party) {
-            $entities = [...$entities, ...party.party]
+    const loadEncounter = () => {
+        if (encounter) {
+            $entities = [...$entities, ...encounter.entities]
         }
-        party = undefined;
+        encounter = undefined;
     }
 
     const text = [
-        `Confirm loading ${party?.name} to the initiative tracker?`,
+        `Confirm loading ${encounter?.name} to the initiative tracker?`,
         "This will not ovveride any entities that you have currently in the tracker"
     ]
 
@@ -24,5 +24,5 @@
 <ConfirmationModal 
     isOpen={isOpen}
     text={text}
-    confirmaCallback={loadParty}
+    confirmaCallback={loadEncounter}
     cancelCallback={cancel}/>

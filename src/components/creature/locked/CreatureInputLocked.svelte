@@ -1,27 +1,27 @@
 <script lang="ts">
     import HealthBar from "../../common/HealthBar.svelte";
-    import { EntityType, type Entity } from "../entity";
+    import { CreatureType, type Creature } from "../../../models/creature";
     import Minions from "./Minions.svelte";
 
-    export let entity: Entity;
+    export let creature: Creature;
     export let isActive = false;
 
-    $: isMinion = entity.type === EntityType.Minion;
-    $: isPlayer = entity.type === EntityType.Player;
+    $: isMinion = creature.type === CreatureType.Minion;
+    $: isPlayer = creature.type === CreatureType.Player;
 </script>
 
 <div class="entity-area">
     <div class="name-input-container">
         <input 
-            bind:value={entity.name}
+            bind:value={creature.name}
             type="text"
             class:active={isActive && !isMinion}
-            class:minion-main-name={entity.type === EntityType.Minion}
-            placeholder={isPlayer ? entity.class : "Entity"}/>
+            class:minion-main-name={creature.type === CreatureType.Minion}
+            placeholder={isPlayer ? creature.class : "Creature"}/>
             {#if isMinion}
-            <Minions bind:name={entity.name} bind:quantity={entity.quantity} hpMax={entity.hpMax} hpCurrent={entity.hpCurrent} isActive={isActive}/>
+            <Minions bind:name={creature.name} bind:quantity={creature.quantity} hpMax={creature.hpMax} hpCurrent={creature.hpCurrent} isActive={isActive}/>
             {:else}
-                <HealthBar max={entity.hpMax} current={entity.hpCurrent[0]}/>
+                <HealthBar max={creature.hpMax} current={creature.hpCurrent[0]}/>
             {/if}
     </div>
 </div>

@@ -1,6 +1,6 @@
 <script lang="ts">
     import { getThemePath } from "../toolbar/selectTheme/setTheme";
-    import type { Effect } from "./effect";
+    import type { Effect } from "../../models/effect";
     export let effect: Effect;
     
     $: themePath = effect.theme ? getThemePath(effect.theme) : "";

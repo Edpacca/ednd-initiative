@@ -1,6 +1,6 @@
 <script lang="ts">
     import { dRoll } from "../../lib/dieRoll";
-    import type { Effect } from "./effect";
+    import type { Effect } from "../../models/effect";
     import { THEMES } from "../toolbar/selectTheme/themes";
     import Cave from "../../assets/icons/cave.svelte";
     import AddRemove from "../common/AddRemove.svelte";

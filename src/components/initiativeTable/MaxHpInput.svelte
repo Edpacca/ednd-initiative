@@ -1,7 +1,7 @@
 <script lang="ts">
     import NumberInput from "../common/NumberInput.svelte";
-    import type { Entity } from "../entity/entity";
-    export let entity: Entity;
+    import type { Creature } from "../../models/creature";
+    export let entity: Creature;
     export let setHpCurrent: (hp: number) => void;
     export let value;
     export let isHidden = false;

@@ -3,45 +3,44 @@
     import { entities } from "../../../store";
     import AddRemove from "../../common/AddRemove.svelte";
     import HealthBar from "../../common/HealthBar.svelte";
-    import PlusMinusButton from "../../common/PlusMinusButton.svelte";
     import RemoveButton from "../../common/RemoveButton.svelte";
-    import { EntityType, type Entity } from "../entity";
-    import Minions from "../entityLocked/Minions.svelte";
+    import { CreatureType, type Creature } from "../../../models/creature";
+    import Minions from "../locked/Minions.svelte";
 
-    export let removeEntity: (e: Entity) => void;
-    export let entity: Entity;
+    export let removeCreature: (e: Creature) => void;
+    export let creature: Creature;
     const addMinion = () => {
-        entity.quantity++;
-        entity.hpCurrent = [...entity.hpCurrent, 10];
+        creature.quantity++;
+        creature.hpCurrent = [...creature.hpCurrent, 10];
     }
 
     const removeMinion = () => {
-        entity.quantity = Math.max(1, entity.quantity - 1)
-        entity.hpCurrent = entity.hpCurrent.slice(0, -1);
+        creature.quantity = Math.max(1, creature.quantity - 1)
+        creature.hpCurrent = creature.hpCurrent.slice(0, -1);
     }
 
-    $: isMinion = entity.type === EntityType.Minion;
-    $: isPlayer = entity.type === EntityType.Player;
+    $: isMinion = creature.type === CreatureType.Minion;
+    $: isPlayer = creature.type === CreatureType.Player;
 
-    $: entity, setLocalStorageEntities($entities);
+    $: creature, setLocalStorageEntities($entities);
 
 </script>
 
 <div class="entity-area" class:minion-grid={isMinion}>
     <div class="name-input-container">
         <input 
-            bind:value={entity.name}
+            bind:value={creature.name}
             type="text"
-            class:minion-input={entity.type === EntityType.Minion}
-            placeholder={isPlayer ? entity.class : "Entity"}/>
+            class:minion-input={creature.type === CreatureType.Minion}
+            placeholder={isPlayer ? creature.class : "Creature"}/>
         {#if !isMinion}
-            <HealthBar max={entity.hpMax} current={entity.hpCurrent}/>
+            <HealthBar max={creature.hpMax} current={creature.hpCurrent}/>
         {/if}
         <div class="xbutton">
-            <RemoveButton onClick={() => removeEntity(entity)} isinverted={isMinion}/>
+            <RemoveButton onClick={() => removeCreature(creature)} isinverted={isMinion}/>
         </div>
         {#if isMinion}
-            <Minions bind:name={entity.name} bind:quantity={entity.quantity} bind:hpMax={entity.hpMax} bind:hpCurrent={entity.hpCurrent}/>
+            <Minions bind:name={creature.name} bind:quantity={creature.quantity} bind:hpMax={creature.hpMax} bind:hpCurrent={creature.hpCurrent}/>
         {/if}
     </div>
     {#if isMinion}
