@@ -10,10 +10,15 @@
         "This will clear everything currently in the tracker and reset your theme, but will not delete your saved data"
     ]
 
+    const confirmReset = () => {
+        reset();
+        close();
+    }
+
 </script>
 
 <ConfirmationModal 
     text={text}
     isOpen={isOpen}
-    confirmaCallback={reset}
+    confirmaCallback={confirmReset}
     cancelCallback={close}/>

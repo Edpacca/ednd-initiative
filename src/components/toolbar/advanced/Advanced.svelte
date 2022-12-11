@@ -11,6 +11,7 @@
     let state = State.None;
 
     const close = () => state = State.None;
+    
 </script>
 
 <div class="flex-col">

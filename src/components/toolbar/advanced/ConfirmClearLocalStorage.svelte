@@ -8,7 +8,7 @@
     const clear = () => {
         clearLocalStorage();
         reset();
-        isOpen = false;
+        close();
     }
 
     const text = [

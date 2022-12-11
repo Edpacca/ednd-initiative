@@ -39,8 +39,7 @@ body {
 
 table {
     table-layout: auto;
-    width: 100%;
-    max-width: 41em;
+    width: 41em;
     border-collapse: collapse;
     border-spacing: 0;
     font-family: 'Roboto Condensed';
