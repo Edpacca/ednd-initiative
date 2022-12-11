@@ -1,28 +1,29 @@
-<script>
-    import { currentEntityIndex, currentTheme, entities } from "../../../store";
+<script lang="ts">
     import ConfirmClearLocalStorage from "./ConfirmClearLocalStorage.svelte";
+    import ConfirmReset from "./ConfirmReset.svelte";
 
-    let isConfirming = false;
-
-    const reset = () => {
-        $entities = [];
-        $currentTheme = "stone";
-        
-        $currentEntityIndex = 0;
+    enum State {
+        None,
+        Reset,
+        Clear
     }
+
+    let state = State.None;
+
+    const close = () => state = State.None;
 </script>
 
 <div class="flex-col">
-    <button class="submit-button" on:click={() => isConfirming = true}>
+    <button
+        class="submit-button" on:click={() => state = State.Clear}>
         Clear local storage
     </button>
-    <button class="submit-button" on:click={reset}>
+    <button class="submit-button" on:click={() => state= State.Reset}>
         Reset page
     </button>
 </div>
-{#if isConfirming}
-    <ConfirmClearLocalStorage bind:isOpen={isConfirming}/>
-{/if}
+<ConfirmClearLocalStorage isOpen={state === State.Clear} close={close}/>
+<ConfirmReset isOpen={state === State.Reset} close={close}/>
 
 <style>
     button {

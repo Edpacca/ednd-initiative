@@ -3,28 +3,48 @@
     import { entities } from "../../../store";
     import { ALL, ALL_ENEMIES } from "../../common/EntityFilters";
     import { EntityType } from "../../entity/entity";
+    import ConfirmOverwrite from "./ConfirmOverwrite.svelte";
+
+    enum State {
+        None,
+        Saved,
+        Overwrite
+    }
+
     let name: string;
     let filteredTypes: EntityType[]
-    let message = "";
-    let isOverriding = false;
+    let state = State.None;
+    let messageName = "";
     $: hasName = name ? name.length > 0 : false;
 
     const saveParty = (override = false) => {
         try {
             setLocalStorageParty(name, $entities, filteredTypes, override);
-            message = `${name} saved to local storage!`
+            messageName = name;
             name = "";
-            isOverriding = false;
-            clearMessage();
+            state = State.Saved;
         } catch (e) {
-            if (e instanceof SaveError) message = e.message;
-            isOverriding = true;
+            if (e instanceof SaveError) state = State.Overwrite;
         }
     }
 
-    const clearMessage = async() => {
-        setTimeout(() => message = "", 4000);
+    const cancel = () => state = State.None;
+    
+    const onEnter = (event: KeyboardEvent) => {
+        if (event.key === "Enter") {
+            saveParty();
+        }
     }
+    
+    $: if(state === State.Saved) {
+        setTimeout(() => { 
+            state = State.None;
+            messageName = "";
+        }, 4000);
+    }
+
+    $: console.log(state);
+
 </script>
 
 <div class="setting-container">
@@ -36,17 +56,14 @@
         <option value={[EntityType.Enemy]}>Enemies</option>
         <option value={[EntityType.Minion]}>Minions</option>
     </select>
-    <input placeholder="Name" bind:value={name} on:input={() => message = ""}>
-    {#if message}
-        <div>{message}</div>
-    {/if}
-    {#if hasName && !message && !isOverriding}
+    <input placeholder="Name" bind:value={name} on:input={() => messageName = ""} on:keydown={e => onEnter(e)}>
+    {#if state === State.Saved}
+        <div>{messageName} saved to local storage!</div>
+    {:else if state === State.None && hasName}
         <button on:click={() => saveParty()} class="submit-button">Save</button>
-    {:else if isOverriding}
-        <button on:click={() => saveParty(true)} class="submit-button">Save</button>
-        <button on:click={() => name = ""} class="submit-button">Cancel</button>
     {/if}
 </div>
+<ConfirmOverwrite overwrite={() => saveParty(true)} cancel={cancel} name={name} isOpen={state === State.Overwrite}/>
 
 <style>
     .setting-container {

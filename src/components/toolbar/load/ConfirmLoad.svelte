@@ -1,9 +1,11 @@
 <script lang="ts">
     import { entities } from "../../../store";
-    import Modal from "../../common/Modal.svelte";
+    import ConfirmationModal from "../../common/ConfirmationModal.svelte";
     import type { Party } from "../save/Party";
 
     export let party: Party | undefined = undefined;
+    export let isOpen;
+    export let cancel: () => void;
 
     const loadParty = () => {
         if (party) {
@@ -11,27 +13,16 @@
         }
         party = undefined;
     }
+
+    const text = [
+        `Confirm loading ${party?.name} to the initiative tracker?`,
+        "This will not ovveride any entities that you have currently in the tracker"
+    ]
+
 </script>
 
-<Modal isOpen={party !== undefined}>
-    <p>Confirm loading {party.name} to the intiative tracker?</p>
-    <p>This will not override any entities that you have stored in the tracker already</p>
-    <div class="button-container">
-        <button class="submit-button" on:click={loadParty} >Confirm</button>
-        <button class="submit-button" on:click={() => party = undefined}>Cancel</button>
-    </div>
-</Modal>
-
-<style>
-    p {
-        font-size: 16px;
-        text-align: center;
-        margin-bottom: 1rem;
-    }
-
-    .button-container {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        column-gap: 0.3rem;
-    }
-</style>
+<ConfirmationModal 
+    isOpen={isOpen}
+    text={text}
+    confirmaCallback={loadParty}
+    cancelCallback={cancel}/>

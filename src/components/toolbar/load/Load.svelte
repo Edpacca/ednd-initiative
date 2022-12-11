@@ -12,27 +12,38 @@
     
     const getParties = () => {
         parties = getLocalStorageParties();
-        console.log("got parties");
+        console.log("got em");
     }
     
     getParties();
 
+    enum State {
+        None,
+        Load,
+        Delete
+    }
+
+    let state: State = State.None;
     let selectedParty: Party | undefined = undefined;
-    let isRemoving = false;
 
     const loadParty = (party: Party) => {
         selectedParty = party;
-        isRemoving = false;
+        state = State.Load;
     }
 
     const deleteParty = (party: Party) => {
         selectedParty = party;
-        isRemoving = true;
+        state = State.Delete;
     }
 
-    $: if (isRemoving === false) {
+    $: if (state === State.None) {
         getParties();
     } 
+
+    const cancel = () => {
+        selectedParty = undefined;
+        state = State.None;
+    }
 </script>
 
 <div class="load-container">
@@ -67,11 +78,9 @@
         <div>No parties saved.</div>
     {/if}
 </div>
-{#if isRemoving}
-    <ConfirmDelete bind:party={selectedParty} bind:isRemoving/>
-{:else}
-    <ConfirmLoad bind:party={selectedParty}/>
-{/if}
+
+<ConfirmDelete party={selectedParty} isOpen={state === State.Delete} cancel={cancel}/>
+<ConfirmLoad party={selectedParty} isOpen={state === State.Load} cancel={cancel}/>
 
 <style>
     .load-container {
