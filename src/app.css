@@ -38,8 +38,9 @@ body {
 }
 
 table {
-    table-layout: fixed;
+    table-layout: auto;
     width: 100%;
+    max-width: 41em;
     border-collapse: collapse;
     border-spacing: 0;
     font-family: 'Roboto Condensed';
@@ -118,6 +119,7 @@ input:focus {
 
 .icon-header {
     height: 1.5rem;
+    width: 3rem;
 }
 
 .entity-type-button {

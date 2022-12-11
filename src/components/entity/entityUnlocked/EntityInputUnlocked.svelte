@@ -45,7 +45,7 @@
         {/if}
     </div>
     {#if isMinion}
-        <AddRemove add={addMinion} remove={removeMinion} isVertial={true}/>
+        <AddRemove add={addMinion} remove={removeMinion} vertical={true}/>
     {/if}
 </div>
 

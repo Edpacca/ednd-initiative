@@ -18,9 +18,10 @@
 <table>
     <thead class="secondary">
         <th class="value-col"></th>
-        <th>Effect</th>
+        <th class="full-width">Effect </th>
+        <th class="fit-content">Counters</th>
         <th class="value-col"><div class="icon-header svg-fit-container"><Speed/></div></th>
-        <th class="fn-col"></th>
+        <th class="value-col"></th>
     </thead>
     <tbody>
         {#each $effects as effect}
@@ -28,3 +29,13 @@
         {/each}
     </tbody>
 </table>
+
+<style>
+    .fit-content {
+        width: fit-content;
+    }
+
+    .full-width {
+        width: 100%;
+    }
+</style>
