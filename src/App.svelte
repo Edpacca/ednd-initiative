@@ -8,7 +8,7 @@
     import { setTheme } from "./components/toolbar/selectTheme/setTheme";
     import Toolbar from "./components/toolbar/Toolbar.svelte";
     import LockPage from "./components/tools/LockPage.svelte";
-    import { CreatureType } from "./models/creature";
+    import { CreatureType } from "./lib/models/creature";
     import { currentTheme, entities, isLocked } from "./store";
 
     onMount(async () => {

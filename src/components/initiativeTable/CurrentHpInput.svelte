@@ -1,7 +1,7 @@
 <script lang="ts">
     import Skull from "../../assets/icons/skull.svelte";
     import NumberInput from "../common/NumberInput.svelte";
-    import { CreatureType } from "../../models/creature";
+    import { CreatureType } from "../../lib/models/creature";
     export let entity;
     $: isMinion = entity.type === CreatureType.Minion;
     $: isDead = entity.hpCurrent <= 0;

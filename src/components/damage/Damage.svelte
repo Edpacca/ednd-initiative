@@ -2,7 +2,7 @@
     import { onMount } from "svelte";
 import Blood from "../../assets/icons/blood.svelte";
     import Heart from "../../assets/icons/heart.svelte";
-    import { Creature } from "../../models/creature";
+    import { Creature } from "../../lib/models/creature";
     import { entities, isLocked, selectedEntityIndex } from "../../store";
 
     let damage: number;

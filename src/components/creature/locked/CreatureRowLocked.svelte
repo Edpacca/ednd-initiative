@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { CreatureType, type Creature } from "../../../models/creature";
+    import { CreatureType, type Creature } from "../../../lib/models/creature";
     import InitiativeValue from "../../initiativeTable/InitiativeValue.svelte";
     import PlayerIcon from "../../initiativeTable/PlayerIconSwitch.svelte";
     import { setLocalStorageEntities } from "../../../lib/persistance";
@@ -15,7 +15,7 @@
 </script>
 
 <tr>
-    <div class:active={isActive}></div>
+    <div class:active-initiative={isActive}></div>
     <td class="flex-col">
         {#if creature.type === CreatureType.Player}
             <PlayerIcon bind:icon={creature.class}/>
@@ -36,20 +36,3 @@
         <InitiativeValue bind:initiative={creature.initiative} bind:bonus={creature.bonus}/>
     </td>
 </tr>
-
-<style>
-
-    tr {
-        position: relative;
-    }
-
-    .active {
-        position: absolute;
-        width: 100%;
-        height: calc(100% - 5px);
-        background-color: var(--dark-grey);
-        border: 3px solid var(--gold);
-        border-radius: 8px;
-        z-index: -1;
-    }
-</style>

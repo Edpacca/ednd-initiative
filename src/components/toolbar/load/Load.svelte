@@ -4,8 +4,8 @@
     import Player from "../../../assets/entity-types/player.svelte";
     import { getLocalStorageEncounters } from "../../../lib/persistance";
     import RemoveButton from "../../common/RemoveButton.svelte";
-    import { CreatureType } from "../../../models/creature";
-    import type { Encounter } from "../../../models/encounter";
+    import { CreatureType } from "../../../lib/models/creature";
+    import type { Encounter } from "../../../lib/models/encounter";
     import ConfirmDelete from "./ConfirmDelete.svelte";
     import ConfirmLoad from "./ConfirmLoad.svelte";
     let encounters: Encounter[];

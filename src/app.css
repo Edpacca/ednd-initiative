@@ -8,6 +8,7 @@
     --light-grey: rgb(150, 150, 150);
     --grey: rgb(75, 75, 75);
     --dark-grey: rgb(37, 38, 39);
+    --super-dark-grey: rgb(19, 19, 19);
     --dark-grey-90: rgba(37, 38, 39, 0.9);
 
     --green: rgb(80, 182, 36);
@@ -20,8 +21,8 @@
 
     --gold: goldenrod;
 
-    --blue: rgb(80, 42, 146);
-    --light-blue: rgb(108, 80, 156);
+    --blue: rgb(58, 42, 146);
+    --light-blue: rgb(88, 80, 156);
 
     --border-radius: 4px;
     --margin: 8px;
@@ -56,6 +57,10 @@ td {
     vertical-align: top;
 }
 
+.td-icon {
+    min-width: 3rem !important;
+}
+
 .table-text {
     font-size: 20px;
     font-weight: bold;
@@ -81,8 +86,8 @@ th.value-col, th.fn-col {
 }
 
 .blue {
-    color: var(--blue);
-    fill: var(--blue);
+    color: var(--light-blue);
+    fill: var(--light-blue);
 }
 
 
@@ -224,4 +229,39 @@ select {
 .submit-button:hover {
     border-color: var(--light-grey);
     color: var(--white);
+}
+
+.counters {
+    display: flex;
+    flex-direction: row;
+    column-gap: 0.1rem;
+    width: fit-content;
+}
+
+.counter {
+    max-width: 2.5rem;
+    min-width: 2.5rem;
+}
+
+.thin-counter {
+    min-width: 2rem;
+}
+
+.effect-counter-input {
+    background-color: var(--super-dark-grey);
+    color: var(--light-blue);
+}
+
+.active-initiative {
+    position: absolute;
+    width: 100%;
+    height: calc(100% - 5px);
+    background-color: var(--dark-grey);
+    border: 3px solid var(--gold);
+    border-radius: 8px;
+    z-index: -1;
+}
+
+tr {
+    position: relative;
 }

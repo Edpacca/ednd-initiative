@@ -1,6 +1,6 @@
 <script lang="ts">
     import { getThemePath } from "../toolbar/selectTheme/setTheme";
-    import type { Effect } from "../../models/effect";
+    import type { Effect } from "../../lib/models/effect";
     export let effect: Effect;
     
     $: themePath = effect.theme ? getThemePath(effect.theme) : "";
@@ -15,7 +15,8 @@
     .effect-input {
         background: var(--theme);
         color: var(--white);
-        border: 2px solid var(--light-grey);
+        font-style: italic;
+        /* border: 2px solid var(--light-grey); */
     }
 
     .effect-input::placeholder {

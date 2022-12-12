@@ -1,7 +1,6 @@
 <script lang="ts">
-    import { onMount } from "svelte";
     import { isLocked } from "../../store";
-    import type { PlayerClass } from "../../models/PlayerClass";
+    import type { PlayerClass } from "../../lib/models/playerClass";
 
     export let icon: PlayerClass | undefined;
     $: path = `classes/${icon.toLowerCase()}.svg#icon`;

@@ -4,12 +4,14 @@
     import AddRemove from "../common/AddRemove.svelte";
     import Shield from "../../assets/icons/shield.svelte";
     import { setLocalStorageEntities } from "../../lib/persistance";
-    import { Creature, CreatureType } from "../../models/creature";
+    import { Creature, CreatureType } from "../../lib/models/creature";
     import CreatureRowUnlocked from "../creature/unlocked/CreatureRowUnlocked.svelte";
     import Speed from "../../assets/icons/speed.svelte";
+    import type { EntityType } from "../../lib/models/entity";
+    import { CREATURES } from "../../lib/typeFilters";
     
-    export let typeFilter: CreatureType[];
-    $: creatures = $entities.filter(e => e instanceof Creature && typeFilter.includes(e.type)) as Creature[];
+    export let typeFilter: EntityType[];
+    $: creatures = $entities.filter(e => CREATURES.includes(e.type) && typeFilter.includes(e.type));
 
     const addCreature = () => {
         if (typeFilter.includes(CreatureType.Player)) {
@@ -58,8 +60,8 @@
         {/if}
     </thead>
     <tbody>
-        {#each creatures as creature, index}
-            <CreatureRowUnlocked {creature} removeCreature={() => removeCreature(creature)}/>
+        {#each creatures as creature, i}
+            <CreatureRowUnlocked {creature} removeCreature={() => removeCreature(creature)} index={i}/>
         {/each}
     </tbody>
 </table>

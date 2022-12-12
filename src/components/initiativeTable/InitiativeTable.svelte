@@ -2,10 +2,10 @@
     import { isLocked, entities, activeEntityTurnIndex } from "../../store";
     import Heart from "../../assets/icons/heart.svelte";
     import CreatureRowLocked from "../creature/locked/CreatureRowLocked.svelte";
-    import { Creature } from "../../models/creature";
-    import { Effect } from "../../models/effect";
     import EffectRowLocked from "../effects/EffectRowLocked.svelte";
     import Speed from "../../assets/icons/speed.svelte";
+    import { CREATURES } from "../../lib/typeFilters";
+    import { EffectType } from "../../lib/models/effect";
 
     const sortByInitiative = () => {
         $entities.sort((a, b) => {
@@ -17,6 +17,7 @@
     }
 
     $: $isLocked, sortByInitiative();
+
 </script>
 
 <table>
@@ -42,9 +43,9 @@
     </thead>
     <tbody>
         {#each $entities as entity, index}
-            {#if entity instanceof Creature}
+            {#if CREATURES.includes(entity.type)}
                 <CreatureRowLocked creature={entity} isActive={index === $activeEntityTurnIndex}/>
-            {:else if entity instanceof Effect}
+            {:else if entity.type === EffectType.Effect}
                 <EffectRowLocked effect={entity} isActive={index === $activeEntityTurnIndex}/>
             {/if}
         {/each}

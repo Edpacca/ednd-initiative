@@ -4,11 +4,13 @@
     import AddRemove from "../../common/AddRemove.svelte";
     import HealthBar from "../../common/HealthBar.svelte";
     import RemoveButton from "../../common/RemoveButton.svelte";
-    import { CreatureType, type Creature } from "../../../models/creature";
+    import { CreatureType, type Creature } from "../../../lib/models/creature";
     import Minions from "../locked/Minions.svelte";
 
     export let removeCreature: (e: Creature) => void;
     export let creature: Creature;
+    export let index: number;
+
     const addMinion = () => {
         creature.quantity++;
         creature.hpCurrent = [...creature.hpCurrent, 10];
@@ -40,7 +42,7 @@
             <RemoveButton onClick={() => removeCreature(creature)} isinverted={isMinion}/>
         </div>
         {#if isMinion}
-            <Minions bind:name={creature.name} bind:quantity={creature.quantity} bind:hpMax={creature.hpMax} bind:hpCurrent={creature.hpCurrent}/>
+            <Minions bind:name={creature.name} bind:quantity={creature.quantity} bind:hpMax={creature.hpMax} bind:hpCurrent={creature.hpCurrent} index={index}/>
         {/if}
     </div>
     {#if isMinion}

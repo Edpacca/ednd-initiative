@@ -1,8 +1,7 @@
 import { Entity } from "./entity";
-import type { PlayerClass } from "./PlayerClass";
+import { getRandomClass, type PlayerClass } from "./playerClass";
 
 export class Creature extends Entity {
-    declare type: CreatureType;
     class?: PlayerClass;
     quantity?: number;
     hpMax?: number;
@@ -14,10 +13,13 @@ export class Creature extends Entity {
         this.type = type;
         this.ac = 10;
         this.quantity = 1;
+        this.hpMax = 10;
         this.hpCurrent = [10];
         if (type === CreatureType.Player) {
-            this.class = "Paladin";
+            this.class = getRandomClass();
         }
+
+        Object.setPrototypeOf(this, Creature.prototype);
     }
 }
 

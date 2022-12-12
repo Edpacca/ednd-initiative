@@ -2,9 +2,9 @@
     import { SaveError, setLocalStorageEncounter } from "../../../lib/persistance";
     import ConfirmOverwrite from "./ConfirmOverwrite.svelte";
     import { entities } from "../../../store";
-    import type { EntityType } from "../../../models/entity";
-    import { CreatureType } from "../../../models/creature";
-    import { EffectType } from "../../../models/effect";
+    import type { EntityType } from "../../../lib/models/entity";
+    import { CreatureType } from "../../../lib/models/creature";
+    import { EffectType } from "../../../lib/models/effect";
 
     enum State {
         None,

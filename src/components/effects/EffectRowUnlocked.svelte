@@ -1,13 +1,15 @@
 <script lang="ts">
     import { dRoll } from "../../lib/dieRoll";
-    import type { Effect } from "../../models/effect";
+    import type { Effect } from "../../lib/models/effect";
     import { THEMES } from "../toolbar/selectTheme/themes";
     import Cave from "../../assets/icons/cave.svelte";
     import AddRemove from "../common/AddRemove.svelte";
     import D20Button from "../common/D20Button.svelte";
     import NumberInput from "../common/NumberInput.svelte";
-    import EffectInputUnlocked from "./EffectInputUnlocked.svelte";
+    import EffectInput from "./EffectInput.svelte";
     import InitiativeValue from "../initiativeTable/InitiativeValue.svelte";
+    import { setLocalStorageEntities } from "../../lib/persistance";
+    import { entities } from "../../store";
 
     export let effect: Effect;
     let themeIndex = 0;
@@ -34,7 +36,7 @@
         }
     }
 
-
+    $: effect, setLocalStorageEntities($entities);
 </script>
 
 <tr>
@@ -43,7 +45,7 @@
             <Cave/>
         </button>
     </td>
-    <td><EffectInputUnlocked effect={effect}/></td>
+    <td><EffectInput bind:effect={effect}/></td>
     <td class="counters">
         <AddRemove add={addCounter} remove={removeCounter} center={true}/>
         {#if effect.counters}
@@ -68,27 +70,9 @@
         border: none;
     }
 
-    .td-icon {
-        min-width: 3rem !important;
-    }
-
     button:hover {
-        fill: var(--light-blue);
+        fill: var(--white);
     }
 
-    .counters {
-        display: flex;
-        flex-direction: row;
-        column-gap: 0.1rem;
-        width: fit-content;
-    }
 
-    .counter {
-        max-width: 2.5rem;
-        min-width: 2.5rem;
-    }
-    
-    .thin-counter {
-        min-width: 2rem;
-    }
 </style>

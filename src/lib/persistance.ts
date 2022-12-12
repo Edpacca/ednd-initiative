@@ -1,6 +1,6 @@
-import type { Creature, CreatureType } from "../models/creature";
-import type { Encounter } from "../models/encounter";
-import type { Entity, EntityType } from "../models/entity";
+import type { Creature, CreatureType } from "./models/creature";
+import type { Encounter } from "./models/encounter";
+import type { Entity, EntityType } from "./models/entity";
 
 export class SaveError extends Error {}
 

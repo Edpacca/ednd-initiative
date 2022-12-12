@@ -1,6 +1,6 @@
 <script lang="ts">
     import HealthBar from "../../common/HealthBar.svelte";
-    import { CreatureType, type Creature } from "../../../models/creature";
+    import { CreatureType, type Creature } from "../../../lib/models/creature";
     import Minions from "./Minions.svelte";
 
     export let creature: Creature;

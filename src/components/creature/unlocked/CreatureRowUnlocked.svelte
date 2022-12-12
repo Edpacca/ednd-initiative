@@ -1,6 +1,6 @@
 <script lang="ts">
     import { setLocalStorageEntities } from "../../../lib/persistance";
-    import { CreatureType, type Creature } from "../../../models/creature";
+    import { CreatureType, type Creature } from "../../../lib/models/creature";
     import { dRoll } from "../../../lib/dieRoll";
     import {    entities } from "../../../store";
     import D20Button from "../../common/D20Button.svelte";
@@ -13,6 +13,7 @@
     import CreatureToggle from "../../common/CreatureToggle.svelte";
 
     export let creature: Creature;
+    export let index: number;
     export let removeCreature: () => void;
     
     const setHpCurrent = (value: number) => creature.hpCurrent.fill(value);
@@ -28,7 +29,7 @@
         {/if}
     </td>
     <td>
-        <CreatureInputUnlocked bind:creature removeCreature={removeCreature}/>
+        <CreatureInputUnlocked bind:creature removeCreature={removeCreature} index={index}/>
     </td>
     <td>
         <MaxHpInput setHpCurrent={setHpCurrent} bind:value={creature.hpMax} entity={creature}/>
