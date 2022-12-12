@@ -11,7 +11,7 @@
     import Toolbar from "./components/toolbar/Toolbar.svelte";
     import LockPage from "./components/tools/LockPage.svelte";
     import { CreatureType } from "./lib/models/creature";
-    import { currentTheme, entities, isLocked } from "./store";
+    import { activeEntityTurnIndex, currentTheme, entities, isLocked, selectedEntityIndex } from "./store";
 
     onMount(async () => {
       setTheme($currentTheme);
@@ -25,10 +25,12 @@
         <LockPage/>
     </div>
   {/if}
-  <div class="toolbar">
-    <TurnTracker/>
-    <DamageTool/>
-  </div>
+  {#if $isLocked}
+    <div class="toolbar">
+      <TurnTracker/>
+      <DamageTool/>
+    </div>
+  {/if}
   <div class="table-container">
     {#if !$isLocked}
       <h2>Players</h2>

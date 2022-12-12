@@ -1,8 +1,8 @@
 <script lang="ts">
-    import { onMount } from "svelte";
-import Blood from "../../assets/icons/blood.svelte";
+    import Blood from "../../assets/icons/blood.svelte";
     import Heart from "../../assets/icons/heart.svelte";
-    import { Creature } from "../../lib/models/creature";
+    import type { Creature } from "../../lib/models/creature";
+    import { CREATURES } from "../../lib/typeFilters";
     import { entities, isLocked, selectedEntityIndex } from "../../store";
     import { FLOATERS } from "../common/floater/animationValue";
     import Floater from "../common/floater/Floater.svelte";
@@ -13,7 +13,7 @@ import Blood from "../../assets/icons/blood.svelte";
     let healingInputElement: HTMLInputElement;
 
     $: currentEntity = $entities[$selectedEntityIndex[0]];
-    $: isCreature = currentEntity instanceof Creature;
+    $: isCreature = CREATURES.includes(currentEntity.type);
 
     const applyDamage = () => {
         if (isCreature && (currentEntity as Creature).hpCurrent && damage) {
@@ -53,27 +53,9 @@ import Blood from "../../assets/icons/blood.svelte";
                 healingFocused = true;
                 damageFocused = false;
             }
-            // if (!damageFocused) {
-            //     healingInputElement.blur();
-            //     damageInputElement.focus();
-            //     console.log("damage");
-            // } else {
-            //     damageInputElement.blur();
-            //     healingInputElement.focus();
-            //     console.log("healing");
-            // }
         } else if (event.key === "Enter") {
             submitEnter("damage");
         }
-        // } else if (!damageFocused && !healingFocused && numbers.includes(event.key)) {
-        //     console.log(event.key);
-        //     if (!damageFocused) {
-        //         damageInputElement.focus();
-        //         damageInputElement.value = event.key;
-        //     } else if (healingFocused) {
-        //         healingInputElement.value = event.key;
-        //     }
-        // }
     }
     
     const submitEnter = (type: "damage" | "healing") => {
@@ -82,53 +64,48 @@ import Blood from "../../assets/icons/blood.svelte";
     }
 </script>
 
-{#if $isLocked}
-    <div class="damage-tool-container">
-        <div class="damage relative flex-col" class:active={damageFocused}>
-            <div class="input-icon">
-                <Blood/>
-            </div>
-            {#if damageFocused}
-                <div class="floaters">
-                    {#each FLOATERS as floater}
-                        <Floater av={floater} color="darkred"/>
-                    {/each}
-                </div>
-            {/if}
-            <input
-                id="damage-input"
-                bind:this={damageInputElement}
-                type="number"
-                min={0} bind:value={damage}
-                on:input={resetHealing}
-                tabindex={0}
-                on:keydown={e => keyboardInput(e)}/>
-            <button on:click={() => applyDamage()} class:active={damageFocused}>Damage</button>
+<div class="damage-tool-container">
+    <div class="damage relative flex-col" class:active={damageFocused}>
+        <div class="input-icon">
+            <Blood/>
         </div>
-        <div class="heal relative flex-col" class:active={healingFocused}>
-            <div class="input-icon">
-                <Heart/>
+        {#if damageFocused}
+            <div class="floaters">
+                {#each FLOATERS as floater}
+                    <Floater av={floater} color="darkred"/>
+                {/each}
             </div>
-            {#if healingFocused}
-                <div class="floaters">
-                    {#each FLOATERS as floater}
-                        <Floater av={floater} color="green"/>
-                    {/each}
-                </div>
-            {/if}
-            <input
-                bind:this={healingInputElement}
-                id="healing-input"
-                type="number"
-                min={0} bind:value={healing}
-                on:input={resetDamage}
-                tabindex={0}
-                on:keydown={e => submitEnter("healing")}/>
-            <button on:click={() => applyHealing()} class:active={healingFocused}>Heal</button>
-        </div>
+        {/if}
+        <input
+            id="damage-input"
+            bind:this={damageInputElement}
+            type="number"
+            min={0} bind:value={damage}
+            on:input={resetHealing}
+            tabindex={0}/>
+        <button on:click={() => applyDamage()} class:active={damageFocused}>Damage</button>
     </div>
-{/if}
-
+    <div class="heal relative flex-col" class:active={healingFocused}>
+        <div class="input-icon">
+            <Heart/>
+        </div>
+        {#if healingFocused}
+            <div class="floaters">
+                {#each FLOATERS as floater}
+                    <Floater av={floater} color="green"/>
+                {/each}
+            </div>
+        {/if}
+        <input
+            bind:this={healingInputElement}
+            id="healing-input"
+            type="number"
+            min={0} bind:value={healing}
+            on:input={resetDamage}
+            tabindex={0}/>
+        <button on:click={() => applyHealing()} class:active={healingFocused}>Heal</button>
+    </div>
+</div>
 
 <style>
 
@@ -181,7 +158,7 @@ import Blood from "../../assets/icons/blood.svelte";
         bottom: 45px;
     }
     .heal .input-icon {
-        top: 2px;
+        top: 8px;
         width: 5rem;
         height: 5rem;
     }

@@ -22,6 +22,8 @@
         <Player/>
     {:else if type === CreatureType.Minion}
         <Minion/>
+    {:else if type === CreatureType.Boss}
+        <div>BOSS</div>
     {/if}
 </button>
 

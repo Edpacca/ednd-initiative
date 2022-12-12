@@ -35,7 +35,7 @@
     }
 </script>
 
-<div class="turn-tracker" class:hidden={!$isLocked}>
+<div class="turn-tracker">
     <div class="header">Round {$currentRound}</div>
     <div class="tt-buttons flex-row" >
         <button on:click={previous}>{"<"}</button>

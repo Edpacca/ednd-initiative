@@ -9,3 +9,7 @@ export const currentRound: Writable<number> = writable(1);
 export const activeEntityTurnIndex: Writable<number> = writable(0);
 export const selectedEntityIndex: Writable<[number, number]> = writable([0, 0]);
 export const currentTheme: Writable<string> = writable(getLocalStorageTheme() ?? "stone");
+
+export function selectEntityInput(index: [number, number]) {
+    selectedEntityIndex.set(index);
+}

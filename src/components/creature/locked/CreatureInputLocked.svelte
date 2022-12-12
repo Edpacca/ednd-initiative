@@ -2,12 +2,15 @@
     import HealthBar from "../../common/HealthBar.svelte";
     import { CreatureType, type Creature } from "../../../lib/models/creature";
     import Minions from "./Minions.svelte";
+    import { selectedEntityIndex, selectEntityInput } from "../../../store";
 
     export let creature: Creature;
     export let isActive = false;
+    export let index: number
 
     $: isMinion = creature.type === CreatureType.Minion;
     $: isPlayer = creature.type === CreatureType.Player;
+    $: isSelected = $selectedEntityIndex[0] === index && !isMinion;
 </script>
 
 <div class="entity-area">
@@ -15,11 +18,13 @@
         <input 
             bind:value={creature.name}
             type="text"
-            class:active={isActive && !isMinion}
+            class:active={isActive}
             class:minion-main-name={creature.type === CreatureType.Minion}
-            placeholder={isPlayer ? creature.class : "Creature"}/>
+            placeholder={isPlayer ? creature.class : "Creature"}
+            class:selected-input={isSelected}
+            on:click={() => selectEntityInput([index, 0])}/>
             {#if isMinion}
-            <Minions bind:name={creature.name} bind:quantity={creature.quantity} hpMax={creature.hpMax} hpCurrent={creature.hpCurrent} isActive={isActive}/>
+            <Minions bind:name={creature.name} bind:quantity={creature.quantity} hpMax={creature.hpMax} hpCurrent={creature.hpCurrent} index={index}/>
             {:else}
                 <HealthBar max={creature.hpMax} current={creature.hpCurrent[0]}/>
             {/if}
@@ -32,7 +37,8 @@
     .name-input-container {
         position: relative;
     }
-      input[type="text"] {
+    
+    input[type="text"] {
         font-style: italic;
         background-color: var(--grey);
         color: var(--white);
