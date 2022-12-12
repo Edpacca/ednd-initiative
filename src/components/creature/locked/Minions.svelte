@@ -19,7 +19,7 @@
             <input 
                 type="text"
                 class="minion-input"
-                class:locked={$isLocked && !($selectedEntityIndex[0] === index && $selectedEntityIndex[1] === i)}
+                class:locked={$isLocked}
                 class:selected-input={$selectedEntityIndex[0] === index && $selectedEntityIndex[1] === i}
                 value={`${name} #${i + 1}`}
                 on:click={() => selectMinion(i)}/>
@@ -39,6 +39,7 @@
         box-sizing: border-box;
         font-size: 18px;
         font-weight: bold;
+        border: none;
     }
 
     input.locked {
@@ -53,11 +54,5 @@
         font-size: 1.5em;
         font-weight: bold;
         text-align: right;
-    }
-
-
-
-    input:hover:not(.selected-minion) {
-        background-color: var(--light-grey)
     }
 </style>

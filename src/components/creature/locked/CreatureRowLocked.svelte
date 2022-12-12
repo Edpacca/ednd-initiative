@@ -4,15 +4,16 @@
     import { setLocalStorageEntities } from "../../../lib/persistance";
     import AcValue from "../../initiativeTable/AcValue.svelte";
     import CreatureInputLocked from "./CreatureInputLocked.svelte";
-    import { entities } from "../../../store";
+    import { entities, selectedEntityIndex } from "../../../store";
     import CurrentHpInput from "../../initiativeTable/CurrentHpInput.svelte";
     import CreatureIconSelect from "../../common/buttons/CreatureIconSelect.svelte";
-    import type { Creature } from "../../../lib/models/creature";
+    import { CreatureType, type Creature } from "../../../lib/models/creature";
 
     export let creature: Creature;
     export let isActive = false;
     export let index: number;
     $: creature, setLocalStorageEntities($entities);
+    $: isSelected = $selectedEntityIndex[0] === index;
 </script>
 
 <tr>
@@ -21,10 +22,10 @@
         <CreatureIconSelect type={creature.type} index={index} playerClass={creature.class ? creature.class : undefined}/>
     </td>
     <td>
-       <CreatureInputLocked bind:isActive bind:creature={creature} index={index}/>
+       <CreatureInputLocked bind:isActive bind:creature={creature} index={index} isSelected={isSelected && creature.type !== CreatureType.Minion}/>
     </td>
     <td>
-        <CurrentHpInput bind:entity={creature}/>
+        <CurrentHpInput bind:entity={creature} isSelected={isSelected}/>
     </td>
     <td>
         <AcValue value={creature.ac}/>

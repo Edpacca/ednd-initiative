@@ -7,10 +7,11 @@
     export let creature: Creature;
     export let isActive = false;
     export let index: number
+    export let isSelected: boolean;
 
     $: isMinion = creature.type === CreatureType.Minion;
     $: isPlayer = creature.type === CreatureType.Player;
-    $: isSelected = $selectedEntityIndex[0] === index && !isMinion;
+
 </script>
 
 <div class="entity-area">
@@ -53,7 +54,7 @@
     }
 
     .minion-main-name {
-        background-color: var(--dark-grey);
+        background-color: var(--dark-grey) !important;
         color: var(--grey) !important;
     }
 

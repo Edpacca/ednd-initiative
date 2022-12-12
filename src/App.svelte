@@ -1,7 +1,5 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { FLOATERS } from "./components/common/floater/animationValue";
-    import Floater from "./components/common/floater/Floater.svelte";
     import TurnTracker from "./components/common/TurnTracker.svelte";
     import DamageTool from "./components/damage/Damage.svelte";
     import EffectTable from "./components/effects/EffectTable.svelte";
@@ -11,7 +9,7 @@
     import Toolbar from "./components/toolbar/Toolbar.svelte";
     import LockPage from "./components/tools/LockPage.svelte";
     import { CreatureType } from "./lib/models/creature";
-    import { activeEntityTurnIndex, currentTheme, entities, isLocked, selectedEntityIndex } from "./store";
+    import { currentTheme, entities, isLocked } from "./store";
 
     onMount(async () => {
       setTheme($currentTheme);

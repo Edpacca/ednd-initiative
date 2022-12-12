@@ -77,6 +77,7 @@
             </div>
         {/if}
         <input
+            class="damage-input"
             id="damage-input"
             bind:this={damageInputElement}
             type="number"
@@ -97,6 +98,7 @@
             </div>
         {/if}
         <input
+            class="damage-input"
             bind:this={healingInputElement}
             id="healing-input"
             type="number"
@@ -117,7 +119,7 @@
         column-gap: 8px;
     }
 
-    input {
+    .damage-input {
         height: 6rem;
         width: 6rem;
         font-size: 34px;
@@ -126,8 +128,12 @@
         background: none;
     }
 
-    input:focus {
+    .damage-input:focus {
         outline: none;
+    }
+
+    .damage-input:hover {
+        background: none !important;
     }
 
     input::-webkit-outer-spin-button,
