@@ -1,12 +1,13 @@
 <script lang="ts">
     import { DEFAULT, type AnimationValue } from "./animationValue";
     export let av: AnimationValue = DEFAULT;
+    export let color = "red";
 </script>
 <div 
     class="fade-container" 
-    style={`--y-time: ${av.yTiming}s; --size: ${av.size}px; --color: ${av.color}; --delay: ${av.delay}s`}>
-    <div class="y-container" style={`--y: ${av.yRange}px;`}>
-        <svg viewBox="0 0 100 100" style={`--x: ${av.xRange}px; --x-time: ${av.xTiming}s`}>
+    style={`--y-time: ${av.yTiming}s; --size: ${av.size}px; --color: ${color}; --delay: ${av.delay}s; x-offset: ${av.xOffset}px`}>
+    <div class="y-container" style={`--y-range: ${av.yRange}px;`}>
+        <svg viewBox="0 0 100 100" style={`--x-range: ${av.xRange}px; --x-time: ${av.xTiming}s`}>
             <circle cx="50" cy="50" r="50"/>
         </svg>
     </div>
@@ -19,6 +20,8 @@
         width: var(--size);
         height: var(--size);
         animation: fade var(--y-time) ease-in var(--delay) infinite;
+        opacity: 0;
+        left: var(--x-offset);
     }
 
     .y-container {
@@ -36,19 +39,19 @@
 
     @keyframes floatX {
         0% {
-            transform: translateX(calc(var(--x) * -1));
+            transform: translateX(calc(var(--x-range) * -1));
         }
         100% {
-            transform: translateX(var(--x));
+            transform: translateX(var(--x-range));
         }
     }
 
     @keyframes floatY {
         0% {
-            transform: translateY(var(--y));
+            transform: translateY(0);
         }
         100% {
-            transform: translateY(calc(var(--y) * -1));
+            transform: translateY(calc(var(--y-range) * -1));
         }
     }
 
@@ -57,10 +60,10 @@
             opacity: 0;
         }
         30% {
-            opacity: 1;
+            opacity: 0.7;
         }
         50% {
-            opacity: 1;
+            opacity: 0.7;
         }
         100% {
             opacity: 0;

@@ -5,7 +5,7 @@ export interface AnimationValue {
     yTiming: number;
     delay: number;
     size: number;
-    color: string;
+    xOffset: number;
 }
 
 export let DEFAULT: AnimationValue = {
@@ -15,7 +15,7 @@ export let DEFAULT: AnimationValue = {
     yTiming: 2,
     delay: 0,
     size: 20,
-    color: "red",
+    xOffset: 0
 }
 
 export let FLOATERS: AnimationValue[] = [
@@ -25,8 +25,8 @@ export let FLOATERS: AnimationValue[] = [
         yRange: 50,
         yTiming: 2,
         delay: 0,
-        size: 20,
-        color: "red",
+        size: 15,
+        xOffset: -20
     },
     {
         xRange: 15,
@@ -34,8 +34,8 @@ export let FLOATERS: AnimationValue[] = [
         yRange: 70,
         yTiming: 3,
         delay: 0.2,
-        size: 30,
-        color: "red",
+        size: 20,
+        xOffset: -12
     },
     {
         xRange: 12,
@@ -43,8 +43,8 @@ export let FLOATERS: AnimationValue[] = [
         yRange: 60,
         yTiming: 2.3,
         delay: 0.25,
-        size: 20,
-        color: "red",
+        size: 17,
+        xOffset: -8
     },
     {
         xRange: 6,
@@ -52,8 +52,8 @@ export let FLOATERS: AnimationValue[] = [
         yRange: 80,
         yTiming: 2.7,
         delay: 0.6,
-        size: 20,
-        color: "red",
+        size: 15,
+        xOffset: 0
     },
     {
         xRange: 17,
@@ -61,8 +61,8 @@ export let FLOATERS: AnimationValue[] = [
         yRange: 70,
         yTiming: 2.3,
         delay: 0.8,
-        size: 20,
-        color: "red",
+        size: 22,
+        xOffset: 8
     },
     {
         xRange: 14,
@@ -70,8 +70,8 @@ export let FLOATERS: AnimationValue[] = [
         yRange: 40,
         yTiming: 3.1,
         delay: 0.9,
-        size: 20,
-        color: "red",
+        size: 16,
+        xOffset: 12
     },
     {
         xRange: 16,
@@ -79,7 +79,7 @@ export let FLOATERS: AnimationValue[] = [
         yRange: 55,
         yTiming: 2.5,
         delay: 1,
-        size: 20,
-        color: "red",
+        size: 14,
+        xOffset: 20
     }
 ]

@@ -4,6 +4,8 @@ import Blood from "../../assets/icons/blood.svelte";
     import Heart from "../../assets/icons/heart.svelte";
     import { Creature } from "../../lib/models/creature";
     import { entities, isLocked, selectedEntityIndex } from "../../store";
+    import { FLOATERS } from "../common/floater/animationValue";
+    import Floater from "../common/floater/Floater.svelte";
 
     let damage: number;
     let healing: number;
@@ -24,7 +26,7 @@ import Blood from "../../assets/icons/blood.svelte";
         if (isCreature && healing && (currentEntity as Creature).hpCurrent) {
             ($entities[$selectedEntityIndex[0]] as Creature).hpCurrent[$selectedEntityIndex[1]] += healing;
             resetHealing();
-        } 
+        }
     }
     
     const resetDamage = () => damage = undefined;
@@ -80,12 +82,19 @@ import Blood from "../../assets/icons/blood.svelte";
     }
 </script>
 
-{#if $isLocked || true}
+{#if $isLocked}
     <div class="damage-tool-container">
         <div class="damage relative flex-col" class:active={damageFocused}>
             <div class="input-icon">
                 <Blood/>
             </div>
+            {#if damageFocused}
+                <div class="floaters">
+                    {#each FLOATERS as floater}
+                        <Floater av={floater} color="darkred"/>
+                    {/each}
+                </div>
+            {/if}
             <input
                 id="damage-input"
                 bind:this={damageInputElement}
@@ -94,12 +103,19 @@ import Blood from "../../assets/icons/blood.svelte";
                 on:input={resetHealing}
                 tabindex={0}
                 on:keydown={e => keyboardInput(e)}/>
-            <button on:click={() => applyDamage()} class:active={!!damage}>Damage</button>
+            <button on:click={() => applyDamage()} class:active={damageFocused}>Damage</button>
         </div>
         <div class="heal relative flex-col" class:active={healingFocused}>
             <div class="input-icon">
                 <Heart/>
             </div>
+            {#if healingFocused}
+                <div class="floaters">
+                    {#each FLOATERS as floater}
+                        <Floater av={floater} color="green"/>
+                    {/each}
+                </div>
+            {/if}
             <input
                 bind:this={healingInputElement}
                 id="healing-input"
@@ -108,10 +124,10 @@ import Blood from "../../assets/icons/blood.svelte";
                 on:input={resetDamage}
                 tabindex={0}
                 on:keydown={e => submitEnter("healing")}/>
-            <button on:click={() => applyHealing()} class:active={!!healing}>Heal</button>
+            <button on:click={() => applyHealing()} class:active={healingFocused}>Heal</button>
         </div>
     </div>
-    {/if}
+{/if}
 
 
 <style>
@@ -152,16 +168,13 @@ import Blood from "../../assets/icons/blood.svelte";
         width: 6rem;
         height: 6rem;
         z-index: 1;
-        stroke-width: 5px;
     }
 
     .damage {
         fill: var(--red-50);
-        stroke: var(--dark-red);
     }
     .heal {
         fill: var(--green-50);
-        stroke: var(--dark-green);
     }
 
     .damage .input-icon {
@@ -169,6 +182,8 @@ import Blood from "../../assets/icons/blood.svelte";
     }
     .heal .input-icon {
         top: 2px;
+        width: 5rem;
+        height: 5rem;
     }
 
     .damage.active {
@@ -190,6 +205,7 @@ import Blood from "../../assets/icons/blood.svelte";
         font-size: 16px;
         background: none;
         border: none;
+        border-radius: var(--border-radius);
         width: 100%;
         height: 2rem;
         display: flex;
@@ -218,4 +234,10 @@ import Blood from "../../assets/icons/blood.svelte";
         border: 3px solid var(--green);
     }
 
+    .floaters {
+        z-index: 1;
+        position: absolute;
+        top: 20px;
+        margin-right: 20px;
+    }
 </style>
