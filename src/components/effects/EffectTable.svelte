@@ -1,7 +1,7 @@
 <script lang="ts">
     import Speed from "../../assets/icons/speed.svelte";
     import { entities } from "../../store";
-    import AddRemove from "../common/AddRemove.svelte";
+    import AddRemove from "../common/buttons/AddRemove.svelte";
     import { Effect, EffectType } from "../../lib/models/effect";
     import EffectRowUnlocked from "./EffectRowUnlocked.svelte";
 

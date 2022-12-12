@@ -3,8 +3,8 @@
     import type { Effect } from "../../lib/models/effect";
     import { THEMES } from "../toolbar/selectTheme/themes";
     import Cave from "../../assets/icons/cave.svelte";
-    import AddRemove from "../common/AddRemove.svelte";
-    import D20Button from "../common/D20Button.svelte";
+    import AddRemove from "../common/buttons/AddRemove.svelte";
+    import D20Button from "../common/buttons/D20Button.svelte";
     import NumberInput from "../common/NumberInput.svelte";
     import EffectInput from "./EffectInput.svelte";
     import InitiativeValue from "../initiativeTable/InitiativeValue.svelte";

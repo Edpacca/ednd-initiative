@@ -1,5 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
+    import { FLOATERS } from "./components/common/floater/animationValue";
+    import Floater from "./components/common/floater/Floater.svelte";
     import TurnTracker from "./components/common/TurnTracker.svelte";
     import DamageTool from "./components/damage/Damage.svelte";
     import EffectTable from "./components/effects/EffectTable.svelte";
@@ -29,6 +31,7 @@
   </div>
   <div class="table-container">
     {#if !$isLocked}
+      <h1>Prepare...</h1>
       <h2>Players</h2>
       <CreatureTable typeFilter={[CreatureType.Player]}/>
       <hr>
@@ -38,10 +41,17 @@
       <h2>Effects</h2>
       <EffectTable/>
     {:else}
+      <h1>Fight!</h1>
       <InitiativeTable/>
     {/if}
   </div>
 </main>
+<div class="damage-tool-large">
+  {#each FLOATERS as floater}
+    <Floater av={floater}/>
+  {/each}
+  <Floater/>
+</div>
 
 <style>
   main {
@@ -75,6 +85,16 @@
 
   hr {
     margin: 2em 0
+  }
+
+  .damage-tool-large {
+    border: 2px solid var(--primary);
+    height: 60vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: -1;
+    background-color: black;
   }
 
 </style>

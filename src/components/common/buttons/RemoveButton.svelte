@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Cross from "../../assets/symbols/cross.svelte";
+    import Cross from "../../../assets/symbols/cross.svelte";
     export let onClick: () => void;
     export let isHidden = false;
     export let isinverted = false;

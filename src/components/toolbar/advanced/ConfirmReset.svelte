@@ -1,5 +1,5 @@
 <script lang="ts">
-    import ConfirmationModal from "../../common/ConfirmationModal.svelte";
+    import ConfirmationModal from "../../common/modal/ConfirmationModal.svelte";
     import { reset } from "./reset";
 
     export let isOpen = false;

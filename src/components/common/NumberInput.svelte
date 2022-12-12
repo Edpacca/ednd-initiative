@@ -1,5 +1,5 @@
 <script lang="ts">
-    import ValueSpinner from "./ValueSpinner.svelte";
+    import ValueSpinner from "./buttons/ValueSpinner.svelte";
 
     export let value = 0;
     export let isHidden = false;

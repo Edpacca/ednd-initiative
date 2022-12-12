@@ -7,7 +7,7 @@
     import CreatureInputLocked from "./CreatureInputLocked.svelte";
     import { entities } from "../../../store";
     import CurrentHpInput from "../../initiativeTable/CurrentHpInput.svelte";
-    import CreatureToggle from "../../common/CreatureToggle.svelte";
+    import CreatureToggle from "../../common/buttons/CreatureToggle.svelte";
 
     export let creature: Creature;
     export let isActive = false;

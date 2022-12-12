@@ -1,6 +1,6 @@
 <script lang="ts">
     import { removeLocalStorageParty } from "../../../lib/persistance";
-    import ConfirmationModal from "../../common/ConfirmationModal.svelte";
+    import ConfirmationModal from "../../common/modal/ConfirmationModal.svelte";
     import type { Encounter } from "../../../lib/models/encounter";
 
     export let party: Encounter | undefined = undefined;

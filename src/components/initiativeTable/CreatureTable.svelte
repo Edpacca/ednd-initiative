@@ -1,7 +1,7 @@
 <script lang="ts">
     import { isLocked, entities } from "../../store";
     import Heart from "../../assets/icons/heart.svelte";
-    import AddRemove from "../common/AddRemove.svelte";
+    import AddRemove from "../common/buttons/AddRemove.svelte";
     import Shield from "../../assets/icons/shield.svelte";
     import { setLocalStorageEntities } from "../../lib/persistance";
     import { Creature, CreatureType } from "../../lib/models/creature";

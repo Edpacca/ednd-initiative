@@ -11,7 +11,6 @@ import Blood from "../../assets/icons/blood.svelte";
     let healingInputElement: HTMLInputElement;
 
     $: currentEntity = $entities[$selectedEntityIndex[0]];
-
     $: isCreature = currentEntity instanceof Creature;
 
     const applyDamage = () => {
@@ -35,8 +34,8 @@ import Blood from "../../assets/icons/blood.svelte";
 
     $: damage, resetDamageAtZero();
     $: healing, resetHealingAtZero();
-    let damageFocused = false;
-    let healingFocused = false;
+    let damageFocused = true;
+    let healingFocused = true;
 
     const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
     const keyboardInput = async (event: KeyboardEvent) => {
@@ -81,10 +80,10 @@ import Blood from "../../assets/icons/blood.svelte";
     }
 </script>
 
-{#if $isLocked}
+{#if $isLocked || true}
     <div class="damage-tool-container">
-        <div class="damage relative flex-col">
-            <div class="input-icon" class:active={damageFocused}>
+        <div class="damage relative flex-col" class:active={damageFocused}>
+            <div class="input-icon">
                 <Blood/>
             </div>
             <input
@@ -97,8 +96,8 @@ import Blood from "../../assets/icons/blood.svelte";
                 on:keydown={e => keyboardInput(e)}/>
             <button on:click={() => applyDamage()} class:active={!!damage}>Damage</button>
         </div>
-        <div class="heal relative flex-col">
-            <div class="input-icon" class:active={healingFocused}>
+        <div class="heal relative flex-col" class:active={healingFocused}>
+            <div class="input-icon">
                 <Heart/>
             </div>
             <input
@@ -130,7 +129,7 @@ import Blood from "../../assets/icons/blood.svelte";
         width: 6rem;
         font-size: 34px;
         font-weight: bold;
-        z-index: 1;
+        z-index: 2;
         background: none;
     }
 
@@ -152,7 +151,7 @@ import Blood from "../../assets/icons/blood.svelte";
         position: absolute;
         width: 6rem;
         height: 6rem;
-        z-index: -1;
+        z-index: 1;
         stroke-width: 5px;
     }
 
@@ -172,10 +171,10 @@ import Blood from "../../assets/icons/blood.svelte";
         top: 2px;
     }
 
-    .damage .input-icon.active {
+    .damage.active {
         fill: var(--red);
     }
-    .heal .input-icon.active {
+    .heal.active {
         fill: var(--green);
     }
 

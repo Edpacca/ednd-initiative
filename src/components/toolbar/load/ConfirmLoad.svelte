@@ -1,6 +1,6 @@
 <script lang="ts">
     import { entities } from "../../../store";
-    import ConfirmationModal from "../../common/ConfirmationModal.svelte";
+    import ConfirmationModal from "../../common/modal/ConfirmationModal.svelte";
     import type { Encounter } from "../../../lib/models/encounter";
 
     export let encounter: Encounter | undefined = undefined;

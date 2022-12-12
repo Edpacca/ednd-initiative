@@ -3,7 +3,7 @@
     import Minion from "../../../assets/entity-types/minion.svelte";
     import Player from "../../../assets/entity-types/player.svelte";
     import { getLocalStorageEncounters } from "../../../lib/persistance";
-    import RemoveButton from "../../common/RemoveButton.svelte";
+    import RemoveButton from "../../common/buttons/RemoveButton.svelte";
     import { CreatureType } from "../../../lib/models/creature";
     import type { Encounter } from "../../../lib/models/encounter";
     import ConfirmDelete from "./ConfirmDelete.svelte";

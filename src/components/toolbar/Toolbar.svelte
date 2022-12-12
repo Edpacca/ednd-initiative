@@ -1,5 +1,5 @@
 <script lang="ts">
-    import BurgerButton from "../common/BurgerButton.svelte";
+    import BurgerButton from "../common/buttons/BurgerButton.svelte";
     import AccordionTool from "./AccordionTool.svelte";
     import Advanced from "./advanced/Advanced.svelte";
     import Load from "./load/Load.svelte";

@@ -1,9 +1,9 @@
 <script lang="ts">
-    import Enemy from "../../assets/entity-types/enemy.svelte";
-    import Minion from "../../assets/entity-types/minion.svelte";
-    import Player from "../../assets/entity-types/player.svelte";
-    import { CreatureType } from "../../lib/models/creature";
-    import type { EntityType } from "../../lib/models/entity";
+    import Enemy from "../../../assets/entity-types/enemy.svelte";
+    import Minion from "../../../assets/entity-types/minion.svelte";
+    import Player from "../../../assets/entity-types/player.svelte";
+    import { CreatureType } from "../../../lib/models/creature";
+    import type { EntityType } from "../../../lib/models/entity";
 
     export let type: EntityType;
     export let allowedTypes: EntityType[];

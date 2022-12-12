@@ -1,6 +1,6 @@
 <script lang="ts">
-    import Minus from "../../assets/symbols/minus.svelte";
-    import Plus from "../../assets/symbols/plus.svelte";
+    import Minus from "../../../assets/symbols/minus.svelte";
+    import Plus from "../../../assets/symbols/plus.svelte";
     export let type: "+" | "-";
     export let onClick: () => void;
 </script>

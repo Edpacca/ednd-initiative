@@ -1,6 +1,6 @@
 <script lang="ts">
     import { clearLocalStorage } from "../../../lib/persistance";
-    import ConfirmationModal from "../../common/ConfirmationModal.svelte";
+    import ConfirmationModal from "../../common/modal/ConfirmationModal.svelte";
     import { reset } from "./reset";
     export let isOpen;
     export let close: () => void;

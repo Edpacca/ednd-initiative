@@ -1,9 +1,9 @@
 <script lang="ts">
     import { setLocalStorageEntities } from "../../../lib/persistance";
     import { entities } from "../../../store";
-    import AddRemove from "../../common/AddRemove.svelte";
+    import AddRemove from "../../common/buttons/AddRemove.svelte";
     import HealthBar from "../../common/HealthBar.svelte";
-    import RemoveButton from "../../common/RemoveButton.svelte";
+    import RemoveButton from "../../common/buttons/RemoveButton.svelte";
     import { CreatureType, type Creature } from "../../../lib/models/creature";
     import Minions from "../locked/Minions.svelte";
 

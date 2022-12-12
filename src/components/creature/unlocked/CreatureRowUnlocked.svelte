@@ -3,14 +3,14 @@
     import { CreatureType, type Creature } from "../../../lib/models/creature";
     import { dRoll } from "../../../lib/dieRoll";
     import {    entities } from "../../../store";
-    import D20Button from "../../common/D20Button.svelte";
+    import D20Button from "../../common/buttons/D20Button.svelte";
     import CreatureInputUnlocked from "./CreatureInputUnlocked.svelte";
     import InitiativeValue from "../../initiativeTable/InitiativeValue.svelte";
     import NumberStringInput from "../../common/NumberStringInput.svelte";
     import NumberInput from "../../common/NumberInput.svelte";
     import MaxHpInput from "../../initiativeTable/MaxHpInput.svelte";
     import PlayerIcon from "../../initiativeTable/PlayerIconSwitch.svelte";
-    import CreatureToggle from "../../common/CreatureToggle.svelte";
+    import CreatureToggle from "../../common/buttons/CreatureToggle.svelte";
 
     export let creature: Creature;
     export let index: number;
