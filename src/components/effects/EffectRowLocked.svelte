@@ -3,6 +3,7 @@
     import type { Effect } from "../../lib/models/effect";
     import NumberInput from "../common/NumberInput.svelte";
     import InitiativeValue from "../initiativeTable/InitiativeValue.svelte";
+    import EffectCounter from "./EffectCounter.svelte";
     import EffectInput from "./EffectInput.svelte";
     export let effect: Effect
     export let isActive = false;
@@ -17,14 +18,14 @@
     </td>
     <td><EffectInput effect={effect}/></td>
     <td></td>
-    <td class="counters">
-        {#if effect.counters}
-            {#each effect.counters as counter}
-                <div class="counter" class:thin-counter={effect.counters.length > 3}>
-                    <NumberInput bind:value={counter} extraClasses={"effect-counter-input"}/>
-                </div>
-            {/each}
-        {/if}
+    <td>
+        <div class="counters">
+            {#if effect.counters}
+                {#each effect.counters as counter}
+                    <EffectCounter bind:value={counter} extraClasses={effect.counters.length > 3 ? "small-counter" : ""}/>
+                {/each}
+            {/if}
+        </div>
     </td>
     <td>
         <InitiativeValue bind:initiative={effect.initiative} bind:bonus={effect.bonus}/>

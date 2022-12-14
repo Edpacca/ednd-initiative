@@ -25,7 +25,7 @@
             class:selected-input={isSelected}
             on:click={() => selectEntityInput([index, 0])}/>
             {#if isMinion}
-            <Minions bind:name={creature.name} bind:quantity={creature.quantity} hpMax={creature.hpMax} hpCurrent={creature.hpCurrent} index={index}/>
+                <Minions bind:name={creature.name} bind:quantity={creature.quantity} hpMax={creature.hpMax} hpCurrent={creature.hpCurrent} index={index}/>
             {:else}
                 <HealthBar max={creature.hpMax} current={creature.hpCurrent[0]}/>
             {/if}

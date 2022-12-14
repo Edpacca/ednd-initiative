@@ -189,6 +189,7 @@ input:focus {
 
 .dead {
     background: var(--dark-grey);
+    color: transparent;
 }
 
 .setting-toggle-button {
@@ -233,21 +234,16 @@ select {
     display: flex;
     flex-direction: row;
     column-gap: 0.1rem;
-    width: fit-content;
-}
-
-.counter {
-    max-width: 2.5rem;
-    min-width: 2.5rem;
-}
-
-.thin-counter {
-    min-width: 2rem;
 }
 
 .effect-counter-input {
     background-color: var(--super-dark-grey);
     color: var(--light-blue);
+    width: 2.5rem;
+}
+
+.small-counter {
+    max-width: 2rem;
 }
 
 .active-initiative {
@@ -272,4 +268,12 @@ tr {
 
 input:hover:not(.selected-input):not(.minion-main-name) {
     background-color: var(--light-grey) !important;
+}
+
+.skull {
+    position: absolute;
+    height: 2.5rem;
+    z-index: 5;
+    top: 0;
+    fill: rgba(250, 235, 215, 0.729);
 }

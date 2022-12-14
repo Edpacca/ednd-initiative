@@ -10,6 +10,7 @@
     import InitiativeValue from "../initiativeTable/InitiativeValue.svelte";
     import { setLocalStorageEntities } from "../../lib/persistance";
     import { entities } from "../../store";
+    import EffectCounter from "./EffectCounter.svelte";
 
     export let effect: Effect;
     let themeIndex = 0;
@@ -46,15 +47,15 @@
         </button>
     </td>
     <td><EffectInput bind:effect={effect}/></td>
-    <td class="counters">
-        <AddRemove add={addCounter} remove={removeCounter} center={true}/>
-        {#if effect.counters}
-            {#each effect.counters as counter}
-                <div class="counter" class:thin-counter={effect.counters.length > 3}>
-                    <NumberInput bind:value={counter}/>
-                </div>
-            {/each}
-        {/if}
+    <td>
+        <div class="counters">
+            <AddRemove add={addCounter} remove={removeCounter} center={true}/>
+            {#if effect.counters}
+                {#each effect.counters as counter}
+                    <EffectCounter bind:value={counter} extraClasses={effect.counters.length > 3 ? "small-counter" : ""}/>
+                {/each}
+            {/if}
+        </div>
     </td>
     <td>
         <InitiativeValue bind:initiative={effect.initiative} bonus={0}/>
@@ -73,6 +74,4 @@
     button:hover {
         fill: var(--white);
     }
-
-
 </style>

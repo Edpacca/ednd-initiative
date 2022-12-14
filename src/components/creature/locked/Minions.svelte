@@ -20,10 +20,10 @@
                 type="text"
                 class="minion-input"
                 class:locked={$isLocked}
-                class:selected-input={$selectedEntityIndex[0] === index && $selectedEntityIndex[1] === i}
+                class:selected-input={$selectedEntityIndex[0] === index && $selectedEntityIndex[1] === i && $isLocked}
                 value={`${name} #${i + 1}`}
                 on:click={() => selectMinion(i)}/>
-                <HealthBar max={hpMax} current={hpCurrent[i]}/>
+            <HealthBar max={hpMax} current={hpCurrent[i]}/>
         </div>
     {/each}
 {/if}
