@@ -5,11 +5,12 @@
     import EffectTable from "./components/effects/EffectTable.svelte";
     import CreatureTable from "./components/initiativeTable/CreatureTable.svelte";
     import InitiativeTable from "./components/initiativeTable/InitiativeTable.svelte";
+    import RollAll from "./components/rollAll/RollAll.svelte";
     import { setTheme } from "./components/toolbar/selectTheme/setTheme";
     import Toolbar from "./components/toolbar/Toolbar.svelte";
     import LockPage from "./components/tools/LockPage.svelte";
     import { CreatureType } from "./lib/models/creature";
-    import { currentTheme, entities, isLocked } from "./store";
+    import { activeEntityTurnIndex, currentRound, currentTheme, entities, isLocked, selectedEntityIndex } from "./store";
 
     onMount(async () => {
       setTheme($currentTheme);
@@ -27,7 +28,13 @@
     <div class="toolbar">
       <TurnTracker/>
       <DamageTool/>
+      <div>
+        <div>selected {$selectedEntityIndex}</div>
+        <div>active {$activeEntityTurnIndex}</div>
+      </div>
     </div>
+  {:else}
+    <RollAll/>
   {/if}
   <div class="table-container">
     {#if !$isLocked}

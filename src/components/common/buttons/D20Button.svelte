@@ -1,29 +1,37 @@
 <script lang="ts">
     import D20 from "../../../assets/icons/d20.svelte";
     export let onClick: () => void;
+    export let primary: string = "";
+    export let secondary: string = "";
+    export let width: string = "";
     let isRolling = false;
     const animation = () => {
         onClick();
         isRolling = true;
     }
+
 </script>
 
-<button on:click={animation} class="d20" class:rolly={isRolling}>
+<button on:click={animation} class="d20" class:rolly={isRolling} 
+    style={`${primary ? `--primary-color: ${primary};` : "--primary-color: var(--primary); "}
+        ${secondary ? `--secondary-color: ${secondary};` : "--secondary-color: var(--secondary); "}
+        ${width ? `--width: ${width}` : "--width: 3rem;"}`
+        }>
     <D20/>
 </button>
 
 <style>
     .d20 {
-        width: 3em;
-        height: 3em;
+        width: var(--width);
+        height: var(--width);
         border: none;
         background: none;
-        fill: brown;
+        fill: var(--primary-color);
     }
 
     .d20:hover {
         background: none;
-        fill: burlywood;
+        fill: var(--secondary-color);
         outline: none;
     }
 
