@@ -2,7 +2,7 @@
     import { dRoll } from "../../lib/dieRoll";
     import type { Effect } from "../../lib/models/effect";
     import { THEMES } from "../toolbar/selectTheme/themes";
-    import Cave from "../../assets/icons/cave.svelte";
+    import Cave from "../../graphics/icons/cave.svelte";
     import AddRemove from "../common/buttons/AddRemove.svelte";
     import D20Button from "../common/buttons/D20Button.svelte";
     import NumberInput from "../common/NumberInput.svelte";

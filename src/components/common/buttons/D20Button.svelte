@@ -1,5 +1,5 @@
 <script lang="ts">
-    import D20 from "../../../assets/icons/d20.svelte";
+    import D20 from "../../../graphics/icons/d20.svelte";
     export let onClick: () => void;
     export let primary: string = "";
     export let secondary: string = "";

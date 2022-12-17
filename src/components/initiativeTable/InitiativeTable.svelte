@@ -1,9 +1,9 @@
 <script lang="ts">
     import { isLocked, entities, activeEntityTurnIndex } from "../../store";
-    import Heart from "../../assets/icons/heart.svelte";
+    import Heart from "../../graphics/icons/heart.svelte";
     import CreatureRowLocked from "../creature/locked/CreatureRowLocked.svelte";
     import EffectRowLocked from "../effects/EffectRowLocked.svelte";
-    import Speed from "../../assets/icons/speed.svelte";
+    import Speed from "../../graphics/icons/speed.svelte";
     import { CREATURES } from "../../lib/typeFilters";
     import { EffectType } from "../../lib/models/effect";
 

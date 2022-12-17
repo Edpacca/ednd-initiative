@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Skull from "../../assets/icons/skull.svelte";
+    import Skull from "../../graphics/icons/skull.svelte";
     import NumberInput from "../common/NumberInput.svelte";
     import { CreatureType } from "../../lib/models/creature";
     import { selectedEntityIndex } from "../../store";

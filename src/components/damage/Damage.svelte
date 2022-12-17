@@ -1,6 +1,6 @@
 <script lang="ts">
-    import Blood from "../../assets/icons/blood.svelte";
-    import Heart from "../../assets/icons/heart.svelte";
+    import Blood from "../../graphics/icons/blood.svelte";
+    import Heart from "../../graphics/icons/heart.svelte";
     import type { Creature } from "../../lib/models/creature";
     import { CREATURES } from "../../lib/typeFilters";
     import { entities, isLocked, selectedEntityIndex } from "../../store";

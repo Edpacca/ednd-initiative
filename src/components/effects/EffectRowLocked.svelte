@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Cave from "../../assets/icons/cave.svelte";
+    import Cave from "../../graphics/icons/cave.svelte";
     import type { Effect } from "../../lib/models/effect";
     import NumberInput from "../common/NumberInput.svelte";
     import InitiativeValue from "../initiativeTable/InitiativeValue.svelte";

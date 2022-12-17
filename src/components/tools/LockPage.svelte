@@ -1,7 +1,7 @@
 <script lang="ts">
     import { isLocked, isStarted } from "../../store";
-    import PadlockClosed from "../../assets/icons/padlock-closed.svelte";
-    import PadlockOpen from "../../assets/icons/padlock-open.svelte";
+    import PadlockClosed from "../../graphics/icons/padlock-closed.svelte";
+    import PadlockOpen from "../../graphics/icons/padlock-open.svelte";
 
     const toggleLock = () => {
         if (!$isStarted) $isStarted = true;

@@ -1,12 +1,12 @@
 <script lang="ts">
     import { isLocked, entities } from "../../store";
-    import Heart from "../../assets/icons/heart.svelte";
+    import Heart from "../../graphics/icons/heart.svelte";
     import AddRemove from "../common/buttons/AddRemove.svelte";
-    import Shield from "../../assets/icons/shield.svelte";
+    import Shield from "../../graphics/icons/shield.svelte";
     import { setLocalStorageEntities } from "../../lib/persistance";
     import { Creature, CreatureType } from "../../lib/models/creature";
     import CreatureRowUnlocked from "../creature/unlocked/CreatureRowUnlocked.svelte";
-    import Speed from "../../assets/icons/speed.svelte";
+    import Speed from "../../graphics/icons/speed.svelte";
     import type { EntityType } from "../../lib/models/entity";
     import { CREATURES } from "../../lib/typeFilters";
     

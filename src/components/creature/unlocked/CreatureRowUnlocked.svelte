@@ -25,7 +25,7 @@
         {#if creature.type === CreatureType.Player}
             <PlayerIcon bind:icon={creature.class}/>
         {:else}
-            <CreatureToggle bind:type={creature.type} allowedTypes={[CreatureType.Enemy, CreatureType.Minion]}/>
+            <CreatureToggle bind:type={creature.type} allowedTypes={[CreatureType.Enemy, CreatureType.Minion, CreatureType.Boss]}/>
         {/if}
     </td>
     <td>

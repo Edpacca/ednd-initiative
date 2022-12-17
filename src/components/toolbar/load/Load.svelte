@@ -1,7 +1,7 @@
 <script lang="ts">
-    import Enemy from "../../../assets/entity-types/enemy.svelte";
-    import Minion from "../../../assets/entity-types/minion.svelte";
-    import Player from "../../../assets/entity-types/player.svelte";
+    import Enemy from "../../../graphics/entity-types/enemy.svelte";
+    import Minion from "../../../graphics/entity-types/minion.svelte";
+    import Player from "../../../graphics/entity-types/player.svelte";
     import { getLocalStorageEncounters } from "../../../lib/persistance";
     import RemoveButton from "../../common/buttons/RemoveButton.svelte";
     import { CreatureType } from "../../../lib/models/creature";
