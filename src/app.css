@@ -265,7 +265,7 @@ tr {
 }
 
 .selected-input {
-    border: 4px solid var(--red) !important;
+    border: 3px solid var(--primary) !important;
     outline: none !important;
 }
 

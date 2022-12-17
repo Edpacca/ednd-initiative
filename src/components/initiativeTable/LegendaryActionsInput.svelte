@@ -4,7 +4,11 @@
     export let valueMax;
     export let valueCurrent;
 
-    $: () => valueCurrent = valueMax
+    const setCurrent = (value) => {
+        valueCurrent = value;
+    }
+
+    $: setCurrent(valueMax);
 </script>
 
 <div class="legendary svg-fit-container">
