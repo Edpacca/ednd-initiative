@@ -92,6 +92,9 @@ th.value-col, th.fn-col {
     fill: var(--light-blue);
 }
 
+.gold {
+    color: var(--gold);
+}
 
 .svg-fit {
     position: absolute;
@@ -266,7 +269,7 @@ tr {
     outline: none !important;
 }
 
-input:hover:not(.selected-input):not(.minion-main-name) {
+input:hover:not(.selected-input):not(.minion-main-name):not(.blank-input) {
     background-color: var(--light-grey) !important;
 }
 
@@ -276,4 +279,10 @@ input:hover:not(.selected-input):not(.minion-main-name) {
     z-index: 5;
     top: 0;
     fill: rgba(250, 235, 215, 0.729);
+}
+
+.blank-input, .blank-input:active, .blank-input:focus {
+    background: none;
+    border: none;
+    outline: none;
 }

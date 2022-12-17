@@ -34,5 +34,6 @@
 <style>
     button {
         fill: var(--gold);
+        filter: drop-shadow(0 0 10px black)
     }
 </style>

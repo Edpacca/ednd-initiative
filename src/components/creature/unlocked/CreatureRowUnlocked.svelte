@@ -11,6 +11,7 @@
     import MaxHpInput from "../../initiativeTable/MaxHpInput.svelte";
     import PlayerIcon from "../../initiativeTable/PlayerIconSwitch.svelte";
     import CreatureToggle from "../../common/buttons/CreatureToggle.svelte";
+    import LegendaryActionsInput from "../../initiativeTable/LegendaryActionsInput.svelte";
 
     export let creature: Creature;
     export let index: number;

@@ -6,6 +6,7 @@
     import RemoveButton from "../../common/buttons/RemoveButton.svelte";
     import { CreatureType, type Creature } from "../../../lib/models/creature";
     import Minions from "../locked/Minions.svelte";
+    import LegendaryActionsInput from "../../initiativeTable/LegendaryActionsInput.svelte";
 
     export let removeCreature: (e: Creature) => void;
     export let creature: Creature;
@@ -23,12 +24,16 @@
 
     $: isMinion = creature.type === CreatureType.Minion;
     $: isPlayer = creature.type === CreatureType.Player;
+    $: isBoss = creature.type === CreatureType.Boss;
 
     $: creature, setLocalStorageEntities($entities);
 
 </script>
 
-<div class="entity-area" class:minion-grid={isMinion}>
+<div class="entity-area" class:minion-grid={isMinion} class:boss-grid={isBoss}>
+    {#if isBoss}
+        <LegendaryActionsInput bind:valueMax={creature.laMax} bind:valueCurrent={creature.laCurrent}/>
+    {/if}
     <div class="name-input-container">
         <input 
             bind:value={creature.name}
@@ -51,6 +56,7 @@
 </div>
 
 
+
 <style>
 
     .name-input-container {
@@ -67,6 +73,12 @@
     .minion-grid {
         display: grid;
         grid-template-columns: 1fr 3em;
+    }
+
+    .boss-grid {
+        display: grid;
+        grid-template-columns: 3em 1fr;
+        column-gap: 0.5em;
     }
 
     .minion-input {

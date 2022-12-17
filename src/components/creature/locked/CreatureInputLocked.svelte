@@ -2,7 +2,8 @@
     import HealthBar from "../../common/HealthBar.svelte";
     import { CreatureType, type Creature } from "../../../lib/models/creature";
     import Minions from "./Minions.svelte";
-    import { selectedEntityIndex, selectEntityInput } from "../../../store";
+    import { selectEntityInput } from "../../../store";
+    import LegendaryActionsValue from "../../initiativeTable/LegendaryActionsValue.svelte";
 
     export let creature: Creature;
     export let isActive = false;
@@ -11,10 +12,14 @@
 
     $: isMinion = creature.type === CreatureType.Minion;
     $: isPlayer = creature.type === CreatureType.Player;
+    $: isBoss = creature.type === CreatureType.Boss;
 
 </script>
 
-<div class="entity-area">
+<div class="entity-area" class:boss-grid={isBoss}>
+    {#if isBoss}
+        <LegendaryActionsValue bind:value={creature.laCurrent}/>
+    {/if}
     <div class="name-input-container">
         <input 
             bind:value={creature.name}
@@ -63,4 +68,8 @@
         color: var(--gold) !important;
     }
     
+    .boss-grid {
+        display: grid;
+        grid-template-columns: 3rem 1fr;
+    }
 </style>

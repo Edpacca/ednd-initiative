@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { currentRound, entities, isLocked, activeEntityTurnIndex } from "../../store";
+    import { Creature, CreatureType } from "../../lib/models/creature";
+    import { currentRound, entities, activeEntityTurnIndex } from "../../store";
     
     $: max = $entities.length - 1;
     
@@ -8,6 +9,13 @@
         if ($activeEntityTurnIndex > max) {
             $activeEntityTurnIndex = 0;
             $currentRound++;
+            $entities = $entities.map(e => {
+                if (e.type === CreatureType.Boss) {
+                    (e as Creature).laCurrent = (e as Creature).laMax;
+                }
+
+                return e;
+            }); 
         }
     }
 

@@ -1,4 +1,5 @@
 <script lang="ts">
+    import Boss from "../../../graphics/entity-types/boss.svelte";
     import Enemy from "../../../graphics/entity-types/enemy.svelte";
     import Minion from "../../../graphics/entity-types/minion.svelte";
     import { CreatureType } from "../../../lib/models/creature";
@@ -24,7 +25,7 @@
     {:else if type === CreatureType.Minion}
         <Minion/>
     {:else if type === CreatureType.Boss}
-        <div>BOSS</div>
+        <Boss/>
     {/if}
 </button>
 
