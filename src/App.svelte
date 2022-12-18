@@ -27,10 +27,6 @@
   {#if $isLocked}
     <div class="toolbar">
       <TurnTracker/>
-      <div>
-        <div>selected {$selectedEntityIndex}</div>
-        <div>active {$activeEntityTurnIndex}</div>
-      </div>
     </div>
   {:else}
     <RollAll/>

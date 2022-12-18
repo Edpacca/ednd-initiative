@@ -1,13 +1,19 @@
 <script lang="ts">
     import Heart from "../../../graphics/icons/heart.svelte";
+    import Skull from "../../../graphics/icons/skull.svelte";
     export let value;
+    export let valueMax;
 </script>
 
-<div class="hp svg-fit-container">
+<div class="hp svg-fit-container" class:bloodied-svg={value <= valueMax / 2}>
     <div class="svg-fit heart-offset">
-        <Heart/>
+        {#if value > 0}
+            <Heart/>
+        {:else}
+            <Skull/>
+        {/if}
     </div>
-    <div class="value">{value}</div>
+    <div class="value">{value > 0 ? value : ""}</div>
 </div>
 
 <style>

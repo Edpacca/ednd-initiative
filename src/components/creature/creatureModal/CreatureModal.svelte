@@ -5,6 +5,7 @@
     import Modal from "../../common/modal/Modal.svelte";
     import Damage from "../../damage/Damage.svelte";
     import CreatureInputLocked from "../locked/CreatureInputLocked.svelte";
+    import Conditions from "./Conditions.svelte";
     import HpValue from "./HpValue.svelte";
     export let creature: Creature;
     export let isSelected = false;
@@ -21,22 +22,13 @@
                 <div class="creature-info">
                     <CreatureIconSelect type={creature.type} playerClass={creature.class}/>
                     <CreatureInputLocked creature={creature}/>
-                    <HpValue value={creature.hpCurrent}/>
+                    <HpValue value={creature.hpCurrent} valueMax={creature.hpMax}/>
                 </div>
                 <div class="damage-container">
                     <Damage bind:creature/>
                 </div>
             </div>
-            <div class="effects">
-                <div class="header-small underline">Effects & Conditions</div>
-                {#if creature.conditions && creature.conditions.length > 0}
-                    {#each creature.conditions as condition}
-                        <div>{condition}</div>
-                    {/each}
-                {:else}
-                    <div>No effects</div>
-                {/if}
-            </div>
+            <Conditions bind:conditions={creature.conditions}/>
         </div>
     </Modal>
 </div>
@@ -67,11 +59,6 @@
     padding-top: 2rem;
 }
 
-.effects {
-    border: 2px solid var(--primary);
-    border-radius: var(--border-radius);
-    text-align: center;
-}
 
 .damage-container {
     display: flex;

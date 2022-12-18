@@ -1,6 +1,7 @@
 <script lang="ts">
     import Blood from "../../graphics/icons/blood.svelte";
     import Heart from "../../graphics/icons/heart.svelte";
+    import Skull from "../../graphics/icons/skull.svelte";
     import type { Creature } from "../../lib/models/creature";
     import { FLOATERS } from "../common/floater/animationValue";
     import Floater from "../common/floater/Floater.svelte";
@@ -12,10 +13,12 @@
     let damageInputElement: HTMLInputElement;
     let healingInputElement: HTMLInputElement;
     let focused: "damage" | "healing" = "damage";
+    let isSkullHovered = false;
 
     const applyDamage = () => {
         if (damage) {
             creature.hpCurrent[0] -= damage;
+            if (creature.hpCurrent[0] < 0) creature.hpCurrent[0] = 0;
             resetDamage();
         } 
     }
@@ -37,14 +40,12 @@
 
     const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
     const keyboardInput = async (event: KeyboardEvent) => {
-        if (event.key === "Tab" || numbers.includes(event.key)) {
+        if (event.key === "Tab") {
             if (focused === "healing") {
-                document.getElementById("damage-input").focus();
-                document.getElementById("healing-input").blur();
+                damageInputElement.focus();
                 focused = "damage"
             } else if (focused === "damage") {
-                document.getElementById("healing-input").focus();
-                document.getElementById("damage-input").blur();
+                healingInputElement.focus();
                 focused = "healing"
             }
         } else if (event.key === "Enter") {
@@ -58,7 +59,7 @@
     }
 </script>
 
-<div class="damage-tool-container" on:keydown={e => keyboardInput(e)}>
+<div class="damage-tool-container">
     <div class="damage relative flex-col" class:active={focused === "damage"}>
         <div class="input-icon">
             <Blood/>
@@ -78,7 +79,7 @@
             min={0} bind:value={damage}
             on:input={resetHealing}
             on:click={() => focused = "damage"}
-            tabindex={0}/>
+            tabindex={1}/>
         <button on:click={() => applyDamage()} class:active={focused === "damage"}>Damage</button>
     </div>
     <div class="heal relative flex-col" class:active={focused === "healing"}>
@@ -100,10 +101,29 @@
             min={0} bind:value={healing}
             on:input={resetDamage}
             on:click={() => focused = "healing"}
-            tabindex={0}/>
+            tabindex={1}/>
         <button on:click={() => applyHealing()} class:active={focused === "healing"}>Heal</button>
     </div>
+    <div class="kill-buttons">
+        <button class="kill-button"
+        on:mouseenter={() => isSkullHovered = true}
+        on:mouseleave={() => isSkullHovered = false}
+        on:click={() => creature.hpCurrent[0] = 0}>
+        <Skull/>
+        {#if isSkullHovered}
+            <div class="floaters">
+                {#each FLOATERS as floater}
+                    <Floater av={floater} color="black"/>
+                {/each}
+            </div>
+        {/if}
+        </button>
+        <button class:kill={isSkullHovered} on:click={() => creature.hpCurrent[0] = 0}>Kill</button>
+    </div>
+
 </div>
+
+<svelte:window on:keyup={e => keyboardInput(e)}/>
 
 <style>
 
@@ -122,6 +142,25 @@
         font-weight: bold;
         z-index: 2;
         background: none;
+    }
+
+    .kill-buttons {
+
+    }
+
+    .kill-button {
+        height: 6rem;
+        width: 6rem;
+
+        position: relative;
+    }
+
+    .kill-button:hover {
+        fill: var(--white);
+    }
+
+    .kill {
+        color: var(--white);
     }
 
     .damage-input:focus {
