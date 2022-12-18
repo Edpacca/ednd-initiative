@@ -9,7 +9,7 @@ export class Creature extends Entity {
     hpMax?: number;
     hpCurrent?: number[];
     ac?: number;
-    conditions: string[] = [];
+    conditions?: string[];
 
     constructor(type: CreatureType) {
         super();
@@ -19,6 +19,7 @@ export class Creature extends Entity {
         this.laMax = 1;
         this.laCurrent = 1;
         this.hpMax = 10;
+        this.conditions = [];
         this.hpCurrent = [10];
         if (type === CreatureType.Player) {
             this.class = getRandomClass();

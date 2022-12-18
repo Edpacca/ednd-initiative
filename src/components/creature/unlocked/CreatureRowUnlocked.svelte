@@ -11,10 +11,8 @@
     import MaxHpInput from "../../initiativeTable/MaxHpInput.svelte";
     import PlayerIcon from "../../initiativeTable/PlayerIconSwitch.svelte";
     import CreatureToggle from "../../common/buttons/CreatureToggle.svelte";
-    import LegendaryActionsInput from "../../initiativeTable/LegendaryActionsInput.svelte";
 
     export let creature: Creature;
-    export let index: number;
     export let removeCreature: () => void;
     
     const setHpCurrent = (value: number) => creature.hpCurrent.fill(value);
@@ -30,7 +28,7 @@
         {/if}
     </td>
     <td>
-        <CreatureInputUnlocked bind:creature removeCreature={removeCreature} index={index}/>
+        <CreatureInputUnlocked bind:creature removeCreature={removeCreature}/>
     </td>
     <td>
         <MaxHpInput setHpCurrent={setHpCurrent} bind:value={creature.hpMax} entity={creature}/>

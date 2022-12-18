@@ -3,9 +3,10 @@
     import Plus from "../../../graphics/symbols/plus.svelte";
     export let type: "+" | "-";
     export let onClick: () => void;
+    export let width = "1.75rem";
 </script>
 
-<button on:click={onClick}>
+<button on:click={onClick} style={`--width: ${width}`}>
     {#if type === "+"}
         <Plus/>
     {:else}
@@ -20,16 +21,17 @@
         font-weight: bold;
         color: var(--primary);
         border-radius: 2px;
-        height: 2.5em;
-        width: 2.5em;
+        height: var(--width);
+        width: var(--width);
         border-radius: var(--border-radius);
         stroke: var(--primary);
         transition: 0.3s ease-out;
     }
 
   button:hover {
-    background: blanchedalmond;
-    outline: 1px solid brown;
+    background: var(--white);
+    outline: 1px solid var(--primary);
+    transition: 0.3s ease-out;
   }
 
 </style>

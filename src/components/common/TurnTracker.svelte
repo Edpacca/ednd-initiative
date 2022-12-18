@@ -50,7 +50,7 @@
         <button on:click={next}>{">"}</button>
     </div>
 </div>
-<svelte:window on:keydown={e => onArrows(e)}/>
+<svelte:body on:keydown={e => onArrows(e)}/>
 
 <style>
     .turn-tracker {

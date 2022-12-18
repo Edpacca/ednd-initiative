@@ -9,6 +9,18 @@
     import HpValue from "./HpValue.svelte";
     export let creature: Creature;
     export let isSelected = false;
+
+    const submitCondition = (condition: string) => {
+        console.log(condition);
+        if (condition && !creature.conditions.includes(condition)) {
+            creature.conditions = [...creature.conditions, condition];
+        }
+    }
+
+    const removeCondition = (condition: string) => {
+        creature.conditions = creature.conditions.filter(c => c !== condition);
+    }
+
 </script>
 
 {#if isSelected}
@@ -28,7 +40,7 @@
                     <Damage bind:creature/>
                 </div>
             </div>
-            <Conditions bind:conditions={creature.conditions}/>
+            <Conditions bind:conditions={creature.conditions} submitCondition={submitCondition} removeCondition={removeCondition}/>
         </div>
     </Modal>
 </div>
@@ -54,7 +66,7 @@
 
 .modal-grid {
     display: grid;
-    grid-template-columns: 80% 20%;
+    grid-template-columns: 70% 1fr;
     column-gap: 1rem;
     padding-top: 2rem;
 }

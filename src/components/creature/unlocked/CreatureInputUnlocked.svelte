@@ -10,7 +10,6 @@
 
     export let removeCreature: (e: Creature) => void;
     export let creature: Creature;
-    export let index: number;
 
     const addMinion = () => {
         creature.quantity++;
@@ -47,7 +46,7 @@
             <RemoveButton onClick={() => removeCreature(creature)} isinverted={isMinion}/>
         </div>
         {#if isMinion}
-            <Minions bind:name={creature.name} bind:quantity={creature.quantity} bind:hpMax={creature.hpMax} bind:hpCurrent={creature.hpCurrent} index={index}/>
+            <Minions bind:name={creature.name} bind:quantity={creature.quantity} bind:hpMax={creature.hpMax} bind:hpCurrent={creature.hpCurrent}/>
         {/if}
     </div>
     {#if isMinion}
