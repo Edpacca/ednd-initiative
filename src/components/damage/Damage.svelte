@@ -2,29 +2,27 @@
     import Blood from "../../graphics/icons/blood.svelte";
     import Heart from "../../graphics/icons/heart.svelte";
     import type { Creature } from "../../lib/models/creature";
-    import { CREATURES } from "../../lib/typeFilters";
-    import { entities, isLocked, selectedEntityIndex } from "../../store";
     import { FLOATERS } from "../common/floater/animationValue";
     import Floater from "../common/floater/Floater.svelte";
+
+    export let creature: Creature;
 
     let damage: number;
     let healing: number;
     let damageInputElement: HTMLInputElement;
     let healingInputElement: HTMLInputElement;
-
-    $: currentEntity = $entities[$selectedEntityIndex[0]];
-    $: isCreature = CREATURES.includes(currentEntity.type);
+    let focused: "damage" | "healing" = "damage";
 
     const applyDamage = () => {
-        if (isCreature && (currentEntity as Creature).hpCurrent && damage) {
-            ($entities[$selectedEntityIndex[0]] as Creature).hpCurrent[$selectedEntityIndex[1]] -= damage;
+        if (damage) {
+            creature.hpCurrent[0] -= damage;
             resetDamage();
         } 
     }
 
     const applyHealing = () => {
-        if (isCreature && healing && (currentEntity as Creature).hpCurrent) {
-            ($entities[$selectedEntityIndex[0]] as Creature).hpCurrent[$selectedEntityIndex[1]] += healing;
+        if (healing) {
+            creature.hpCurrent[0] += healing;
             resetHealing();
         }
     }
@@ -36,40 +34,36 @@
 
     $: damage, resetDamageAtZero();
     $: healing, resetHealingAtZero();
-    let damageFocused = true;
-    let healingFocused = true;
 
     const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
     const keyboardInput = async (event: KeyboardEvent) => {
-        if (event.key === "Tab") {
-            if (!damageFocused) {
+        if (event.key === "Tab" || numbers.includes(event.key)) {
+            if (focused === "healing") {
                 document.getElementById("damage-input").focus();
                 document.getElementById("healing-input").blur();
-                damageFocused = true;
-                healingFocused = false;
-            } else {
+                focused = "damage"
+            } else if (focused === "damage") {
                 document.getElementById("healing-input").focus();
                 document.getElementById("damage-input").blur();
-                healingFocused = true;
-                damageFocused = false;
+                focused = "healing"
             }
         } else if (event.key === "Enter") {
-            submitEnter("damage");
+            submitEnter(focused);
         }
     }
     
     const submitEnter = (type: "damage" | "healing") => {
         if (type === "damage") applyDamage();
-        else if (type === "healing") applyHealing();
+        else applyHealing();
     }
 </script>
 
-<div class="damage-tool-container">
-    <div class="damage relative flex-col" class:active={damageFocused}>
+<div class="damage-tool-container" on:keydown={e => keyboardInput(e)}>
+    <div class="damage relative flex-col" class:active={focused === "damage"}>
         <div class="input-icon">
             <Blood/>
         </div>
-        {#if damageFocused}
+        {#if focused === "damage"}
             <div class="floaters">
                 {#each FLOATERS as floater}
                     <Floater av={floater} color="darkred"/>
@@ -83,14 +77,15 @@
             type="number"
             min={0} bind:value={damage}
             on:input={resetHealing}
+            on:click={() => focused = "damage"}
             tabindex={0}/>
-        <button on:click={() => applyDamage()} class:active={damageFocused}>Damage</button>
+        <button on:click={() => applyDamage()} class:active={focused === "damage"}>Damage</button>
     </div>
-    <div class="heal relative flex-col" class:active={healingFocused}>
+    <div class="heal relative flex-col" class:active={focused === "healing"}>
         <div class="input-icon">
             <Heart/>
         </div>
-        {#if healingFocused}
+        {#if focused === "healing"}
             <div class="floaters">
                 {#each FLOATERS as floater}
                     <Floater av={floater} color="green"/>
@@ -104,8 +99,9 @@
             type="number"
             min={0} bind:value={healing}
             on:input={resetDamage}
+            on:click={() => focused = "healing"}
             tabindex={0}/>
-        <button on:click={() => applyHealing()} class:active={healingFocused}>Heal</button>
+        <button on:click={() => applyHealing()} class:active={focused === "healing"}>Heal</button>
     </div>
 </div>
 
@@ -198,23 +194,26 @@
 
     button.active {
         cursor: pointer;
+        outline: none;
     }
 
     .damage > button {
-        color: var(--red);
+        color: var(--red-50);
     }
 
     .heal > button {
-        color: var(--green);
+        color: var(--green-50);
     }
 
     .damage > button.active {
         background: var(--dark-red);
         border: 3px solid var(--red);
+        color: var(--red);
     }
     .heal > button.active {
         background: var(--dark-green);
         border: 3px solid var(--green);
+        color: var(--green);
     }
 
     .floaters {

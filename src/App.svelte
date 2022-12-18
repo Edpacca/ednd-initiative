@@ -27,7 +27,6 @@
   {#if $isLocked}
     <div class="toolbar">
       <TurnTracker/>
-      <DamageTool/>
       <div>
         <div>selected {$selectedEntityIndex}</div>
         <div>active {$activeEntityTurnIndex}</div>

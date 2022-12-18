@@ -8,7 +8,8 @@ export class Creature extends Entity {
     laCurrent?: number;
     hpMax?: number;
     hpCurrent?: number[];
-    ac?: number
+    ac?: number;
+    conditions?: string[];
 
     constructor(type: CreatureType) {
         super();

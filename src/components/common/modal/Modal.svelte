@@ -4,7 +4,7 @@
 </script>
 
 {#if isOpen}
-<div class="modal-container" style={`width: ${width}`}>
+<div class="modal-container" style={`--width: ${width}`}>
     <div class="modal">
         <slot></slot>
     </div>
@@ -18,6 +18,7 @@
         left: 0;
         right: 0;
         bottom: 0;
+        width: var(--width);
         margin: auto;
         height: fit-content;
         background-color: var(--dark-grey-90);

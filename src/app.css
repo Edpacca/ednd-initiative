@@ -145,7 +145,20 @@ input:focus {
 
 .header {
     font-weight: bold;
-    font-size: 32px;
+    font-size: 2rem;
+}
+
+.header-small {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.text-center {
+    text-align: center;
 }
 
 .relative {
