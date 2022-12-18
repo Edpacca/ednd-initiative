@@ -7,7 +7,7 @@
     }
 </script>
 
-<button class="legendary svg-fit-container" on:click={reduceValue} class:spent={value === 0}>
+<button class="legendary svg-fit-container" on:click={reduceValue} class:spent={value === 0} on:contextmenu|preventDefault={() => value++}>
     <div class="svg-fit">
         <Legendary/>
     </div>

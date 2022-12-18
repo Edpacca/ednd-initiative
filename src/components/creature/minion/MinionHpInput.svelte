@@ -4,13 +4,11 @@
 
     export let hp;
     export let hpMax;
-    export let isSelected;
     export let index;
 
     $: dead = hp <= 0;
     $: bloodied = hp < (hpMax / 2) && !dead;
-    $: damageClass = bloodied ? "minion-input bloodied" : dead ? "dead" : "minion-hp-input";
-    $: extraClasses = isSelected ? `${damageClass} selected-input` : damageClass;
+    $: extraClasses = bloodied ? "minion-input bloodied" : dead ? "dead" : "minion-hp-input";
 </script>
 
 <div class="relative">

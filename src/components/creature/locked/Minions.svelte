@@ -5,11 +5,7 @@
     export let hpMax: number;
     export let hpCurrent: number[];
     export let name: string;
-    export let index: number;
 
-    const selectMinion = (minionIndex: number) => {
-        if ($isLocked) selectEntityInput([index, minionIndex]);
-    }
 </script>
 
 {#if quantity}
@@ -20,9 +16,8 @@
                 type="text"
                 class="minion-input"
                 class:locked={$isLocked}
-                class:selected-input={$selectedEntityIndex[0] === index && $selectedEntityIndex[1] === i && $isLocked}
-                value={`${name} #${i + 1}`}
-                on:click={() => selectMinion(i)}/>
+                disabled={$isLocked}
+                value={`${name} #${i + 1}`}/>
             <HealthBar max={hpMax} current={hpCurrent[i]}/>
         </div>
     {/each}

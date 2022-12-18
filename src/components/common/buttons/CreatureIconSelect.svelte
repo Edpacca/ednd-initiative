@@ -9,15 +9,11 @@
     import PlayerIconSwitch from "../../initiativeTable/PlayerIconSwitch.svelte";
 
     export let type: EntityType;
-    export let index: number;
     export let playerClass: PlayerClass | undefined = undefined;
-
-    const selectEntity = () => {
-        selectEntityInput([index, 0])
-    }
+    export let isSelected = false;
 </script>
 
-<button class="entity-type-button" on:click={selectEntity}>
+<button class="entity-type-button" on:click={() => isSelected = true}>
     {#if type === CreatureType.Player && playerClass}
         <PlayerIconSwitch bind:icon={playerClass}/>
     {:else if type === CreatureType.Enemy}

@@ -269,9 +269,9 @@ tr {
     outline: none !important;
 }
 
-input:hover:not(.selected-input):not(.minion-main-name):not(.blank-input) {
+/* input:hover:not(.selected-input):not(.minion-main-name):not(.blank-input) {
     background-color: var(--light-grey) !important;
-}
+} */
 
 .skull {
     position: absolute;

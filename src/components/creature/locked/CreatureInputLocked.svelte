@@ -2,13 +2,11 @@
     import HealthBar from "../../common/HealthBar.svelte";
     import { CreatureType, type Creature } from "../../../lib/models/creature";
     import Minions from "./Minions.svelte";
-    import { selectEntityInput } from "../../../store";
     import LegendaryActionsValue from "../../initiativeTable/LegendaryActionsValue.svelte";
 
     export let creature: Creature;
     export let isActive = false;
-    export let index: number
-    export let isSelected: boolean;
+    export let isSelected = false;
 
     $: isMinion = creature.type === CreatureType.Minion;
     $: isPlayer = creature.type === CreatureType.Player;
@@ -25,12 +23,16 @@
             bind:value={creature.name}
             type="text"
             class:active={isActive}
+            disabled
             class:minion-main-name={creature.type === CreatureType.Minion}
             placeholder={isPlayer ? creature.class : "Creature"}
-            class:selected-input={isSelected}
-            on:click={() => selectEntityInput([index, 0])}/>
+            on:click={() => isSelected = true}/>
             {#if isMinion}
-                <Minions bind:name={creature.name} bind:quantity={creature.quantity} hpMax={creature.hpMax} hpCurrent={creature.hpCurrent} index={index}/>
+                <Minions 
+                    bind:name={creature.name}
+                    bind:quantity={creature.quantity}
+                    hpMax={creature.hpMax}
+                    hpCurrent={creature.hpCurrent}/>
             {:else}
                 <HealthBar max={creature.hpMax} current={creature.hpCurrent[0]}/>
             {/if}
