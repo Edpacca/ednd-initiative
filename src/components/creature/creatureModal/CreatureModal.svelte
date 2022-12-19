@@ -24,20 +24,25 @@
     let healingInput: HTMLInputElement;
     let conditionInput: HTMLInputElement;
 
-    let focussable: HTMLInputElement[] = [
-        damageInput,
-        healingInput,
-        conditionInput,
-    ]
-
-    let focusedIndex = 0;
+    let focused: "damage" | "healing" | "condition" = "damage";
 
     const keyboardInput = async (event: KeyboardEvent) => {
         if (isSelected) {
             if (event.key === "Tab") {
-                focusedIndex = (focusedIndex + 1) % 3;
-                console.log(focussable[focusedIndex])
-                focussable[focusedIndex].focus();
+                switch(focused) {
+                    case "damage":
+                        healingInput.focus();
+                        focused = "healing";
+                        break;
+                    case "healing":
+                        conditionInput.focus();
+                        focused = "condition";
+                        break;
+                    case "condition":
+                        damageInput.focus();
+                        focused = "damage";
+                        break;
+                }
             // } else if (event.key === "Enter") {
             //     submitEnter(focused);
             // }   
@@ -65,7 +70,7 @@
                     <HpValue value={creature.hpCurrent} valueMax={creature.hpMax}/>
                 </div>
                 <div class="damage-container">
-                    <Damage bind:creature bind:damageInput bind:healingInput/>
+                    <Damage bind:creature bind:damageInput bind:healingInput bind:focused/>
                 </div>
             </div>
             <Conditions 

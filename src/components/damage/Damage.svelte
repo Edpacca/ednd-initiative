@@ -12,7 +12,7 @@
     let healing: number;
     export let damageInput: HTMLInputElement;
     export let healingInput: HTMLInputElement;
-    let focused: "damage" | "healing" = "damage";
+    export let focused: "damage" | "healing" | "condition" = "damage";
     let isSkullHovered = false;
 
     const applyDamage = () => {
