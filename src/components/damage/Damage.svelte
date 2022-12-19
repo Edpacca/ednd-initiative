@@ -5,6 +5,7 @@
     import type { Creature } from "../../lib/models/creature";
     import { FLOATERS } from "../common/floater/animationValue";
     import Floater from "../common/floater/Floater.svelte";
+    import type { FocusType } from "../creature/creatureModal/focusType";
 
     export let creature: Creature;
 
@@ -12,7 +13,7 @@
     let healing: number;
     export let damageInput: HTMLInputElement;
     export let healingInput: HTMLInputElement;
-    export let focused: "damage" | "healing" | "condition" = "damage";
+    export let focused: FocusType = "damage";
     let isSkullHovered = false;
 
     const applyDamage = () => {
@@ -38,20 +39,6 @@
     $: damage, resetDamageAtZero();
     $: healing, resetHealingAtZero();
 
-    // const keyboardInput = async (event: KeyboardEvent) => {
-    //     if (event.key === "Tab") {
-    //         if (focused === "healing") {
-    //             damageInputElement.focus();
-    //             focused = "damage"
-    //         } else if (focused === "damage") {
-    //             healingInputElement.focus();
-    //             focused = "healing"
-    //         }
-    //     } else if (event.key === "Enter") {
-    //         submitEnter(focused);
-    //     }
-    // }
-    
     const submitEnter = (type: "damage" | "healing") => {
         if (type === "damage") applyDamage();
         else applyHealing();
@@ -77,7 +64,6 @@
             type="number"
             min={0} bind:value={damage}
             on:input={resetHealing}
-            on:focusin={() => focused = "damage"}
             tabindex={1}/>
         <button on:click={() => applyDamage()} class:active={focused === "damage"}>Damage</button>
     </div>
@@ -99,7 +85,6 @@
             type="number"
             min={0} bind:value={healing}
             on:input={resetDamage}
-            on:focusin={() => focused = "healing"}
             tabindex={1}/>
         <button on:click={() => applyHealing()} class:active={focused === "healing"}>Heal</button>
     </div>
@@ -119,9 +104,7 @@
         </button>
         <button class:kill={isSkullHovered} on:click={() => creature.hpCurrent[0] = 0}>Kill</button>
     </div>
-
 </div>
-<!-- <svelte:window on:keyup={e => keyboardInput(e)}/> -->
 
 <style>
 

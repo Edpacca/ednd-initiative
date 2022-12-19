@@ -6,6 +6,7 @@
     import Damage from "../../damage/Damage.svelte";
     import CreatureInputLocked from "../locked/CreatureInputLocked.svelte";
     import Conditions from "./Conditions.svelte";
+    import type { FocusType } from "./focusType";
     import HpValue from "./HpValue.svelte";
     export let creature: Creature;
     export let isSelected = false;
@@ -24,7 +25,9 @@
     let healingInput: HTMLInputElement;
     let conditionInput: HTMLInputElement;
 
-    let focused: "damage" | "healing" | "condition" = "damage";
+    let focused: FocusType = "damage";
+
+    $: console.log(focused);
 
     const keyboardInput = async (event: KeyboardEvent) => {
         if (isSelected) {

@@ -1,39 +1,29 @@
 <script lang="ts">
     import { CONDITIONS } from "../../../lib/conditions";
     import PlusMinusButton from "../../common/buttons/PlusMinusButton.svelte";
+    import type { FocusType } from "./focusType";
     export let conditions: string[];
     export let conditionInput: HTMLInputElement;
+    export let focused: FocusType = "none";
     export let submitCondition: (condition: string) => void;
     export let removeCondition: (condition: string) => void;
     let value = "";
-    let inputHasFocus = false;
     let listHasFocus = false;
     let filteredIndex = 0;
 
     $: filteredConditions = CONDITIONS.filter(c => c.startsWith(value.toLowerCase()));
-
-    const submitEnter = (event: KeyboardEvent, condition: string) => {
-        
-        if (event.key === "Enter") {
-            submitCondition(condition);
-        }
-    }
 
     const submit = (condition: string) => {
         console.log(condition);
         submitCondition(condition);
         value = "";
         listHasFocus = false;
-        inputHasFocus = false;
-    }
-
-    const delayFocusOut = async() => {
-        setTimeout(() => inputHasFocus = false, 100);
     }
    
-    const changeIndex = (event: KeyboardEvent) => {
+    const onKeydown = (event: KeyboardEvent) => {
         if (event.key === "ArrowUp") {
             filteredIndex = Math.max(filteredIndex - 1, 0);
+            listHasFocus = true;
         } else if (event.key === "ArrowDown") {
             if (listHasFocus) {
                 filteredIndex = Math.min(filteredIndex + 1, filteredConditions.length - 1);
@@ -42,14 +32,17 @@
             }
         } else if (event.key === "Enter") {
             if (listHasFocus) {
-                console.log("enter")
                 submit(filteredConditions[filteredIndex]);
+            } else {
+                submit(value);
             }
+        } else if (event.key === "Tab" && value && filteredConditions.length > 0) {
+            value = filteredConditions[0]
         }
     }
 
     const focusInputList = (event: KeyboardEvent) => {
-        if (!inputHasFocus && event.key === "ArrowDown") { 
+        if (focused !== "condition" && event.key === "ArrowDown") { 
             conditionInput.focus();
             listHasFocus = true;
         }
@@ -62,13 +55,12 @@
             <input 
                 bind:value
                 bind:this={conditionInput}
-                on:focusin={() => inputHasFocus = true}
-                on:focusout={delayFocusOut}
-                on:keydown={e => changeIndex(e)}
+                on:focusin={() => focused = "condition"}
+                on:keydown={e => onKeydown(e)}
                 tabindex={1}/>
             <PlusMinusButton type="+" onClick={() => submit(value)} width="1.5rem"/>
         </div>
-        {#if (inputHasFocus || listHasFocus) && filteredConditions.length > 0}
+        {#if (value || listHasFocus) && focused === "condition" && filteredConditions.length > 0}
             <div class="filter-list">
                 <ul>
                     {#each filteredConditions as condition, i}
