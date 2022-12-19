@@ -61,7 +61,7 @@
     </thead>
     <tbody>
         {#each creatures as creature, i}
-            <CreatureRowUnlocked {creature} removeCreature={() => removeCreature(creature)} index={i}/>
+            <CreatureRowUnlocked {creature} removeCreature={() => removeCreature(creature)}/>
         {/each}
     </tbody>
 </table>

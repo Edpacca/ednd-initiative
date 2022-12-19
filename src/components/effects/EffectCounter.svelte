@@ -9,8 +9,8 @@
 <div class="effect-value-container"
     on:mouseenter={() => isHovered = true}
     on:mouseleave={() => isHovered = false}>
-    <input type="number" class={`effect-counter-input ${extraClasses}`} bind:value={value} on:mouseenter={() => isHovered = true}
-    on:mouseleave={() => isHovered = false}/>
+    <input type="number" class={`effect-counter-input ${extraClasses}`}
+    bind:value={value}/>
     <ValueSpinner bind:value isHidden={!isHovered}/>
 </div>
 

@@ -6,6 +6,7 @@
     --black: rgb(30, 30, 30);
 
     --light-grey: rgb(150, 150, 150);
+    --mid-grey: rgb(85, 85, 85);    
     --grey: rgb(50, 50, 50);
     --dark-grey: rgb(37, 38, 39);
     --super-dark-grey: rgb(19, 19, 19);
@@ -297,10 +298,6 @@ tr {
     outline: none !important;
 }
 
-/* input:hover:not(.selected-input):not(.minion-main-name):not(.blank-input) {
-    background-color: var(--light-grey) !important;
-} */
-
 .skull {
     position: absolute;
     height: 2.5rem;
@@ -313,4 +310,21 @@ tr {
     background: none;
     border: none;
     outline: none;
+}
+
+::-webkit-scrollbar {
+    width: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--dark-grey);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--mid-grey);
+    border-radius: 3px
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--light-grey);
 }

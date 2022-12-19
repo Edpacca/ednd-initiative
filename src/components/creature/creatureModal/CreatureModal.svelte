@@ -11,7 +11,6 @@
     export let isSelected = false;
 
     const submitCondition = (condition: string) => {
-        console.log(condition);
         if (condition && !creature.conditions.includes(condition)) {
             creature.conditions = [...creature.conditions, condition];
         }
