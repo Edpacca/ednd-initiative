@@ -5,7 +5,6 @@
     import { CreatureType } from "../../../lib/models/creature";
     import type { EntityType } from "../../../lib/models/entity";
     import type { PlayerClass } from "../../../lib/models/playerClass";
-    import { selectEntityInput } from "../../../store";
     import PlayerIconSwitch from "../../initiativeTable/PlayerIconSwitch.svelte";
 
     export let type: EntityType;

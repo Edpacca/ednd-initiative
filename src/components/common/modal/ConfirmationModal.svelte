@@ -3,7 +3,9 @@
     export let isOpen: boolean;
     export let text: string[];
     export let confirmaCallback: () => void;
-    export let cancelCallback: () => void = () => isOpen = false;
+    export let cancelCallback: () => void = () => { 
+        isOpen = false;
+    }
 </script>
 
 <Modal isOpen={isOpen}>

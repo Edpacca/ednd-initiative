@@ -10,8 +10,8 @@
 
     let damage: number;
     let healing: number;
-    let damageInputElement: HTMLInputElement;
-    let healingInputElement: HTMLInputElement;
+    export let damageInput: HTMLInputElement;
+    export let healingInput: HTMLInputElement;
     let focused: "damage" | "healing" = "damage";
     let isSkullHovered = false;
 
@@ -38,20 +38,19 @@
     $: damage, resetDamageAtZero();
     $: healing, resetHealingAtZero();
 
-    const numbers = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
-    const keyboardInput = async (event: KeyboardEvent) => {
-        if (event.key === "Tab") {
-            if (focused === "healing") {
-                damageInputElement.focus();
-                focused = "damage"
-            } else if (focused === "damage") {
-                healingInputElement.focus();
-                focused = "healing"
-            }
-        } else if (event.key === "Enter") {
-            submitEnter(focused);
-        }
-    }
+    // const keyboardInput = async (event: KeyboardEvent) => {
+    //     if (event.key === "Tab") {
+    //         if (focused === "healing") {
+    //             damageInputElement.focus();
+    //             focused = "damage"
+    //         } else if (focused === "damage") {
+    //             healingInputElement.focus();
+    //             focused = "healing"
+    //         }
+    //     } else if (event.key === "Enter") {
+    //         submitEnter(focused);
+    //     }
+    // }
     
     const submitEnter = (type: "damage" | "healing") => {
         if (type === "damage") applyDamage();
@@ -74,11 +73,11 @@
         <input
             class="damage-input"
             id="damage-input"
-            bind:this={damageInputElement}
+            bind:this={damageInput}
             type="number"
             min={0} bind:value={damage}
             on:input={resetHealing}
-            on:click={() => focused = "damage"}
+            on:focusin={() => focused = "damage"}
             tabindex={1}/>
         <button on:click={() => applyDamage()} class:active={focused === "damage"}>Damage</button>
     </div>
@@ -95,12 +94,12 @@
         {/if}
         <input
             class="damage-input"
-            bind:this={healingInputElement}
+            bind:this={healingInput}
             id="healing-input"
             type="number"
             min={0} bind:value={healing}
             on:input={resetDamage}
-            on:click={() => focused = "healing"}
+            on:focusin={() => focused = "healing"}
             tabindex={1}/>
         <button on:click={() => applyHealing()} class:active={focused === "healing"}>Heal</button>
     </div>
@@ -122,8 +121,7 @@
     </div>
 
 </div>
-
-<svelte:window on:keyup={e => keyboardInput(e)}/>
+<!-- <svelte:window on:keyup={e => keyboardInput(e)}/> -->
 
 <style>
 

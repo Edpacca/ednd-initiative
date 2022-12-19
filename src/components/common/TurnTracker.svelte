@@ -1,6 +1,6 @@
 <script lang="ts">
     import { Creature, CreatureType } from "../../lib/models/creature";
-    import { currentRound, entities, activeEntityTurnIndex } from "../../store";
+    import { currentRound, entities, activeEntityTurnIndex, isModalOpen } from "../../store";
     
     $: max = $entities.length - 1;
     
@@ -30,15 +30,17 @@
     }
 
     const onArrows = (event: KeyboardEvent) => {
-        switch(event.key) {
-            case "ArrowLeft":
-                previous();
-                return;
-            case "ArrowRight":
-                next();
-                return;
-            default:
-                return;
+        if (!$isModalOpen) {
+            switch(event.key) {
+                case "ArrowLeft":
+                    previous();
+                    return;
+                case "ArrowRight":
+                    next();
+                    return;
+                default:
+                    return;
+            }
         }
     }
 </script>
@@ -50,7 +52,7 @@
         <button on:click={next}>{">"}</button>
     </div>
 </div>
-<!-- <svelte:body on:keydown={e => onArrows(e)}/> -->
+<svelte:window on:keydown={e => onArrows(e)}/>
 
 <style>
     .turn-tracker {

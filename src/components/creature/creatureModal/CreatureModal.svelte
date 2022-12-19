@@ -20,6 +20,35 @@
         creature.conditions = creature.conditions.filter(c => c !== condition);
     }
 
+    let damageInput: HTMLInputElement;
+    let healingInput: HTMLInputElement;
+    let conditionInput: HTMLInputElement;
+
+    let focussable: HTMLInputElement[] = [
+        damageInput,
+        healingInput,
+        conditionInput,
+    ]
+
+    let focusedIndex = 0;
+
+    const keyboardInput = async (event: KeyboardEvent) => {
+        if (isSelected) {
+            if (event.key === "Tab") {
+                focusedIndex = (focusedIndex + 1) % 3;
+                console.log(focussable[focusedIndex])
+                focussable[focusedIndex].focus();
+            // } else if (event.key === "Enter") {
+            //     submitEnter(focused);
+            // }   
+            }
+        }
+    }
+    
+    const submitEnter = (type: "damage" | "healing") => {
+        // if (type === "damage") applyDamage();
+        // else applyHealing();
+    }
 </script>
 
 {#if isSelected}
@@ -36,14 +65,19 @@
                     <HpValue value={creature.hpCurrent} valueMax={creature.hpMax}/>
                 </div>
                 <div class="damage-container">
-                    <Damage bind:creature/>
+                    <Damage bind:creature bind:damageInput bind:healingInput/>
                 </div>
             </div>
-            <Conditions bind:conditions={creature.conditions} submitCondition={submitCondition} removeCondition={removeCondition}/>
+            <Conditions 
+                bind:conditions={creature.conditions}
+                bind:conditionInput
+                submitCondition={submitCondition}
+                removeCondition={removeCondition}/>
         </div>
     </Modal>
 </div>
 {/if}
+<svelte:window on:keyup={e => keyboardInput(e)}/>
 
 <style>
 .creature-modal {

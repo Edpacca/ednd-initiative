@@ -2,17 +2,18 @@
     import { CONDITIONS } from "../../../lib/conditions";
     import PlusMinusButton from "../../common/buttons/PlusMinusButton.svelte";
     export let conditions: string[];
+    export let conditionInput: HTMLInputElement;
     export let submitCondition: (condition: string) => void;
     export let removeCondition: (condition: string) => void;
     let value = "";
     let inputHasFocus = false;
     let listHasFocus = false;
     let filteredIndex = 0;
-    let conditionInput: HTMLInputElement;
 
     $: filteredConditions = CONDITIONS.filter(c => c.startsWith(value.toLowerCase()));
 
     const submitEnter = (event: KeyboardEvent, condition: string) => {
+        
         if (event.key === "Enter") {
             submitCondition(condition);
         }
@@ -63,7 +64,8 @@
                 bind:this={conditionInput}
                 on:focusin={() => inputHasFocus = true}
                 on:focusout={delayFocusOut}
-                on:keydown={e => changeIndex(e)}/>
+                on:keydown={e => changeIndex(e)}
+                tabindex={1}/>
             <PlusMinusButton type="+" onClick={() => submit(value)} width="1.5rem"/>
         </div>
         {#if (inputHasFocus || listHasFocus) && filteredConditions.length > 0}
