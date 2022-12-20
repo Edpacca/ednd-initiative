@@ -37,6 +37,7 @@
     --fontsize-M: 1rem;
     --fontsize-L: 1.125rem;
     --fontsize-XL: 1.25rem;
+    --fontsize-XXL: 1.75rem;
 
     --table-padding: 0.3125rem;
     --table-cell-width: 3rem;
@@ -47,7 +48,7 @@
 }
 
 :root {
-    /* font-size: 10px; */
+    font-size: 14px;
 }
 
 body {

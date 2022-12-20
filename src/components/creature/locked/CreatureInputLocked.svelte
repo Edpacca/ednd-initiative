@@ -15,9 +15,6 @@
 </script>
 
 <div class="entity-area" class:boss-grid={isBoss}>
-    {#if isBoss}
-        <LegendaryActionsValue bind:value={creature.laCurrent}/>
-    {/if}
     <div class="name-input-container">
         <input 
             bind:value={creature.name}
@@ -37,6 +34,9 @@
                 <HealthBar max={creature.hpMax} current={creature.hpCurrent[0]}/>
             {/if}
     </div>
+    {#if isBoss}
+        <LegendaryActionsValue bind:value={creature.laCurrent}/>
+    {/if}
 </div>
 
 
@@ -72,6 +72,7 @@
     
     .boss-grid {
         display: grid;
-        grid-template-columns: 3rem 1fr;
+        grid-template-columns: 1fr 3rem;
+        column-gap: 1rem;
     }
 </style>

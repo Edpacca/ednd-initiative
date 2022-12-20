@@ -24,7 +24,6 @@
 </div>
 <div>
     <div>Roll remaining</div>
-
 </div>
 
 <style>

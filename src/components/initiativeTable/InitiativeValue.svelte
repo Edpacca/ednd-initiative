@@ -24,7 +24,7 @@
         box-sizing: border-box;
         color: goldenrod;
         background: none;
-        font-size: 28px;
+        font-size: var(--fontsize-XXL);
         border: 2px solid grey;
     }
 
