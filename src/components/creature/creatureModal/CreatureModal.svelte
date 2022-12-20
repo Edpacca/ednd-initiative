@@ -26,6 +26,7 @@
     let conditionInput: HTMLInputElement;
 
     let focused: FocusType = "damage";
+    let conditionInputValue = "";
 
     $: console.log(focused);
 
@@ -42,20 +43,18 @@
                         focused = "condition";
                         break;
                     case "condition":
-                        damageInput.focus();
-                        focused = "damage";
-                        break;
-                }
-            // } else if (event.key === "Enter") {
-            //     submitEnter(focused);
-            // }   
+                        if (conditionInputValue) {
+                            conditionInput.focus();
+                            conditionInput.select();
+                        } else {
+                            damageInput.focus();
+                            focused = "damage";
+                            break;
+                        }
+                } 
             }
+            event.stopPropagation();
         }
-    }
-    
-    const submitEnter = (type: "damage" | "healing") => {
-        // if (type === "damage") applyDamage();
-        // else applyHealing();
     }
 </script>
 
@@ -79,6 +78,7 @@
             <Conditions 
                 bind:conditions={creature.conditions}
                 bind:conditionInput
+                bind:value={conditionInputValue}
                 submitCondition={submitCondition}
                 removeCondition={removeCondition}/>
         </div>

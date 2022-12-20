@@ -7,11 +7,11 @@
     export let focused: FocusType = "none";
     export let submitCondition: (condition: string) => void;
     export let removeCondition: (condition: string) => void;
-    let value = "";
+    export let value = "";
     let listHasFocus = false;
     let filteredIndex = 0;
 
-    $: filteredConditions = CONDITIONS.filter(c => c.startsWith(value.toLowerCase()));
+    $: filteredConditions = CONDITIONS.filter(c => c.startsWith(value.toLowerCase()) && !conditions.includes(c));
 
     const submit = (condition: string) => {
         console.log(condition);
@@ -20,7 +20,7 @@
         listHasFocus = false;
     }
    
-    const onKeydown = (event: KeyboardEvent) => {
+    const onKeyup = (event: KeyboardEvent) => {
         if (event.key === "ArrowUp") {
             filteredIndex = Math.max(filteredIndex - 1, 0);
             listHasFocus = true;
@@ -36,19 +36,19 @@
             } else {
                 submit(value);
             }
-        } else if (event.key === "Tab" && value && filteredConditions.length > 0) {
-            value = filteredConditions[0]
-        }
-    }
+        } else if (event.key === "Tab") {
 
-    const focusInputList = (event: KeyboardEvent) => {
-        if (focused !== "condition" && event.key === "ArrowDown") { 
-            conditionInput.focus();
-            listHasFocus = true;
+         if(value && filteredConditions.length > 0) {
+            value = filteredConditions[0];
+            conditionInput.select();
+            // event.stopPropagation();
+        } else {
+            listHasFocus = false;
         }
     }
+}
 </script>
-<div class="effects" on:keyup={e => focusInputList(e)}>
+<div class="effects">
     <div class="header-small underline">Effects & Conditions</div>
     <div class="search-header">
         <div class="controls">
@@ -56,7 +56,7 @@
                 bind:value
                 bind:this={conditionInput}
                 on:focusin={() => focused = "condition"}
-                on:keydown={e => onKeydown(e)}
+                on:keydown={e => onKeyup(e)}
                 tabindex={1}/>
             <PlusMinusButton type="+" onClick={() => submit(value)} width="1.5rem"/>
         </div>
@@ -96,6 +96,7 @@
 
     input {
         height: 1.8rem;
+        text-transform: capitalize;
     }
 
     .controls {

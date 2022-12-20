@@ -39,10 +39,20 @@
     $: damage, resetDamageAtZero();
     $: healing, resetHealingAtZero();
 
-    const submitEnter = (type: "damage" | "healing") => {
-        if (type === "damage") applyDamage();
-        else applyHealing();
+    const submitEnter = (event: KeyboardEvent, type: "damage" | "healing") => {
+        if (event.key === "Enter") {
+            switch(type) {
+                case "damage":
+                    applyDamage();
+                    break;
+                case "healing":
+                    applyHealing();
+                    break;
+            }
+        }
     }
+
+
 </script>
 
 <div class="damage-tool-container">
@@ -64,6 +74,7 @@
             type="number"
             min={0} bind:value={damage}
             on:input={resetHealing}
+            on:keydown={e => submitEnter(e, "damage")}
             tabindex={1}/>
         <button on:click={() => applyDamage()} class:active={focused === "damage"}>Damage</button>
     </div>
@@ -85,6 +96,7 @@
             type="number"
             min={0} bind:value={healing}
             on:input={resetDamage}
+            on:keydown={e => submitEnter(e, "healing")}
             tabindex={1}/>
         <button on:click={() => applyHealing()} class:active={focused === "healing"}>Heal</button>
     </div>
@@ -119,7 +131,7 @@
     .damage-input {
         height: 6rem;
         width: 6rem;
-        font-size: 34px;
+        font-size: 2rem;
         font-weight: bold;
         z-index: 2;
         background: none;
@@ -180,7 +192,7 @@
         bottom: 45px;
     }
     .heal .input-icon {
-        top: 8px;
+        top: 0.5rem;
         width: 5rem;
         height: 5rem;
     }
@@ -239,7 +251,7 @@
     .floaters {
         z-index: 1;
         position: absolute;
-        top: 20px;
-        margin-right: 20px;
+        top: 1.25rem;
+        margin-right: 1.25rem;
     }
 </style>
