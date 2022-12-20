@@ -31,7 +31,7 @@
         text-align: center;
         width: 100%;
         box-sizing: border-box;
-        font-size: 18px;
+        font-size: var(--fontsize-L);
         font-weight: bold;
         border: none;
     }

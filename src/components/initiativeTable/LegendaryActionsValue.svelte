@@ -41,7 +41,7 @@
 
     .value {
         font-weight: bold;
-        font-size: 20px;
+        font-size: var(--fontsize-XL);
         z-index: 1;
     }
 </style>

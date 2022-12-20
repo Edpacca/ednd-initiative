@@ -25,13 +25,29 @@
     --blue: rgb(58, 42, 146);
     --light-blue: rgb(88, 80, 156);
 
-    --border-radius: 4px;
-    --margin: 8px;
+    --border-radius: 0.25rem;
+    --margin: 0.5rem;
 
     --mobile-breakpoint: 480px;
     --tablet-breakpoint: 769px;
 
-    --healthbar-height: 4px;
+    --healthbar-height: 0.25rem;
+
+    --fontsize-S: 0.825rem;
+    --fontsize-M: 1rem;
+    --fontsize-L: 1.125rem;
+    --fontsize-XL: 1.25rem;
+
+    --table-padding: 0.3125rem;
+    --table-cell-width: 3rem;
+
+    --input-height: 2.5rem;
+
+    --dropshadow-size: 0.75rem;
+}
+
+:root {
+    /* font-size: 10px; */
 }
 
 body {
@@ -51,12 +67,12 @@ table {
 }
 
 th {
-    padding: 5px;
+    padding: 0.3125rem;
     vertical-align: bottom;
 }
 
 td {
-    padding: 5px;
+    padding: 0.3125rem;
     vertical-align: top;
 }
 
@@ -65,12 +81,12 @@ td {
 }
 
 .table-text {
-    font-size: 20px;
+    font-size: 1.4rem;
     font-weight: bold;
 }
 
 th.value-col, th.fn-col {
-    width: 3em;
+    width: 3rem;
 }
 
 .hidden {
@@ -117,7 +133,7 @@ input {
     text-align: center;
     width: 100%;
     box-sizing: border-box;
-    font-size: 18px;
+    font-size: var(--fontsize-L);
     font-weight: bold;
     background-color: rgba(255, 255, 255, 0.9);
 }
@@ -135,8 +151,8 @@ input:focus {
 .entity-type-button {
     background: none;
     border: none;
-    height: 3em;
-    width: 3em;
+    height: 3rem;
+    width: 3rem;
     padding: 0;
 }
 
@@ -229,7 +245,7 @@ input:focus {
     border: none;
     border-top: 2px solid var(--light-grey);
     color: var(--white);
-    font-size: 16px;
+    font-size: 1rem;
     height: 2rem;
     width: 100%;
 }
@@ -244,7 +260,7 @@ select {
     background: var(--dark-grey);
     color: var(--secondary);
     text-align: center;
-    font-size: 16px;
+    font-size: 1rem;
     border-radius: var(--border-radius);
 }
 
@@ -281,12 +297,13 @@ select {
 .active-initiative {
     position: absolute;
     width: 100%;
-    height: calc(100% - 5px);
+    top: calc(-1 * var(--table-padding));
+    height: 100%;
     background-color: var(--dark-grey);
     border: 3px solid var(--gold);
-    border-radius: 8px;
+    border-radius: 0.5rem;
     z-index: -1;
-    filter: drop-shadow(0px 0px 12px var(--gold))
+    filter: drop-shadow(0 0 0.75rem var(--gold))
 }
 
 tr {

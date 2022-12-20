@@ -65,7 +65,7 @@
         background-color: var(--grey);
         border: none;
         border-radius: var(--border-radius);
-        font-size: 32px;
+        font-size: 2rem;
         color: var(--white);
     }
 

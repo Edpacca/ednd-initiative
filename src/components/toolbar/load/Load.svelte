@@ -113,7 +113,7 @@
         border: none;
         border-bottom: 2px solid var(--grey);
         border-radius: var(--border-radius);
-        font-size: 14px;
+        font-size: var(--fontsize-S);
         font-weight: bold;
     }
 

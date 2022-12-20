@@ -26,7 +26,7 @@
         margin: 0;
         background: var(--dark-grey);
         color: var(--white);
-        border-width: 0px;
+        border-width: 0;
         width: 0.7rem;
         font-weight: bold;
     }

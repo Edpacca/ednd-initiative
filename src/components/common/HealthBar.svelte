@@ -15,8 +15,8 @@
     .health-bar {
         width: var(--width);
         background-color: var(--color);
-        height: 4px;
+        height: var(--healthbar-height);
         transition: 0.8s ease-out;
-        border-radius: 2px;
+        border-radius: 0.125rem;
     }
 </style>

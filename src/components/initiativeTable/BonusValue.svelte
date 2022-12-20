@@ -49,7 +49,7 @@
         margin: 0;
         background: var(--secondary);
         color: var(--primary);
-        border-width: 0px;
+        border-width: 0;
         width: 0.7rem;
     }  
     

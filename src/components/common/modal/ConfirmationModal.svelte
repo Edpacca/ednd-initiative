@@ -20,7 +20,7 @@
 
 <style>
     p {
-        font-size: 16px;
+        font-size: var(--fontsize-M);
         text-align: center;
         margin-bottom: 1rem;
     }

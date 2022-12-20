@@ -31,6 +31,6 @@
 <style>
     button {
         fill: var(--primary);
-        filter :drop-shadow(0 0 10px black)
+        filter :drop-shadow(0 0 0.75rem black)
     }
 </style>
