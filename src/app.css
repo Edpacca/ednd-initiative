@@ -349,7 +349,7 @@ tr {
 
 .condition-icon {
     fill: var(--white);
-    stroke: var(--white);
+    /* stroke: var(--white); */
 }
 
 .conditions {

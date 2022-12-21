@@ -51,5 +51,5 @@
     </td>
 </tr>
 
-<svelte:window on:keydown={e => selectCreature(e)}/>
+<!-- <svelte:window on:keydown={e => selectCreature(e)}/> -->
 <CreatureModal bind:isSelected bind:creature/>

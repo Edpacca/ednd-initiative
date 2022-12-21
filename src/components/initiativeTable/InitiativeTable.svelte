@@ -49,7 +49,6 @@
             {:else if entity.type === EffectType.Effect}
                 <EffectRowLocked bind:effect={entity} isActive={index === $activeEntityTurnIndex}/>
             {/if}
-
         {/each}
     </tbody>
 </table>

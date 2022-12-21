@@ -8,12 +8,13 @@
 </script>
 
 <div class="input-counters">
-    <input class:input-locked={$isLocked && !effect.theme} style={`--theme: ${themePath}`} placeholder="Effect" bind:value={effect.name}>
+    <input disabled={$isLocked} class:input-locked={$isLocked && !effect.theme} style={`--theme: ${themePath}`} placeholder="Effect" bind:value={effect.name}>
 </div>
 
 <style>
 
     input {
+        background: var(--grey);
         background: var(--theme);
         color: var(--white);
         font-style: italic;
