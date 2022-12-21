@@ -1,4 +1,5 @@
 <script lang="ts">
+    import Arrow from "../../graphics/icons/arrow.svelte";
     import Cave from "../../graphics/icons/cave.svelte";
     import type { Effect } from "../../lib/models/effect";
     import NumberInput from "../common/NumberInput.svelte";
@@ -9,6 +10,11 @@
     export let isActive = false;
 </script>
 
+{#if isActive}
+    <div class="active-icon">
+        <Arrow/>
+    </div>
+{/if}
 <tr>
     <div class:active-initiative={isActive}></div>
     <td class="blue flex-col">

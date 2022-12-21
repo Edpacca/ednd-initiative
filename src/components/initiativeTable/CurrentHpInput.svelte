@@ -11,7 +11,7 @@
     $: isBloodied = entity.hpCurrent <= entity.hpMax / 2 && !isDead;
 </script>
 
-<div class="svg-fit-container" class:minion-hp-container={isMinion}>
+<div class="svg-fit-container">
     <NumberInput bind:value={entity.hpCurrent[0]} extraClasses={isBloodied ? "bloodied" : isDead ? "dead" : ""} isHidden={isMinion}/>
     {#if isDead && !isMinion}
         <div class="skull"><Skull/></div>

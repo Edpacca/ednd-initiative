@@ -346,3 +346,33 @@ tr {
 ::-webkit-scrollbar-thumb:hover {
     background: var(--light-grey);
 }
+
+.condition-icon {
+    fill: var(--white);
+    stroke: var(--white);
+}
+
+.conditions {
+    fill: var(--white);
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0.25rem;
+}
+
+.active-icon {
+    position: absolute;
+    fill: var(--gold);
+    height: 2.5rem;
+    padding: 0.625rem;
+    left: -6rem;
+    animation: point 1.5s ease-in infinite alternate;
+}
+
+@keyframes point {
+    from {
+        transform: translateX(-0.5rem);
+    } to {
+        transform: translateX(0);
+    }
+}

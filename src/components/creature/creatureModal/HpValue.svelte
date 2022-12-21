@@ -5,7 +5,7 @@
     export let valueMax;
 </script>
 
-<div class="hp svg-fit-container" class:bloodied-svg={value <= valueMax / 2}>
+<div class={`hp svg-fit-container ${$$props.class}`} class:bloodied-svg={value <= valueMax / 2}>
     <div class="svg-fit heart-offset">
         {#if value > 0}
             <Heart/>
@@ -27,6 +27,13 @@
         justify-content: center;
         color: var(--primary);
         bottom: 0.7rem;
+    }
+
+    .minion-hp {
+        height: var(--input-height);
+        width: var(--input-height);
+        bottom: 0;
+        margin-bottom: var(--healthbar-height);
     }
     
     .value {

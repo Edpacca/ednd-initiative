@@ -8,25 +8,26 @@
     import type { FocusType } from "../creature/creatureModal/focusType";
 
     export let creature: Creature;
-
-    let damage: number;
-    let healing: number;
     export let damageInput: HTMLInputElement;
     export let healingInput: HTMLInputElement;
     export let focused: FocusType = "damage";
+    export let index = 0;
+
+    let damage: number;
+    let healing: number;
     let isSkullHovered = false;
 
     const applyDamage = () => {
         if (damage) {
-            creature.hpCurrent[0] -= damage;
-            if (creature.hpCurrent[0] < 0) creature.hpCurrent[0] = 0;
+            creature.hpCurrent[index] -= damage;
+            if (creature.hpCurrent[index] < 0) creature.hpCurrent[index] = 0;
             resetDamage();
         } 
     }
 
     const applyHealing = () => {
         if (healing) {
-            creature.hpCurrent[0] += healing;
+            creature.hpCurrent[index] += healing;
             resetHealing();
         }
     }
@@ -104,7 +105,7 @@
         <button class="kill-button"
         on:mouseenter={() => isSkullHovered = true}
         on:mouseleave={() => isSkullHovered = false}
-        on:click={() => creature.hpCurrent[0] = 0}>
+        on:click={() => creature.hpCurrent[index] = 0}>
         <Skull/>
         {#if isSkullHovered}
             <div class="floaters">
@@ -114,7 +115,7 @@
             </div>
         {/if}
         </button>
-        <button class:kill={isSkullHovered} on:click={() => creature.hpCurrent[0] = 0}>Kill</button>
+        <button class:kill={isSkullHovered} on:click={() => creature.hpCurrent[index] = 0}>Kill</button>
     </div>
 </div>
 

@@ -6,6 +6,7 @@
     import Speed from "../../graphics/icons/speed.svelte";
     import { CREATURES } from "../../lib/typeFilters";
     import { EffectType } from "../../lib/models/effect";
+    import Arrow from "../../graphics/icons/arrow.svelte";
 
     const sortByInitiative = () => {
         $entities.sort((a, b) => {
@@ -41,13 +42,14 @@
             <th class="fn-col"></th>
         {/if}
     </thead>
-    <tbody>
+    <tbody class="relative">
         {#each $entities as entity, index}
             {#if CREATURES.includes(entity.type)}
                 <CreatureRowLocked bind:creature={entity} isActive={index === $activeEntityTurnIndex}/>
             {:else if entity.type === EffectType.Effect}
                 <EffectRowLocked bind:effect={entity} isActive={index === $activeEntityTurnIndex}/>
             {/if}
+
         {/each}
     </tbody>
 </table>

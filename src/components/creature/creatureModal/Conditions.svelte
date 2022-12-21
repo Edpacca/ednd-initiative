@@ -1,6 +1,7 @@
 <script lang="ts">
     import { CONDITIONS } from "../../../lib/conditions";
     import PlusMinusButton from "../../common/buttons/PlusMinusButton.svelte";
+    import ConditionIcon from "../../common/ConditionIcon.svelte";
     import type { FocusType } from "./focusType";
     export let conditions: string[];
     export let conditionInput: HTMLInputElement;
@@ -14,7 +15,6 @@
     $: filteredConditions = CONDITIONS.filter(c => c.startsWith(value.toLowerCase()) && !conditions.includes(c));
 
     const submit = (condition: string) => {
-        console.log(condition);
         submitCondition(condition);
         value = "";
         listHasFocus = false;
@@ -45,11 +45,15 @@
         } else {
             listHasFocus = false;
         }
+    } else if (event.key === "Backspace" && !value) {
+            listHasFocus = false;
     }
 }
 </script>
-<div class="effects">
+<div class="effects-conditions">
     <div class="header-small underline">Effects & Conditions</div>
+    <slot>
+    </slot>
     <div class="search-header">
         <div class="controls">
             <input 
@@ -58,7 +62,7 @@
                 on:focusin={() => focused = "condition"}
                 on:keydown={e => onKeyup(e)}
                 tabindex={1}/>
-            <PlusMinusButton type="+" onClick={() => submit(value)} width="1.5rem"/>
+            <PlusMinusButton type="+" onClick={() => submit(value)} width="2rem"/>
         </div>
         {#if (value || listHasFocus) && focused === "condition" && filteredConditions.length > 0}
             <div class="filter-list">
@@ -76,9 +80,9 @@
     {#if conditions && conditions.length > 0}
     <div class="condition-grid">
         {#each conditions as condition}
-            <div>icon</div>
+            <div><ConditionIcon condition={condition} class="condition-icon" width="3rem"/></div>
             <div>{condition}</div>
-            <PlusMinusButton type="-" onClick={() => removeCondition(condition)} width="1.5rem"/>
+            <PlusMinusButton type="-" onClick={() => removeCondition(condition)} width="2rem"/>
         {/each}
     </div>
     {:else}
@@ -87,8 +91,7 @@
 </div>
 
 <style>
-    .effects {
-        border: 2px solid var(--primary);
+    .effects-conditions {
         border-radius: var(--border-radius);
         text-align: center;
         padding: 1rem;
@@ -102,17 +105,23 @@
     .controls {
         display: flex;
         flex-direction: row;
-        column-gap: 0.2rem;
+        column-gap: 0.5rem;
         align-items: center;
-        margin: 0.5rem 0;        
+        margin: 0.5rem 0;
+        padding-right: 1rem;      
     }
 
     .condition-grid {
         display: grid;
-        grid-template-columns: 1.5rem 1fr 1.5rem;
-        border: 1px solid var(--secondary);
+        grid-template-columns: 3rem 1fr 2rem;
+        padding-right: 0.5rem;
         text-align: left;
         column-gap: 2rem;
+        align-items: center;
+        font-size: var(--fontsize-L);
+        text-transform: capitalize;
+        max-height: 30vh;
+        overflow-y: scroll;
     }
 
     .search-header {

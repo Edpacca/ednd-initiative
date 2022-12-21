@@ -5,7 +5,7 @@
     import HealthBar from "../../common/HealthBar.svelte";
     import RemoveButton from "../../common/buttons/RemoveButton.svelte";
     import { CreatureType, type Creature } from "../../../lib/models/creature";
-    import Minions from "../locked/Minions.svelte";
+    import Minions from "../minion/Minions.svelte";
     import LegendaryActionsInput from "../../initiativeTable/LegendaryActionsInput.svelte";
 
     export let removeCreature: (e: Creature) => void;
@@ -14,11 +14,13 @@
     const addMinion = () => {
         creature.quantity++;
         creature.hpCurrent = [...creature.hpCurrent, 10];
+        creature.conditions = [...creature.conditions, []];
     }
 
     const removeMinion = () => {
         creature.quantity = Math.max(1, creature.quantity - 1)
         creature.hpCurrent = creature.hpCurrent.slice(0, -1);
+        creature.conditions = creature.conditions.slice(0, -1);
     }
 
     $: isMinion = creature.type === CreatureType.Minion;
@@ -46,7 +48,7 @@
             <RemoveButton onClick={() => removeCreature(creature)} isinverted={isMinion}/>
         </div>
         {#if isMinion}
-            <Minions bind:name={creature.name} bind:quantity={creature.quantity} bind:hpMax={creature.hpMax} bind:hpCurrent={creature.hpCurrent}/>
+            <Minions bind:name={creature.name} bind:quantity={creature.quantity} bind:hpMax={creature.hpMax} bind:hpCurrent={creature.hpCurrent} />
         {/if}
     </div>
     {#if isMinion}

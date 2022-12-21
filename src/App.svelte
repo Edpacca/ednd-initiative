@@ -10,7 +10,7 @@
     import Toolbar from "./components/toolbar/Toolbar.svelte";
     import LockPage from "./components/tools/LockPage.svelte";
     import { CreatureType } from "./lib/models/creature";
-    import { activeEntityTurnIndex, currentRound, currentTheme, entities, isLocked } from "./store";
+    import { currentTheme, entities, isLocked } from "./store";
 
     onMount(async () => {
       setTheme($currentTheme);

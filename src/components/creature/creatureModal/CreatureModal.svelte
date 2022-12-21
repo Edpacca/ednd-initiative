@@ -1,5 +1,5 @@
 <script lang="ts">
-    import type { Creature } from "../../../lib/models/creature";
+    import { CreatureType, type Creature } from "../../../lib/models/creature";
     import CreatureIconSelect from "../../common/buttons/CreatureIconSelect.svelte";
     import RemoveButton from "../../common/buttons/RemoveButton.svelte";
     import Modal from "../../common/modal/Modal.svelte";
@@ -10,15 +10,16 @@
     import HpValue from "./HpValue.svelte";
     export let creature: Creature;
     export let isSelected = false;
+    let index = 0;
 
     const submitCondition = (condition: string) => {
-        if (condition && !creature.conditions.includes(condition)) {
-            creature.conditions = [...creature.conditions, condition];
+        if (condition && !creature.conditions[index].includes(condition)) {
+            creature.conditions[index] = [...creature.conditions[index], condition];
         }
     }
 
     const removeCondition = (condition: string) => {
-        creature.conditions = creature.conditions.filter(c => c !== condition);
+        creature.conditions[index] = creature.conditions[index].filter(c => c !== condition);
     }
 
     let damageInput: HTMLInputElement;
@@ -27,8 +28,7 @@
 
     let focused: FocusType = "damage";
     let conditionInputValue = "";
-
-    $: console.log(focused);
+    $: isMinion = creature.type === CreatureType.Minion
 
     const keyboardInput = async (event: KeyboardEvent) => {
         if (isSelected) {
@@ -52,6 +52,8 @@
                             break;
                         }
                 } 
+            } else if (event.key === "Escape") {
+                isSelected = false;
             }
             event.stopPropagation();
         }
@@ -60,27 +62,40 @@
 
 {#if isSelected}
 <div class="relative creature-modal">
-    <Modal bind:isOpen={isSelected} width="80vw">
+    <Modal bind:isOpen={isSelected} width="60vw">
         <div class="close-button">
             <RemoveButton onClick={() => isSelected = false}/>
         </div>
-        <div class="modal-grid">
-            <div>
-                <div class="creature-info">
-                    <CreatureIconSelect type={creature.type} playerClass={creature.class}/>
-                    <CreatureInputLocked creature={creature}/>
-                    <HpValue value={creature.hpCurrent} valueMax={creature.hpMax}/>
-                </div>
-                <div class="damage-container">
-                    <Damage bind:creature bind:damageInput bind:healingInput bind:focused/>
-                </div>
+        <div>
+            <div class="creature-info">
+                <CreatureIconSelect type={creature.type} playerClass={creature.class}/>
+                <CreatureInputLocked creature={creature} bind:selectedIndex={index}/>
+                {#if isMinion}
+                    <div class="minion-hp-container">
+                        {#each Array(creature.quantity) as m, i}
+                            <HpValue value={creature.hpCurrent[i]} valueMax={creature.hpMax} class="minion-hp"/>
+                        {/each}
+                    </div>
+                {:else}
+                    <HpValue value={creature.hpCurrent[0]} valueMax={creature.hpMax}/>
+                {/if}
             </div>
-            <Conditions 
-                bind:conditions={creature.conditions}
-                bind:conditionInput
-                bind:value={conditionInputValue}
-                submitCondition={submitCondition}
-                removeCondition={removeCondition}/>
+            <div class="modal-control-grid">
+                <div class="damage-container">
+                    <Damage bind:creature bind:damageInput bind:healingInput bind:focused index={index}/>
+                </div>
+                <Conditions 
+                    bind:conditions={creature.conditions[index]}
+                    bind:conditionInput
+                    bind:value={conditionInputValue}
+                    submitCondition={submitCondition}
+                    removeCondition={removeCondition}>
+                    {#if isMinion}
+                        <div class="selected-minion">{creature.name} #{index + 1}</div>
+                    {/if}
+                </Conditions>
+            </div>
+           
         </div>
     </Modal>
 </div>
@@ -103,12 +118,12 @@
     display: flex;
     flex-direction: row;
     column-gap: 1rem;
+    padding-top: 1rem;
 }
 
-.modal-grid {
+.modal-control-grid {
     display: grid;
-    grid-template-columns: 70% 1fr;
-    column-gap: 1rem;
+    grid-template-columns: 1fr 1fr;
     padding-top: 2rem;
 }
 
@@ -116,5 +131,16 @@
 .damage-container {
     display: flex;
     justify-content: center;
+    margin-top: 2rem;
+}
+
+.selected-minion {
+    font-size: var(--fontsize-L);
+    font-weight: bold;
+    color: var(--gold);
+}
+
+.minion-hp-container {
+    padding-top: var(--input-height);
 }
 </style>

@@ -8,14 +8,30 @@
     import CreatureIconSelect from "../../common/buttons/CreatureIconSelect.svelte";
     import type { Creature } from "../../../lib/models/creature";
     import CreatureModal from "../creatureModal/CreatureModal.svelte";
+    import Arrow from "../../../graphics/icons/arrow.svelte";
 
     export let creature: Creature;
     export let isActive = false;
     let isSelected = false;
     
+    const selectCreature = (event: KeyboardEvent) => {
+        if (!isSelected && isActive && event.code === "Space") {
+            isSelected = true;
+            event.stopPropagation();
+            event.preventDefault();
+        } else if (event.code === "Tab") {
+            event.preventDefault();
+        }
+    }
+
     $: creature, setLocalStorageEntities($entities);
 </script>
 
+{#if isActive}
+    <div class="active-icon">
+        <Arrow/>
+    </div>
+{/if}
 <tr>
     <div class:active-initiative={isActive}></div>
     <td class="flex-col">
@@ -35,4 +51,5 @@
     </td>
 </tr>
 
+<svelte:window on:keydown={e => selectCreature(e)}/>
 <CreatureModal bind:isSelected bind:creature/>

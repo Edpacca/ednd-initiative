@@ -1,12 +1,14 @@
 <script lang="ts">
     import HealthBar from "../../common/HealthBar.svelte";
     import { CreatureType, type Creature } from "../../../lib/models/creature";
-    import Minions from "./Minions.svelte";
+    import Minions from "../minion/Minions.svelte";
     import LegendaryActionsValue from "../../initiativeTable/LegendaryActionsValue.svelte";
+    import ConditionIcon from "../../common/ConditionIcon.svelte";
 
     export let creature: Creature;
     export let isActive = false;
     export let isSelected = false;
+    export let selectedIndex = 0;
 
     $: isMinion = creature.type === CreatureType.Minion;
     $: isPlayer = creature.type === CreatureType.Player;
@@ -25,14 +27,25 @@
             placeholder={isPlayer ? creature.class : "Creature"}
             on:click={() => isSelected = true}/>
             {#if isMinion}
-                <Minions 
+                <Minions
+                    bind:selectedIndex
+                    bind:isSelected
                     bind:name={creature.name}
                     bind:quantity={creature.quantity}
                     hpMax={creature.hpMax}
-                    hpCurrent={creature.hpCurrent}/>
+                    hpCurrent={creature.hpCurrent}
+                    conditions={creature.conditions}/>
             {:else}
                 <HealthBar max={creature.hpMax} current={creature.hpCurrent[0]}/>
+                {#if creature.conditions[0].length > 0}
+                    <div class="conditions">
+                        {#each creature.conditions as condition}
+                            <ConditionIcon condition={condition} width="2rem"/>
+                        {/each}
+                    </div>
+                {/if}
             {/if}
+
     </div>
     {#if isBoss}
         <LegendaryActionsValue bind:value={creature.laCurrent}/>
@@ -41,7 +54,6 @@
 
 
 <style>
-
     .name-input-container {
         position: relative;
     }
@@ -75,4 +87,5 @@
         grid-template-columns: 1fr 3rem;
         column-gap: 1rem;
     }
+
 </style>
