@@ -4,10 +4,13 @@
     import Player from "../../../graphics/entity-types/player.svelte";
     import { getLocalStorageEncounters } from "../../../lib/persistance";
     import RemoveButton from "../../common/buttons/RemoveButton.svelte";
-    import { CreatureType } from "../../../lib/models/creature";
+    import { Creature, CreatureType } from "../../../lib/models/creature";
     import type { Encounter } from "../../../lib/models/encounter";
     import ConfirmDelete from "./ConfirmDelete.svelte";
     import ConfirmLoad from "./ConfirmLoad.svelte";
+    import { EffectType } from "../../../lib/models/effect";
+    import Cave from "../../../graphics/icons/cave.svelte";
+    import { ENEMY_CREATURES } from "../../../lib/typeFilters";
     let encounters: Encounter[];
     
     const getEncounters = () => {
@@ -56,13 +59,13 @@
                                 <span class="player">
                                     <Player/>
                                 </span>
-                            {:else if type === CreatureType.Enemy}
+                            {:else if ENEMY_CREATURES.includes(type)}
                                 <span class="enemy">
                                     <Enemy/>
                                 </span>
-                            {:else}
-                                <span class="enemy">
-                                    <Minion/>
+                            {:else if type === EffectType.Effect}
+                                <span class="cave">
+                                    <Cave/>
                                 </span>
                             {/if}
                         {/each}
@@ -137,5 +140,9 @@
 
     .enemy {
         fill: var(--primary);
+    }
+
+    .cave {
+        fill: var(--blue);
     }
 </style>
