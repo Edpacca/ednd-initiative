@@ -23,7 +23,7 @@
     let checkedEffects = true;
     $: checkedAll = checkedPlayers && checkedEnemies && checkedEffects;
 
-    const saveParty = (override = false) => {
+    const saveEncounter = (override = false) => {
         let filteredTypes = []
         if (checkedPlayers) filteredTypes.push(CreatureType.Player);
         if (checkedEffects) filteredTypes.push(EffectType.Effect);
@@ -43,7 +43,7 @@
     
     const onEnter = (event: KeyboardEvent) => {
         if (event.key === "Enter") {
-            saveParty();
+            saveEncounter();
         }
     }
     
@@ -92,14 +92,14 @@
             <Cave/>
         </CheckboxIcon>
     </div>
-    <input placeholder="Group Name" bind:value={name} on:input={() => messageName = ""} on:keydown={e => onEnter(e)}>
+    <input placeholder="Encounter Name" bind:value={name} on:input={() => messageName = ""} on:keydown={e => onEnter(e)}>
     {#if state === State.Saved}
         <div>{messageName} saved to local storage!</div>
     {:else if state === State.None && hasName}
-        <button on:click={() => saveParty()} class="submit-button">Save</button>
+        <button on:click={() => saveEncounter()} class="submit-button">Save</button>
     {/if}
 </div>
-<ConfirmOverwrite overwrite={() => saveParty(true)} cancel={cancel} name={name} isOpen={state === State.Overwrite}/>
+<ConfirmOverwrite overwrite={() => saveEncounter(true)} cancel={cancel} name={name} isOpen={state === State.Overwrite}/>
 
 <style>
     .setting-container {

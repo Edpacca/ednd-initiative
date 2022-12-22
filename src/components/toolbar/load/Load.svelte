@@ -11,28 +11,29 @@
     import { EffectType } from "../../../lib/models/effect";
     import Cave from "../../../graphics/icons/cave.svelte";
     import { ENEMY_CREATURES } from "../../../lib/typeFilters";
-    let encounters: Encounter[];
+    import type { EntityType } from "../../../lib/models/entity";
+
+    enum State { None, Load, Delete }
     
+    let state: State = State.None;
+    let encounters: Encounter[];
+    let slecectedEncounter: Encounter | undefined = undefined;
+    
+
+
+   
+
     const getEncounters = () => {
         encounters = getLocalStorageEncounters();
     }
 
-    enum State {
-        None,
-        Load,
-        Delete
-    }
-
-    let state: State = State.None;
-    let slecectedEncounter: Encounter | undefined = undefined;
-
-    const loadEncounter = (party: Encounter) => {
-        slecectedEncounter = party;
+    const loadEncounter = (encounter: Encounter) => {
+        slecectedEncounter = encounter;
         state = State.Load;
     }
 
-    const deleteEncounter = (party: Encounter) => {
-        slecectedEncounter = party;
+    const deleteEncounter = (encounter: Encounter) => {
+        slecectedEncounter = encounter;
         state = State.Delete;
     }
 
@@ -44,34 +45,34 @@
         slecectedEncounter = undefined;
         state = State.None;
     }
+
+    const hasPlayers =  (encounter: EntityType[]): boolean => {
+        return encounter.includes(CreatureType.Player);
+    }
+
+    const hasEffects =  (encounter: EntityType[]): boolean => {
+        return encounter.includes(EffectType.Effect);
+    }
+
+    const hasEnemies =  (encounter: EntityType[]): boolean => {
+        return encounter.includes(CreatureType.Enemy || CreatureType.Boss || CreatureType.Minion);
+    }
 </script>
 
 <div class="load-container">
     <div>Saved groups</div>
     {#if encounters.length > 0}
-        {#each encounters as party}
+        {#each encounters as encounter}
             <div class="party-container">
-                <button class="party-button" on:click={() => loadEncounter(party)}>
-                    <div class="name">{party.name}</div>
+                <button class="party-button" on:click={() => loadEncounter(encounter)}>
+                    <div class="name">{encounter.name}</div>
                     <div class="icons">
-                        {#each party.filteredTypes as type}
-                            {#if type === CreatureType.Player}
-                                <span class="player">
-                                    <Player/>
-                                </span>
-                            {:else if ENEMY_CREATURES.includes(type)}
-                                <span class="enemy">
-                                    <Enemy/>
-                                </span>
-                            {:else if type === EffectType.Effect}
-                                <span class="cave">
-                                    <Cave/>
-                                </span>
-                            {/if}
-                        {/each}
+                       {#if hasPlayers(encounter.filteredTypes)}<Player class="gold"/>{/if}
+                       {#if hasEnemies(encounter.filteredTypes)}<Enemy class="primary"/>{/if}
+                       {#if hasEffects(encounter.filteredTypes)}<Cave class="blue"/>{/if}
                     </div>
                 </button>
-                <RemoveButton onClick={() => deleteEncounter(party)}/>
+                <RemoveButton onClick={() => deleteEncounter(encounter)}/>
             </div>
         {/each}
     {:else}
@@ -121,28 +122,13 @@
     }
 
     .party-button:hover {
-        background-color: var(--gold);
+        background-color: var(--light-grey);
         color: var(--dark-grey);
-    }
-
-    .party-button:hover span {
-        fill: var(--dark-grey) !important;
+        cursor: pointer;
     }
 
     .name {
         width: 75%;
         text-align: left;
-    }
-
-    .player {
-        fill: var(--gold);
-    }
-
-    .enemy {
-        fill: var(--primary);
-    }
-
-    .cave {
-        fill: var(--blue);
     }
 </style>

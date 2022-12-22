@@ -95,6 +95,11 @@ th.value-col, th.fn-col {
     visibility: hidden;
 }
 
+.primary {
+    color: var(--primary);
+    fill: var(--primary);
+}
+
 .secondary {
     color: var(--secondary);
     fill: var(--secondary);
@@ -112,6 +117,7 @@ th.value-col, th.fn-col {
 
 .gold {
     color: var(--gold);
+    fill: var(--gold);
 }
 
 .svg-fit {
