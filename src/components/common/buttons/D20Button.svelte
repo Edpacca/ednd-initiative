@@ -1,10 +1,11 @@
 <script lang="ts">
     import D20 from "../../../graphics/icons/d20.svelte";
     export let onClick: () => void;
-    export let primary: string = "";
-    export let secondary: string = "";
-    export let width: string = "";
+    export let primary: string = "var(--primary)";
+    export let secondary: string = "var(--secondary)";
+    export let width: string = "3rem";
     let isRolling = false;
+    
     const animation = () => {
         onClick();
         isRolling = true;
@@ -12,11 +13,11 @@
 
 </script>
 
-<button on:click={animation} class="d20" class:rolly={isRolling} 
-    style={`${primary ? `--primary-color: ${primary};` : "--primary-color: var(--primary); "}
-        ${secondary ? `--secondary-color: ${secondary};` : "--secondary-color: var(--secondary); "}
-        ${width ? `--width: ${width}` : "--width: 3rem;"}`
-        }>
+<button 
+    on:click={animation} 
+    class="d20" 
+    class:rolly={isRolling} 
+    style={`--primary-color: ${primary}; --secondary-color: ${secondary}; --width: ${width}`}>
     <D20/>
 </button>
 

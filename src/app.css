@@ -382,3 +382,7 @@ tr {
         transform: translateX(0);
     }
 }
+
+input[type="checkbox"] {
+    background: var(--grey);
+}
