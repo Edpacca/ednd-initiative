@@ -384,5 +384,31 @@ tr {
 }
 
 input[type="checkbox"] {
-    background: var(--grey);
+    appearance: none;
+    background-color: var(--grey);
+    width: 2rem;
+    height: 2rem;
+    border: 2px solid var(--light-grey);
+    display: grid;
+    place-content: center;  
+    margin: auto;
+}
+
+input[type="checkbox"]::before {
+    content: "";
+    width: 1.5rem;
+    height: 1.5rem;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1.5rem 1.5rem var(--white);
+    clip-path: polygon(28% 38%, 41% 53%, 75% 24%, 86% 38%, 40% 78%, 15% 50%);
+}
+
+input[type="checkbox"]:checked::before {
+    transform: scale(1);
+
+}
+
+input[type="checkbox"]:focus {
+    outline: none;
 }

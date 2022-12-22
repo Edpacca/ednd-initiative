@@ -73,15 +73,6 @@ import { dRoll } from "../../lib/dieRoll";
         margin-top: 0.5rem;
     }
 
-    input {
-        width: 2rem;
-        height: 2rem;
-    }
-
-    input:focus {
-        outline: none;
-    }
-
     label {
         font-size: var(--fontsize-S);
     }

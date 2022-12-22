@@ -92,7 +92,7 @@
             <Cave/>
         </CheckboxIcon>
     </div>
-    <input placeholder="Encounter Name" bind:value={name} on:input={() => messageName = ""} on:keydown={e => onEnter(e)}>
+    <input type="text" placeholder="Encounter Name" bind:value={name} on:input={() => messageName = ""} on:keydown={e => onEnter(e)}>
     {#if state === State.Saved}
         <div>{messageName} saved to local storage!</div>
     {:else if state === State.None && hasName}
@@ -109,7 +109,7 @@
         color: var(--light-grey);
     }
 
-    input {
+    input[type="text"] {
         background-color: var(--grey);
         font-style: italic;
         color: var(--white);
