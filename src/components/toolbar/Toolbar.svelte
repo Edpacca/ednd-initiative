@@ -50,7 +50,7 @@
         display: flex;
         flex-direction: column;
         text-align: center;
-        width: 14rem;
+        width: 20rem;
         margin: var(--margin);
     }
 
