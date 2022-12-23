@@ -11,6 +11,8 @@
 
     export let type: EntityType;
     export let playerClass: PlayerClass | undefined = undefined;
+
+    console.log("class " + playerClass);
 </script>
 
 {#if type === CreatureType.Player && playerClass}

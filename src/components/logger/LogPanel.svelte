@@ -17,5 +17,7 @@
         position: absolute;
         top: 0;
         right: 0;
+        max-height: 90vh;
+        overflow-y: scroll;
     }
 </style>

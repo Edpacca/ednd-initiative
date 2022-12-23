@@ -8,7 +8,7 @@
 
 <div class="log-entry">
     <div class="log-header">
-        <div class="log-icon"><EntityIcon type={logEntry.owner.type}/></div>
+        <div class="log-icon"><EntityIcon type={logEntry.owner.type} playerClass={logEntry.owner.playerClass}/></div>
         <div class="log-name">{logEntry.owner.name}</div>
         <div class="time-info">
             <div>Round {logEntry.round}</div>

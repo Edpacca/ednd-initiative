@@ -14,6 +14,6 @@
 <style>
     .class-icon {
         fill: var(--gold);
-        filter: drop-shadow(0 0 0.125rem black)
+        filter: drop-shadow(0 0 0.125rem black);
     }
 </style>

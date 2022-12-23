@@ -23,13 +23,15 @@ export class LogEntry {
 
     constructor (entity: Entity, round: number) {
         this.owner = {
-            name: entity.name,
+            name: entity.name ?? "",
             type: entity.type,
         }
 
         if (entity.type === CreatureType.Player) {
             this.owner.playerClass = (entity as Creature).class;
         }
+
+        console.log(this.owner);
 
         this.round = round;
         this.messages = [];
@@ -43,7 +45,7 @@ export class LogEntry {
 
     addRecipient(recipient: Creature, damage: number, index=0) {
         const name = recipient.type === CreatureType.Minion ? `${recipient.name}#${index}` : recipient.name;
-        const playerClass = recipient.type === CreatureType.Player ? recipient.class : undefined;
+        const playerClass = recipient.class;
         this.recipients.push({name, type: recipient.type, damage, playerClass});
     }
 }
