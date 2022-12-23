@@ -13,7 +13,7 @@
     .log-panel {
         border: 2px solid var(--primary);
         background-color: var(--dark-grey-90);
-        width: 20rem;
+        width: 15rem;
         position: absolute;
         top: 0;
         right: 0;

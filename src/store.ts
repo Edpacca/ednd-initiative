@@ -2,6 +2,7 @@ import { get, writable, type Writable } from "svelte/store";
 import { getLocalStorageEntities, getLocalStorageTheme } from "./lib/persistance";
 import type { Entity } from "./lib/models/entity";
 import { LogEntry } from "./components/logger/logEntry";
+import type { Creature } from "./lib/models/creature";
 
 export const entities: Writable<Entity[]> = writable(getLocalStorageEntities());
 export const isLocked: Writable<boolean> = writable(false);
@@ -19,5 +20,10 @@ export function setModalOpen(isOpen: boolean) {
 
 export function storeCurrentLog() {
     logs.update(l => [...l, get(currentLog)]);
+
     currentLog.set(new LogEntry(get(entities)[get(activeEntityTurnIndex)], get(currentRound)));
+}
+
+export function appendToCurrentLog(entity: Creature, damage: number, index=0) {
+    get(currentLog).addRecipient(entity, damage, index);
 }

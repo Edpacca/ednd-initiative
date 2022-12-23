@@ -11,7 +11,6 @@
         if (!$isStarted) {
             $isStarted = true;
             $currentLog = new LogEntry($entities[0], $currentRound);
-            console.log($currentLog);
         }
         $isLocked = !$isLocked;
         justToggled = true;

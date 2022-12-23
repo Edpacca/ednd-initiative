@@ -4,7 +4,6 @@
     export let logEntry: LogEntry;
 
     const timeString = `${logEntry.time.getHours()}:${logEntry.time.getMinutes()}:${logEntry.time.getSeconds()}`;
-    
 </script>
 
 <div class="log-entry">
@@ -17,7 +16,13 @@
         </div>
     </div>
     <hr>
-
+    <div class="damage-log">
+        {#each logEntry.recipients as recipient}
+            <div><EntityIcon type={recipient.type} playerClass={recipient.playerClass}/></div>
+            <div>{recipient.name}</div>
+            <div class="bold" class:red={recipient.damage < 0} class:green={recipient.damage > 0}>{recipient.damage}</div>
+        {/each}
+    </div>
 </div>
 
 <style>
@@ -28,7 +33,7 @@
 
     .log-header {
         display: grid;
-        grid-template-columns: 20% 1fr 20%;
+        grid-template-columns: 20% 1fr 30%;
     }
 
     .log-icon {
@@ -43,6 +48,13 @@
 
     hr {
         border: 0;
-        border-bottom: 2px solid var(--primary);
+        border-bottom: 2px solid var(--light-grey);
+    }
+
+    .damage-log {
+        display: grid;
+        grid-template-columns: 1.2rem 1fr 5rem;
+        column-gap: 0.5rem;
+        text-align: right;
     }
 </style>

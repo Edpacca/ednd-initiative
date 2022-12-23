@@ -1,8 +1,11 @@
+import { Creature, CreatureType } from "../../lib/models/creature"
 import type { Entity, EntityType } from "../../lib/models/entity"
+import type { PlayerClass } from "../../lib/models/playerClass"
 
 type LogEntity = {
     name: string,
-    type: EntityType
+    type: EntityType,
+    playerClass?: PlayerClass
 }
 
 type Damage = {
@@ -21,7 +24,11 @@ export class LogEntry {
     constructor (entity: Entity, round: number) {
         this.owner = {
             name: entity.name,
-            type: entity.type
+            type: entity.type,
+        }
+
+        if (entity.type === CreatureType.Player) {
+            this.owner.playerClass = (entity as Creature).class;
         }
 
         this.round = round;
@@ -34,7 +41,9 @@ export class LogEntry {
         this.messages.push(message);
     }
 
-    addRecipient(recipient: Entity, damage: number) {
-        this.recipients.push({name: recipient.name, type: recipient.type, damage});
+    addRecipient(recipient: Creature, damage: number, index=0) {
+        const name = recipient.type === CreatureType.Minion ? `${recipient.name}#${index}` : recipient.name;
+        const playerClass = recipient.type === CreatureType.Player ? recipient.class : undefined;
+        this.recipients.push({name, type: recipient.type, damage, playerClass});
     }
 }

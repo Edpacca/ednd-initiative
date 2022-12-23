@@ -120,6 +120,15 @@ th.value-col, th.fn-col {
     fill: var(--gold);
 }
 
+.red {
+    color: var(--red);
+    fill: var(--red);
+}
+
+.bold {
+    font-weight: bold;
+}
+
 .svg-fit {
     position: absolute;
     left: 0;

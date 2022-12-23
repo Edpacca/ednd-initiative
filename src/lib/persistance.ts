@@ -1,3 +1,4 @@
+import type { LogEntry } from "../components/logger/logEntry";
 import type { Creature, CreatureType } from "./models/creature";
 import type { Encounter } from "./models/encounter";
 import type { Entity, EntityType } from "./models/entity";
@@ -7,7 +8,8 @@ export class SaveError extends Error {}
 enum StorageType {
     Entity = "entities",
     Encounter = "encounters",
-    Theme = "theme"
+    Theme = "theme",
+    Logs = "logs"
 }
 
 export function getLocalStorageEntities(): Entity[] {
@@ -22,8 +24,12 @@ export function getLocalStorageEncounters(): Encounter[] {
     return getLocalStorageArr(StorageType.Encounter);
 }
 
-export function getLocalStorageParty(name: string): Encounter | undefined {
+export function getLocalStorageEncounter(name: string): Encounter | undefined {
     return getLocalStorageEncounters().find(p => p.name === name);
+}
+
+export function setLocalStorageLogs(logs: LogEntry[]) {
+    setLocalStorageArr(StorageType.Logs, logs);
 }
 
 export function setLocalStorageEncounter(name: string, entities: Entity[], filteredTypes: EntityType[], override = false) {
@@ -47,6 +53,7 @@ export function setLocalStorageEncounter(name: string, entities: Entity[], filte
         setLocalStorageArr(StorageType.Encounter, [...existingParties, { name, party, filteredTypes }]);
     } 
 }
+
 
 export function removeLocalStorageParty(name: string) {
     const parties = getLocalStorageArr(StorageType.Encounter).filter(p => p.name !== name);
