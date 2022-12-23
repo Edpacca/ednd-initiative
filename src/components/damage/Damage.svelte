@@ -3,7 +3,7 @@
     import Heart from "../../graphics/icons/heart.svelte";
     import Skull from "../../graphics/icons/skull.svelte";
     import type { Creature } from "../../lib/models/creature";
-    import { appendToCurrentLog } from "../../store";
+    import { appendDamageToCurrentLog } from "../../store";
     import { FLOATERS } from "../common/floater/animationValue";
     import Floater from "../common/floater/Floater.svelte";
     import type { FocusType } from "../creature/creatureModal/focusType";
@@ -22,7 +22,7 @@
         if (damage) {
             creature.hpCurrent[index] -= damage;
             if (creature.hpCurrent[index] < 0) creature.hpCurrent[index] = 0;
-            appendToCurrentLog(creature, damage * -1, index);
+            appendDamageToCurrentLog(creature, damage * -1, index);
             resetDamage();
         } 
     }
@@ -30,7 +30,7 @@
     const applyHealing = () => {
         if (healing) {
             creature.hpCurrent[index] += healing;
-            appendToCurrentLog(creature, healing, index);
+            appendDamageToCurrentLog(creature, healing, index);
             resetHealing();
         }
     }

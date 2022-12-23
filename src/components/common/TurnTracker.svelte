@@ -1,5 +1,6 @@
 <script lang="ts">
     import { Creature, CreatureType } from "../../lib/models/creature";
+    import { setLocalStorageLogs } from "../../lib/persistance";
     import { currentRound, entities, activeEntityTurnIndex, isModalOpen, logs, currentLog, storeCurrentLog } from "../../store";
     
     $: max = $entities.length - 1;
@@ -28,6 +29,8 @@
             $activeEntityTurnIndex = max;
             $currentRound = Math.max($currentRound - 1, 1);
         }
+        $currentLog = $logs[$logs.length - 1];
+        $logs = $logs.slice(0, -1);
     }
 
     const onArrows = (event: KeyboardEvent) => {
@@ -44,6 +47,8 @@
             }
         }
     }
+
+    $: setLocalStorageLogs($logs);
 </script>
 
 <div class="turn-tracker">

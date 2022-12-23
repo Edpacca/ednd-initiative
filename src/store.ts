@@ -1,5 +1,5 @@
 import { get, writable, type Writable } from "svelte/store";
-import { getLocalStorageEntities, getLocalStorageTheme } from "./lib/persistance";
+import { getLocalStorageEntities, getLocalStorageLogs, getLocalStorageTheme } from "./lib/persistance";
 import type { Entity } from "./lib/models/entity";
 import { LogEntry } from "./components/logger/logEntry";
 import type { Creature } from "./lib/models/creature";
@@ -11,7 +11,7 @@ export const isStarted: Writable<boolean> = writable(false);
 export const currentRound: Writable<number> = writable(1);
 export const activeEntityTurnIndex: Writable<number> = writable(0);
 export const currentTheme: Writable<string> = writable(getLocalStorageTheme() ?? "stone");
-export const logs: Writable<LogEntry[]> = writable([]);
+export const logs: Writable<LogEntry[]> = writable(getLocalStorageLogs());
 export const currentLog: Writable<LogEntry> = writable(undefined);
 
 export function setModalOpen(isOpen: boolean) {
@@ -24,8 +24,20 @@ export function storeCurrentLog() {
     currentLog.set(new LogEntry(get(entities)[get(activeEntityTurnIndex)], get(currentRound)));
 }
 
-export function appendToCurrentLog(entity: Creature, damage: number, index=0) {
+export function appendDamageToCurrentLog(entity: Creature, damage: number, index=0) {
     const current = get(currentLog);
-    current.addRecipient(entity, damage, index);
+    current.addLogEntityDamage(entity, damage, index);
+    currentLog.set(current);
+}
+
+export function appendConditionsToCurrentLog(entity: Creature, conditions: string[], index=0) {
+    const current = get(currentLog);
+    current.addLogEntityConditions(entity, conditions, index);
+    currentLog.set(current);
+}
+
+export function appenLegendaryActionsToCurrentLog(entity: Creature, actions: number, index=0) {
+    const current = get(currentLog);
+    current.addLogEntityLegendaryActions(entity, actions, index);
     currentLog.set(current);
 }

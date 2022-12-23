@@ -2,8 +2,6 @@
     import { currentLog, currentRound, logs } from "../../store";
     import LogTurn from "./LogTurn.svelte";
 
-    let panel: HTMLElement;
-
     const scrollToBottom = (node, list) => {
         const scroll = () => node.scroll({
             top: node.scrollHeight,
@@ -42,14 +40,17 @@
     .log-panel {
         border: 2px solid var(--primary);
         background-color: var(--dark-grey-90);
+        border-radius: var(--border-radius);
         width: 15rem;
         max-height: 93vh;
         overflow-y: scroll;
-        /* margin: 0.5rem; */
     }
 
     .current-turn {
         border: 2px solid var(--gold);
+        border-radius: var(--border-radius);
+        filter: drop-shadow(0 0 var(--dropshadow-size) var(--gold));
+        background-color: var(--dark-grey);
     }
 
 </style>

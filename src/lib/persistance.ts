@@ -32,6 +32,10 @@ export function setLocalStorageLogs(logs: LogEntry[]) {
     setLocalStorageArr(StorageType.Logs, logs);
 }
 
+export function getLocalStorageLogs(): LogEntry[] {
+    return getLocalStorageArr(StorageType.Logs);
+}
+
 export function setLocalStorageEncounter(name: string, entities: Entity[], filteredTypes: EntityType[], override = false) {
     
     let party = entities.filter(e => filteredTypes.includes(e.type));

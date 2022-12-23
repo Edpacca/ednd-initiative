@@ -10,7 +10,7 @@
     width={width} height={width}
     on:mouseenter={() => isHovering = true}
     on:mouseleave={() => isHovering = false}>
-    <use href={`conditions/conditions.svg#${condition}`} />
+    <use href={`icons/conditions.svg#${condition}`} />
 </svg>
 
 {#if hasTooltip && isHovering}

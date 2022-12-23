@@ -1,9 +1,13 @@
 <script lang="ts">
-    import EntityIcon from "../common/icons/EntityIcon.svelte";
+    import Blood from "../../graphics/icons/blood.svelte";
+    import Heart from "../../graphics/icons/heart.svelte";
+    import Legendary from "../../graphics/icons/legendary.svelte";
+    import ConditionIcon from "../common/icons/ConditionIcon.svelte";
+import EntityIcon from "../common/icons/EntityIcon.svelte";
     import type { LogEntry } from "./logEntry";
     export let logEntry: LogEntry;
-
-    const timeString = `${logEntry.time.getHours()}:${logEntry.time.getMinutes()}:${logEntry.time.getSeconds()}`;
+    const time = new Date(logEntry.time);
+    const timeString = `${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`;
 </script>
 
 <div class="log-entry">
@@ -19,9 +23,32 @@
     {/if}
     <div class="damage-log">
         {#each logEntry.recipients as recipient}
-            <div><EntityIcon type={recipient.type} playerClass={recipient.playerClass}/></div>
-            <div>{recipient.name}</div>
-            <div class="bold" class:red={recipient.damage < 0} class:green={recipient.damage > 0}>{recipient.damage}</div>
+            <div class="log-icon"><EntityIcon type={recipient.type} playerClass={recipient.playerClass}/></div>
+            <div class="name">{recipient.name}</div>
+            {#if recipient.logType === "damage"}
+                {#if recipient.damage > 0}
+                    <div class="bold green flex-row mini-icon">
+                        {recipient.damage}
+                        <Heart/>
+                    </div>
+                    {:else}
+                    <div class="bold red flex-row mini-icon">
+                        {recipient.damage}
+                        <Blood/>
+                    </div>
+                {/if}
+            {:else if recipient.logType === "legendary"}
+                <div>
+                    {recipient.actions}
+                    <Legendary/>
+                </div>
+            {:else if recipient.logType === "condition"}
+                <div class="flex-row">
+                    {#each recipient.conditions as condition}
+                        <ConditionIcon condition={condition}/>
+                    {/each}
+                </div>
+            {/if}
         {/each}
     </div>
 </div>
@@ -36,17 +63,26 @@
         display: grid;
         grid-template-columns: 20% 1fr 30%;
         align-items: center;
-        text-align: center;
+        column-gap: 0.5rem;
     }
 
     .log-icon {
         height: 2rem;
     }
 
+    .damage-log .log-icon {
+        height: 1.2rem;
+    }
+
+    .mini-icon {
+        height: 1rem;
+    }
+
     .log-name {
         font-size: var(--fontsize-L);
         color: var(--gold);
         font-weight: bold;
+        text-transform: capitalize;
     }
 
     hr {
@@ -56,9 +92,10 @@
     }
 
     .damage-log {
+        padding: 0.75rem;
         display: grid;
-        grid-template-columns: 1.2rem 1fr 5rem;
+        grid-template-columns: 1.2rem 1fr 20%;
         column-gap: 0.5rem;
-        text-align: right;
+
     }
 </style>

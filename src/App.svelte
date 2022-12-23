@@ -48,7 +48,9 @@
       {/if}
     </div>
   </main>
-  <LogPanel/>
+  {#if $isLocked}
+    <LogPanel/>
+  {/if}
 </div>
 
 <style>

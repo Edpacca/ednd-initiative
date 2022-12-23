@@ -6,7 +6,7 @@
     import { CreatureType } from "../../lib/models/creature";
     import { EffectType } from "../../lib/models/effect";
     import { ENEMY_CREATURES } from "../../lib/typeFilters";
-    import { entities } from "../../store";
+    import { activeEntityTurnIndex, currentRound, entities } from "../../store";
     import CheckboxIcon from "../common/buttons/CheckboxIcon.svelte";
     import D20Button from "../common/buttons/D20Button.svelte";
 
@@ -34,6 +34,8 @@
         });
 
         $entities = buffer;
+        $activeEntityTurnIndex = 0;
+        $currentRound = 1;
     }
 
 </script>

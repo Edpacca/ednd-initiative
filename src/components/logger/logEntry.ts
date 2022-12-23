@@ -8,24 +8,29 @@ type LogEntity = {
     playerClass?: PlayerClass
 }
 
-type Damage = {
-    damage: number
-}
+type Damage = { damage: number, logType: "damage" }
+type LegendaryAction = { actions: number, logType: "legendary" }
+type Condition = { conditions: string[], logType: "condition" }
 
-type LogEntityDamage = LogEntity & Damage
+type LogEntityDamage = LogEntity & Damage;
+type LogEntityLegendaryAction = LogEntity & LegendaryAction;
+type LogEntityCondition = LogEntity & Condition;
+type LogEntityAny = LogEntityDamage | LogEntityCondition | LogEntityLegendaryAction
 
 export class LogEntry {
     round: number;
     owner: LogEntity;
-    recipients: LogEntityDamage[];
+    recipients: LogEntityAny[];
     messages: string[];
     time: Date;
 
     constructor (entity: Entity, round: number) {
         this.owner = {
-            name: entity.name ?? "",
+            name: entity.name ? entity.name : getBaseName(entity),
             type: entity.type,
         }
+
+        console.log(this.owner.name)
 
         if (entity.type === CreatureType.Player) {
             this.owner.playerClass = (entity as Creature).class;
@@ -41,9 +46,25 @@ export class LogEntry {
         this.messages.push(message);
     }
 
-    addRecipient(recipient: Creature, damage: number, index=0) {
+    addLogEntityDamage(recipient: Creature, damage: number, index=0) {
         const name = recipient.type === CreatureType.Minion ? `${recipient.name}#${index}` : recipient.name;
         const playerClass = recipient.class;
-        this.recipients.push({name, type: recipient.type, damage, playerClass});
+        this.recipients.push({name, type: recipient.type, damage, playerClass, logType: "damage"});
     }
+
+    addLogEntityConditions(recipient: Creature, conditions: string[], index=0) {
+        const name = recipient.type === CreatureType.Minion ? `${recipient.name}#${index}` : recipient.name;
+        const playerClass = recipient.class;
+        this.recipients.push({name, type: recipient.type, conditions, playerClass, logType: "condition"});
+    }
+
+    addLogEntityLegendaryActions(recipient: Creature, actions: number, index=0) {
+        const name = recipient.type === CreatureType.Minion ? `${recipient.name}#${index}` : recipient.name;
+        const playerClass = recipient.class;
+        this.recipients.push({name, type: recipient.type, actions, playerClass, logType: "legendary"});
+    }
+}
+
+function getBaseName(entity: Entity): string {
+    return entity.type === CreatureType.Player ? (entity as Creature).class : entity.type.toString();
 }

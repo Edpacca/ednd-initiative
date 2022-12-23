@@ -170,6 +170,7 @@ input:focus {
     height: 3rem;
     width: 3rem;
     padding: 0;
+    filter: drop-shadow(0 0 var(--dropshadow-size), black);
 }
 
 .entity-type-button:hover:not(:disabled) {
@@ -420,4 +421,8 @@ input[type="checkbox"]:checked::before {
 
 input[type="checkbox"]:focus {
     outline: none;
+}
+
+.name {
+    text-transform: capitalize;
 }

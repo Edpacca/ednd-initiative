@@ -6,7 +6,6 @@
     import Speed from "../../graphics/icons/speed.svelte";
     import { CREATURES } from "../../lib/typeFilters";
     import { EffectType } from "../../lib/models/effect";
-    import Arrow from "../../graphics/icons/arrow.svelte";
 
     const sortByInitiative = () => {
         $entities.sort((a, b) => {

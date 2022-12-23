@@ -23,17 +23,12 @@
     }
 </script>
 
-<button class="entity-type-button svg-fit-container" on:click={() => rotate()} disabled={$isLocked}>
+<button class="entity-type-button svg-fit-container gold" on:click={() => rotate()}>
     {#if icon}
-    <svg class="svg-fit">
-        <use xlink:href={path} href={path}></use>
-     </svg>
+        <svg
+            class="relative"
+            width="100%" height="100%">
+            <use href={`icons/classes.svg#${icon.toLowerCase()}`}/>
+        </svg>
     {/if}
 </button>
-
-<style>
-    button {
-        fill: var(--gold);
-        filter: drop-shadow(0 0 0.125rem black)
-    }
-</style>
