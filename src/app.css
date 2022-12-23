@@ -163,7 +163,7 @@ input:focus {
     padding: 0;
 }
 
-.entity-type-button:hover {
+.entity-type-button:hover:not(:disabled) {
     fill: var(--white);
 }
 
@@ -330,7 +330,7 @@ tr {
     fill: rgba(250, 235, 215, 0.729);
 }
 
-.blank-input, .blank-input:active, .blank-input:focus {
+.blank-input, .blank-input:active, .blank-input:focus, .blank-button {
     background: none;
     border: none;
     outline: none;
@@ -388,7 +388,7 @@ input[type="checkbox"] {
     background-color: var(--grey);
     width: 2rem;
     height: 2rem;
-    border: 2px solid var(--light-grey);
+    border: 2px solid var(--mid-grey);
     display: grid;
     place-content: center;  
     margin: auto;

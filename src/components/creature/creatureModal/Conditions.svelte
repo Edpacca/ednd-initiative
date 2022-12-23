@@ -80,7 +80,7 @@
     {#if conditions && conditions.length > 0}
     <div class="condition-grid">
         {#each conditions as condition}
-            <div><ConditionIcon condition={condition} class="condition-icon" width="3rem"/></div>
+            <div><ConditionIcon condition={condition} class="condition-icon" width="3rem" hasTooltip={false}/></div>
             <div>{condition}</div>
             <PlusMinusButton type="-" onClick={() => removeCondition(condition)} width="2rem"/>
         {/each}

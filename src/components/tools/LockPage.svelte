@@ -3,17 +3,37 @@
     import PadlockClosed from "../../graphics/icons/padlock-closed.svelte";
     import PadlockOpen from "../../graphics/icons/padlock-open.svelte";
 
+    let isHovered = false;
+    let justToggled = false;
+
     const toggleLock = () => {
         if (!$isStarted) $isStarted = true;
         $isLocked = !$isLocked;
+        justToggled = true;
     }
+
+    $: if (justToggled === true) {
+        setTimeout(() => justToggled = false, 2000);
+    }
+
 </script>
 
-<button on:click={toggleLock}>
+<button
+    on:click={toggleLock}
+    on:mouseenter={() => isHovered = true}
+    on:mouseleave={() => isHovered = false}>
     {#if $isLocked}
-        <PadlockClosed/>
+        {#if isHovered && !justToggled}
+            <PadlockOpen/>
+        {:else}
+            <PadlockClosed/>
+        {/if}
     {:else}
-        <PadlockOpen/>
+        {#if isHovered && !justToggled}
+            <PadlockClosed/>
+        {:else}
+            <PadlockOpen/>
+        {/if}
     {/if}
 </button>
 

@@ -5,11 +5,10 @@
     import Cave from "../../graphics/icons/cave.svelte";
     import AddRemove from "../common/buttons/AddRemove.svelte";
     import D20Button from "../common/buttons/D20Button.svelte";
-    import NumberInput from "../common/NumberInput.svelte";
     import EffectInput from "./EffectInput.svelte";
     import InitiativeValue from "../initiativeTable/InitiativeValue.svelte";
     import { setLocalStorageEntities } from "../../lib/persistance";
-    import { entities } from "../../store";
+    import { entities, isLocked } from "../../store";
     import EffectCounter from "./EffectCounter.svelte";
 
     export let effect: Effect;
@@ -42,7 +41,7 @@
 
 <tr>
     <td class="blue svg-fit-container td-icon">
-        <button class="blank-button svg-fit" on:click={cycleTheme}>
+        <button class="blank-button svg-fit" on:click={cycleTheme} on:contextmenu|preventDefault={() => effect.theme = undefined}>
             <Cave/>
         </button>
     </td>
@@ -66,11 +65,6 @@
 </tr>
 
 <style>
-    button {
-        background: none;
-        border: none;
-    }
-
     button:hover {
         fill: var(--white);
     }

@@ -18,7 +18,7 @@
 <tr>
     <div class:active-initiative={isActive}></div>
     <td class="blue flex-col">
-        <button class="entity-type-button">
+        <button class="entity-type-button" disabled>
             <Cave/>
         </button>
     </td>
@@ -37,3 +37,4 @@
         <InitiativeValue bind:initiative={effect.initiative} bind:bonus={effect.bonus}/>
     </td>
 </tr>
+
