@@ -10,7 +10,7 @@ type LogEntity = {
 
 type Damage = { damage: number, logType: "damage" }
 type LegendaryAction = { actions: number, logType: "legendary" }
-type Condition = { conditions: string[], logType: "condition" }
+type Condition = { condition: string, logType: "condition" }
 
 type LogEntityDamage = LogEntity & Damage;
 type LogEntityLegendaryAction = LogEntity & LegendaryAction;
@@ -52,10 +52,10 @@ export class LogEntry {
         this.recipients.push({name, type: recipient.type, damage, playerClass, logType: "damage"});
     }
 
-    addLogEntityConditions(recipient: Creature, conditions: string[], index=0) {
+    addLogEntityCondition(recipient: Creature, condition: string, index=0) {
         const name = recipient.type === CreatureType.Minion ? `${recipient.name}#${index}` : recipient.name;
         const playerClass = recipient.class;
-        this.recipients.push({name, type: recipient.type, conditions, playerClass, logType: "condition"});
+        this.recipients.push({name, type: recipient.type, condition, playerClass, logType: "condition"});
     }
 
     addLogEntityLegendaryActions(recipient: Creature, actions: number, index=0) {

@@ -44,9 +44,7 @@ import EntityIcon from "../common/icons/EntityIcon.svelte";
                 </div>
             {:else if recipient.logType === "condition"}
                 <div class="flex-row">
-                    {#each recipient.conditions as condition}
-                        <ConditionIcon condition={condition}/>
-                    {/each}
+                    <ConditionIcon condition={recipient.condition}/>
                 </div>
             {/if}
         {/each}

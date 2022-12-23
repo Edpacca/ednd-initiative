@@ -4,6 +4,7 @@
     import Minions from "../minion/Minions.svelte";
     import LegendaryActionsValue from "../../initiativeTable/LegendaryActionsValue.svelte";
     import ConditionIcon from "../../common/icons/ConditionIcon.svelte";
+    import { appenLegendaryActionsToCurrentLog } from "../../../store";
 
     export let creature: Creature;
     export let isActive = false;
@@ -13,6 +14,12 @@
     $: isMinion = creature.type === CreatureType.Minion;
     $: isPlayer = creature.type === CreatureType.Player;
     $: isBoss = creature.type === CreatureType.Boss;
+
+    const logLegendaryAction = () => {
+        if (isBoss) {
+            appenLegendaryActionsToCurrentLog(creature, 1);
+        }
+    }
 
 </script>
 
@@ -48,7 +55,7 @@
 
     </div>
     {#if isBoss}
-        <LegendaryActionsValue bind:value={creature.laCurrent}/>
+        <LegendaryActionsValue bind:value={creature.laCurrent} logUsage={logLegendaryAction}/>
     {/if}
 </div>
 

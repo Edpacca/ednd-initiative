@@ -1,5 +1,6 @@
 <script lang="ts">
     import { CreatureType, type Creature } from "../../../lib/models/creature";
+    import { appendConditionToCurrentLog } from "../../../store";
     import CreatureIconSelect from "../../common/buttons/CreatureIconSelect.svelte";
     import RemoveButton from "../../common/buttons/RemoveButton.svelte";
     import Modal from "../../common/modal/Modal.svelte";
@@ -15,6 +16,7 @@
     const submitCondition = (condition: string) => {
         if (condition && !creature.conditions[index].includes(condition)) {
             creature.conditions[index] = [...creature.conditions[index], condition];
+            appendConditionToCurrentLog(creature, condition, index);
         }
     }
 

@@ -1,13 +1,15 @@
 <script lang="ts">
     import Legendary from "../../graphics/icons/legendary.svelte";
     export let value;
+    export let logUsage: () => void;
 
     const reduceValue = () => {
         value = Math.max(value - 1, 0);
+        logUsage();
     }
 </script>
 
-<button class="legendary svg-fit-container" on:click={reduceValue} class:spent={value === 0} on:contextmenu|preventDefault={() => value++}>
+<button class="legendary svg-fit-container" on:click={reduceValue} class:spent={value === 0} disabled={value === 0} on:contextmenu|preventDefault={() => value++}>
     <div class="svg-fit">
         <Legendary/>
     </div>

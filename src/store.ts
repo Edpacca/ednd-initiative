@@ -30,9 +30,9 @@ export function appendDamageToCurrentLog(entity: Creature, damage: number, index
     currentLog.set(current);
 }
 
-export function appendConditionsToCurrentLog(entity: Creature, conditions: string[], index=0) {
+export function appendConditionToCurrentLog(entity: Creature, condition: string, index=0) {
     const current = get(currentLog);
-    current.addLogEntityConditions(entity, conditions, index);
+    current.addLogEntityCondition(entity, condition, index);
     currentLog.set(current);
 }
 
