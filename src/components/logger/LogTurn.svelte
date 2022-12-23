@@ -11,11 +11,12 @@
         <div class="log-icon"><EntityIcon type={logEntry.owner.type} playerClass={logEntry.owner.playerClass}/></div>
         <div class="log-name">{logEntry.owner.name}</div>
         <div class="time-info">
-            <div>Round {logEntry.round}</div>
             <div class="time">{timeString}</div>
         </div>
     </div>
-    <hr>
+    {#if logEntry.recipients.length > 0 || logEntry.messages.length > 0}
+        <hr>
+    {/if}
     <div class="damage-log">
         {#each logEntry.recipients as recipient}
             <div><EntityIcon type={recipient.type} playerClass={recipient.playerClass}/></div>
@@ -27,13 +28,15 @@
 
 <style>
     .log-entry {
-        border: 2px solid var(--primary);
+        border-bottom: 2px solid var(--primary);
         padding: 0.25rem;
     }
 
     .log-header {
         display: grid;
         grid-template-columns: 20% 1fr 30%;
+        align-items: center;
+        text-align: center;
     }
 
     .log-icon {
@@ -48,7 +51,8 @@
 
     hr {
         border: 0;
-        border-bottom: 2px solid var(--light-grey);
+        border-bottom: 2px solid var(--grey);
+        margin: 0 2rem;
     }
 
     .damage-log {

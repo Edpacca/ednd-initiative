@@ -5,11 +5,9 @@
     const path = `classes/${icon.toLowerCase()}.svg#icon`;
 </script>
 
-<div class="svg-fit-container class-icon">
-    <svg class="svg-fit">
-        <use xlink:href={path} href={path}></use>
-     </svg>
-</div>
+<svg width="100%" height="100%" class="class-icon">
+    <use xlink:href={path} href={path}></use>
+</svg>
 
 <style>
     .class-icon {

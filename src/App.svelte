@@ -19,39 +19,47 @@
 </script>
 
 <Toolbar/>
-<main>
-  {#if $entities.length > 0}
-    <div class="top-right-icon">
-        <LockPage/>
-    </div>
-  {/if}
-  {#if $isLocked}
-    <div class="toolbar">
-      <TurnTracker/>
-    </div>
-  {:else}
-    <RollAll/>
-  {/if}
-  <div class="table-container">
-    {#if !$isLocked}
-      <h2>Players</h2>
-      <CreatureTable typeFilter={[CreatureType.Player]}/>
-      <hr>
-      <h2>Enemies</h2>
-      <CreatureTable typeFilter={[CreatureType.Enemy, CreatureType.Minion, CreatureType.Boss]}/>
-      <hr>
-      <h2>Effects</h2>
-      <EffectTable/>
-    {:else}
-      <InitiativeTable/>
+<div class="main-grid">
+  <main>
+    {#if $entities.length > 0}
+      <div class="top-right-icon">
+          <LockPage/>
+      </div>
     {/if}
-  </div>
-</main>
-<LogPanel/>
+    {#if $isLocked}
+      <div class="toolbar">
+        <TurnTracker/>
+      </div>
+    {:else}
+      <RollAll/>
+    {/if}
+    <div class="table-container">
+      {#if !$isLocked}
+        <h2>Players</h2>
+        <CreatureTable typeFilter={[CreatureType.Player]}/>
+        <hr>
+        <h2>Enemies</h2>
+        <CreatureTable typeFilter={[CreatureType.Enemy, CreatureType.Minion, CreatureType.Boss]}/>
+        <hr>
+        <h2>Effects</h2>
+        <EffectTable/>
+      {:else}
+        <InitiativeTable/>
+      {/if}
+    </div>
+  </main>
+  <LogPanel/>
+</div>
 
 <style>
+  .main-grid {
+    display: flex;
+    flex-direction: row;
+    /* grid-template-columns: 50vw 15vw */
+  }
+
   main {
-    padding: 2em 3em;
+    padding: 2em 6em;
     display: flex;
     flex-direction: column;
     align-items: center;

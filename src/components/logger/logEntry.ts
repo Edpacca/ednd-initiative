@@ -31,8 +31,6 @@ export class LogEntry {
             this.owner.playerClass = (entity as Creature).class;
         }
 
-        console.log(this.owner);
-
         this.round = round;
         this.messages = [];
         this.recipients = [];

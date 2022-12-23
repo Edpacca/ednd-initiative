@@ -25,5 +25,7 @@ export function storeCurrentLog() {
 }
 
 export function appendToCurrentLog(entity: Creature, damage: number, index=0) {
-    get(currentLog).addRecipient(entity, damage, index);
+    const current = get(currentLog);
+    current.addRecipient(entity, damage, index);
+    currentLog.set(current);
 }

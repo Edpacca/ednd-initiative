@@ -7,7 +7,6 @@
     const next = () => {
         $activeEntityTurnIndex++;
         if ($activeEntityTurnIndex > max) {
-            console.log($activeEntityTurnIndex)
             $activeEntityTurnIndex = 0;
             $currentRound++;
             $entities = $entities.map(e => {
