@@ -1,13 +1,18 @@
 <script lang="ts">
-    import { isLocked, isStarted } from "../../store";
+    import { currentLog, currentRound, entities, isLocked, isStarted } from "../../store";
     import PadlockClosed from "../../graphics/icons/padlock-closed.svelte";
     import PadlockOpen from "../../graphics/icons/padlock-open.svelte";
+    import { LogEntry } from "../logger/logEntry";
 
     let isHovered = false;
     let justToggled = false;
 
     const toggleLock = () => {
-        if (!$isStarted) $isStarted = true;
+        if (!$isStarted) {
+            $isStarted = true;
+            $currentLog = new LogEntry($entities[0], $currentRound);
+            console.log($currentLog);
+        }
         $isLocked = !$isLocked;
         justToggled = true;
     }

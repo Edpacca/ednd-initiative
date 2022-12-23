@@ -1,11 +1,13 @@
 <script lang="ts">
     import { Creature, CreatureType } from "../../lib/models/creature";
-    import { currentRound, entities, activeEntityTurnIndex, isModalOpen } from "../../store";
+    import { currentRound, entities, activeEntityTurnIndex, isModalOpen, logs, currentLog, storeCurrentLog } from "../../store";
+    import { LogEntry } from "../logger/logEntry";
     
     $: max = $entities.length - 1;
     
     const next = () => {
         $activeEntityTurnIndex++;
+        storeCurrentLog();
         if ($activeEntityTurnIndex > max) {
             $activeEntityTurnIndex = 0;
             $currentRound++;
@@ -15,7 +17,7 @@
                 }
 
                 return e;
-            }); 
+            });
         }
     }
 

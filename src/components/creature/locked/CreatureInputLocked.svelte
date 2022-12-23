@@ -3,7 +3,7 @@
     import { CreatureType, type Creature } from "../../../lib/models/creature";
     import Minions from "../minion/Minions.svelte";
     import LegendaryActionsValue from "../../initiativeTable/LegendaryActionsValue.svelte";
-    import ConditionIcon from "../../common/ConditionIcon.svelte";
+    import ConditionIcon from "../../common/icons/ConditionIcon.svelte";
 
     export let creature: Creature;
     export let isActive = false;

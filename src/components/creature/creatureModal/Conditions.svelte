@@ -1,7 +1,7 @@
 <script lang="ts">
     import { CONDITIONS } from "../../../lib/conditions";
     import PlusMinusButton from "../../common/buttons/PlusMinusButton.svelte";
-    import ConditionIcon from "../../common/ConditionIcon.svelte";
+    import ConditionIcon from "../../common/icons/ConditionIcon.svelte";
     import type { FocusType } from "./focusType";
     export let conditions: string[];
     export let conditionInput: HTMLInputElement;

@@ -5,6 +5,7 @@
     import EffectTable from "./components/effects/EffectTable.svelte";
     import CreatureTable from "./components/initiativeTable/CreatureTable.svelte";
     import InitiativeTable from "./components/initiativeTable/InitiativeTable.svelte";
+    import LogPanel from "./components/logger/LogPanel.svelte";
     import RollAll from "./components/rollAll/RollAll.svelte";
     import { setTheme } from "./components/toolbar/selectTheme/setTheme";
     import Toolbar from "./components/toolbar/Toolbar.svelte";
@@ -46,6 +47,7 @@
     {/if}
   </div>
 </main>
+<LogPanel/>
 
 <style>
   main {

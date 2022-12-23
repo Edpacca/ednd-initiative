@@ -1,6 +1,6 @@
 <script lang="ts">
     import { isLocked } from "../../../store";
-    import ConditionIcon from "../../common/ConditionIcon.svelte";
+    import ConditionIcon from "../../common/icons/ConditionIcon.svelte";
     import HealthBar from "../../common/HealthBar.svelte";
     export let quantity: number;
     export let hpMax: number;
