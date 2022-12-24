@@ -80,6 +80,14 @@ export function clearLocalStorage() {
     }
 }
 
+export function clearLocalStorageLogs() {
+    try {
+        localStorage.removeItem(StorageType.Logs);
+    } catch(e) {
+        console.error(`Error clearing local storage: ${e}`)
+    }
+}
+
 function setLocalStorageArr(name: string, obj: any[]) {
     try {
         localStorage.setItem(name, JSON.stringify(obj));

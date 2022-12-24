@@ -125,6 +125,11 @@ th.value-col, th.fn-col {
     fill: var(--red);
 }
 
+.white {
+    color: var(--white);
+    fill: var(--white);
+}
+
 .bold {
     font-weight: bold;
 }

@@ -47,19 +47,22 @@ export class LogEntry {
     }
 
     addLogEntityDamage(recipient: Creature, damage: number, index=0) {
-        const name = recipient.type === CreatureType.Minion ? `${recipient.name}#${index}` : recipient.name;
+        const baseName = recipient.name ?? getBaseName(recipient);
+        const name = recipient.type === CreatureType.Minion ? `${baseName}#${index}` : baseName;
         const playerClass = recipient.class;
         this.recipients.push({name, type: recipient.type, damage, playerClass, logType: "damage"});
     }
 
     addLogEntityCondition(recipient: Creature, condition: string, index=0) {
-        const name = recipient.type === CreatureType.Minion ? `${recipient.name}#${index}` : recipient.name;
+        const baseName = recipient.name ?? getBaseName(recipient);
+        const name = recipient.type === CreatureType.Minion ? `${baseName}#${index}` : baseName;
         const playerClass = recipient.class;
         this.recipients.push({name, type: recipient.type, condition, playerClass, logType: "condition"});
     }
 
     addLogEntityLegendaryActions(recipient: Creature, actions: number, index=0) {
-        const existing = this.recipients.find(r => r.logType === "legendary" && r.name === recipient.name)
+        const baseName = recipient.name ?? getBaseName(recipient);
+        const existing = this.recipients.find(r => r.logType === "legendary" && r.name === baseName)
 
         if (existing) {
             (existing as LegendaryAction).actions += actions;

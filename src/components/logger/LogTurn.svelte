@@ -38,14 +38,13 @@
                     </div>
                 {/if}
             {:else if recipient.logType === "condition"}
-                <div class="flex-row">
-                    <ConditionIcon condition={recipient.condition}/>
+                <div class="log-icon">
+                    <ConditionIcon condition={recipient.condition} class="white"/>
                 </div>
             {:else if recipient.logType === "legendary"}
                 <LegendaryActionsValueIcon value={recipient.actions}/>
             {/if}
         {/each}
-        
     </div>
 </div>
 
@@ -92,6 +91,5 @@
         display: grid;
         grid-template-columns: 1.2rem 1fr 20%;
         column-gap: 0.5rem;
-
     }
 </style>

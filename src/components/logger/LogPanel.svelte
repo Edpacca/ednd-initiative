@@ -13,14 +13,16 @@
 </script>
 
 <div class="log-panel" use:scrollToBottom={$logs}>
-    {#each Array($currentRound) as round, i}
-        <div class="log-round">
-            <div class="header text-center">Round {i + 1}</div>
-            {#each $logs.filter(l => l.round === i + 1) as log}
-                <LogTurn logEntry={log}/>
-            {/each}
-        </div>
-    {/each}
+    {#if $logs.length > 0}
+        {#each Array($currentRound) as round, i}
+            <div class="log-round">
+                <div class="header text-center">Round {i + 1}</div>
+                {#each $logs.filter(l => l.round === i + 1) as log}
+                    <LogTurn logEntry={log}/>
+                {/each}
+            </div>
+        {/each}
+    {/if}
     {#if $currentLog}
         <div class="current-turn">
             <LogTurn logEntry={$currentLog}/>
@@ -51,6 +53,7 @@
         border-radius: var(--border-radius);
         filter: drop-shadow(0 0 var(--dropshadow-size) var(--gold));
         background-color: var(--dark-grey);
+        z-index: 0;
     }
 
 </style>

@@ -27,7 +27,8 @@
 
     .value {
         font-weight: bold;
-        font-size: var(--fontsize-XL);
+        font-size: var(--fontsize-M);
         z-index: 1;
+        color: var(--white);
     }
 </style>
