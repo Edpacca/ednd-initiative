@@ -1,9 +1,9 @@
 <script lang="ts">
     import Blood from "../../graphics/icons/blood.svelte";
     import Heart from "../../graphics/icons/heart.svelte";
-    import Legendary from "../../graphics/icons/legendary.svelte";
     import ConditionIcon from "../common/icons/ConditionIcon.svelte";
-import EntityIcon from "../common/icons/EntityIcon.svelte";
+    import EntityIcon from "../common/icons/EntityIcon.svelte";
+    import LegendaryActionsValueIcon from "../common/icons/LegendaryActionsValueIcon.svelte";
     import type { LogEntry } from "./logEntry";
     export let logEntry: LogEntry;
     const time = new Date(logEntry.time);
@@ -37,17 +37,15 @@ import EntityIcon from "../common/icons/EntityIcon.svelte";
                         <Blood/>
                     </div>
                 {/if}
-            {:else if recipient.logType === "legendary"}
-                <div>
-                    {recipient.actions}
-                    <Legendary/>
-                </div>
             {:else if recipient.logType === "condition"}
                 <div class="flex-row">
                     <ConditionIcon condition={recipient.condition}/>
                 </div>
+            {:else if recipient.logType === "legendary"}
+                <LegendaryActionsValueIcon value={recipient.actions}/>
             {/if}
         {/each}
+        
     </div>
 </div>
 

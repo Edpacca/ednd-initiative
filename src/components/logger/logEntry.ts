@@ -59,9 +59,14 @@ export class LogEntry {
     }
 
     addLogEntityLegendaryActions(recipient: Creature, actions: number, index=0) {
-        const name = recipient.type === CreatureType.Minion ? `${recipient.name}#${index}` : recipient.name;
-        const playerClass = recipient.class;
-        this.recipients.push({name, type: recipient.type, actions, playerClass, logType: "legendary"});
+        const existing = this.recipients.find(r => r.logType === "legendary" && r.name === recipient.name)
+
+        if (existing) {
+            (existing as LegendaryAction).actions += actions;
+            this.recipients[this.recipients.indexOf(existing)] = existing;
+        } else {
+            this.recipients.push({name: recipient.name, type: recipient.type, actions, logType: "legendary"});
+        }
     }
 }
 
