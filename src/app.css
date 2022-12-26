@@ -48,6 +48,8 @@
 
     --z-modal-bkg: 49;
     --z-modal: 50;
+
+    --sword-transition: 400ms cubic-bezier(.13, 0, .57, .1);
 }
 
 :root {

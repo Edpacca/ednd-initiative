@@ -3,6 +3,7 @@
     import PadlockClosed from "../../graphics/icons/padlock-closed.svelte";
     import PadlockOpen from "../../graphics/icons/padlock-open.svelte";
     import { LogEntry } from "../logger/logEntry";
+    import LockedSwordsIcon from "../lockToggle/LockedSwordsIcon.svelte";
 
     let isHovered = false;
     let justToggled = false;
@@ -21,7 +22,9 @@
 
 </script>
 
-<button
+<LockedSwordsIcon isLocked={$isLocked} onClick={toggleLock}/>
+
+<!-- <button
     on:click={toggleLock}
     on:mouseenter={() => isHovered = true}
     on:mouseleave={() => isHovered = false}>
@@ -38,7 +41,7 @@
             <PadlockOpen/>
         {/if}
     {/if}
-</button>
+</button> -->
 
 <style>
     button {
