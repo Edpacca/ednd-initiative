@@ -27,12 +27,12 @@
             <div class="name">{recipient.name}</div>
             {#if recipient.logType === "damage"}
                 {#if recipient.damage > 0}
-                    <div class="bold green flex-row mini-icon">
+                    <div class="bold green damage-log-icon">
                         {recipient.damage}
                         <Heart/>
                     </div>
                     {:else}
-                    <div class="bold red flex-row mini-icon">
+                    <div class="bold red damage-log-icon">
                         {recipient.damage}
                         <Blood/>
                     </div>
@@ -69,8 +69,12 @@
         height: 1.2rem;
     }
 
-    .mini-icon {
+    .damage-log-icon {
+        display: flex;
+        flex-direction: row;
+        column-gap: 0.25rem;
         height: 1rem;
+        justify-content: left;
     }
 
     .log-name {
@@ -89,7 +93,8 @@
     .damage-log {
         padding: 0.75rem;
         display: grid;
-        grid-template-columns: 1.2rem 1fr 20%;
+        grid-template-columns: 1.2rem 1fr auto;
         column-gap: 0.5rem;
+        align-items: center;
     }
 </style>

@@ -1,7 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import TurnTracker from "./components/common/TurnTracker.svelte";
-    import DamageTool from "./components/damage/Damage.svelte";
     import EffectTable from "./components/effects/EffectTable.svelte";
     import CreatureTable from "./components/initiativeTable/CreatureTable.svelte";
     import InitiativeTable from "./components/initiativeTable/InitiativeTable.svelte";
@@ -30,7 +29,7 @@
       <div class="toolbar">
         <TurnTracker/>
       </div>
-    {:else}
+    {:else if $entities.length > 0}
       <RollAll/>
     {/if}
     <div class="table-container">

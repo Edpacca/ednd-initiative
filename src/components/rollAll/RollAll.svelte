@@ -41,32 +41,32 @@
 </script>
 
 <div class="roll-all-container">
-    <div class="roll-all-icons">
-            <CheckboxIcon 
-                bind:isChecked={rollingPlayers}
-                isDisabled={!rollingEnemies && !rollingEffects}
-                checkedColor="var(--gold)">
-                <Player/>
-            </CheckboxIcon>
-            <CheckboxIcon 
-                bind:isChecked={rollingEnemies}
-                isDisabled={!rollingPlayers && !rollingEffects}
-                checkedColor="var(--primary)">
-                <Enemy/>
-            </CheckboxIcon>   
-            <CheckboxIcon 
-                bind:isChecked={rollingEffects}
-                isDisabled={!rollingPlayers && !rollingEnemies}
-                checkedColor="var(--blue)">
-                <Cave/>
-            </CheckboxIcon>
-            <div class="checkbox">
-                <label for="overwrite-initiative">Override</label>
-                <input type="checkbox" id="overwrite-initiative" bind:checked={override}/>
-            </div>
-    </div>
+    <D20Button primary="var(--gold)" secondary="var(--white)" width="5rem" onClick={() => rollAll()}/>
     <div class="text-center message">{message}</div>
-    <D20Button primary="var(--gold)" secondary="var(--white)" width="4rem" onClick={() => rollAll()}/>
+    <div class="roll-all-icons">
+        <CheckboxIcon 
+            bind:isChecked={rollingPlayers}
+            isDisabled={!rollingEnemies && !rollingEffects}
+            checkedColor="var(--gold)">
+            <Player/>
+        </CheckboxIcon>
+        <CheckboxIcon 
+            bind:isChecked={rollingEnemies}
+            isDisabled={!rollingPlayers && !rollingEffects}
+            checkedColor="var(--primary)">
+            <Enemy/>
+        </CheckboxIcon>   
+        <CheckboxIcon 
+            bind:isChecked={rollingEffects}
+            isDisabled={!rollingPlayers && !rollingEnemies}
+            checkedColor="var(--blue)">
+            <Cave/>
+        </CheckboxIcon>
+        <div class="checkbox">
+            <label for="overwrite-initiative">Override</label>
+            <input type="checkbox" id="overwrite-initiative" bind:checked={override}/>
+        </div>
+    </div>
 </div>
 
 <style>

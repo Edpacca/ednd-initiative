@@ -46,6 +46,8 @@
         width: 15rem;
         max-height: 93vh;
         overflow-y: scroll;
+        position: relative;
+        z-index: -1;
     }
 
     .current-turn {
@@ -53,7 +55,6 @@
         border-radius: var(--border-radius);
         filter: drop-shadow(0 0 var(--dropshadow-size) var(--gold));
         background-color: var(--dark-grey);
-        z-index: 0;
     }
 
 </style>

@@ -1,16 +1,22 @@
-<script>
-    export let condition;
+<script lang="ts">
+    import { CONDITIONS } from "../../../lib/conditions";
+    export let condition: string;
     export let width = "100%";
     export let hasTooltip = true;
     let isHovering = false;
 </script>
 
+
 <svg
-    class={`${$$props.class} relative`}
+    class={`${$$props.class}`}
     width={width} height={width}
     on:mouseenter={() => isHovering = true}
     on:mouseleave={() => isHovering = false}>
-    <use href={`icons/conditions.svg#${condition}`} />
+    {#if CONDITIONS.includes(condition)}
+        <use href={`icons/conditions.svg#${condition}`} />
+    {:else}
+        <text>{condition}</text>
+    {/if}
 </svg>
 
 {#if hasTooltip && isHovering}
@@ -29,5 +35,9 @@
         background-color: var(--dark-grey-90);
         color: var(--white);
         padding: 0.2rem;
+    }
+
+    text {
+        stroke: var(--white);
     }
 </style>

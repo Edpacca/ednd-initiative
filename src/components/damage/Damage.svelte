@@ -78,8 +78,8 @@
             type="number"
             min={0} bind:value={damage}
             on:input={resetHealing}
-            on:keydown={e => submitEnter(e, "damage")}
-            tabindex={1}/>
+            on:focus={() => focused = "damage"}
+            on:keydown={e => submitEnter(e, "damage")}/>
         <button on:click={() => applyDamage()} class:active={focused === "damage"}>Damage</button>
     </div>
     <div class="heal relative flex-col" class:active={focused === "healing"}>
@@ -100,8 +100,8 @@
             type="number"
             min={0} bind:value={healing}
             on:input={resetDamage}
-            on:keydown={e => submitEnter(e, "healing")}
-            tabindex={1}/>
+            on:focus={() => focused = "healing"}
+            on:keydown={e => submitEnter(e, "healing")}/>
         <button on:click={() => applyHealing()} class:active={focused === "healing"}>Heal</button>
     </div>
     <div class="kill-buttons">

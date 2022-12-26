@@ -35,36 +35,45 @@
     const keyboardInput = async (event: KeyboardEvent) => {
         if (isSelected) {
             if (event.key === "Tab") {
+                event.preventDefault();
+                console.log("TAB modal ----------")
                 switch(focused) {
                     case "damage":
                         healingInput.focus();
                         focused = "healing";
+                        console.log("healing");
                         break;
                     case "healing":
                         conditionInput.focus();
                         focused = "condition";
+                        console.log("condition");
                         break;
                     case "condition":
                         if (conditionInputValue) {
                             conditionInput.focus();
                             conditionInput.select();
+                            console.log("auto-complete condition")
                         } else {
                             damageInput.focus();
                             focused = "damage";
+                            console.log("damage");
                             break;
                         }
-                } 
+                }
+                event.stopImmediatePropagation();
             } else if (event.key === "Escape") {
                 isSelected = false;
             }
             event.stopPropagation();
         }
     }
+
+    $: console.log("focus: " + focused);
 </script>
 
 {#if isSelected}
 <div class="relative creature-modal">
-    <Modal bind:isOpen={isSelected} width="60vw">
+    <Modal bind:isOpen={isSelected} width="40rem">
         <div class="close-button">
             <RemoveButton onClick={() => isSelected = false}/>
         </div>
@@ -89,6 +98,7 @@
                 <Conditions 
                     bind:conditions={creature.conditions[index]}
                     bind:conditionInput
+                    bind:focused
                     bind:value={conditionInputValue}
                     submitCondition={submitCondition}
                     removeCondition={removeCondition}>

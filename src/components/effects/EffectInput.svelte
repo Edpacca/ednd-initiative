@@ -17,6 +17,7 @@
         background: var(--grey);
         background: var(--theme);
         color: var(--white);
+        text-shadow: 0 0 4px black;
         font-style: italic;
     }
 

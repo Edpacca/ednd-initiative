@@ -20,7 +20,6 @@
     .legendary {
         fill: var(--gold);
         color: var(--gold);
-        position: relative;
         height: 2.5rem;
         width: 2.5rem;
         background: none;

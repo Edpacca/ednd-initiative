@@ -10,7 +10,6 @@
     const toggleLock = () => {
         if (!$isStarted) {
             $isStarted = true;
-            $currentLog = new LogEntry($entities[0], $currentRound);
         }
         $isLocked = !$isLocked;
         justToggled = true;

@@ -14,7 +14,6 @@
     .legendary {
         fill: var(--gold);
         color: var(--gold);
-        position: relative;
         height: 1.2rem;
         width: 1.2rem;
         background: none;
@@ -22,7 +21,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-
     }
 
     .value {

@@ -1,8 +1,15 @@
 <script lang="ts">
+    import { isSettingsOpen } from "../../../store";
     import Modal from "./Modal.svelte";
     export let isOpen: boolean;
     export let text: string[];
     export let confirmaCallback: () => void;
+
+    let confirm = () => {
+        confirmaCallback();
+        $isSettingsOpen = false
+    }
+
     export let cancelCallback: () => void = () => { 
         isOpen = false;
     }
@@ -13,7 +20,7 @@
         <p>{line}</p>
     {/each}
     <div class="button-container">
-        <button class="submit-button" on:click={confirmaCallback} >Confirm</button>
+        <button class="submit-button" on:click={confirm} >Confirm</button>
         <button class="submit-button" on:click={cancelCallback}>Cancel</button>
     </div>
 </Modal>
