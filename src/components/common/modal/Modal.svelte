@@ -30,6 +30,7 @@
         border: 2px solid var(--primary);
         border-radius: var(--border-radius);
         padding: 2rem;
+        z-index: var(--z-modal);
     }
 
     .modal-container {
@@ -40,5 +41,6 @@
         backdrop-filter: blur(3px);
         top: 0;
         left: 0;
+        z-index: var(--z-modal-bkg);
     }
 </style>
