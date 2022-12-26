@@ -1,3 +1,4 @@
+import { v4 } from "uuid";
 import type { CreatureType } from "./creature";
 import type { EffectType } from "./effect";
 
@@ -6,6 +7,12 @@ export class Entity {
     initiative?: number;
     bonus?: number;
     type: EntityType;
+    id: string;
+
+    constructor() {
+        this.id = v4();
+        console.log(this.id);
+    }
 }
 
 export type EntityType = CreatureType | EffectType
