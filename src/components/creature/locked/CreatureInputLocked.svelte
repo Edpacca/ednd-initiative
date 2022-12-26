@@ -1,8 +1,8 @@
 <script lang="ts">
-    import HealthBar from "../../common/HealthBar.svelte";
+    import HealthBar from "../../common/values/HealthBar.svelte";
     import { CreatureType, type Creature } from "../../../lib/models/creature";
     import Minions from "../minion/Minions.svelte";
-    import LegendaryActionsValue from "../../initiativeTable/LegendaryActionsValue.svelte";
+    import LegendaryActionsValue from "../../common/values/LegendaryActionsValue.svelte";
     import ConditionIcon from "../../common/icons/ConditionIcon.svelte";
     import { appenLegendaryActionsToCurrentLog } from "../../../store";
 
@@ -47,7 +47,7 @@
                 {#if creature.conditions[0].length > 0}
                     <div class="conditions">
                         {#each creature.conditions as condition}
-                            <ConditionIcon condition={condition} width="2rem"/>
+                            <ConditionIcon condition={condition[0]} width="2rem"/>
                         {/each}
                     </div>
                 {/if}

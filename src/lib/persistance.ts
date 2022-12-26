@@ -1,5 +1,4 @@
 import type { LogEntry } from "../components/logger/logEntry";
-import type { Creature, CreatureType } from "./models/creature";
 import type { Encounter } from "./models/encounter";
 import type { Entity, EntityType } from "./models/entity";
 
@@ -9,7 +8,8 @@ enum StorageType {
     Entity = "entities",
     Encounter = "encounters",
     Theme = "theme",
-    Logs = "logs"
+    Logs = "logs",
+    Round = "round",
 }
 
 export function getLocalStorageEntities(): Entity[] {
@@ -34,6 +34,14 @@ export function setLocalStorageLogs(logs: LogEntry[]) {
 
 export function getLocalStorageLogs(): LogEntry[] {
     return getLocalStorageArr(StorageType.Logs);
+}
+
+export function getLocalStorageRound(): number {
+    return getLocalStorage(StorageType.Round)
+}
+
+export function setLocalStorageRound(round: number) {
+    setLocalStorage(StorageType.Round, round)
 }
 
 export function setLocalStorageEncounter(name: string, entities: Entity[], filteredTypes: EntityType[], override = false) {

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Shield from "../../graphics/icons/shield.svelte";
+    import Shield from "../../../graphics/icons/shield.svelte";
     export let value;
     let isEnchanted = false;
 </script>

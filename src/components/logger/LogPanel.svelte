@@ -30,6 +30,7 @@
         position: absolute;
         top: 0;
         right: 0;
+        margin: 0.5rem;
     }
 
     .panel-button-container {
@@ -39,17 +40,17 @@
 
     button {
         background: none;
-        fill: var(--secondary);
+        fill: var(--light-grey);
         border: none;
         width: 4rem;
         padding: 0.5rem;
-        transition: 400ms;
+        transition: var(--transition-time);
     }
 
     button:hover {
-        fill: var(--gold);
+        fill: var(--white);
     }
-
+    
     .open-arrow:hover {
         transform: translateX(-0.75rem);
     }

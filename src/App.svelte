@@ -1,14 +1,14 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import TurnTracker from "./components/common/TurnTracker.svelte";
+    import TurnTracker from "./components/turnTracker/TurnTracker.svelte";
     import EffectTable from "./components/effects/EffectTable.svelte";
     import CreatureTable from "./components/initiativeTable/CreatureTable.svelte";
     import InitiativeTable from "./components/initiativeTable/InitiativeTable.svelte";
     import LogPanel from "./components/logger/LogPanel.svelte";
     import RollAll from "./components/rollAll/RollAll.svelte";
-    import { setTheme } from "./components/toolbar/selectTheme/setTheme";
-    import Toolbar from "./components/toolbar/Toolbar.svelte";
-    import LockPage from "./components/tools/LockPage.svelte";
+    import { setTheme } from "./components/settingsMenu/selectTheme/setTheme";
+    import Toolbar from "./components/settingsMenu/SettingsMenu.svelte";
+    import LockPage from "./components/lockToggle/LockPage.svelte";
     import { CreatureType } from "./lib/models/creature";
     import { currentTheme, entities, isLocked } from "./store";
 
@@ -48,9 +48,7 @@
     {/if}
   </div>
 </main>
-{#if $isLocked}
-    <LogPanel/>
-{/if}
+<LogPanel/>
 
 <style>
 
@@ -64,7 +62,7 @@
     border-radius: 4px;
     position: relative;
     row-gap: 2em;
-    max-width: 50em;
+    max-width: 50rem;
     margin: auto;
     background: var(--dark-grey-90);
     z-index: 0;

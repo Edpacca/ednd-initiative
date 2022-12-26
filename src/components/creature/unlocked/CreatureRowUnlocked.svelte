@@ -5,11 +5,11 @@
     import {    entities } from "../../../store";
     import D20Button from "../../common/buttons/D20Button.svelte";
     import CreatureInputUnlocked from "./CreatureInputUnlocked.svelte";
-    import InitiativeValue from "../../initiativeTable/InitiativeValue.svelte";
-    import NumberStringInput from "../../common/NumberStringInput.svelte";
-    import NumberInput from "../../common/NumberInput.svelte";
-    import MaxHpInput from "../../initiativeTable/MaxHpInput.svelte";
-    import PlayerIcon from "../../initiativeTable/PlayerIconSwitch.svelte";
+    import InitiativeValue from "../../common/values/InitiativeValue.svelte";
+    import NumberStringInput from "../../common/values/NumberStringInput.svelte";
+    import NumberInput from "../../common/values/NumberInput.svelte";
+    import MaxHpInput from "../../common/values/MaxHpInput.svelte";
+    import PlayerIcon from "../../common/buttons/PlayerIconSwitch.svelte";
     import CreatureToggle from "../../common/buttons/CreatureToggle.svelte";
 
     export let creature: Creature;

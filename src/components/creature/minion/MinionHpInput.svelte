@@ -1,6 +1,6 @@
 <script>
     import Skull from "../../../graphics/icons/skull.svelte";
-    import NumberInput from "../../common/NumberInput.svelte";
+    import NumberInput from "../../common/values/NumberInput.svelte";
 
     export let hp;
     export let hpMax;

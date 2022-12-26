@@ -1,6 +1,6 @@
 <script lang="ts">
-    import Legendary from "../../graphics/icons/legendary.svelte";
-    import NumberInput from "../common/NumberInput.svelte";
+    import Legendary from "../../../graphics/icons/legendary.svelte";
+    import NumberInput from "./NumberInput.svelte";
     export let valueMax;
     export let valueCurrent;
 

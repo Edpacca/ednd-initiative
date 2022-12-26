@@ -15,13 +15,14 @@
         background: var(--dark-grey);
         width: 2rem;
         height: 2rem;
-        border: 1px solid var(--grey);
+        border: 1px solid var(--light-grey);
         border-radius: var(--border-radius);
         outline: none;
+        transition: var(--transition-time);
     }
 
     button svg {
-        stroke: var(--secondary);
+        stroke: var(--light-grey);
         stroke-width: 4px;
         width: 100%;
         height: 100%;
@@ -30,9 +31,11 @@
     button:hover {
         background: var(--grey);
         border-color: var(--white);
+        transition: var(--transition-time);
     }
 
     button:hover svg {
         stroke: var(--white);
+        transition: var(--transition-time);
     }
 </style>

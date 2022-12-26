@@ -1,7 +1,8 @@
 <script lang="ts">
+    import ArrowPlain from "../../graphics/icons/arrow-plain.svelte";
     import { Creature, CreatureType } from "../../lib/models/creature";
     import { setLocalStorageLogs } from "../../lib/persistance";
-    import { currentRound, entities, activeEntityTurnIndex, isModalOpen, logs, currentLog, storeCurrentLog } from "../../store";
+    import { currentRound, entities, activeEntityTurnIndex, isModalOpen, logs, currentLog, storeCurrentLog, storeCurrentRound } from "../../store";
     
     $: max = $entities.length - 1;
     
@@ -10,6 +11,7 @@
         if ($activeEntityTurnIndex > max) {
             $activeEntityTurnIndex = 0;
             $currentRound++;
+            storeCurrentRound();
             $entities = $entities.map(e => {
                 if (e.type === CreatureType.Boss) {
                     (e as Creature).laCurrent = (e as Creature).laMax;
@@ -28,6 +30,7 @@
         if ($activeEntityTurnIndex < 0) {
             $activeEntityTurnIndex = max;
             $currentRound = Math.max($currentRound - 1, 1);
+            storeCurrentRound();
         }
         $currentLog = $logs[$logs.length - 1];
         $logs = $logs.slice(0, -1);
@@ -54,29 +57,30 @@
 <div class="turn-tracker">
     <div class="header">Round {$currentRound}</div>
     <div class="tt-buttons flex-row" >
-        <button on:click={previous}>{"<"}</button>
-        <button on:click={next}>{">"}</button>
+        <button on:click={previous}><ArrowPlain class="left"/></button>
+        <button on:click={next}><ArrowPlain/></button>
     </div>
 </div>
 <svelte:window on:keydown={e => onArrows(e)}/>
 
 <style>
     .turn-tracker {
-        width: fit-content;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
     button {
-        width: 3rem;
+        width: 5rem;
         height: 3rem;
-        background-color: var(--grey);
+        background: none;
         border: none;
-        border-radius: var(--border-radius);
-        font-size: 2rem;
-        color: var(--white);
+        transition: var(--transition-time);
+        fill: var(--white);
     }
 
     button:hover {
-        background-color: var(--light-grey);
+       fill: var(--gold);
     }
 
     .tt-buttons {

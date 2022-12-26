@@ -1,6 +1,6 @@
 <script lang="ts">
-    import NumberInput from "../common/NumberInput.svelte";
-    import type { Creature } from "../../lib/models/creature";
+    import NumberInput from "./NumberInput.svelte";
+    import type { Creature } from "../../../lib/models/creature";
     export let entity: Creature;
     export let setHpCurrent: (hp: number) => void;
     export let value;

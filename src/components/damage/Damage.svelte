@@ -141,14 +141,9 @@
         background: none;
     }
 
-    .kill-buttons {
-
-    }
-
     .kill-button {
         height: 6rem;
         width: 6rem;
-
         position: relative;
     }
 
@@ -187,9 +182,11 @@
 
     .damage {
         fill: var(--red-50);
+        transition: var(--transition-time);
     }
     .heal {
         fill: var(--green-50);
+        transition: var(--transition-time);
     }
 
     .damage .input-icon {
@@ -203,9 +200,11 @@
 
     .damage.active {
         fill: var(--red);
+        transition: var(--transition-time);
     }
     .heal.active {
         fill: var(--green);
+        transition: var(--transition-time);
     }
 
     .damage input {
@@ -226,6 +225,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        transition: var(--transition-time);
     }
 
     button.active {

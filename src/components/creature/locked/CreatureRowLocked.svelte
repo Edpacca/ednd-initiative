@@ -1,14 +1,14 @@
 <script lang="ts">
-    import InitiativeValue from "../../initiativeTable/InitiativeValue.svelte";
+    import InitiativeValue from "../../common/values/InitiativeValue.svelte";
     import { setLocalStorageEntities } from "../../../lib/persistance";
-    import AcValue from "../../initiativeTable/AcValue.svelte";
+    import AcValue from "../../common/values/AcValue.svelte";
     import CreatureInputLocked from "./CreatureInputLocked.svelte";
     import { entities } from "../../../store";
-    import CurrentHpInput from "../../initiativeTable/CurrentHpInput.svelte";
+    import CurrentHpInput from "../../common/values/CurrentHpInput.svelte";
     import CreatureIconSelect from "../../common/buttons/CreatureIconSelect.svelte";
     import type { Creature } from "../../../lib/models/creature";
     import CreatureModal from "../creatureModal/CreatureModal.svelte";
-    import Arrow from "../../../graphics/icons/arrow.svelte";
+    import ActiveEntityIndicator from "../../initiativeTable/ActiveEntityIndicator.svelte";
 
     export let creature: Creature;
     export let isActive = false;
@@ -28,15 +28,9 @@
 </script>
 
 <tr>
-    {#if isActive}
-        <div class=active-initiative>
-            <div class="active-icon">
-                <Arrow/>
-            </div>
-        </div>
-    {/if}
+    <ActiveEntityIndicator isActive={isActive}/>
     <td class="flex-col">
-        <CreatureIconSelect type={creature.type} playerClass={creature.class} bind:isSelected/>
+        <CreatureIconSelect type={creature.type} playerClass={creature.class} bind:isSelected isDisabled={true}/>
     </td>
     <td>
        <CreatureInputLocked bind:isActive bind:creature={creature} bind:isSelected/>

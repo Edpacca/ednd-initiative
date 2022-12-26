@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { fade, slide } from "svelte/transition";
     import { isSettingsOpen } from "../../store";
     import BurgerButton from "../common/buttons/BurgerButton.svelte";
     import AccordionTool from "./AccordionTool.svelte";
@@ -12,7 +13,7 @@
     <BurgerButton onClick={() => $isSettingsOpen = !$isSettingsOpen}/>
 </div>
 {#if $isSettingsOpen}
-    <div class="toolbar">
+    <div class="settings-menu" in:slide out:slide>
         <h1>Settings</h1>
         <div>
             <AccordionTool text={"Theme"}>
@@ -38,7 +39,7 @@
 {/if}
 
 <style>
-    .toolbar {
+    .settings-menu {
         position: absolute;
         padding: 2rem;
         top: 0;
@@ -50,7 +51,7 @@
         display: flex;
         flex-direction: column;
         text-align: center;
-        width: 20rem;
+        width: 18rem;
         margin: var(--margin);
     }
 

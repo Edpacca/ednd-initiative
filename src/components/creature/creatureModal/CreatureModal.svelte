@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { fade } from "svelte/transition";
     import { CreatureType, type Creature } from "../../../lib/models/creature";
     import { appendConditionToCurrentLog } from "../../../store";
     import CreatureIconSelect from "../../common/buttons/CreatureIconSelect.svelte";
@@ -72,45 +73,44 @@
 </script>
 
 {#if isSelected}
-<div class="relative creature-modal">
-    <Modal bind:isOpen={isSelected} width="40rem">
-        <div class="close-button">
-            <RemoveButton onClick={() => isSelected = false}/>
-        </div>
-        <div>
-            <div class="creature-info">
-                <CreatureIconSelect type={creature.type} playerClass={creature.class}/>
-                <CreatureInputLocked creature={creature} bind:selectedIndex={index}/>
-                {#if isMinion}
-                    <div class="minion-hp-container">
-                        {#each Array(creature.quantity) as m, i}
-                            <HpValue value={creature.hpCurrent[i]} valueMax={creature.hpMax} class="minion-hp"/>
-                        {/each}
-                    </div>
-                {:else}
-                    <HpValue value={creature.hpCurrent[0]} valueMax={creature.hpMax}/>
-                {/if}
+    <div class="relative creature-modal">
+        <Modal bind:isOpen={isSelected} width="40rem">
+            <div class="close-button">
+                <RemoveButton onClick={() => isSelected = false}/>
             </div>
-            <div class="modal-control-grid">
-                <div class="damage-container">
-                    <Damage bind:creature bind:damageInput bind:healingInput bind:focused index={index}/>
-                </div>
-                <Conditions 
-                    bind:conditions={creature.conditions[index]}
-                    bind:conditionInput
-                    bind:focused
-                    bind:value={conditionInputValue}
-                    submitCondition={submitCondition}
-                    removeCondition={removeCondition}>
+            <div in:fade>
+                <div class="creature-info">
+                    <CreatureIconSelect type={creature.type} playerClass={creature.class} isDisabled={true}/>
+                    <CreatureInputLocked creature={creature} bind:selectedIndex={index}/>
                     {#if isMinion}
-                        <div class="selected-minion">{creature.name} #{index + 1}</div>
+                        <div class="minion-hp-container">
+                            {#each Array(creature.quantity) as m, i}
+                                <HpValue value={creature.hpCurrent[i]} valueMax={creature.hpMax} class="minion-hp"/>
+                            {/each}
+                        </div>
+                    {:else}
+                        <HpValue value={creature.hpCurrent[0]} valueMax={creature.hpMax}/>
                     {/if}
-                </Conditions>
+                </div>
+                <div class="modal-control-grid">
+                    <div class="damage-container">
+                        <Damage bind:creature bind:damageInput bind:healingInput bind:focused index={index}/>
+                    </div>
+                    <Conditions 
+                        bind:conditions={creature.conditions[index]}
+                        bind:conditionInput
+                        bind:focused
+                        bind:value={conditionInputValue}
+                        submitCondition={submitCondition}
+                        removeCondition={removeCondition}>
+                        {#if isMinion}
+                            <div class="selected-minion">{creature.name} #{index + 1}</div>
+                        {/if}
+                    </Conditions>
+                </div>
             </div>
-           
-        </div>
-    </Modal>
-</div>
+        </Modal>
+    </div>
 {/if}
 <svelte:window on:keyup={e => keyboardInput(e)}/>
 

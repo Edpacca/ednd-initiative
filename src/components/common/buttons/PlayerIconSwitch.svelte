@@ -1,12 +1,15 @@
 <script lang="ts">
-    import { isLocked } from "../../store";
-    import type { PlayerClass } from "../../lib/models/playerClass";
+    import type { PlayerClass } from "../../../lib/models/playerClass";
 
     export let icon: PlayerClass | undefined;
-    $: path = `classes/${icon.toLowerCase()}.svg#icon`;
+    export let isDisabled = false;
+    export let onClick = () => {};
 
-    const rotate = async () => {
-        icon = 
+    const rotate = () => {
+        if (isDisabled) {
+            onClick();
+        } else {
+            icon = 
             icon === "Artificer" ? "Barbarian" :
             icon ==="Barbarian" ? "Bard" :
             icon === "Bard" ? "Cleric" :
@@ -20,6 +23,7 @@
             icon === "Sorcerer" ? "Warlock" :
             icon === "Warlock" ? "Wizard" :
             "Artificer";
+        }
     }
 </script>
 

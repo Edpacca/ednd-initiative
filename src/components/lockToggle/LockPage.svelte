@@ -1,6 +1,6 @@
 <script lang="ts">
     import { isLocked, isStarted } from "../../store";
-    import LockedSwordsIcon from "../lockToggle/LockedSwordsIcon.svelte";
+    import LockedSwordsIcon from "./LockedSwordsIcon.svelte";
 
     const toggleLock = () => {
         if (!$isStarted) {

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import Legendary from "../../graphics/icons/legendary.svelte";
+    import Legendary from "../../../graphics/icons/legendary.svelte";
     export let value;
     export let logUsage: () => void;
 

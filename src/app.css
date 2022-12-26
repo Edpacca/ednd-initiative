@@ -49,11 +49,12 @@
     --z-modal-bkg: 49;
     --z-modal: 50;
 
-    --sword-transition: 400ms cubic-bezier(.13, 0, .57, .1);
-}
+    --transition-time: 400ms;
+    --sword-transition: var(--transition-time) cubic-bezier(.13, 0, .57, .1);
+}   
 
 :root {
-    font-size: 14px;
+    font-size: 14px ;
 }
 
 body {
@@ -72,6 +73,10 @@ table {
     border-spacing: 0;
     font-family: 'Roboto Condensed';
 
+}
+
+button:active {
+    outline: none;
 }
 
 th {
@@ -323,18 +328,6 @@ select {
     max-width: 2rem;
 }
 
-.active-initiative {
-    position: absolute;
-    width: 100%;
-    top: calc(-1 * var(--table-padding));
-    height: 100%;
-    background-color: var(--dark-grey);
-    border: 3px solid var(--gold);
-    border-radius: 0.5rem;
-    z-index: -1;
-    filter: drop-shadow(0 0 0.75rem var(--gold))
-}
-
 tr {
     position: relative;
 }
@@ -388,18 +381,17 @@ tr {
     margin: 0.25rem;
 }
 
-.active-icon {
-    position: absolute;
-    fill: var(--gold);
-    height: 2.5rem;
-    padding: 0.625rem;
-    left: -6rem;
-    animation: point 1.5s ease-in infinite alternate;
-}
-
-@keyframes point {
+@keyframes point-L {
     from {
         transform: translateX(-0.5rem);
+    } to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes point-R {
+    from {
+        transform: translateX(0.5rem);
     } to {
         transform: translateX(0);
     }

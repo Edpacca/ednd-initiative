@@ -2,11 +2,11 @@
     import { setLocalStorageEntities } from "../../../lib/persistance";
     import { entities } from "../../../store";
     import AddRemove from "../../common/buttons/AddRemove.svelte";
-    import HealthBar from "../../common/HealthBar.svelte";
+    import HealthBar from "../../common/values/HealthBar.svelte";
     import RemoveButton from "../../common/buttons/RemoveButton.svelte";
     import { CreatureType, type Creature } from "../../../lib/models/creature";
     import Minions from "../minion/Minions.svelte";
-    import LegendaryActionsInput from "../../initiativeTable/LegendaryActionsInput.svelte";
+    import LegendaryActionsInput from "../../common/values/LegendaryActionsInput.svelte";
 
     export let removeCreature: (e: Creature) => void;
     export let creature: Creature;

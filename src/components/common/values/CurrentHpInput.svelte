@@ -1,8 +1,8 @@
 <script lang="ts">
-    import Skull from "../../graphics/icons/skull.svelte";
-    import NumberInput from "../common/NumberInput.svelte";
-    import { CreatureType } from "../../lib/models/creature";
-    import MinionHpInput from "../creature/minion/MinionHpInput.svelte";
+    import Skull from "../../../graphics/icons/skull.svelte";
+    import NumberInput from "./NumberInput.svelte";
+    import { CreatureType } from "../../../lib/models/creature";
+    import MinionHpInput from "../../creature/minion/MinionHpInput.svelte";
 
     export let entity;
 

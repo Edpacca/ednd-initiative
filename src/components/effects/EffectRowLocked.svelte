@@ -2,21 +2,17 @@
     import Arrow from "../../graphics/icons/arrow.svelte";
     import Cave from "../../graphics/icons/cave.svelte";
     import type { Effect } from "../../lib/models/effect";
-    import NumberInput from "../common/NumberInput.svelte";
-    import InitiativeValue from "../initiativeTable/InitiativeValue.svelte";
+    import NumberInput from "../common/values/NumberInput.svelte";
+    import InitiativeValue from "../common/values/InitiativeValue.svelte";
     import EffectCounter from "./EffectCounter.svelte";
     import EffectInput from "./EffectInput.svelte";
+    import ActiveEntityIndicator from "../initiativeTable/ActiveEntityIndicator.svelte";
     export let effect: Effect
     export let isActive = false;
 </script>
 
-{#if isActive}
-    <div class="active-icon">
-        <Arrow/>
-    </div>
-{/if}
 <tr>
-    <div class:active-initiative={isActive}></div>
+    <ActiveEntityIndicator isActive={isActive}/>
     <td class="blue flex-col">
         <button class="entity-type-button" disabled>
             <Cave/>

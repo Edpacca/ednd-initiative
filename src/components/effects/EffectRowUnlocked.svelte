@@ -1,12 +1,12 @@
 <script lang="ts">
     import { dRoll } from "../../lib/dieRoll";
     import type { Effect } from "../../lib/models/effect";
-    import { THEMES } from "../toolbar/selectTheme/themes";
+    import { THEMES } from "../settingsMenu/selectTheme/themes";
     import Cave from "../../graphics/icons/cave.svelte";
     import AddRemove from "../common/buttons/AddRemove.svelte";
     import D20Button from "../common/buttons/D20Button.svelte";
     import EffectInput from "./EffectInput.svelte";
-    import InitiativeValue from "../initiativeTable/InitiativeValue.svelte";
+    import InitiativeValue from "../common/values/InitiativeValue.svelte";
     import { setLocalStorageEntities } from "../../lib/persistance";
     import { entities, isLocked } from "../../store";
     import EffectCounter from "./EffectCounter.svelte";
