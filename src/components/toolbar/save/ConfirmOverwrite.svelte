@@ -1,6 +1,5 @@
 <script lang="ts">
     import ConfirmationModal from "../../common/modal/ConfirmationModal.svelte";
-    import type { CreatureType } from "../../../lib/models/creature";
 
     export let name: string;
     export let isOpen: boolean;

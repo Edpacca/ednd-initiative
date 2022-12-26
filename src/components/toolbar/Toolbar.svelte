@@ -1,17 +1,17 @@
 <script lang="ts">
+    import { isSettingsOpen } from "../../store";
     import BurgerButton from "../common/buttons/BurgerButton.svelte";
     import AccordionTool from "./AccordionTool.svelte";
     import Advanced from "./advanced/Advanced.svelte";
     import Load from "./load/Load.svelte";
     import Save from "./save/Save.svelte";
     import SelectTheme from "./selectTheme/SelectTheme.svelte";
-    let isOpen = false;
 </script>
 
 <div class="menu-button">
-    <BurgerButton onClick={() => isOpen = !isOpen}/>
+    <BurgerButton onClick={() => $isSettingsOpen = !$isSettingsOpen}/>
 </div>
-{#if isOpen}
+{#if $isSettingsOpen}
     <div class="toolbar">
         <h1>Settings</h1>
         <div>
