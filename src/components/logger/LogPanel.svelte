@@ -1,60 +1,65 @@
 <script lang="ts">
-    import { currentLog, currentRound, logs } from "../../store";
-    import LogTurn from "./LogTurn.svelte";
-
-    const scrollToBottom = (node, list) => {
-        const scroll = () => node.scroll({
-            top: node.scrollHeight,
-            behavior: "smooth"
-        });
-        scroll();
-        return { update: scroll }
-    }
+    import { fly } from "svelte/transition";
+    import ArrowPlain from "../../graphics/icons/arrow-plain.svelte";
+    import LogEntries from "./LogEntries.svelte";
+    let isOpen = false;
+    const flyIn = {x: 214, duration: 400, opacity: 1};
 </script>
 
-<div class="log-panel" use:scrollToBottom={$logs}>
-    {#if $logs.length > 0}
-        {#each Array($currentRound) as round, i}
-            <div class="log-round">
-                <div class="header text-center">Round {i + 1}</div>
-                {#each $logs.filter(l => l.round === i + 1) as log}
-                    <LogTurn logEntry={log}/>
-                {/each}
+<div class="log-panel-container">
+    {#if isOpen}
+        <div in:fly={flyIn} out:fly={flyIn} class="panel-button-container">
+            <div>
+                <button on:click={() => isOpen = !isOpen} class="close-arrow">
+                    <ArrowPlain/>
+                </button>
             </div>
-        {/each}
-    {/if}
-    {#if $currentLog}
-        <div class="current-turn">
-            <LogTurn logEntry={$currentLog}/>
+            <LogEntries/>
+        </div>
+    {:else}
+        <div in:fly={{x: 28, duration: 400, delay: 400}}>
+            <button on:click={() => isOpen = !isOpen} class="open-arrow">
+                <ArrowPlain class="left"/>
+            </button>
         </div>
     {/if}
 </div>
 
 <style>
-    .log-round {
-        padding-top: 0.5rem;
+    .log-panel-container {
+        position: absolute;
+        top: 0;
+        right: 0;
     }
 
-    .log-round:not(:first-child) {
-        border-top: 4px solid var(--light-grey);
+    .panel-button-container {
+        display: flex;
+        flex-direction: row;
     }
 
-    .log-panel {
-        border: 2px solid var(--primary);
-        background-color: var(--dark-grey-90);
-        border-radius: var(--border-radius);
-        width: 15rem;
-        max-height: 93vh;
-        overflow-y: scroll;
-        position: relative;
-        z-index: -1;
+    button {
+        background: none;
+        fill: var(--secondary);
+        border: none;
+        width: 4rem;
+        padding: 0.5rem;
+        transition: 400ms;
     }
 
-    .current-turn {
-        border: 2px solid var(--gold);
-        border-radius: var(--border-radius);
-        filter: drop-shadow(0 0 var(--dropshadow-size) var(--gold));
-        background-color: var(--dark-grey);
+    button:hover {
+        fill: var(--gold);
     }
 
+    .open-arrow:hover {
+        transform: translateX(-0.75rem);
+    }
+
+    .close-arrow {
+        position: absolute;
+        right: 0;
+    }
+
+    .close-arrow:hover {
+        transform: translateX(0.75rem);
+    }
 </style>

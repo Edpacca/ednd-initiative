@@ -7,6 +7,7 @@
     import { CREATURES } from "../../lib/typeFilters";
     import { EffectType } from "../../lib/models/effect";
     import { LogEntry } from "../logger/logEntry";
+    import { fade } from "svelte/transition";
 
     const sortByInitiative = () => {
         $entities.sort((a, b) => {
@@ -22,7 +23,7 @@
 
 </script>
 
-<table>
+<table in:fade>
     <thead class="secondary">
         <th class="value-col"></th>
         <th>Name</th>

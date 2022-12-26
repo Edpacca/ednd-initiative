@@ -57,7 +57,9 @@
 }
 
 body {
-    background: url('/background/stone.webp'), var(--dark-grey);
+    background-color: var(--dark-grey);
+    background-image: url('/background/stone.webp');
+    background-attachment: fixed;
     font-family: 'Roboto Condensed', 'Arial', 'sans-serif';
     color: antiquewhite;
     margin: var(--margin);

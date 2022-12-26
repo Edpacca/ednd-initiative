@@ -27,13 +27,14 @@
     $: creature, setLocalStorageEntities($entities);
 </script>
 
-{#if isActive}
-    <div class="active-icon">
-        <Arrow/>
-    </div>
-{/if}
 <tr>
-    <div class:active-initiative={isActive}></div>
+    {#if isActive}
+        <div class=active-initiative>
+            <div class="active-icon">
+                <Arrow/>
+            </div>
+        </div>
+    {/if}
     <td class="flex-col">
         <CreatureIconSelect type={creature.type} playerClass={creature.class} bind:isSelected/>
     </td>
