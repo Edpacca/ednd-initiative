@@ -1,10 +1,12 @@
 <script lang="ts">
-    import { onDestroy, onMount } from "svelte";
-    import { isModalOpen, setModalOpen } from "../../../store";
+    import { onDestroy } from "svelte";
+    import { isModalOpen } from "../../../store";
     export let isOpen: boolean;
     export let width = "15rem";
 
     $: $isModalOpen = isOpen;
+
+    onDestroy(() => $isModalOpen = false);
 </script>
 
 {#if isOpen}

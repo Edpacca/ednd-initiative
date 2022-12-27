@@ -23,7 +23,7 @@
 
     const addMinion = () => {
         creature.quantity++;
-        creature.hpCurrent = [...creature.hpCurrent, 10];
+        creature.hpCurrent = [...creature.hpCurrent, creature.hpMax];
         creature.conditions = [...creature.conditions, []];
     }
 

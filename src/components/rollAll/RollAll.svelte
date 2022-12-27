@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { slide } from "svelte/transition";
     import Enemy from "../../graphics/entity-types/enemy.svelte";
     import Player from "../../graphics/entity-types/player.svelte";
     import Cave from "../../graphics/icons/cave.svelte";
@@ -40,7 +41,7 @@
 
 </script>
 
-<div class="roll-all-container">
+<div class="roll-all-container" in:slide out:slide>
     <D20Button primary="var(--gold)" secondary="var(--white)" width="5rem" onClick={() => rollAll()}/>
     <div class="text-center message">{message}</div>
     <div class="roll-all-icons">

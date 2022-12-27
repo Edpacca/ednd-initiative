@@ -1,23 +1,23 @@
 <script lang="ts">
     import { onMount } from "svelte";
+    import { currentTheme, entities, isLocked, isStarted } from "./store";
+    import { setTheme } from "./components/settingsMenu/selectTheme/setTheme";
+    import { CreatureType } from "./lib/models/creature";
     import TurnTracker from "./components/turnTracker/TurnTracker.svelte";
     import EffectTable from "./components/effects/EffectTable.svelte";
     import CreatureTable from "./components/initiativeTable/CreatureTable.svelte";
     import InitiativeTable from "./components/initiativeTable/InitiativeTable.svelte";
     import LogPanel from "./components/logger/LogPanel.svelte";
     import RollAll from "./components/rollAll/RollAll.svelte";
-    import { setTheme } from "./components/settingsMenu/selectTheme/setTheme";
-    import Toolbar from "./components/settingsMenu/SettingsMenu.svelte";
+    import SettingsMenu from "./components/settingsMenu/SettingsMenu.svelte";
     import LockPage from "./components/lockToggle/LockPage.svelte";
-    import { CreatureType } from "./lib/models/creature";
-    import { currentTheme, entities, isLocked, isModalOpen } from "./store";
 
     onMount(async () => {
       setTheme($currentTheme);
     });
 </script>
 
-<Toolbar/>
+<SettingsMenu/>
 <main>
   {#if $entities.length > 0}
     <div class="top-right-icon">
@@ -46,7 +46,9 @@
     {/if}
   </div>
 </main>
-<LogPanel/>
+{#if $isStarted}
+  <LogPanel/>
+{/if}
 
 <style>
 

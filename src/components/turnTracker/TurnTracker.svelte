@@ -1,7 +1,7 @@
 <script lang="ts">
     import ArrowPlain from "../../graphics/icons/arrow-plain.svelte";
     import { Creature, CreatureType } from "../../lib/models/creature";
-    import { setLocalStorageLogs } from "../../lib/persistance";
+    import { setLocalStorageCurrentLog, setLocalStorageLogs } from "../../lib/persistance";
     import { currentRound, entities, activeEntityTurnIndex, isModalOpen, logs, currentLog, storeCurrentLog, storeCurrentRound } from "../../store";
     
     $: max = $entities.length - 1;
@@ -11,7 +11,6 @@
         if ($activeEntityTurnIndex > max) {
             $activeEntityTurnIndex = 0;
             $currentRound++;
-            storeCurrentRound();
             $entities = $entities.map(e => {
                 if (e.type === CreatureType.Boss) {
                     (e as Creature).laCurrent = (e as Creature).laMax;
@@ -20,6 +19,7 @@
                 return e;
             });
         }
+        storeCurrentRound();
         storeCurrentLog();
     }
 
@@ -30,10 +30,10 @@
         if ($activeEntityTurnIndex < 0) {
             $activeEntityTurnIndex = max;
             $currentRound = Math.max($currentRound - 1, 1);
-            storeCurrentRound();
         }
         $currentLog = $logs[$logs.length - 1];
         $logs = $logs.slice(0, -1);
+        storeCurrentRound();
     }
 
     const onArrows = (event: KeyboardEvent) => {
@@ -52,6 +52,7 @@
     }
 
     $: setLocalStorageLogs($logs);
+    $: setLocalStorageCurrentLog($currentLog);
 </script>
 
 <div class="turn-tracker">

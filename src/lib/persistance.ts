@@ -9,7 +9,8 @@ enum StorageType {
     Encounter = "encounters",
     Theme = "theme",
     Logs = "logs",
-    Round = "round",
+    CurrentLog = "current-log",
+    Turn = "turn",
 }
 
 export function getLocalStorageEntities(): Entity[] {
@@ -36,12 +37,20 @@ export function getLocalStorageLogs(): LogEntry[] {
     return getLocalStorageArr(StorageType.Logs);
 }
 
-export function getLocalStorageRound(): number {
-    return getLocalStorage(StorageType.Round)
+export function getLocalStorageTurn(): [number, number] {
+    return getLocalStorage(StorageType.Turn)
 }
 
-export function setLocalStorageRound(round: number) {
-    setLocalStorage(StorageType.Round, round)
+export function setLocalStorageTurn(turn: [number, number]) {
+    setLocalStorage(StorageType.Turn, turn);
+}
+
+export function setLocalStorageCurrentLog(currentLog: LogEntry) { 
+    setLocalStorage(StorageType.CurrentLog, currentLog);
+}
+
+export function getLocalStorageCurrentLog(): LogEntry {
+    return getLocalStorage(StorageType.CurrentLog);
 }
 
 export function setLocalStorageEncounter(name: string, entities: Entity[], filteredTypes: EntityType[], override = false) {
