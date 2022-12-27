@@ -1,24 +1,24 @@
 <script lang="ts">
     import { fly } from "svelte/transition";
     import ArrowPlain from "../../graphics/icons/arrow-plain.svelte";
+    import { isLogsOpen } from "../../store";
     import LogEntries from "./LogEntries.svelte";
-    let isOpen = false;
     const flyIn = {x: 214, duration: 400, opacity: 1};
 </script>
 
 <div class="log-panel-container">
-    {#if isOpen}
+    {#if $isLogsOpen}
         <div in:fly={flyIn} out:fly={flyIn} class="panel-button-container">
             <LogEntries/>
             <div>
-                <button on:click={() => isOpen = false} class="close-arrow">
+                <button on:click={() => $isLogsOpen = false} class="close-arrow">
                     <ArrowPlain/>
                 </button>
             </div>
         </div>
     {:else}
         <div in:fly={{x: 28, duration: 400, delay: 400}}>
-            <button on:click={() => isOpen = true} class="open-arrow">
+            <button on:click={() => $isLogsOpen = true} class="open-arrow">
                 <ArrowPlain class="left"/>
             </button>
         </div>
@@ -58,11 +58,10 @@
     .close-arrow {
         position: absolute;
         top: 0;
-        right: calc(50% - 2rem);
+        right: 0;
     }
 
     .close-arrow:hover {
-        width: calc(100% - 4px -0.75rem);
         transform: translateX(0.75rem);
     }
 </style>

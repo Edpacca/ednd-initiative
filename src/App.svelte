@@ -10,13 +10,11 @@
     import Toolbar from "./components/settingsMenu/SettingsMenu.svelte";
     import LockPage from "./components/lockToggle/LockPage.svelte";
     import { CreatureType } from "./lib/models/creature";
-    import { currentTheme, entities, isLocked } from "./store";
+    import { currentTheme, entities, isLocked, isModalOpen } from "./store";
 
     onMount(async () => {
       setTheme($currentTheme);
     });
-
-    let isLogOpen = true;
 </script>
 
 <Toolbar/>

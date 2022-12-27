@@ -7,7 +7,8 @@ type LogEntity = {
     name: string,
     type: EntityType,
     id: string,
-    playerClass?: PlayerClass
+    playerClass?: PlayerClass,
+    index: number
 }
 
 type Damage = { damage: number, logType: "damage" }
@@ -17,7 +18,7 @@ type Condition = { condition: string, logType: "condition" }
 type LogEntityDamage = LogEntity & Damage;
 type LogEntityLegendaryAction = LogEntity & LegendaryAction;
 type LogEntityCondition = LogEntity & Condition;
-type LogEntityAny = LogEntityDamage | LogEntityCondition | LogEntityLegendaryAction
+export type LogEntityAny = LogEntityDamage | LogEntityCondition | LogEntityLegendaryAction
 
 export class LogEntry {
     id: string;
@@ -31,7 +32,8 @@ export class LogEntry {
         this.owner = {
             name: entity.name ? entity.name : getBaseName(entity),
             type: entity.type,
-            id: entity.id
+            id: entity.id,
+            index: 0
         }
         
         this.id = entity.id;
@@ -51,25 +53,27 @@ export class LogEntry {
     }
 
     addLogEntityDamage(recipient: Creature, damage: number, index=0) {
-        const name = getBaseName(recipient);
+        const name = getBaseName(recipient, index);
         const playerClass = recipient.class;
         this.recipients.push({ 
             name, 
             damage, 
+            index,
             playerClass, 
             id: recipient.id,
             type: recipient.type, 
-            logType: "damage"
+            logType: "damage",
         });
     }
 
 
     addLogEntityCondition(recipient: Creature, condition: string, index=0) {
-        const name = getBaseName(recipient);
+        const name = getBaseName(recipient, index);
         const playerClass = recipient.class;
         this.recipients.push({
             name,
             condition,
+            index,
             playerClass,
             id: recipient.id,
             type: recipient.type,
@@ -78,7 +82,7 @@ export class LogEntry {
     }
 
     addLogEntityLegendaryActions(recipient: Creature, numberOfActions: number, index=0) {
-        const name = getBaseName(recipient);
+        const name = getBaseName(recipient, index);
         const existing = this.recipients.find(r => r.logType === "legendary" && r.id === recipient.id)
 
         if (existing) {
@@ -87,11 +91,16 @@ export class LogEntry {
         } else {
             this.recipients.push({
                 name,
+                index,
                 actions: numberOfActions,
                 id: recipient.id,
                 type: recipient.type,
                 logType: "legendary"});
         }
+    }
+
+    removeLogEntity(logEntity: LogEntityAny) {
+        this.recipients = this.recipients.filter(r => r !== logEntity);
     }
 }
 

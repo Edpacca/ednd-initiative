@@ -32,7 +32,7 @@
         width: 100%;
         top: calc(-1 * var(--table-padding));
         height: 100%;
-        background-color: var(--dark-grey);
+        background-color: var(--super-dark-grey);
         border: 3px solid var(--gold);
         border-radius: 0.5rem;
         z-index: -1;

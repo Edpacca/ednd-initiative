@@ -46,8 +46,8 @@
                 <HealthBar max={creature.hpMax} current={creature.hpCurrent[0]}/>
                 {#if creature.conditions[0].length > 0}
                     <div class="conditions">
-                        {#each creature.conditions as condition}
-                            <ConditionIcon condition={condition[0]} width="2rem"/>
+                        {#each creature.conditions[0] as condition}
+                            <ConditionIcon condition={condition} width="2rem"/>
                         {/each}
                     </div>
                 {/if}
@@ -85,7 +85,7 @@
     }
 
     .active, input.active::placeholder  {
-        background-color: var(--dark-grey) !important;
+        background-color: var(--suepr-dark-grey) !important;
         color: var(--gold) !important;
     }
     

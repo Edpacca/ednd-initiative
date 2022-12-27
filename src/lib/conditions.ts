@@ -13,8 +13,8 @@ export const CONDITIONS: string[] = [
     "restrained",
     "stunned",
     "unconscious",
-    "exhaustion-I",
-    "exhaustion-II",
-    "exhaustion-III",
-    "exhaustion-IV"
+    "exhausted-I",
+    "exhausted-II",
+    "exhausted-III",
+    "exhausted-IV"
 ]

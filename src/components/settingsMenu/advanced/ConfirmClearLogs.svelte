@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { currentLog, logs } from "../../../store";
+    import { logs } from "../../../store";
     import ConfirmationModal from "../../common/modal/ConfirmationModal.svelte";
     export let isOpen;
     export let close: () => void;

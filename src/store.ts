@@ -9,6 +9,7 @@ export const isLocked: Writable<boolean> = writable(false);
 export const isModalOpen: Writable<boolean> = writable(false);
 export const isStarted: Writable<boolean> = writable(false);
 export const isSettingsOpen: Writable<boolean> = writable(false);
+export const isLogsOpen: Writable<boolean> = writable(false);
 export const currentRound: Writable<number> = writable(getLocalStorageRound() ?? 1);
 export const activeEntityTurnIndex: Writable<number> = writable(0);
 export const currentTheme: Writable<string> = writable(getLocalStorageTheme() ?? "stone");
@@ -45,4 +46,10 @@ export function appendLegendaryActionsToCurrentLog(entity: Creature, actions: nu
     const current = get(currentLog);
     current.addLogEntityLegendaryActions(entity, actions, index);
     currentLog.set(current);
+}
+
+export function updateSingleEntity(entity: Entity) {
+    entities.update(ents => ents.map(e => {
+        return e.id === entity.id ? entity : e;
+    }));
 }

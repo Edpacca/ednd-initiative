@@ -305,6 +305,7 @@ select {
     border: 1px solid var(--grey);
     border-radius: var(--border-radius);
     font-weight: bold;
+    transition: var(--transition-time);
 }
 
 .submit-button:hover {
@@ -370,7 +371,6 @@ tr {
 
 .condition-icon {
     fill: var(--white);
-    /* stroke: var(--white); */
 }
 
 .conditions {

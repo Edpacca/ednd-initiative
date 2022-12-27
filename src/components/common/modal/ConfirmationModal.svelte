@@ -7,7 +7,7 @@
 
     let confirm = () => {
         confirmaCallback();
-        $isSettingsOpen = false
+        $isSettingsOpen = false;
     }
 
     export let cancelCallback: () => void = () => { 

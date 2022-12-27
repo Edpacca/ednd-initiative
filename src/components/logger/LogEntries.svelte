@@ -1,6 +1,9 @@
 <script lang="ts">
     import { currentLog, currentRound, logs } from "../../store";
+    import ConfirmClearLogs from "../settingsMenu/advanced/ConfirmClearLogs.svelte";
     import LogTurn from "./LogTurn.svelte";
+
+    let isClearingLogs = false;
 
     const scrollToBottom = (node, list) => {
         const scroll = () => node.scroll({
@@ -29,7 +32,13 @@
         </div>
     {/if}
 </div>
-<div class="top-mask"></div>
+<div class="top-mask">
+    {#if $logs.length > 0}
+        <button class="submit-button" on:click={() => isClearingLogs = true}>Clear logs</button>
+    {/if}
+</div>
+
+<ConfirmClearLogs isOpen={isClearingLogs} close={() => isClearingLogs = false}/>
 
 <style>
     .top-mask {
@@ -38,14 +47,15 @@
         right: 2px;
         width: calc(100% - 4px);
         height: 3rem;
-        background: linear-gradient(var(--dark-grey) 65%, transparent);
+        background-color: var(--dark-grey);
+        border-bottom: 1px solid var(--grey);
     }
     .log-round {
         padding-top: 0.5rem;
     }
 
     .log-round:not(:first-child) {
-        border-top: 4px solid var(--light-grey);
+        border-top: 2px solid var(--light-grey);
     }
 
     .log-panel {
@@ -56,14 +66,21 @@
         max-height: 93vh;
         overflow-y: scroll;
         position: relative;
-        padding-top: 2rem;
+        padding: calc(3rem + 2px) 0 0.5rem 0.5rem;
     }
 
     .current-turn {
         border: 2px solid var(--gold);
         border-radius: var(--border-radius);
-        filter: drop-shadow(0 0 var(--dropshadow-size) var(--gold));
-        background-color: var(--dark-grey);
+        background-color: var(--super-dark-grey);
+        padding: 0.5rem 0;
     }
 
+    .submit-button {
+        color: var(--light-grey);
+    }
+
+    .submit-button:hover {
+        color: var(--white);
+    }
 </style>

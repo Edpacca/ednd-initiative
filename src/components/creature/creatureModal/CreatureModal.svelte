@@ -37,7 +37,6 @@
         if (isSelected) {
             if (event.key === "Tab") {
                 event.preventDefault();
-                console.log("TAB modal ----------")
                 switch(focused) {
                     case "damage":
                         healingInput.focus();

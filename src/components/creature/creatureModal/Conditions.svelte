@@ -39,7 +39,6 @@
                 submit(value);
             }
         } else if (event.key === "Tab") {
-            console.log("TAB condition ---------")
          if(value && filteredConditions.length > 0) {
             value = filteredConditions[0];
             conditionInput.select();
