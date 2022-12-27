@@ -84,7 +84,4 @@
   hr {
     margin: 2em 0
   }
-
-
-
 </style>

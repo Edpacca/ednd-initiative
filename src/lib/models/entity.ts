@@ -11,7 +11,6 @@ export class Entity {
 
     constructor() {
         this.id = v4();
-        console.log(this.id);
     }
 }
 

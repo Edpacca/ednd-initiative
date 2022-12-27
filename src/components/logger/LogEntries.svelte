@@ -29,8 +29,17 @@
         </div>
     {/if}
 </div>
+<div class="top-mask"></div>
 
 <style>
+    .top-mask {
+        position: absolute;
+        top: 2px;
+        right: 2px;
+        width: calc(100% - 4px);
+        height: 3rem;
+        background: linear-gradient(var(--dark-grey) 65%, transparent);
+    }
     .log-round {
         padding-top: 0.5rem;
     }
@@ -47,7 +56,6 @@
         max-height: 93vh;
         overflow-y: scroll;
         position: relative;
-        z-index: -1;
         padding-top: 2rem;
     }
 

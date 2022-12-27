@@ -1,7 +1,5 @@
 <script>
     import Arrow from "../../graphics/icons/arrow.svelte";
-
-
     export let isActive = false;
 </script>
 

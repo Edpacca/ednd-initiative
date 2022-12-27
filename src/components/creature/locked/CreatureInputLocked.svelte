@@ -4,12 +4,13 @@
     import Minions from "../minion/Minions.svelte";
     import LegendaryActionsValue from "../../common/values/LegendaryActionsValue.svelte";
     import ConditionIcon from "../../common/icons/ConditionIcon.svelte";
-    import { appenLegendaryActionsToCurrentLog } from "../../../store";
+    import { appendLegendaryActionsToCurrentLog } from "../../../store";
 
     export let creature: Creature;
     export let isActive = false;
     export let isSelected = false;
     export let selectedIndex = 0;
+
 
     $: isMinion = creature.type === CreatureType.Minion;
     $: isPlayer = creature.type === CreatureType.Player;
@@ -17,10 +18,9 @@
 
     const logLegendaryAction = () => {
         if (isBoss) {
-            appenLegendaryActionsToCurrentLog(creature, 1);
+            appendLegendaryActionsToCurrentLog(creature, 1);
         }
     }
-
 </script>
 
 <div class="entity-area" class:boss-grid={isBoss}>

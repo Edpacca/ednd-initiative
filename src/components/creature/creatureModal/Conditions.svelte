@@ -2,6 +2,7 @@
     import { CONDITIONS } from "../../../lib/conditions";
     import { appendConditionToCurrentLog } from "../../../store";
     import PlusMinusButton from "../../common/buttons/PlusMinusButton.svelte";
+    import FilterList from "../../common/FilterList.svelte";
     import ConditionIcon from "../../common/icons/ConditionIcon.svelte";
     import type { FocusType } from "./focusType";
     export let conditions: string[];
@@ -21,7 +22,7 @@
         listHasFocus = false;
     }
    
-    const onKeyup = (event: KeyboardEvent) => {
+    const onKeydown = (event: KeyboardEvent) => {
         if (event.key === "ArrowUp") {
             filteredIndex = Math.max(filteredIndex - 1, 0);
             listHasFocus = true;
@@ -60,21 +61,12 @@
                 bind:value
                 bind:this={conditionInput}
                 on:focusin={() => focused = "condition"}
-                on:keydown={e => onKeyup(e)}
+                on:keydown={e => onKeydown(e)}
                 tabindex={1}/>
             <PlusMinusButton type="+" onClick={() => submit(value)} width="2rem"/>
         </div>
         {#if (value || listHasFocus) && focused === "condition" && filteredConditions.length > 0}
-            <div class="filter-list">
-                <ul>
-                    {#each filteredConditions as condition, i}
-                        <!-- svelte-ignore a11y-click-events-have-key-events -->
-                        <li on:click={() => submit(condition)} class:highlighted={listHasFocus && i === filteredIndex}>
-                            {condition}
-                        </li>
-                    {/each}
-                </ul>
-            </div>
+            <FilterList filtered={filteredConditions} onLiClick={submit} filteredIndex={filteredIndex}/>    
         {/if}
     </div>
     {#if conditions && conditions.length > 0}
@@ -126,42 +118,5 @@
 
     .search-header {
         position: relative;
-    }
-
-    .filter-list {
-        position: absolute;
-        background: var(--dark-grey);
-        color: var(--light-grey);
-        border: 1px solid var(--light-grey);
-        width: calc(100%);
-        text-align: left;
-        top: 1.8rem;
-        border-radius: var(--border-radius);
-        display: flex;
-        flex-direction: column;
-    }
-
-    li {
-        list-style: none;
-        border-top: 1px solid var(--light-grey);
-        text-transform: capitalize;
-        cursor: pointer;
-    }
-
-    li:hover {
-        color: var(--white);
-        background-color: var(--light-grey);
-    }
-
-    ul {
-        padding: 0 0.5rem;
-        max-height: 20rem;
-        overflow-y: scroll;
-        margin: 0.5rem 0;
-    }
-
-    .highlighted {
-        background: var(--light-grey);
-        color: var(--white);
     }
 </style> 

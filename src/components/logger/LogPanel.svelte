@@ -9,16 +9,16 @@
 <div class="log-panel-container">
     {#if isOpen}
         <div in:fly={flyIn} out:fly={flyIn} class="panel-button-container">
+            <LogEntries/>
             <div>
-                <button on:click={() => isOpen = !isOpen} class="close-arrow">
+                <button on:click={() => isOpen = false} class="close-arrow">
                     <ArrowPlain/>
                 </button>
             </div>
-            <LogEntries/>
         </div>
     {:else}
         <div in:fly={{x: 28, duration: 400, delay: 400}}>
-            <button on:click={() => isOpen = !isOpen} class="open-arrow">
+            <button on:click={() => isOpen = true} class="open-arrow">
                 <ArrowPlain class="left"/>
             </button>
         </div>
@@ -42,7 +42,7 @@
         background: none;
         fill: var(--light-grey);
         border: none;
-        width: 4rem;
+        height: 2.5rem;
         padding: 0.5rem;
         transition: var(--transition-time);
     }
@@ -57,10 +57,12 @@
 
     .close-arrow {
         position: absolute;
-        right: 0;
+        top: 0;
+        right: calc(50% - 2rem);
     }
 
     .close-arrow:hover {
+        width: calc(100% - 4px -0.75rem);
         transform: translateX(0.75rem);
     }
 </style>

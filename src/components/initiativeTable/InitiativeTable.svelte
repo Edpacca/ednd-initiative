@@ -4,7 +4,7 @@
     import CreatureRowLocked from "../creature/locked/CreatureRowLocked.svelte";
     import EffectRowLocked from "../effects/EffectRowLocked.svelte";
     import Speed from "../../graphics/icons/speed.svelte";
-    import { CREATURES } from "../../lib/typeFilters";
+    import { CREATURE_TYPES } from "../../lib/typeFilters";
     import { EffectType } from "../../lib/models/effect";
     import { LogEntry } from "../logger/logEntry";
     import { fade } from "svelte/transition";
@@ -46,7 +46,7 @@
     </thead>
     <tbody class="relative">
         {#each $entities as entity, index}
-            {#if CREATURES.includes(entity.type)}
+            {#if CREATURE_TYPES.includes(entity.type)}
                 <CreatureRowLocked bind:creature={entity} isActive={index === $activeEntityTurnIndex}/>
             {:else if entity.type === EffectType.Effect}
                 <EffectRowLocked bind:effect={entity} isActive={index === $activeEntityTurnIndex}/>

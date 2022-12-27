@@ -8,10 +8,10 @@
     import CreatureRowUnlocked from "../creature/unlocked/CreatureRowUnlocked.svelte";
     import Speed from "../../graphics/icons/speed.svelte";
     import type { EntityType } from "../../lib/models/entity";
-    import { CREATURES } from "../../lib/typeFilters";
+    import { CREATURE_TYPES } from "../../lib/typeFilters";
     
     export let typeFilter: EntityType[];
-    $: creatures = $entities.filter(e => CREATURES.includes(e.type) && typeFilter.includes(e.type));
+    $: creatures = $entities.filter(e => CREATURE_TYPES.includes(e.type) && typeFilter.includes(e.type));
 
     const addCreature = () => {
         if (typeFilter.includes(CreatureType.Player)) {

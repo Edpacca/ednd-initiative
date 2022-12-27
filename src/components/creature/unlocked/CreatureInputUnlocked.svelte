@@ -7,9 +7,19 @@
     import { CreatureType, type Creature } from "../../../lib/models/creature";
     import Minions from "../minion/Minions.svelte";
     import LegendaryActionsInput from "../../common/values/LegendaryActionsInput.svelte";
+    import { CREATURES, type CreatureData } from "../../../lib/creatureData";
+    import FilterList from "../../common/FilterList.svelte";
 
     export let removeCreature: (e: Creature) => void;
     export let creature: Creature;
+    let isInputFocused = false;
+    let filteredIndex = 0;
+
+    $: isMinion = creature.type === CreatureType.Minion;
+    $: isPlayer = creature.type === CreatureType.Player;
+    $: isBoss = creature.type === CreatureType.Boss;
+    $: creature, setLocalStorageEntities($entities);
+    $: filteredCreatures = CREATURES.filter(c => c.name.toLowerCase().startsWith(creature.name.toLowerCase())).slice(0, 7);
 
     const addMinion = () => {
         creature.quantity++;
@@ -23,12 +33,28 @@
         creature.conditions = creature.conditions.slice(0, -1);
     }
 
-    $: isMinion = creature.type === CreatureType.Minion;
-    $: isPlayer = creature.type === CreatureType.Player;
-    $: isBoss = creature.type === CreatureType.Boss;
+    const setFromCreatureData = (creatureData: CreatureData) => {
+        creature.name = creatureData.name;
+        creature.ac = creatureData.ac;
+        creature.hpMax = creatureData.hp;
+        creature.hpCurrent.fill(creatureData.hp);
+        creature.bonus = Math.floor((creatureData.dex - 10) / 2);
+        isInputFocused = false;
+    }
 
-    $: creature, setLocalStorageEntities($entities);
-
+    const onKeydown = (event: KeyboardEvent) => {
+        if (isInputFocused) {
+            if (event.key === "ArrowUp") {
+                filteredIndex = Math.max(filteredIndex - 1, 0);
+            } else if (event.key === "ArrowDown") {
+                filteredIndex = Math.min(filteredIndex + 1, filteredCreatures.length - 1);
+            } else if (event.key === "Enter" || event.key === "Tab") {
+                setFromCreatureData(filteredCreatures[filteredIndex]);
+                event.preventDefault();
+                event.stopPropagation();
+            }
+        }
+    }
 </script>
 
 <div class="entity-area" class:minion-grid={isMinion} class:boss-grid={isBoss}>
@@ -38,9 +64,20 @@
     <div class="name-input-container">
         <input 
             bind:value={creature.name}
+            on:focusin={() => isInputFocused = true}
+            on:focusout={() => isInputFocused = false}
+            on:keydown={e => onKeydown(e)}
+            tabindex={1}
             type="text"
             class:minion-input={creature.type === CreatureType.Minion}
             placeholder={isPlayer ? creature.class : "Creature"}/>
+        {#if !isPlayer && isInputFocused && creature.name}
+            <FilterList 
+                filtered={filteredCreatures}
+                filteredIndex={filteredIndex}              
+                key="name"
+                onLiClick={setFromCreatureData}/>
+        {/if}
         {#if !isMinion}
             <HealthBar max={creature.hpMax} current={creature.hpCurrent}/>
         {/if}
@@ -59,7 +96,6 @@
 
 
 <style>
-
     .name-input-container {
         position: relative;
     }
@@ -86,8 +122,6 @@
         background: var(--dark-grey);
         color: var(--secondary);
     }
-
-
 
     .xbutton {
         position: absolute;

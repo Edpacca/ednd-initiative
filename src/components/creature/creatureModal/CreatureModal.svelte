@@ -42,22 +42,18 @@
                     case "damage":
                         healingInput.focus();
                         focused = "healing";
-                        console.log("healing");
                         break;
                     case "healing":
                         conditionInput.focus();
                         focused = "condition";
-                        console.log("condition");
                         break;
                     case "condition":
                         if (conditionInputValue) {
                             conditionInput.focus();
                             conditionInput.select();
-                            console.log("auto-complete condition")
                         } else {
                             damageInput.focus();
                             focused = "damage";
-                            console.log("damage");
                             break;
                         }
                 }
@@ -68,8 +64,6 @@
             event.stopPropagation();
         }
     }
-
-    $: console.log("focus: " + focused);
 </script>
 
 {#if isSelected}

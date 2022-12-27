@@ -5,7 +5,7 @@
     import { dRoll } from "../../lib/dieRoll";
     import { CreatureType } from "../../lib/models/creature";
     import { EffectType } from "../../lib/models/effect";
-    import { ENEMY_CREATURES } from "../../lib/typeFilters";
+    import { ENEMY_CREATURE_TYPES } from "../../lib/typeFilters";
     import { activeEntityTurnIndex, currentRound, entities } from "../../store";
     import CheckboxIcon from "../common/buttons/CheckboxIcon.svelte";
     import D20Button from "../common/buttons/D20Button.svelte";
@@ -24,7 +24,7 @@
         let typeFilter = [];
         if (rollingPlayers) typeFilter.push(CreatureType.Player);
         if (rollingEffects) typeFilter.push(EffectType.Effect);
-        if (rollingEnemies) typeFilter = typeFilter.concat(ENEMY_CREATURES);
+        if (rollingEnemies) typeFilter = typeFilter.concat(ENEMY_CREATURE_TYPES);
 
         const buffer = $entities.map(e => {
             if (typeFilter.includes(e.type) && (override || !e.initiative)) {

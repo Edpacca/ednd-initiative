@@ -10,7 +10,7 @@
     import ConfirmLoad from "./ConfirmLoad.svelte";
     import { EffectType } from "../../../lib/models/effect";
     import Cave from "../../../graphics/icons/cave.svelte";
-    import { ENEMY_CREATURES } from "../../../lib/typeFilters";
+    import { ENEMY_CREATURE_TYPES } from "../../../lib/typeFilters";
     import type { EntityType } from "../../../lib/models/entity";
 
     enum State { None, Load, Delete }

@@ -41,7 +41,7 @@ export function appendConditionToCurrentLog(entity: Creature, condition: string,
     currentLog.set(current);
 }
 
-export function appenLegendaryActionsToCurrentLog(entity: Creature, actions: number, index=0) {
+export function appendLegendaryActionsToCurrentLog(entity: Creature, actions: number, index=0) {
     const current = get(currentLog);
     current.addLogEntityLegendaryActions(entity, actions, index);
     currentLog.set(current);
