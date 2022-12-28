@@ -269,6 +269,16 @@ input:focus {
     width: 100%;
 }
 
+.enchanted-input {
+    border: 2px solid aqua;
+    background: var(--grey);
+    color: aqua;
+}
+
+.enchanted-input:focus {
+    background: var(--grey);
+}
+
 .dead {
     background: var(--dark-grey);
     color: transparent;

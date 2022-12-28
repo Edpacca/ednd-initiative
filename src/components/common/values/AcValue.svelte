@@ -1,10 +1,13 @@
 <script lang="ts">
-    import Shield from "../../../graphics/icons/shield.svelte";
+    import { scale } from "svelte/transition";
+    import ShieldBroken from "../../../graphics/icons/shield-broken.svelte";
+import Shield from "../../../graphics/icons/shield.svelte";
     import NumberStringInput from "./NumberStringInput.svelte";
     export let value;
     let isBonusOpen = false;
     let bonus = 0;
-    $: isEnchanted = bonus !== 0;
+    $: isEnchanted = bonus > 0;
+    $: isCursed = bonus < 0;
 
     const handleClick = () => {
         if (!isBonusOpen) {
@@ -13,17 +16,28 @@
             isBonusOpen = false;
         }
     }
+
+    const closeTimeout = async() => {
+        setTimeout(() => isBonusOpen = false, 3500);
+    }
+
+    $: bonus, closeTimeout();
 </script>
 
-<button class="ac svg-fit-container" class:enchanted={isEnchanted} on:click={handleClick} on:contextmenu|preventDefault={() => isBonusOpen = !isBonusOpen}>
+<button class="ac svg-fit-container" class:enchanted={isEnchanted} class:cursed={isCursed} on:click={handleClick} on:contextmenu|preventDefault={() => isBonusOpen = !isBonusOpen}>
     <div class="svg-fit">
-        <Shield/>
+        {#if isCursed}
+            <ShieldBroken/>    
+        {:else}
+            <Shield/>
+        {/if}
     </div>
     <div class="value">{value + bonus}</div>
 </button>
 {#if isBonusOpen}
-    <div class="bonus-popup">
-        <NumberStringInput bind:value={bonus} showPlus={true}/>
+    <div class="bonus-popup" in:scale out:scale>
+        <div class="bonus-text">mod</div>
+        <NumberStringInput bind:value={bonus} showPlus={true} class="enchanted-input" onChange={() => console.log("test")}/>
     </div>
 {/if}
 
@@ -53,11 +67,22 @@
         fill: aqua;
     }
 
+    .cursed {
+        filter: drop-shadow(0 0 4px var(--red));
+    }
+
     .bonus-popup {
         position: absolute;
-        width: 3rem;
-        height: 3rem;
+        width: 2.5rem;
+        height: 2.5rem;
         z-index: 20;
     }
 
+    .bonus-text {
+        color: aqua;
+        font-weight: bold;
+        text-align: center;
+        background: var(--dark-grey);
+        border-radius: var(--border-radius);
+    }
 </style>

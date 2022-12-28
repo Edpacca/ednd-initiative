@@ -12,6 +12,10 @@
 <div class="value-container" class:hidden={isHidden} 
     on:mouseenter={() => isHovered = true}
     on:mouseleave={() => isHovered = false}>
-        <input type="text" bind:value={valueString} hidden={isHidden}/>
+        <input 
+            class={$$props.class}
+            type="text"
+            bind:value={valueString}
+            hidden={isHidden}/>
         <ValueSpinner bind:value isHidden={!isHovered}/>
 </div>
