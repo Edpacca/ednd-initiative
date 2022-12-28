@@ -1,9 +1,12 @@
 <script lang="ts">
     import type { PlayerClass } from "../../../lib/models/playerClass";
+    import IconGridSelect from "../IconGridSelect.svelte";
 
     export let icon: PlayerClass | undefined;
     export let isDisabled = false;
     export let onClick = () => {};
+
+    let isIconGridOpen = false;
 
     const rotate = () => {
         if (isDisabled) {
@@ -27,7 +30,7 @@
     }
 </script>
 
-<button class="entity-type-button svg-fit-container gold" on:click={() => rotate()}>
+<button class="entity-type-button svg-fit-container gold" on:click={() => rotate()} on:contextmenu|preventDefault={() => isIconGridOpen = !isIconGridOpen}>
     {#if icon}
         <svg
             class="relative"
@@ -36,3 +39,7 @@
         </svg>
     {/if}
 </button>
+
+{#if isIconGridOpen}
+    <IconGridSelect/>
+{/if}

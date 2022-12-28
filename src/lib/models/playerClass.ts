@@ -13,7 +13,7 @@ export type PlayerClass =
 "Wizard" |
 "Artificer"
 
-export const PLAYER_CLASSES = [
+export const PLAYER_CLASSES: PlayerClass[] = [
     "Barbarian",
     "Bard",
     "Cleric",
