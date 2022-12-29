@@ -1,5 +1,6 @@
 <script lang="ts">
     import { clearLocalStorage } from "../../../lib/persistance";
+    import { clearLogs } from "../../../store";
     import ConfirmationModal from "../../common/modal/ConfirmationModal.svelte";
     import { reset } from "./reset";
     export let isOpen;
@@ -7,6 +8,7 @@
 
     const clear = () => {
         clearLocalStorage();
+        clearLogs();
         reset();
         close();
     }

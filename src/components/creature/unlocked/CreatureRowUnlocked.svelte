@@ -9,20 +9,47 @@
     import NumberStringInput from "../../common/values/NumberStringInput.svelte";
     import NumberInput from "../../common/values/NumberInput.svelte";
     import MaxHpInput from "../../common/values/MaxHpInput.svelte";
-    import PlayerIcon from "../../common/buttons/PlayerIconSwitch.svelte";
+    import PlayerIconSwitch from "../../common/buttons/PlayerIconSwitch.svelte";
     import CreatureToggle from "../../common/buttons/CreatureToggle.svelte";
 
     export let creature: Creature;
+    export let index: number;
+    export let iconGridIndex = [false, 0];
+    $: isIconGridOpen = iconGridIndex[0] && index === iconGridIndex[1];
+    export let setIconGridIndex: (isOpen: boolean, index: number) => void;
     export let removeCreature: () => void;
     
     const setHpCurrent = (value: number) => creature.hpCurrent.fill(value);
+
+    const toggleIconGrid = () => {
+        isIconGridOpen = !isIconGridOpen;
+    }
+    const rotatePlayerIcon = () => {
+        if (creature.type === CreatureType.Player) {
+            creature.playerClass = 
+            creature.playerClass === "Artificer" ? "Barbarian" :
+            creature.playerClass ==="Barbarian" ? "Bard" :
+            creature.playerClass === "Bard" ? "Cleric" :
+            creature.playerClass === "Cleric" ? "Druid" :
+            creature.playerClass === "Druid" ? "Fighter" :
+            creature.playerClass === "Fighter" ? "Monk" :
+            creature.playerClass === "Monk" ? "Paladin" :
+            creature.playerClass === "Paladin" ? "Ranger" :
+            creature.playerClass === "Ranger" ? "Rogue" :
+            creature.playerClass === "Rogue" ? "Sorcerer" :
+            creature.playerClass === "Sorcerer" ? "Warlock" :
+            creature.playerClass === "Warlock" ? "Wizard" :
+            "Artificer";
+        }
+    }
+    $: setIconGridIndex(isIconGridOpen, index)
     $: creature, setLocalStorageEntities($entities);
 </script>
 
 <tr>
     <td class="flex-col">
         {#if creature.type === CreatureType.Player}
-            <PlayerIcon bind:icon={creature.class}/>
+            <PlayerIconSwitch bind:icon={creature.playerClass} bind:isIconGridOpen onClick={rotatePlayerIcon} onRightClick={toggleIconGrid}/>
         {:else}
             <CreatureToggle bind:type={creature.type} allowedTypes={[CreatureType.Enemy, CreatureType.Minion, CreatureType.Boss]}/>
         {/if}

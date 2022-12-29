@@ -3,7 +3,7 @@ import { Entity } from "./entity";
 import { getRandomClass, type PlayerClass } from "./playerClass";
 
 export class Creature extends Entity {
-    class?: PlayerClass;
+    playerClass?: PlayerClass;
     quantity?: number;
     laMax?: number;
     laCurrent?: number;
@@ -25,7 +25,7 @@ export class Creature extends Entity {
         this.effects = [[]];
         this.hpCurrent = [10];
         if (type === CreatureType.Player) {
-            this.class = getRandomClass();
+            this.playerClass = getRandomClass();
         }
 
         Object.setPrototypeOf(this, Creature.prototype);

@@ -5,7 +5,7 @@
 </script>
 
 <svg
-    class="gold relative"
+    class={`${$$props.class} relative`}
     width={width} height={width}>
     <use href={`icons/classes.svg#${playerClass.toLowerCase()}`}/>
 </svg>

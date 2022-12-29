@@ -30,7 +30,7 @@
 <tr>
     <ActiveEntityIndicator isActive={isActive}/>
     <td class="flex-col">
-        <CreatureIconSelect type={creature.type} playerClass={creature.class} bind:isSelected isDisabled={true}/>
+        <CreatureIconSelect type={creature.type} playerClass={creature.playerClass} bind:isSelected/>
     </td>
     <td>
        <CreatureInputLocked bind:isActive bind:creature={creature} bind:isSelected/>

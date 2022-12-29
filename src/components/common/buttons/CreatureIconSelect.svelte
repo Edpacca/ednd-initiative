@@ -6,15 +6,13 @@
     import type { EntityType } from "../../../lib/models/entity";
     import type { PlayerClass } from "../../../lib/models/playerClass";
     import PlayerIconSwitch from "./PlayerIconSwitch.svelte";
-
     export let type: EntityType;
     export let playerClass: PlayerClass | undefined = undefined;
     export let isSelected = false;
-    export let isDisabled = false;
 </script>
 
 {#if type === CreatureType.Player && playerClass}
-    <PlayerIconSwitch bind:icon={playerClass} isDisabled={isDisabled} onClick={() => isSelected = true}/>
+    <PlayerIconSwitch bind:icon={playerClass} onClick={() => isSelected = true}/>
 {:else}
     <button class="entity-type-button" on:click={() => isSelected = true}>
         {#if type === CreatureType.Enemy}

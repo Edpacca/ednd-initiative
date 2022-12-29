@@ -39,7 +39,7 @@ export class LogEntry {
         this.id = entity.id;
 
         if (entity.type === CreatureType.Player) {
-            this.owner.playerClass = (entity as Creature).class;
+            this.owner.playerClass = (entity as Creature).playerClass;
         }
 
         this.round = round;
@@ -54,7 +54,7 @@ export class LogEntry {
 
     addLogEntityDamage(recipient: Creature, damage: number, index=0) {
         const name = getBaseName(recipient, index);
-        const playerClass = recipient.class;
+        const playerClass = recipient.playerClass;
         this.recipients.push({ 
             name, 
             damage, 
@@ -69,7 +69,7 @@ export class LogEntry {
 
     addLogEntityCondition(recipient: Creature, condition: string, index=0) {
         const name = getBaseName(recipient, index);
-        const playerClass = recipient.class;
+        const playerClass = recipient.playerClass;
         this.recipients.push({
             name,
             condition,
@@ -107,6 +107,6 @@ export class LogEntry {
 function getBaseName(entity: Entity, index = 0): string {
     const baseName = entity.name ? entity.name 
         : entity.type === CreatureType.Player 
-        ? (entity as Creature).class : entity.type.toString();
+        ? (entity as Creature).playerClass : entity.type.toString();
         return entity.type === CreatureType.Minion ? `${baseName}#${index}` : baseName;
 }

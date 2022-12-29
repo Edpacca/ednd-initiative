@@ -22,9 +22,18 @@ export function setModalOpen(isOpen: boolean) {
     isModalOpen.set(isOpen);
 }
 
+function setCurrentLog() {
+    currentLog.set(new LogEntry(get(entities)[get(activeEntityTurnIndex)], get(currentRound)));
+}
+
 export function storeCurrentLog() {
     logs.update(l => [...l, get(currentLog)]);
-    currentLog.set(new LogEntry(get(entities)[get(activeEntityTurnIndex)], get(currentRound)));
+    setCurrentLog();
+}
+
+export function clearLogs() {
+    logs.set([]);
+    setCurrentLog();
 }
 
 export function storeCurrentRound() {

@@ -70,7 +70,7 @@
             tabindex={1}
             type="text"
             class:minion-input={creature.type === CreatureType.Minion}
-            placeholder={isPlayer ? creature.class : "Creature"}/>
+            placeholder={isPlayer ? creature.playerClass : "Creature"}/>
         {#if !isPlayer && isInputFocused && creature.name}
             <FilterList 
                 filtered={filteredCreatures}

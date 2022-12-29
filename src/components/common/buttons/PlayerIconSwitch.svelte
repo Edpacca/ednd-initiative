@@ -3,34 +3,12 @@
     import IconGridSelect from "../IconGridSelect.svelte";
 
     export let icon: PlayerClass | undefined;
-    export let isDisabled = false;
+    export let isIconGridOpen = false;
     export let onClick = () => {};
-
-    let isIconGridOpen = false;
-
-    const rotate = () => {
-        if (isDisabled) {
-            onClick();
-        } else {
-            icon = 
-            icon === "Artificer" ? "Barbarian" :
-            icon ==="Barbarian" ? "Bard" :
-            icon === "Bard" ? "Cleric" :
-            icon === "Cleric" ? "Druid" :
-            icon === "Druid" ? "Fighter" :
-            icon === "Fighter" ? "Monk" :
-            icon === "Monk" ? "Paladin" :
-            icon === "Paladin" ? "Ranger" :
-            icon === "Ranger" ? "Rogue" :
-            icon === "Rogue" ? "Sorcerer" :
-            icon === "Sorcerer" ? "Warlock" :
-            icon === "Warlock" ? "Wizard" :
-            "Artificer";
-        }
-    }
+    export let onRightClick = () => {};
 </script>
 
-<button class="entity-type-button svg-fit-container gold" on:click={() => rotate()} on:contextmenu|preventDefault={() => isIconGridOpen = !isIconGridOpen}>
+<button class="entity-type-button svg-fit-container gold" on:click={onClick} on:contextmenu|preventDefault={onRightClick}>
     {#if icon}
         <svg
             class="relative"
@@ -41,5 +19,5 @@
 </button>
 
 {#if isIconGridOpen}
-    <IconGridSelect/>
+    <IconGridSelect bind:playerClass={icon} bind:isOpen={isIconGridOpen}/>
 {/if}

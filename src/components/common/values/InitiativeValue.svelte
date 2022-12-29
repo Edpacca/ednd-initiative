@@ -1,4 +1,7 @@
 <script lang="ts">
+    import { isLocked } from "../../../store";
+
+
     export let initiative;
     export let bonus = 0;
 
@@ -15,7 +18,7 @@
     }
 </script>
 
-<input type="number" value={total} on:input={e => setInitiative(e)}/>
+<input type="number" placeholder={!total && $isLocked ? "?" : ""} value={total} on:input={e => setInitiative(e)}/>
 
 <style>
     input[type=number] {
@@ -36,5 +39,9 @@
 
     input[type=number] {
         -moz-appearance: textfield;
+    }
+
+    input::placeholder {
+        color: var(--white);
     }
 </style>    

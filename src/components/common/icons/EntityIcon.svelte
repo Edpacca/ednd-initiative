@@ -14,7 +14,7 @@
 </script>
 
 {#if type === CreatureType.Player && playerClass}
-    <PlayerClassIcon playerClass={playerClass}/>
+    <PlayerClassIcon playerClass={playerClass} class="gold"/>
 {:else if type === CreatureType.Enemy}
     <Enemy class="primary"/>
 {:else if type === CreatureType.Minion}

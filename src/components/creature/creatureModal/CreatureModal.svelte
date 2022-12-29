@@ -73,7 +73,7 @@
             </div>
             <div in:fade>
                 <div class="creature-info">
-                    <CreatureIconSelect type={creature.type} playerClass={creature.class} isDisabled={true}/>
+                    <CreatureIconSelect type={creature.type} playerClass={creature.playerClass} isDisabled={true}/>
                     <CreatureInputLocked creature={creature} bind:selectedIndex={index}/>
                     {#if isMinion}
                         <div class="minion-hp-container">

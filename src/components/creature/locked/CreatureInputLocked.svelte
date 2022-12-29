@@ -31,7 +31,7 @@
             class:active={isActive}
             disabled
             class:minion-main-name={creature.type === CreatureType.Minion}
-            placeholder={isPlayer ? creature.class : "Creature"}
+            placeholder={isPlayer ? creature.playerClass : "Creature"}
             on:click={() => isSelected = true}/>
             {#if isMinion}
                 <Minions

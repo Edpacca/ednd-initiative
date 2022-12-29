@@ -9,8 +9,10 @@
     import Speed from "../../graphics/icons/speed.svelte";
     import type { EntityType } from "../../lib/models/entity";
     import { CREATURE_TYPES } from "../../lib/typeFilters";
+    import IconGridSelect from "../common/IconGridSelect.svelte";
     
     export let typeFilter: EntityType[];
+    let openIconGridIndex = [false, 0];
     $: creatures = $entities.filter(e => CREATURE_TYPES.includes(e.type) && typeFilter.includes(e.type));
 
     const addCreature = () => {
@@ -30,9 +32,13 @@
         $entities = $entities.filter(e => e !== entity);
         setLocalStorageEntities($entities);
     }
+
+    const setIconGridIndex = (isOpen: boolean, index: number) => {
+        openIconGridIndex = [isOpen, index];
+    }
 </script>
 
-
+<div>{openIconGridIndex[0]} {openIconGridIndex[1]}</div>
 <AddRemove add={addCreature} remove={removeLastCreature}/>
 <table>
     <thead class="secondary">
@@ -61,7 +67,12 @@
     </thead>
     <tbody>
         {#each creatures as creature, i}
-            <CreatureRowUnlocked {creature} removeCreature={() => removeCreature(creature)}/>
+            <CreatureRowUnlocked 
+                {creature}
+                removeCreature={() => removeCreature(creature)}
+                index={i}
+                bind:iconGridIndex={openIconGridIndex}
+                setIconGridIndex={setIconGridIndex}/>
         {/each}
     </tbody>
 </table>

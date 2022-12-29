@@ -181,6 +181,10 @@ input:focus {
     width: 3rem;
 }
 
+button:active, button:focus {
+    outline: none;
+}
+
 .entity-type-button {
     background: none;
     border: none;
