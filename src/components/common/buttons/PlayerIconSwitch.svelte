@@ -1,9 +1,11 @@
 <script lang="ts">
     import type { PlayerClass } from "../../../lib/models/playerClass";
+    import { activePlayerIndex } from "../../../store";
     import IconGridSelect from "../IconGridSelect.svelte";
 
     export let icon: PlayerClass | undefined;
-    export let isIconGridOpen = false;
+    export let isIconGridOpen;
+    export let index: number;
     export let onClick = () => {};
     export let onRightClick = () => {};
 </script>
@@ -18,6 +20,6 @@
     {/if}
 </button>
 
-{#if isIconGridOpen}
+{#if isIconGridOpen && $activePlayerIndex === index}
     <IconGridSelect bind:playerClass={icon} bind:isOpen={isIconGridOpen}/>
 {/if}

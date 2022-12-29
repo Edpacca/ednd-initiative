@@ -2,7 +2,7 @@
     import { setLocalStorageEntities } from "../../../lib/persistance";
     import { CreatureType, type Creature } from "../../../lib/models/creature";
     import { dRoll } from "../../../lib/dieRoll";
-    import {    entities } from "../../../store";
+    import {    activePlayerIndex, entities } from "../../../store";
     import D20Button from "../../common/buttons/D20Button.svelte";
     import CreatureInputUnlocked from "./CreatureInputUnlocked.svelte";
     import InitiativeValue from "../../common/values/InitiativeValue.svelte";
@@ -14,16 +14,16 @@
 
     export let creature: Creature;
     export let index: number;
-    export let iconGridIndex = [false, 0];
-    $: isIconGridOpen = iconGridIndex[0] && index === iconGridIndex[1];
-    export let setIconGridIndex: (isOpen: boolean, index: number) => void;
+    let isIconGridOpen = false;
     export let removeCreature: () => void;
     
     const setHpCurrent = (value: number) => creature.hpCurrent.fill(value);
 
     const toggleIconGrid = () => {
         isIconGridOpen = !isIconGridOpen;
+        $activePlayerIndex = index;
     }
+
     const rotatePlayerIcon = () => {
         if (creature.type === CreatureType.Player) {
             creature.playerClass = 
@@ -42,14 +42,22 @@
             "Artificer";
         }
     }
-    $: setIconGridIndex(isIconGridOpen, index)
-    $: creature, setLocalStorageEntities($entities);
+
+$: creature, setLocalStorageEntities($entities);
+$: if ($activePlayerIndex !== index) {
+    isIconGridOpen = false;
+}
 </script>
 
 <tr>
     <td class="flex-col">
         {#if creature.type === CreatureType.Player}
-            <PlayerIconSwitch bind:icon={creature.playerClass} bind:isIconGridOpen onClick={rotatePlayerIcon} onRightClick={toggleIconGrid}/>
+            <PlayerIconSwitch 
+                bind:icon={creature.playerClass}
+                bind:isIconGridOpen
+                index={index}
+                onClick={rotatePlayerIcon}
+                onRightClick={toggleIconGrid}/>
         {:else}
             <CreatureToggle bind:type={creature.type} allowedTypes={[CreatureType.Enemy, CreatureType.Minion, CreatureType.Boss]}/>
         {/if}
