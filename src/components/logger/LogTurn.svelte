@@ -36,15 +36,20 @@
                 return;
         }
     }
+
+    export let removeLogEntry: () => void | undefined = undefined;
 </script>
 
 <div class="log-entry">
-    <div class="log-header">
+    <div class="log-header" class:current-log-header={!removeLogEntry}>
         <div class="log-icon"><EntityIcon type={logEntry.owner.type} playerClass={logEntry.owner.playerClass}/></div>
         <div class="log-name">{logEntry.owner.name}</div>
         <div class="time-info">
             <div class="time">{timeString}</div>
         </div>
+        {#if removeLogEntry !== undefined}
+            <RemoveButton onClick={removeLogEntry}/>
+        {/if}
     </div>
     {#if logEntry.recipients.length > 0 || logEntry.messages.length > 0}
         <hr>
@@ -88,9 +93,13 @@
 
     .log-header {
         display: grid;
-        grid-template-columns: 20% 1fr 30%;
+        grid-template-columns: 20% 1fr 30% 1rem;
         align-items: center;
         column-gap: 0.5rem;
+    }
+    
+    .current-log-header {
+        grid-template-columns: 20% 1fr 30%;
     }
 
     .log-icon {

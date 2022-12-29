@@ -1,6 +1,7 @@
 <script lang="ts">
     import { currentLog, currentRound, logs } from "../../store";
     import ConfirmClearLogs from "../settingsMenu/advanced/ConfirmClearLogs.svelte";
+    import type { LogEntry } from "./logEntry";
     import LogTurn from "./LogTurn.svelte";
 
     let isClearingLogs = false;
@@ -13,6 +14,10 @@
         scroll();
         return { update: scroll }
     }
+
+    const removeLogEntry = (entry: LogEntry) => {
+        $logs = $logs.filter(log => log.id !== entry.id);
+    }
 </script>
 
 <div class="log-panel" use:scrollToBottom={$logs}>
@@ -21,7 +26,7 @@
             <div class="log-round">
                 <div class="header text-center">Round {i + 1}</div>
                 {#each $logs.filter(l => l.round === i + 1) as log}
-                    <LogTurn logEntry={log}/>
+                    <LogTurn logEntry={log} removeLogEntry={() => removeLogEntry(log)}/>
                 {/each}
             </div>
         {/each}

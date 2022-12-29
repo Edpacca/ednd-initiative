@@ -4,8 +4,8 @@
     import IconGridSelect from "../IconGridSelect.svelte";
 
     export let icon: PlayerClass | undefined;
-    export let isIconGridOpen;
-    export let index: number;
+    export let isIconGridOpen = false;
+    export let index = 0;
     export let onClick = () => {};
     export let onRightClick = () => {};
 </script>
