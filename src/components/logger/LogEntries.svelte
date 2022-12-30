@@ -1,7 +1,7 @@
 <script lang="ts">
     import { currentLog, currentRound, logs } from "../../store";
     import ConfirmClearLogs from "../settingsMenu/advanced/ConfirmClearLogs.svelte";
-    import type { LogEntry } from "./logEntry";
+    import type { LogEntry } from "../../lib/models/logEntry";
     import LogTurn from "./LogTurn.svelte";
 
     let isClearingLogs = false;

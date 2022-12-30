@@ -58,9 +58,7 @@
 </script>
 
 <div class="entity-area" class:minion-grid={isMinion} class:boss-grid={isBoss}>
-    {#if isBoss}
-        <LegendaryActionsInput bind:valueMax={creature.laMax} bind:valueCurrent={creature.laCurrent}/>
-    {/if}
+
     <div class="name-input-container">
         <input 
             bind:value={creature.name}
@@ -88,6 +86,9 @@
             <Minions bind:name={creature.name} bind:quantity={creature.quantity} bind:hpMax={creature.hpMax} bind:hpCurrent={creature.hpCurrent} />
         {/if}
     </div>
+    {#if isBoss}
+        <LegendaryActionsInput bind:valueMax={creature.laMax} bind:valueCurrent={creature.laCurrent}/>
+    {/if}
     {#if isMinion}
         <AddRemove add={addMinion} remove={removeMinion} vertical={true}/>
     {/if}
@@ -107,16 +108,17 @@
         width: 100%;
     }
 
-    .minion-grid {
+    .minion-grid, .boss-grid {
         display: grid;
         grid-template-columns: 1fr 3em;
+        column-gap: 0.5rem;
     }
 
-    .boss-grid {
+    /* .boss-grid {
         display: grid;
         grid-template-columns: 3em 1fr;
         column-gap: 0.5em;
-    }
+    } */
 
     .minion-input {
         background: var(--dark-grey);

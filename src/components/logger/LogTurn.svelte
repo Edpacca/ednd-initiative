@@ -7,10 +7,10 @@
     import ConditionIcon from "../common/icons/ConditionIcon.svelte";
     import EntityIcon from "../common/icons/EntityIcon.svelte";
     import LegendaryActionsValueIcon from "../common/icons/LegendaryActionsValueIcon.svelte";
-    import type { LogEntityAny, LogEntry } from "./logEntry";
+    import type { LogEntityAny, LogEntry } from "../../lib/models/logEntry";
+    import { getTimeString } from "../../lib/time";
     export let logEntry: LogEntry;
-    const time = new Date(logEntry.time);
-    const timeString = `${time.getHours()}:${time.getMinutes()}:${time.getSeconds()}`;
+    const timeString = getTimeString(new Date(logEntry.time));
 
     const undoLogAction = (recipient: LogEntityAny) => {
         logEntry.recipients = logEntry.recipients.filter(r => r !== recipient);
@@ -93,9 +93,10 @@
 
     .log-header {
         display: grid;
-        grid-template-columns: 20% 1fr 30% 1rem;
+        grid-template-columns: 20% 4rem 30% 1rem;
         align-items: center;
         column-gap: 0.5rem;
+        text-align: left;
     }
     
     .current-log-header {
@@ -127,7 +128,7 @@
 
     hr {
         border: 0;
-        border-bottom: 2px solid var(--grey);
+        border-bottom: 2px solid var(--mid-grey);
         margin: 0.5rem 2rem 0 2rem;
     }
 

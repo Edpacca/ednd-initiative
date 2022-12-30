@@ -1,4 +1,4 @@
-import type { LogEntry } from "../components/logger/logEntry";
+import type { LogEntry } from "./models/logEntry";
 import type { Encounter } from "./models/encounter";
 import type { Entity, EntityType } from "./models/entity";
 

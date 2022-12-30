@@ -6,7 +6,7 @@
     import Speed from "../../graphics/icons/speed.svelte";
     import { CREATURE_TYPES } from "../../lib/typeFilters";
     import { EffectType } from "../../lib/models/effect";
-    import { LogEntry } from "../logger/logEntry";
+    import { LogEntry } from "../../lib/models/logEntry";
     import { fade } from "svelte/transition";
 
     const sortByInitiative = () => {

@@ -1,6 +1,6 @@
-import { Creature, CreatureType } from "../../lib/models/creature"
-import type { Entity, EntityType } from "../../lib/models/entity"
-import type { PlayerClass } from "../../lib/models/playerClass"
+import { Creature, CreatureType } from "./creature"
+import type { Entity, EntityType } from "./entity"
+import type { PlayerClass } from "./playerClass"
 import { v4 } from "uuid";
 
 type LogEntity = {
