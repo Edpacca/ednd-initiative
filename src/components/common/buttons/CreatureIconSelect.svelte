@@ -5,16 +5,20 @@
     import { CreatureType } from "../../../lib/models/creature";
     import type { EntityType } from "../../../lib/models/entity";
     import type { PlayerClass } from "../../../lib/models/playerClass";
-    import PlayerIconSwitch from "./PlayerIconSwitch.svelte";
+    import PlayerIcon from "./PlayerIcon.svelte";
+
     export let type: EntityType;
     export let playerClass: PlayerClass | undefined = undefined;
-    export let isSelected = false;
+    export let isHighlighted = false;
+
+    export let onClick: () => void;
+    export let onRightClick: () => void = () => {};
 </script>
 
 {#if type === CreatureType.Player && playerClass}
-    <PlayerIconSwitch bind:icon={playerClass} onClick={() => isSelected = true}/>
+    <PlayerIcon bind:icon={playerClass} onClick={onClick} onRightClick={onRightClick} class={isHighlighted ? "white" : "gold"}/>
 {:else}
-    <button class="entity-type-button" on:click={() => isSelected = true}>
+    <button class={`entity-type-button ${isHighlighted ? "white" : "primary"}`} on:click={onClick} on:contextmenu|preventDefault={onRightClick}>
         {#if type === CreatureType.Enemy}
             <Enemy/>
         {:else if type === CreatureType.Minion}
@@ -24,9 +28,3 @@
         {/if}
     </button>
 {/if}
-
-<style>
-    button {
-        fill: var(--primary);
-    }
-</style>

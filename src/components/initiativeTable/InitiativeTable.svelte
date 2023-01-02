@@ -47,7 +47,7 @@
     <tbody class="relative">
         {#each $entities as entity, i}
             {#if CREATURE_TYPES.includes(entity.type)}
-                <CreatureRowLocked bind:creature={entity} isActive={i === $activeEntityTurnIndex}/>
+                <CreatureRowLocked bind:creature={entity} isActive={i === $activeEntityTurnIndex} index={i}/>
             {:else if entity.type === EffectType.Effect}
                 <EffectRowLocked bind:effect={entity} isActive={i === $activeEntityTurnIndex}/>
             {/if}

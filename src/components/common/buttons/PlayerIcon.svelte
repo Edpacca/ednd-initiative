@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { PlayerClass } from "../../../lib/models/playerClass";
-    import { activePlayerIndex } from "../../../store";
-    import IconGridSelect from "../IconGridSelect.svelte";
+    import { activeEntityContextIndex } from "../../../store";
+    import IconGridSelect from "../PlayerIconGridSelect.svelte";
 
     export let icon: PlayerClass | undefined;
     export let isIconGridOpen = false;
@@ -10,7 +10,7 @@
     export let onRightClick = () => {};
 </script>
 
-<button class="entity-type-button svg-fit-container gold" on:click={onClick} on:contextmenu|preventDefault={onRightClick}>
+<button class={`entity-type-button svg-fit-container ${$$props.class}`} on:click={onClick} on:contextmenu|preventDefault={onRightClick}>
     {#if icon}
         <svg
             class="relative"
@@ -20,6 +20,6 @@
     {/if}
 </button>
 
-{#if isIconGridOpen && $activePlayerIndex === index}
+{#if isIconGridOpen && $activeEntityContextIndex === index}
     <IconGridSelect bind:playerClass={icon} bind:isOpen={isIconGridOpen}/>
 {/if}

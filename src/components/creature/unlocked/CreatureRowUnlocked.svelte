@@ -2,14 +2,14 @@
     import { setLocalStorageEntities } from "../../../lib/persistance";
     import { CreatureType, type Creature } from "../../../lib/models/creature";
     import { dRoll } from "../../../lib/dieRoll";
-    import {    activePlayerIndex, entities } from "../../../store";
+    import {    activeEntityContextIndex, entities } from "../../../store";
     import D20Button from "../../common/buttons/D20Button.svelte";
     import CreatureInputUnlocked from "./CreatureInputUnlocked.svelte";
     import InitiativeValue from "../../common/values/InitiativeValue.svelte";
     import NumberStringInput from "../../common/values/NumberStringInput.svelte";
     import NumberInput from "../../common/values/NumberInput.svelte";
     import MaxHpInput from "../../common/values/MaxHpInput.svelte";
-    import PlayerIconSwitch from "../../common/buttons/PlayerIconSwitch.svelte";
+    import PlayerIcon from "../../common/buttons/PlayerIcon.svelte";
     import CreatureToggle from "../../common/buttons/CreatureToggle.svelte";
 
     export let creature: Creature;
@@ -21,7 +21,7 @@
 
     const toggleIconGrid = () => {
         isIconGridOpen = !isIconGridOpen;
-        $activePlayerIndex = index;
+        $activeEntityContextIndex = index;
     }
 
     const rotatePlayerIcon = () => {
@@ -44,7 +44,7 @@
     }
 
 $: creature, setLocalStorageEntities($entities);
-$: if ($activePlayerIndex !== index) {
+$: if ($activeEntityContextIndex !== index) {
     isIconGridOpen = false;
 }
 </script>
@@ -52,10 +52,11 @@ $: if ($activePlayerIndex !== index) {
 <tr>
     <td class="flex-col">
         {#if creature.type === CreatureType.Player}
-            <PlayerIconSwitch 
+            <PlayerIcon 
                 bind:icon={creature.playerClass}
                 bind:isIconGridOpen
                 index={index}
+                class="gold"
                 onClick={rotatePlayerIcon}
                 onRightClick={toggleIconGrid}/>
         {:else}
