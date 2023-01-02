@@ -3,6 +3,7 @@
     import ConditionIcon from "./icons/ConditionIcon.svelte";
 
     export let conditions: string[];
+    export let name = "";
     export let isOpen = false;
 
     const handleClick = (condition: string) => {
@@ -17,29 +18,35 @@
 </script>
 
 {#if isOpen}
-    <div class="icon-grid">
-        {#each CONDITIONS as condition}
-            <button class="blank-button" class:highlighted={conditions.includes(condition)} on:click={() => handleClick(condition)}>
-                <ConditionIcon condition={condition}/>
-            </button>
-        {/each}
+    <div class="icon-grid-container">
+        <div class="text-center">{name}</div>
+        <div class="icon-grid">
+            {#each CONDITIONS as condition}
+                <button class="blank-button" class:highlighted={conditions.includes(condition)} on:click={() => handleClick(condition)}>
+                    <ConditionIcon condition={condition}/>
+                </button>
+            {/each}
+        </div>
     </div>
 {/if}
 
 <style>
+    .icon-grid-container {
+        position: absolute;
+        top: 0;
+        left: 3.5rem;
+        z-index: var(--z-modal);
+        background-color: var(--dark-grey-90);
+        border-radius: var(--border-radius);
+        padding: 0.5rem;
+        border: 2px solid var(--light-grey);
+    }
+
     .icon-grid {
         display: grid;
         grid-template-columns: repeat(5, 2rem);
-        background-color: var(--dark-grey-90);
-        border-radius: var(--border-radius);
-        position: absolute;
         row-gap: 0.5rem;
         column-gap: 0.5rem;
-        padding: 0.5rem;
-        border: 2px solid var(--light-grey);
-        z-index: var(--z-modal);
-        top: 0;
-        left: 3.5rem;
     }
 
     button {

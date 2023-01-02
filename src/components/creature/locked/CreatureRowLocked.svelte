@@ -6,10 +6,11 @@
     import { activeEntityContextIndex, entities } from "../../../store";
     import CurrentHpInput from "../../common/values/CurrentHpInput.svelte";
     import CreatureIconSelect from "../../common/buttons/CreatureIconSelect.svelte";
-    import type { Creature } from "../../../lib/models/creature";
+    import { CreatureType, type Creature } from "../../../lib/models/creature";
     import CreatureModal from "../creatureModal/CreatureModal.svelte";
     import ActiveEntityIndicator from "../../initiativeTable/ActiveEntityIndicator.svelte";
     import ConditionIconGridSelect from "../../common/ConditionIconGridSelect.svelte";
+    import { getBaseName } from "../../../lib/models/entity";
 
     export let creature: Creature;
     export let index = 0;
@@ -19,11 +20,13 @@
     $: isHighlighted = isConditionGridOpen && $activeEntityContextIndex === index;
     
     const openConditionGrid = () => {
-        if (!isConditionGridOpen) {
-            isConditionGridOpen = true;
-            $activeEntityContextIndex = index;
-        } else {
-            isConditionGridOpen = false;
+        if (creature.type !== CreatureType.Minion) {
+            if (isConditionGridOpen) {
+                isConditionGridOpen = false;
+            } else {
+                isConditionGridOpen = true;
+                $activeEntityContextIndex = index;
+            }
         }
     }
 
@@ -47,7 +50,7 @@
 
 <tr class="relative">
     <ActiveEntityIndicator isActive={isActive}/>
-    <ConditionIconGridSelect isOpen={isHighlighted} bind:conditions={creature.conditions[0]}/>
+    <ConditionIconGridSelect isOpen={isHighlighted} bind:conditions={creature.conditions[0]} name={getBaseName(creature)}/>
     <td class="flex-col">
         <CreatureIconSelect 
             type={creature.type}
@@ -57,7 +60,7 @@
             onRightClick={openConditionGrid}/>
     </td>
     <td>
-       <CreatureInputLocked bind:isActive bind:creature={creature} bind:isSelected/>
+       <CreatureInputLocked bind:isActive bind:creature={creature} bind:isSelected index={index}/>
     </td>
     <td>
         <CurrentHpInput bind:entity={creature}/>

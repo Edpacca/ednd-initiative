@@ -1,5 +1,6 @@
 <script lang="ts">
-    import { isLocked } from "../../../store";
+    import { activeEntityContextIndex, isLocked } from "../../../store";
+    import ConditionIconGridSelect from "../../common/ConditionIconGridSelect.svelte";
     import ConditionIcon from "../../common/icons/ConditionIcon.svelte";
     import HealthBar from "../../common/values/HealthBar.svelte";
     export let quantity: number;
@@ -7,8 +8,11 @@
     export let hpCurrent: number[];
     export let name: string;
     export let conditions: string[][] = [];
+    export let parentIndex = 0;
     export let selectedIndex = 0;
     export let isSelected = false;
+    let isConditionGridOpen = false;
+    $: isHighlighted = isConditionGridOpen && $activeEntityContextIndex === parentIndex;
 
     const selectIndex = (i: number) => {
         selectedIndex = i;
@@ -22,13 +26,32 @@
         }
     }
 
+    const openConditionGrid = (i: number) => {
+        if (isConditionGridOpen) {
+            isConditionGridOpen = false;
+        } else {
+            $activeEntityContextIndex = parentIndex;
+            selectedIndex = i;
+            isConditionGridOpen = true;
+        }
+    }
+
 </script>
 
 {#if quantity}
     {#each Array(quantity) as e, i}
-        <div class="minion-container">
+        <div class="relative">
+            <ConditionIconGridSelect
+                isOpen={isHighlighted && i === selectedIndex}
+                bind:conditions={conditions[i]}
+                name={`${name} #${i + 1}`}/>
             <!-- svelte-ignore a11y-click-events-have-key-events -->
-            <div class="minion-number" class:selected-minion-number={isSelected && i === selectedIndex} on:click={() => select(i)}>#{i + 1}</div>
+            <div class="minion-number" 
+                class:selected-minion-number={(isSelected || isHighlighted) && i === selectedIndex}
+                on:click={() => select(i)}
+                on:contextmenu|preventDefault={() => openConditionGrid(i)}>
+                #{i + 1}
+            </div>
             <input 
                 type="text"
                 class="minion-input"
@@ -50,10 +73,6 @@
 {/if}
 
 <style>
-    .minion-container {
-        position: relative;
-    }
-
     input {
         text-align: center;
         width: 100%;

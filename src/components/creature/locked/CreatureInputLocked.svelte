@@ -9,7 +9,8 @@
     export let creature: Creature;
     export let isActive = false;
     export let isSelected = false;
-    export let selectedIndex = 0;
+    export let index = 0;
+    let selectedIndex = 0;
 
 
     $: isMinion = creature.type === CreatureType.Minion;
@@ -39,6 +40,7 @@
                     bind:isSelected
                     bind:name={creature.name}
                     bind:quantity={creature.quantity}
+                    parentIndex={index}
                     hpMax={creature.hpMax}
                     hpCurrent={creature.hpCurrent}
                     conditions={creature.conditions}/>

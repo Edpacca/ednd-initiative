@@ -1,5 +1,5 @@
 import { Creature, CreatureType } from "./creature"
-import type { Entity, EntityType } from "./entity"
+import { getBaseName, type Entity, type EntityType } from "./entity"
 import type { PlayerClass } from "./playerClass"
 import { v4 } from "uuid";
 
@@ -102,11 +102,4 @@ export class LogEntry {
     removeLogEntity(logEntity: LogEntityAny) {
         this.recipients = this.recipients.filter(r => r !== logEntity);
     }
-}
-
-function getBaseName(entity: Entity, index = 0): string {
-    const baseName = entity.name ? entity.name 
-        : entity.type === CreatureType.Player 
-        ? (entity as Creature).playerClass : entity.type.toString();
-        return entity.type === CreatureType.Minion ? `${baseName}#${index}` : baseName;
 }
