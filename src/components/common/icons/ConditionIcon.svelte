@@ -1,17 +1,10 @@
 <script lang="ts">
-    import { onMount } from "svelte";
     import { CONDITIONS } from "../../../lib/conditions";
+
     export let condition: string;
     export let width = "100%";
     export let hasTooltip = true;
     let isHovering = false;
-    let position = {x: 0, y: 0}
-    let svgElement: SVGSVGElement;
-
-    onMount(async() => {
-        const rect = svgElement.getBoundingClientRect();
-        position = { x: rect.x, y: rect.y}
-    })
 </script>
 
 
@@ -20,7 +13,6 @@
     class:noTooltip={!hasTooltip}
     width={width} height={width}
     viewBox={"0 0 100 100"}
-    bind:this={svgElement}
     on:mouseenter={() => isHovering = true}
     on:mouseleave={() => isHovering = false}>
     {#if CONDITIONS.includes(condition)}
@@ -32,7 +24,7 @@
 </svg>
 
 {#if hasTooltip && isHovering}
-    <div class="tooltip" style="left: {position.x}px; top: calc(2rem + {position.y}px);">
+    <div class="tooltip">
         {condition}
     </div>
 {/if}
