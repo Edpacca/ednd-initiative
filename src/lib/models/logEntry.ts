@@ -52,6 +52,28 @@ export class LogEntry {
         this.messages.push(message);
     }
 
+    addLogEntitySumDamage(recipient: Creature, damage: number, index=0) {
+
+        const existing = this.recipients.find(r => r.id === recipient.id && r.logType === "damage");
+
+        if (existing) {
+            (existing as Damage).damage += damage;
+            this.recipients[this.recipients.indexOf(existing)] = existing;
+        } else {
+            const name = getBaseName(recipient, index);
+            const playerClass = recipient.playerClass;
+            this.recipients.push({ 
+                name, 
+                damage, 
+                index,
+                playerClass, 
+                id: recipient.id,
+                type: recipient.type, 
+                logType: "damage",
+            });
+        }
+    }
+
     addLogEntityDamage(recipient: Creature, damage: number, index=0) {
         const name = getBaseName(recipient, index);
         const playerClass = recipient.playerClass;
@@ -65,7 +87,6 @@ export class LogEntry {
             logType: "damage",
         });
     }
-
 
     addLogEntityCondition(recipient: Creature, condition: string, index=0) {
         const name = getBaseName(recipient, index);

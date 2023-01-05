@@ -11,7 +11,7 @@
     export let playerClass: PlayerClass | undefined = undefined;
     export let isHighlighted = false;
 
-    export let onClick: () => void;
+    export let onClick: () => void = () => {};
     export let onRightClick: () => void = () => {};
 </script>
 

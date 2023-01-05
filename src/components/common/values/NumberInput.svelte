@@ -3,16 +3,16 @@
 
     export let value = 0;
     export let isHidden = false;
-    export let extraClasses = "";
-
+    export let onValueChange: (difference: number) => void = () => {};
+    
     let isHovered = false;
 </script>
 
 <div class="value-container" class:hidden={isHidden} 
     on:mouseenter={() => isHovered = true}
     on:mouseleave={() => isHovered = false}>
-    <input type="number" class={extraClasses} bind:value={value} hidden={isHidden}/>
-    <ValueSpinner bind:value isHidden={!isHovered}/>
+    <input type="number" class={$$props.class} bind:value={value} hidden={isHidden}/>
+    <ValueSpinner bind:value isHidden={!isHovered} onValueChange={onValueChange}/>
 </div>
 
 <style>

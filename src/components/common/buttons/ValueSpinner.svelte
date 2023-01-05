@@ -1,11 +1,23 @@
 <script lang="ts">
     export let value: number;
     export let isHidden = false;
+
+    export let onValueChange: (difference: number) => void = () => {};
+
+    const increase = () => {
+        value++;
+        onValueChange(1);
+    }
+
+    const decrease = () => {
+        value--;
+        onValueChange(-1);
+    }
 </script>
 
 <div class="spinners" class:hidden={isHidden}>
-    <button on:click={() => value++}>+</button>
-    <button on:click={() => value--}>-</button>
+    <button on:click={increase}>+</button>
+    <button on:click={decrease}>-</button>
 </div>
 
 <style>

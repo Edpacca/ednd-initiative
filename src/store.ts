@@ -5,6 +5,7 @@ import { LogEntry } from "./lib/models/logEntry";
 import type { Creature } from "./lib/models/creature";
 
 const currentTurn = getLocalStorageTurn();
+const currentStorageLog = getLocalStorageCurrentLog();
 
 export const entities: Writable<Entity[]> = writable(getLocalStorageEntities());
 export const isLocked: Writable<boolean> = writable(false);
@@ -16,14 +17,14 @@ export const currentRound: Writable<number> = writable(currentTurn ? currentTurn
 export const activeEntityTurnIndex: Writable<number> = writable(currentTurn ? currentTurn[1] : 0);
 export const activeEntityContextIndex: Writable<number> = writable(0);
 export const currentTheme: Writable<string> = writable(getLocalStorageTheme() ?? "stone");
-export const logs: Writable<LogEntry[]> = writable(getLocalStorageLogs());
-export const currentLog: Writable<LogEntry> = writable(getLocalStorageCurrentLog());
+export const logs: Writable<LogEntry[]> = writable(getLocalStorageLogs() ?? []);
+export const currentLog: Writable<LogEntry> = writable(currentStorageLog);
 
 export function setModalOpen(isOpen: boolean) {
     isModalOpen.set(isOpen);
 }
 
-function setCurrentLog() {
+export function setCurrentLog() {
     currentLog.set(new LogEntry(get(entities)[get(activeEntityTurnIndex)], get(currentRound)));
 }
 
@@ -44,6 +45,12 @@ export function storeCurrentRound() {
 export function appendDamageToCurrentLog(entity: Creature, damage: number, index=0) {
     const current = get(currentLog);
     current.addLogEntityDamage(entity, damage, index);
+    currentLog.set(current);
+}
+
+export function appendSumDamageToCurrentLog(entity: Creature, damage: number, index=0) {
+    const current = get(currentLog);
+    current.addLogEntitySumDamage(entity, damage, index);
     currentLog.set(current);
 }
 
