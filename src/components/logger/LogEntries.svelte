@@ -1,11 +1,11 @@
 <script lang="ts">
-    import { currentLog, currentRound, logs } from "../../store";
+    import { currentLogIndex, currentRound, logs } from "../../store";
     import ConfirmClearLogs from "../settingsMenu/advanced/ConfirmClearLogs.svelte";
     import type { LogEntry } from "../../lib/models/logEntry";
     import LogTurn from "./LogTurn.svelte";
 
     let isClearingLogs = false;
-
+    
     const scrollToBottom = (node, list) => {
         const scroll = () => node.scroll({
             top: node.scrollHeight,
@@ -21,6 +21,7 @@
 </script>
 
 <div class="log-panel" use:scrollToBottom={$logs}>
+    <div>{$currentLogIndex}</div>
     {#if $logs.length > 0}
         {#each Array($currentRound) as round, i}
             <div class="log-round">
@@ -30,11 +31,6 @@
                 {/each}
             </div>
         {/each}
-    {/if}
-    {#if $currentLog}
-        <div class="current-turn">
-            <LogTurn logEntry={$currentLog}/>
-        </div>
     {/if}
 </div>
 <div class="top-mask">
@@ -72,13 +68,6 @@
         overflow-y: scroll;
         position: relative;
         padding: calc(3rem + 2px) 0 0.5rem 0.5rem;
-    }
-
-    .current-turn {
-        border: 2px solid var(--gold);
-        border-radius: var(--border-radius);
-        background-color: var(--super-dark-grey);
-        padding: 0.5rem 0;
     }
 
     .submit-button {

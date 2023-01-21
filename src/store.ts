@@ -1,11 +1,10 @@
 import { get, writable, type Writable } from "svelte/store";
-import { getLocalStorageEntities, getLocalStorageLogs, getLocalStorageTurn, getLocalStorageTheme, setLocalStorageTurn, getLocalStorageCurrentLog } from "./lib/persistance";
+import { getLocalStorageEntities, getLocalStorageLogs, getLocalStorageTurn, getLocalStorageTheme, setLocalStorageTurn, getLocalStorageCurrentLogIndex } from "./lib/persistance";
 import type { Entity } from "./lib/models/entity";
 import { LogEntry } from "./lib/models/logEntry";
 import type { Creature } from "./lib/models/creature";
 
 const currentTurn = getLocalStorageTurn();
-const currentStorageLog = getLocalStorageCurrentLog();
 
 export const entities: Writable<Entity[]> = writable(getLocalStorageEntities());
 export const isLocked: Writable<boolean> = writable(false);
@@ -17,25 +16,24 @@ export const currentRound: Writable<number> = writable(currentTurn ? currentTurn
 export const activeEntityTurnIndex: Writable<number> = writable(currentTurn ? currentTurn[1] : 0);
 export const activeEntityContextIndex: Writable<number> = writable(0);
 export const currentTheme: Writable<string> = writable(getLocalStorageTheme() ?? "stone");
-export const logs: Writable<LogEntry[]> = writable(getLocalStorageLogs() ?? []);
-export const currentLog: Writable<LogEntry> = writable(currentStorageLog);
+export const logs: Writable<LogEntry[]> = writable(getLocalStorageLogs());
+export const currentLogIndex: Writable<number> = writable(getLocalStorageCurrentLogIndex() ?? 0);
 
 export function setModalOpen(isOpen: boolean) {
     isModalOpen.set(isOpen);
 }
 
-export function setCurrentLog() {
-    currentLog.set(new LogEntry(get(entities)[get(activeEntityTurnIndex)], get(currentRound)));
+function getNewlog(index: number): LogEntry {
+    return new LogEntry(get(entities)[get(activeEntityTurnIndex)], get(currentRound), index);
 }
 
-export function storeCurrentLog() {
-    logs.update(l => [...l, get(currentLog)]);
-    setCurrentLog();
+export function addLog() {
+    logs.update(l => [...l, getNewlog(l.length)]);
 }
 
 export function clearLogs() {
     logs.set([]);
-    setCurrentLog();
+    currentLogIndex.set(0);
 }
 
 export function storeCurrentRound() {
@@ -43,27 +41,40 @@ export function storeCurrentRound() {
 }
 
 export function appendDamageToCurrentLog(entity: Creature, damage: number, index=0) {
-    const current = get(currentLog);
-    current.addLogEntityDamage(entity, damage, index);
-    currentLog.set(current);
+    const logBuffer = get(logs);
+    const logIndex = get(currentLogIndex);
+    const currentLog = logBuffer[logIndex];
+    currentLog.addLogEntityDamage(entity, damage, index);
+    logBuffer[logIndex] = currentLog;
+    logs.set(logBuffer);
+    
 }
 
 export function appendSumDamageToCurrentLog(entity: Creature, damage: number, index=0) {
-    const current = get(currentLog);
-    current.addLogEntitySumDamage(entity, damage, index);
-    currentLog.set(current);
+    const logBuffer = get(logs);
+    const logIndex = get(currentLogIndex);
+    const currentLog = logBuffer[logIndex];
+    currentLog.addLogEntitySumDamage(entity, damage, index);
+    logBuffer[logIndex] = currentLog;
+    logs.set(logBuffer);
 }
 
 export function appendConditionToCurrentLog(entity: Creature, condition: string, index=0) {
-    const current = get(currentLog);
-    current.addLogEntityCondition(entity, condition, index);
-    currentLog.set(current);
+    const logBuffer = get(logs);
+    const logIndex = get(currentLogIndex);
+    const currentLog = logBuffer[logIndex];
+    currentLog.addLogEntityCondition(entity, condition, index);
+    logBuffer[logIndex] = currentLog;
+    logs.set(logBuffer);
 }
 
 export function appendLegendaryActionsToCurrentLog(entity: Creature, actions: number, index=0) {
-    const current = get(currentLog);
-    current.addLogEntityLegendaryActions(entity, actions, index);
-    currentLog.set(current);
+    const logBuffer = get(logs);
+    const logIndex = get(currentLogIndex);
+    const currentLog = logBuffer[logIndex];
+    currentLog.addLogEntityLegendaryActions(entity, actions, index);
+    logBuffer[logIndex] = currentLog;
+    logs.set(logBuffer);
 }
 
 export function updateSingleEntity(entity: Entity) {

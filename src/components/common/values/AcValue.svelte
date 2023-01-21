@@ -37,7 +37,7 @@ import Shield from "../../../graphics/icons/shield.svelte";
 {#if isBonusOpen}
     <div class="bonus-popup" in:scale out:scale>
         <div class="bonus-text">mod</div>
-        <NumberStringInput bind:value={bonus} showPlus={true} class="enchanted-input" onChange={() => console.log("test")}/>
+        <NumberStringInput bind:value={bonus} showPlus={true} class="enchanted-input"/>
     </div>
 {/if}
 

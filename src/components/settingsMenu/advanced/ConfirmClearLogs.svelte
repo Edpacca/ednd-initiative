@@ -1,19 +1,18 @@
 <script lang="ts">
-    import { activeEntityTurnIndex, currentRound, logs, setCurrentLog } from "../../../store";
+    import { activeEntityTurnIndex, addLog, clearLogs } from "../../../store";
     import ConfirmationModal from "../../common/modal/ConfirmationModal.svelte";
     export let isOpen;
     export let close: () => void;
 
     const clear = () => {
-        $logs = [];
-        $currentRound = 1;
+        clearLogs();
         $activeEntityTurnIndex = 0;
-        setCurrentLog();
+        addLog();
         close();
     }
 
     const text = [
-        "Are you sure you want to permanently clear all log history?",
+        "Are you sure you want to permanently clear all log history? This will also reset the current round",
     ]
 </script>
 

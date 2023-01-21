@@ -1,8 +1,8 @@
 <script lang="ts">
     import ArrowPlain from "../../graphics/icons/arrow-plain.svelte";
     import { Creature, CreatureType } from "../../lib/models/creature";
-    import { setLocalStorageCurrentLog, setLocalStorageLogs } from "../../lib/persistance";
-    import { currentRound, entities, activeEntityTurnIndex, isModalOpen, logs, currentLog, storeCurrentLog, storeCurrentRound } from "../../store";
+    import { setLocalStorageCurrentLogIndex, setLocalStorageLogs } from "../../lib/persistance";
+    import { currentRound, entities, activeEntityTurnIndex, isModalOpen, logs, storeCurrentRound, addLog, currentLogIndex } from "../../store";
     
     $: max = $entities.length - 1;
     
@@ -20,7 +20,12 @@
             });
         }
         storeCurrentRound();
-        storeCurrentLog();
+
+        if ($currentLogIndex === $logs.length - 1) {
+            addLog();
+        }
+        
+        $currentLogIndex++;
     }
 
     const previous = () => {
@@ -31,8 +36,9 @@
             $activeEntityTurnIndex = max;
             $currentRound = Math.max($currentRound - 1, 1);
         }
-        $currentLog = $logs[$logs.length - 1];
-        $logs = $logs.slice(0, -1);
+        // $currentLog = $logs[$logs.length - 1];
+        // $logs = $logs.slice(0, -1);
+        $currentLogIndex = Math.max(0, $currentLogIndex - 1);
         storeCurrentRound();
     }
 
@@ -52,7 +58,7 @@
     }
 
     $: setLocalStorageLogs($logs);
-    $: setLocalStorageCurrentLog($currentLog);
+    $: setLocalStorageCurrentLogIndex($currentLogIndex);
 </script>
 
 <div class="turn-tracker">

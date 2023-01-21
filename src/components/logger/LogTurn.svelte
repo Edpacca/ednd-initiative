@@ -2,15 +2,17 @@
     import Blood from "../../graphics/icons/blood.svelte";
     import Heart from "../../graphics/icons/heart.svelte";
     import type { Creature } from "../../lib/models/creature";
-    import { entities, updateSingleEntity } from "../../store";
+    import { activeEntityTurnIndex, currentLogIndex, currentRound, entities, updateSingleEntity } from "../../store";
     import RemoveButton from "../common/buttons/RemoveButton.svelte";
     import ConditionIcon from "../common/icons/ConditionIcon.svelte";
     import EntityIcon from "../common/icons/EntityIcon.svelte";
     import LegendaryActionsValueIcon from "../common/icons/LegendaryActionsValueIcon.svelte";
     import type { LogEntityAny, LogEntry } from "../../lib/models/logEntry";
     import { getTimeString } from "../../lib/time";
+
     export let logEntry: LogEntry;
     const timeString = getTimeString(new Date(logEntry.time));
+    $: isCurrentLog = logEntry.round === $currentRound && logEntry.id === $entities[$activeEntityTurnIndex].id;
 
     const undoLogAction = (recipient: LogEntityAny) => {
         logEntry.recipients = logEntry.recipients.filter(r => r !== recipient);
@@ -40,7 +42,7 @@
     export let removeLogEntry: () => void | undefined = undefined;
 </script>
 
-<div class="log-entry">
+<div class="log-entry" class:current-log={isCurrentLog}>
     <div class="log-header" class:current-log-header={!removeLogEntry}>
         <div class="log-icon"><EntityIcon type={logEntry.owner.type} playerClass={logEntry.owner.playerClass}/></div>
         <div class="log-name">{logEntry.owner.name}</div>
@@ -85,6 +87,13 @@
 <style>
     .log-entry:not(:last-child) {
         border-bottom: 2px solid var(--primary);
+    }
+
+    .current-log {
+        border: 2px solid var(--gold);
+        border-radius: var(--border-radius);
+        background-color: var(--super-dark-grey);
+        padding: 0.5rem 0;
     }
 
     .log-entry {

@@ -1,6 +1,5 @@
 <script lang="ts">
     import Skull from "../../../graphics/icons/skull.svelte";
-    import { currentLog } from "../../../store";
     import NumberInput from "../../common/values/NumberInput.svelte";
 
     export let hp: number;

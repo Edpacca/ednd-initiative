@@ -1,12 +1,11 @@
 <script lang="ts">
-    import { isLocked, entities, activeEntityTurnIndex, currentLog, currentRound } from "../../store";
+    import { isLocked, entities, activeEntityTurnIndex, addLog } from "../../store";
     import Heart from "../../graphics/icons/heart.svelte";
     import CreatureRowLocked from "../creature/locked/CreatureRowLocked.svelte";
     import EffectRowLocked from "../effects/EffectRowLocked.svelte";
     import Speed from "../../graphics/icons/speed.svelte";
     import { CREATURE_TYPES } from "../../lib/typeFilters";
     import { EffectType } from "../../lib/models/effect";
-    import { LogEntry } from "../../lib/models/logEntry";
     import { fade } from "svelte/transition";
 
     const sortByInitiative = () => {
@@ -16,7 +15,7 @@
             
             return aTotal === bTotal ? b.bonus - a.bonus : bTotal - aTotal;
         });
-        $currentLog = new LogEntry($entities[$activeEntityTurnIndex], $currentRound);
+        addLog();
     }
 
     $: $isLocked, sortByInitiative();
