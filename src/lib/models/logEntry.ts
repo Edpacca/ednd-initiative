@@ -37,7 +37,7 @@ export class LogEntry {
             index: 0
         }
         
-        this.id = entity.id;
+        this.id = v4();
         this.logIndex = logIndex;
 
         if (entity.type === CreatureType.Player) {

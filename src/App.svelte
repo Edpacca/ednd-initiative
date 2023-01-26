@@ -11,6 +11,7 @@
     import RollAll from "./components/rollAll/RollAll.svelte";
     import SettingsMenu from "./components/settingsMenu/SettingsMenu.svelte";
     import LockPage from "./components/lockToggle/LockPage.svelte";
+    import CastleAnimation from "./graphics/animations/castle/CastleAnimation.svelte";
 
     onMount(async () => {
       setTheme($currentTheme);
@@ -19,6 +20,9 @@
 
 <SettingsMenu/>
 <main>
+  <div class="animation-container">
+    <CastleAnimation/>
+  </div>
   {#if $entities.length > 0}
     <div class="top-right-icon">
         <LockPage/>
@@ -51,6 +55,12 @@
 {/if}
 
 <style>
+
+  .animation-container {
+    width: 20em;
+    height: 20em;
+    border: 1px solid red;
+  }
 
   main {
     padding: 2rem 6rem;
