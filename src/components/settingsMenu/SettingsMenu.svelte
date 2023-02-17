@@ -7,17 +7,23 @@
     import Load from "./load/Load.svelte";
     import Save from "./save/Save.svelte";
     import SelectTheme from "./selectTheme/SelectTheme.svelte";
+    import ViewSettings from "./viewSettings/ViewSettings.svelte";
 </script>
 
 <div class="menu-button">
     <BurgerButton onClick={() => $isSettingsOpen = !$isSettingsOpen}/>
 </div>
 {#if $isSettingsOpen}
-    <div class="settings-menu" in:slide out:slide>
+    <div class="settings-menu" transition:slide>
         <h1>Settings</h1>
         <div>
             <AccordionTool text={"Theme"}>
                 <SelectTheme/>
+            </AccordionTool>
+        </div>
+        <div>
+            <AccordionTool text={"View"}>
+                <ViewSettings/>
             </AccordionTool>
         </div>
         <div>

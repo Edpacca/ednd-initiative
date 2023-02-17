@@ -38,10 +38,9 @@
         $activeEntityTurnIndex = 0;
         $currentRound = 1;
     }
-
 </script>
 
-<div class="roll-all-container" in:slide out:slide>
+<div class="roll-all-container" transition:slide>
     <D20Button primary="var(--gold)" secondary="var(--white)" width="5rem" onClick={() => rollAll()}/>
     <div class="text-center message">{message}</div>
     <div class="roll-all-icons">

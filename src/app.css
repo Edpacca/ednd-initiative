@@ -68,11 +68,15 @@ body {
 
 table {
     table-layout: auto;
-    width: 41em;
+    width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
     font-family: 'Roboto Condensed';
     z-index: 1;
+}
+
+.table-container {
+    width: 100%;
 }
 
 button:active {

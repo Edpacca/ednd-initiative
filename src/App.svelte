@@ -20,9 +20,9 @@
 
 <SettingsMenu/>
 <main>
-  <div class="animation-container">
+  <!-- <div class="animation-container">
     <CastleAnimation/>
-  </div>
+  </div> -->
   {#if $entities.length > 0}
     <div class="top-right-icon">
         <LockPage/>
@@ -33,7 +33,7 @@
       <TurnTracker/>
     </div>
   {:else if $entities.length > 0}
-    <RollAll/>
+      <RollAll/>
   {/if}
   <div class="table-container">
     {#if !$isLocked}
@@ -55,13 +55,6 @@
 {/if}
 
 <style>
-
-  .animation-container {
-    width: 20em;
-    height: 20em;
-    border: 1px solid red;
-  }
-
   main {
     padding: 2rem 6rem;
     display: flex;
@@ -71,7 +64,6 @@
     border: 2px solid var(--primary);
     border-radius: 4px;
     position: relative;
-    row-gap: 2em;
     max-width: 50rem;
     margin: auto;
     background: var(--dark-grey-90);

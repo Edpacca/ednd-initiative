@@ -1,4 +1,7 @@
 <script>
+    import { slide } from "svelte/transition";
+
+
     export let text;
     let isOpen = false;
 </script>
@@ -6,7 +9,7 @@
 
 <button on:click={() => isOpen = !isOpen} class="setting-toggle-button">{text}</button>
 {#if isOpen}
-    <div class="accordion">
+    <div class="accordion" transition:slide>
         <slot></slot>
     </div>
 {/if}

@@ -4,9 +4,10 @@
     export let type: "+" | "-";
     export let onClick: () => void;
     export let width = "1.75rem";
+    export let disabled = false;
 </script>
 
-<button on:click={onClick} style={`--width: ${width}`}>
+<button on:click={onClick} style={`--width: ${width}`} disabled={disabled}>
     {#if type === "+"}
         <Plus/>
     {:else}
@@ -28,10 +29,14 @@
         transition: 0.3s ease-out;
     }
 
-  button:hover {
-    background: var(--white);
-    outline: 1px solid var(--primary);
-    transition: 0.3s ease-out;
-  }
+    button:disabled {
+        opacity: 0.5;
+    }
+
+    button:hover:not(:disabled) {
+        background: var(--white);
+        outline: 1px solid var(--primary);
+        transition: 0.3s ease-out;
+    }
 
 </style>

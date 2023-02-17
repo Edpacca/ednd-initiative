@@ -6,8 +6,8 @@
 </script>
 
 <div class="castle-container">
-    <Castle/>
     <Portcullis isUp={isUp}/>
+    <Castle/>
 </div>
 <button on:click={() => isUp = !isUp}></button>
 
