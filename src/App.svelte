@@ -13,18 +13,10 @@
     import LockPage from "./components/lockToggle/LockPage.svelte";
     import CastleAnimation from "./graphics/animations/castle/CastleAnimation.svelte";
 
-
     onMount(async () => {
       setTheme($currentTheme);
     });
 </script>
-<svelte:head>
-    <style>
-        :root {
-          --font-zoom: 1;
-        }
-    </style>
-</svelte:head>
 
 <SettingsMenu/>
 <main>
