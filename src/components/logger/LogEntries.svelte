@@ -1,8 +1,8 @@
 <script lang="ts">
-    import { currentRound, logs } from "../../store";
+    import { logs } from "../../store";
     import ConfirmClearLogs from "../settingsMenu/advanced/ConfirmClearLogs.svelte";
     import type { LogEntry } from "../../lib/models/logEntry";
-    import LogTurn from "./LogTurn.svelte";
+    import LogTurn from "./LogEntryCard.svelte";
 
     let isClearingLogs = false;
     $: maxRound = Math.max(...$logs.map(l => l.round))
@@ -23,10 +23,10 @@
 
 <div class="log-panel" use:scrollToBottom={$logs}>
     {#if $logs.length > 0}
-        {#each Array(maxRound) as round}
+        {#each Array(maxRound) as round, i}
             <div class="log-round">
-                <div class="header text-center">Round {round}</div>
-                {#each $logs.filter(l => l.round === round) as log}
+                <div class="header text-center">Round {i + 1}</div>
+                {#each $logs.filter(l => l.round === i + 1) as log}
                     <LogTurn logEntry={log} removeLogEntry={() => removeLogEntry(log)}/>
                 {/each}
             </div>

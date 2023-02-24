@@ -2,7 +2,8 @@
     import ArrowPlain from "../../graphics/icons/arrow-plain.svelte";
     import { Creature, CreatureType } from "../../lib/models/creature";
     import { setLocalStorageCurrentLogId, setLocalStorageLogs } from "../../lib/persistance";
-    import { currentRound, entities, activeEntityTurnIndex, isModalOpen, logs, storeCurrentRound, addLog, currentLogId } from "../../store";
+    import { currentRound, entities, activeEntityTurnIndex, isModalOpen, logs, storeCurrentRound, currentLogId } from "../../store";
+    import { updateLogs } from "../logger/logger";
     
     $: max = $entities.length - 1;
     
@@ -19,8 +20,8 @@
                 return e;
             });
         }
+
         storeCurrentRound();
-        addLog();
     }
 
     const previous = () => {
@@ -31,8 +32,7 @@
             $activeEntityTurnIndex = max;
             $currentRound = Math.max($currentRound - 1, 1);
         }
-        // $currentLog = $logs[$logs.length - 1];
-        // $logs = $logs.slice(0, -1);
+        
         storeCurrentRound();
     }
 
@@ -51,6 +51,7 @@
         }
     }
 
+    $: updateLogs($activeEntityTurnIndex);
     $: setLocalStorageLogs($logs);
     $: setLocalStorageCurrentLogId($currentLogId);
 </script>

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { activeEntityTurnIndex, addLog, clearLogs } from "../../../store";
+    import { activeEntityTurnIndex, addNewLog, clearLogs } from "../../../store";
     import ConfirmationModal from "../../common/modal/ConfirmationModal.svelte";
     export let isOpen;
     export let close: () => void;
@@ -7,7 +7,7 @@
     const clear = () => {
         clearLogs();
         $activeEntityTurnIndex = 0;
-        addLog();
+        addNewLog();
         close();
     }
 

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { isLocked, entities, activeEntityTurnIndex, addLog } from "../../store";
+    import { isLocked, entities, activeEntityTurnIndex, addNewLog } from "../../store";
     import Heart from "../../graphics/icons/heart.svelte";
     import CreatureRowLocked from "../creature/locked/CreatureRowLocked.svelte";
     import EffectRowLocked from "../effects/EffectRowLocked.svelte";
@@ -15,7 +15,7 @@
             
             return aTotal === bTotal ? b.bonus - a.bonus : bTotal - aTotal;
         });
-        addLog();
+        addNewLog();
     }
 
     $: $isLocked, sortByInitiative();

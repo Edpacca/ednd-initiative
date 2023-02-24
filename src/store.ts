@@ -20,11 +20,15 @@ export const logs: Writable<LogEntry[]> = writable(getLocalStorageLogs());
 export const currentLogId: Writable<string> = writable(getLocalStorageCurrentLogId() ?? ""  );
 export const zoomLevel: Writable<number> = writable(1);
 
+export function getActiveEntity(): Entity {
+    return get(entities)[get(activeEntityTurnIndex)]
+}
+
 export function setModalOpen(isOpen: boolean) {
     isModalOpen.set(isOpen);
 }
 
-export function addLog() {
+export function addNewLog() {
     const newLog = new LogEntry(get(entities)[get(activeEntityTurnIndex)], get(currentRound));
     logs.update(l => [...l, newLog]);
     currentLogId.set(newLog.id);
