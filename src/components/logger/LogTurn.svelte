@@ -2,7 +2,7 @@
     import Blood from "../../graphics/icons/blood.svelte";
     import Heart from "../../graphics/icons/heart.svelte";
     import type { Creature } from "../../lib/models/creature";
-    import { activeEntityTurnIndex, currentLogIndex, currentRound, entities, updateSingleEntity } from "../../store";
+    import { currentLogId, entities, updateSingleEntity } from "../../store";
     import RemoveButton from "../common/buttons/RemoveButton.svelte";
     import ConditionIcon from "../common/icons/ConditionIcon.svelte";
     import EntityIcon from "../common/icons/EntityIcon.svelte";
@@ -12,7 +12,7 @@
 
     export let logEntry: LogEntry;
     const timeString = getTimeString(new Date(logEntry.time));
-    $: isCurrentLog = logEntry.round === $currentRound && logEntry.id === $entities[$activeEntityTurnIndex].id;
+    $: isCurrentLog = logEntry.id === $currentLogId;
 
     const undoLogAction = (recipient: LogEntityAny) => {
         logEntry.recipients = logEntry.recipients.filter(r => r !== recipient);

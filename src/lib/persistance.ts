@@ -9,7 +9,7 @@ enum StorageType {
     Encounter = "encounters",
     Theme = "theme",
     Logs = "logs",
-    CurrentLogIndex = "logIndex",
+    CurrentLogId = "CurrentLogId",
     Turn = "turn",
 }
 
@@ -45,12 +45,12 @@ export function setLocalStorageTurn(turn: [number, number]) {
     setLocalStorage(StorageType.Turn, turn);
 }
 
-export function setLocalStorageCurrentLogIndex(currentLogIndex: number) { 
-    setLocalStorage(StorageType.CurrentLogIndex, currentLogIndex);
+export function setLocalStorageCurrentLogId(currentLogId: string) { 
+    setLocalStorage(StorageType.CurrentLogId, currentLogId);
 }
 
-export function getLocalStorageCurrentLogIndex(): number {
-    return getLocalStorage(StorageType.CurrentLogIndex);
+export function getLocalStorageCurrentLogId(): string {
+    return getLocalStorage(StorageType.CurrentLogId);
 }
 
 export function setLocalStorageEncounter(name: string, entities: Entity[], filteredTypes: EntityType[], override = false) {

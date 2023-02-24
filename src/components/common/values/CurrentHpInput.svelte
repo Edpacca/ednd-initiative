@@ -27,7 +27,7 @@
         <div class="skull"><Skull/></div>
     {:else if isMinion}
         {#each Array(entity.quantity) as m, i}
-            <MinionHpInput index={i} bind:hp={entity.hpCurrent[i]} hpMax={entity.hpMax} logHealthChange={logHealthChange}/>
+            <MinionHpInput minion_index={i} bind:hp={entity.hpCurrent[i]} hpMax={entity.hpMax} logHealthChange={logHealthChange}/>
         {/each}
     {/if}
 </div>

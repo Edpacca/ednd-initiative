@@ -4,7 +4,7 @@
 
     export let hp: number;
     export let hpMax: number;
-    export let index: number;
+    export let minion_index: number;
 
     $: dead = hp <= 0;
     $: bloodied = hp < (hpMax / 2) && !dead;
@@ -13,7 +13,7 @@
     export const logHealthChange: (difference: number, index: number) => void = () => {};
 
     const onValueChange = (difference: number) => {
-        logHealthChange(difference, index);
+        logHealthChange(difference, minion_index);
     }
 </script>
 
@@ -21,7 +21,7 @@
     <NumberInput bind:value={hp} class={extraClasses} onValueChange={onValueChange}/>
     <div class="spacer"></div>
     {#if hp <= 0}
-        <div class="skull" style={`--i: ${index + 1}`}><Skull/></div>
+        <div class="skull" style={`--i: ${minion_index + 1}`}><Skull/></div>
     {/if}
 </div>
 

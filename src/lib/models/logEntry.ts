@@ -22,28 +22,24 @@ export type LogEntityAny = LogEntityDamage | LogEntityCondition | LogEntityLegen
 
 export class LogEntry {
     id: string;
-    logIndex: number;
     round: number;
     owner: LogEntity;
     recipients: LogEntityAny[];
     messages: string[];
     time: Date;
 
-    constructor (entity: Entity, round: number, logIndex: number) {
+    constructor (entity: Entity, round: number) {
         this.owner = {
             name: entity.name ? entity.name : getBaseName(entity),
             type: entity.type,
             id: entity.id,
             index: 0
         }
-        
-        this.id = v4();
-        this.logIndex = logIndex;
-
         if (entity.type === CreatureType.Player) {
             this.owner.playerClass = (entity as Creature).playerClass;
         }
-
+        
+        this.id = v4();
         this.round = round;
         this.messages = [];
         this.recipients = [];
