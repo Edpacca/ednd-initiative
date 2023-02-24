@@ -1,17 +1,19 @@
 <script lang="ts">
     import PlusMinusButton from "../../common/buttons/PlusMinusButton.svelte";
+    import { setZoom } from "./setZoom";
 
     let level = 100;
-    const delta = 1
-    20;
+    const delta = 5;
     const MAX = 200;
     const MIN = 50;
 
     const setLevel = (delta: number) => {
         if (delta > 0) {
-            level = Math.min(level + delta, MAX)
+            level = Math.min(level + delta, MAX);
+            setZoom(level / 100);
         } else if (delta < 0) {
-            level = Math.max(level + delta, MIN)
+            level = Math.max(level + delta, MIN);
+            setZoom(level / 100);
         }
     }
 </script>

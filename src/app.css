@@ -1,4 +1,9 @@
 :root {
+    --zoom-level: 1;
+    font-size: calc(14px * var(--zoom-level));
+}
+
+:root {
     --primary: brown;
     --secondary: burlywood;
 
@@ -53,10 +58,6 @@
     --sword-transition: var(--transition-time) cubic-bezier(.13, 0, .57, .1);
 }   
 
-:root {
-    font-size: 14px ;
-}
-
 body {
     background-color: var(--dark-grey);
     background-image: url('/background/stone.webp');
@@ -68,7 +69,7 @@ body {
 
 table {
     table-layout: auto;
-    width: 100%;
+    width: calc(var(--zoom-level) * 100%);
     border-collapse: collapse;
     border-spacing: 0;
     font-family: 'Roboto Condensed';
