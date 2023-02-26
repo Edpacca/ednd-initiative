@@ -1,6 +1,5 @@
 <script lang="ts">
     import { CONDITIONS } from "../../../lib/conditions";
-    import { appendConditionToCurrentLog } from "../../../store";
     import PlusMinusButton from "../../common/buttons/PlusMinusButton.svelte";
     import FilterList from "../../common/FilterList.svelte";
     import ConditionIcon from "../../common/icons/ConditionIcon.svelte";

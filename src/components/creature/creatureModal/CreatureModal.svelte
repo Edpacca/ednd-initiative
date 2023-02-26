@@ -1,11 +1,11 @@
 <script lang="ts">
     import { fade } from "svelte/transition";
     import { CreatureType, type Creature } from "../../../lib/models/creature";
-    import { appendConditionToCurrentLog } from "../../../store";
     import CreatureIconSelect from "../../common/buttons/CreatureIconSelect.svelte";
     import RemoveButton from "../../common/buttons/RemoveButton.svelte";
     import Modal from "../../common/modal/Modal.svelte";
     import Damage from "../../damage/Damage.svelte";
+    import { appendConditionToCurrentLog } from "../../logger/logger";
     import CreatureInputLocked from "../locked/CreatureInputLocked.svelte";
     import Conditions from "./Conditions.svelte";
     import type { FocusType } from "./focusType";
@@ -131,7 +131,6 @@
     grid-template-columns: 1fr 1fr;
     padding-top: 2rem;
 }
-
 
 .damage-container {
     display: flex;

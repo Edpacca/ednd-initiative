@@ -3,7 +3,7 @@
     import NumberInput from "./NumberInput.svelte";
     import { CreatureType } from "../../../lib/models/creature";
     import MinionHpInput from "../../creature/minion/MinionHpInput.svelte";
-    import { appendSumDamageToCurrentLog } from "../../../store";
+    import { appendSumDamageToCurrentLog } from "../../logger/logger";
 
     export let entity;
 

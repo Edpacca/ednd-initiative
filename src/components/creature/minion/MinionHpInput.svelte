@@ -5,12 +5,12 @@
     export let hp: number;
     export let hpMax: number;
     export let minion_index: number;
+    export let logHealthChange: (difference: number, index: number) => void = () => {};
 
     $: dead = hp <= 0;
     $: bloodied = hp < (hpMax / 2) && !dead;
     $: extraClasses = bloodied ? "minion-input bloodied" : dead ? "dead" : "minion-hp-input";
 
-    export const logHealthChange: (difference: number, index: number) => void = () => {};
 
     const onValueChange = (difference: number) => {
         logHealthChange(difference, minion_index);

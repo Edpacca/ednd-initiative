@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { isLocked, entities, activeEntityTurnIndex, addNewLog } from "../../store";
+    import { isLocked, entities, activeEntityTurnIndex } from "../../store";
     import Heart from "../../graphics/icons/heart.svelte";
     import CreatureRowLocked from "../creature/locked/CreatureRowLocked.svelte";
     import EffectRowLocked from "../effects/EffectRowLocked.svelte";
@@ -7,6 +7,7 @@
     import { CREATURE_TYPES } from "../../lib/typeFilters";
     import { EffectType } from "../../lib/models/effect";
     import { fade } from "svelte/transition";
+    import { updateLogs } from "../logger/logger";
 
     const sortByInitiative = () => {
         $entities.sort((a, b) => {
@@ -15,7 +16,7 @@
             
             return aTotal === bTotal ? b.bonus - a.bonus : bTotal - aTotal;
         });
-        addNewLog();
+        updateLogs($activeEntityTurnIndex);
     }
 
     $: $isLocked, sortByInitiative();

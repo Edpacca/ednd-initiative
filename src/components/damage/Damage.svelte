@@ -3,10 +3,10 @@
     import Heart from "../../graphics/icons/heart.svelte";
     import Skull from "../../graphics/icons/skull.svelte";
     import type { Creature } from "../../lib/models/creature";
-    import { appendDamageToCurrentLog } from "../../store";
     import { FLOATERS } from "../common/floater/animationValue";
     import Floater from "../common/floater/Floater.svelte";
     import type { FocusType } from "../creature/creatureModal/focusType";
+    import { appendDamageToCurrentLog } from "../logger/logger";
 
     export let creature: Creature;
     export let damageInput: HTMLInputElement;
