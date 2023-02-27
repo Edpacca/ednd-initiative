@@ -10,8 +10,7 @@
     export let isActive = false;
     export let isSelected = false;
     export let index = 0;
-    let selectedIndex = 0;
-
+    export let selectedIndex = 0;
 
     $: isMinion = creature.type === CreatureType.Minion;
     $: isPlayer = creature.type === CreatureType.Player;

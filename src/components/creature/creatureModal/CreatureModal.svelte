@@ -13,16 +13,17 @@
     export let creature: Creature;
     export let isSelected = false;
     let index = 0;
+    let selectedIndex = 0;
 
     const submitCondition = (condition: string) => {
         if (condition && !creature.conditions[index].includes(condition)) {
             creature.conditions[index] = [...creature.conditions[index], condition];
-            appendConditionToCurrentLog(creature, condition, index);
+            appendConditionToCurrentLog(creature, condition, selectedIndex);
         }
     }
 
     const removeCondition = (condition: string) => {
-        creature.conditions[index] = creature.conditions[index].filter(c => c !== condition);
+        creature.conditions[index] = creature.conditions[selectedIndex].filter(c => c !== condition);
     }
 
     let damageInput: HTMLInputElement;
@@ -74,11 +75,11 @@
             <div in:fade>
                 <div class="creature-info">
                     <CreatureIconSelect type={creature.type} playerClass={creature.playerClass}/>
-                    <CreatureInputLocked creature={creature} bind:index={index}/>
+                    <CreatureInputLocked creature={creature} bind:index bind:selectedIndex bind:isSelected/>
                     {#if isMinion}
                         <div class="minion-hp-container">
                             {#each Array(creature.quantity) as m, i}
-                                <HpValue value={creature.hpCurrent[i]} valueMax={creature.hpMax} class="minion-hp"/>
+                                <HpValue value={creature.hpCurrent[i]} valueMax={creature.hpMax} class="minion-hp" disabled={i !== selectedIndex}/>
                             {/each}
                         </div>
                     {:else}
@@ -87,17 +88,17 @@
                 </div>
                 <div class="modal-control-grid">
                     <div class="damage-container">
-                        <Damage bind:creature bind:damageInput bind:healingInput bind:focused index={index}/>
+                        <Damage bind:creature bind:damageInput bind:healingInput bind:focused index={selectedIndex}/>
                     </div>
-                    <Conditions 
-                        bind:conditions={creature.conditions[index]}
+                    <Conditions
+                        bind:conditions={creature.conditions[selectedIndex]}
                         bind:conditionInput
                         bind:focused
                         bind:value={conditionInputValue}
                         submitCondition={submitCondition}
                         removeCondition={removeCondition}>
                         {#if isMinion}
-                            <div class="selected-minion">{creature.name} #{index + 1}</div>
+                            <div class="selected-minion">{creature.name} #{selectedIndex + 1}</div>
                         {/if}
                     </Conditions>
                 </div>

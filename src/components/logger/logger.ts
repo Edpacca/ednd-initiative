@@ -39,19 +39,19 @@ export function appendDamageToCurrentLog(entity: Creature, damage: number, index
 
 export function appendSumDamageToCurrentLog(entity: Creature, damage: number, index=0) {
     const log = currentLog();
-    log.buffer[log.index].addLogEntitySumDamage(entity, damage, index);;
+    log.buffer[log.index].addLogEntitySumDamage(entity, damage, index);
     logs.set(log.buffer);
 }
 
 export function appendConditionToCurrentLog(entity: Creature, condition: string, index=0) {
     const log = currentLog();
-    log.buffer[log.index].addLogEntityCondition(entity, condition, index);;
+    log.buffer[log.index].addLogEntityCondition(entity, condition, index);
     logs.set(log.buffer);
 }
 
 export function appendLegendaryActionsToCurrentLog(entity: Creature, actions: number, index=0) {
     const log = currentLog();
-    log.buffer[log.index].addLogEntityLegendaryActions(entity, actions, index);;
+    log.buffer[log.index].addLogEntityLegendaryActions(entity, actions, index);
     logs.set(log.buffer);
 }
 

@@ -1,4 +1,4 @@
-import type { LogEntry } from "./models/logEntry";
+import { LogEntry, logEntryFromData } from "./models/logEntry";
 import type { Encounter } from "./models/encounter";
 import type { Entity, EntityType } from "./models/entity";
 
@@ -34,7 +34,8 @@ export function setLocalStorageLogs(logs: LogEntry[]) {
 }
 
 export function getLocalStorageLogs(): LogEntry[] {
-    return getLocalStorageArr(StorageType.Logs);
+    const logData = getLocalStorageArr(StorageType.Logs);
+    return logData.map(l => logEntryFromData(l))
 }
 
 export function getLocalStorageTurn(): [number, number] {

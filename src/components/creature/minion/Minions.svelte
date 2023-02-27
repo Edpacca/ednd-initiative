@@ -47,7 +47,8 @@
                 name={`${name} #${i + 1}`}/>
             <!-- svelte-ignore a11y-click-events-have-key-events -->
             <div class="minion-number" 
-                class:selected-minion-number={(isSelected || isHighlighted) && i === selectedIndex}
+                class:selected-minion-number={isSelected && i === selectedIndex}
+                class:unselected-minion-number={isSelected && i !== selectedIndex}
                 on:click={() => select(i)}
                 on:contextmenu|preventDefault={() => openConditionGrid(i)}>
                 #{i + 1}
@@ -107,6 +108,10 @@
 
     .selected-minion-number {
         color: var(--gold);
+    }
+
+    .unselected-minion-number {
+        color: var(--mid-grey);
     }
 
     .selected-minion-input {

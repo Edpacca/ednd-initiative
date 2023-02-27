@@ -13,8 +13,8 @@
     let listHasFocus = false;
     let filteredIndex = 0;
 
-    $: filteredConditions = CONDITIONS.filter(c => c.startsWith(value.toLowerCase()) && !CONDITIONS.includes(c));
-
+    $: filteredConditions = CONDITIONS.filter(c => c.startsWith(value.toLowerCase()) && !conditions.includes(c));
+    
     const submit = (condition: string) => {
         submitCondition(condition);
         value = "";

@@ -122,3 +122,13 @@ export class LogEntry {
         this.recipients = this.recipients.filter(r => r !== logEntity);
     }
 }
+
+export function logEntryFromData(logData: LogEntry): LogEntry {
+    const surrogateLog = new LogEntry(logData.owner, logData.round);
+    logData.addLogEntityCondition = surrogateLog.addLogEntityCondition;
+    logData.addLogEntityDamage = surrogateLog.addLogEntityDamage;
+    logData.addLogEntityLegendaryActions = surrogateLog.addLogEntityLegendaryActions;
+    logData.addLogEntitySumDamage = surrogateLog.addLogEntitySumDamage;
+    logData.addMessage = surrogateLog.addMessage;
+    return logData;
+}
