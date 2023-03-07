@@ -11,7 +11,9 @@
     import { getTimeString } from "../../lib/time";
 
     export let logEntry: LogEntry;
-    const timeString = getTimeString(new Date(logEntry.time));
+    let isLogHeaderHovered = false;
+    let isLogBodyHovered = false;
+    // const timeString = getTimeString(new Date(logEntry.time));
     $: isCurrentLog = logEntry.id === $currentLogId;
 
     const undoLogAction = (recipient: LogEntityAny) => {
@@ -43,20 +45,20 @@
 </script>
 
 <div class="log-entry" class:current-log={isCurrentLog}>
-    <div class="log-header" class:current-log-header={!removeLogEntry}>
+    <div class="log-header" class:current-log-header={!removeLogEntry} on:mouseenter={() => isLogHeaderHovered = true} on:mouseleave={() => isLogHeaderHovered = false}>
         <div class="log-icon"><EntityIcon type={logEntry.owner.type} playerClass={logEntry.owner.playerClass}/></div>
         <div class="log-name">{logEntry.owner.name}</div>
-        <div class="time-info">
+        <!-- <div class="time-info">
             <div class="time">{timeString}</div>
-        </div>
+        </div> -->
         {#if removeLogEntry !== undefined}
-            <RemoveButton onClick={removeLogEntry}/>
+            <RemoveButton onClick={removeLogEntry} isHidden={!isLogHeaderHovered}/>
         {/if}
     </div>
     {#if logEntry.recipients.length > 0 || logEntry.messages.length > 0}
         <hr>
     {/if}
-    <div class="damage-log">
+    <div class="damage-log" on:mouseenter={() => isLogBodyHovered = true} on:mouseleave={() => isLogBodyHovered = false}>
         {#each logEntry.recipients as recipient}
             <div class="log-icon"><EntityIcon type={recipient.type} playerClass={recipient.playerClass}/></div>
             <div class="name">{recipient.name}</div>
@@ -79,7 +81,7 @@
             {:else if recipient.logType === "legendary"}
                 <LegendaryActionsValueIcon value={recipient.actions}/>
             {/if}
-            <RemoveButton onClick={() => undoLogAction(recipient)}/>
+            <RemoveButton onClick={() => undoLogAction(recipient)} isHidden={!isLogBodyHovered} isUndo={true}/>
         {/each}
     </div>
 </div>
@@ -98,14 +100,14 @@
 
     .log-entry {
         padding: 0.25rem;
+        margin-top: 0.25rem;
     }
 
     .log-header {
         display: grid;
-        grid-template-columns: 20% 4rem 30% 1rem;
+        grid-template-columns: 3rem auto 3rem;
         align-items: center;
         column-gap: 0.5rem;
-        text-align: left;
     }
     
     .current-log-header {
@@ -138,7 +140,7 @@
     hr {
         border: 0;
         border-bottom: 2px solid var(--mid-grey);
-        margin: 0.5rem 2rem 0 2rem;
+        margin: 1rem 2rem 0 2rem;
     }
 
     .damage-log {

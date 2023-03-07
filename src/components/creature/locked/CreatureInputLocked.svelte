@@ -29,7 +29,7 @@
             bind:value={creature.name}
             type="text"
             class:active={isActive}
-            disabled
+            readonly
             class:minion-main-name={creature.type === CreatureType.Minion}
             placeholder={isPlayer ? creature.playerClass : "Creature"}
             on:click={() => isSelected = true}/>

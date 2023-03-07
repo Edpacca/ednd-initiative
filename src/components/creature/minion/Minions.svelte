@@ -52,7 +52,8 @@
                 class:non-index-minion-input={isSelected}
                 class:selected-minion-input={isSelected && i === selectedIndex}
                 class:locked={$isLocked}
-                disabled={$isLocked}
+                readonly={$isLocked}
+                on:click={() => select(i)}
                 value={`${name} #${i + 1}`}/>
             <HealthBar max={hpMax} current={hpCurrent[i]}/>
             {#if conditions.length === quantity && conditions[i].length > 0}
