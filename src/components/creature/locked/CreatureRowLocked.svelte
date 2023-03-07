@@ -16,6 +16,7 @@
     export let index = 0;
     export let isActive = false;
     let isSelected = false;
+    let selectedIndex = 0;
     let isConditionGridOpen = false;
     $: isHighlighted = isConditionGridOpen && $activeEntityContextIndex === index;
     
@@ -35,16 +36,6 @@
         isSelected = true;
     }
 
-    const selectCreature = (event: KeyboardEvent) => {
-        if (!isSelected && isActive && event.code === "Space") {
-            isSelected = true;
-            event.stopPropagation();
-            event.preventDefault();
-        } else if (event.code === "Tab") {
-            event.preventDefault();
-        }
-    }
-
     $: creature, setLocalStorageEntities($entities);
 </script>
 
@@ -60,7 +51,7 @@
             onRightClick={openConditionGrid}/>
     </td>
     <td>
-       <CreatureInputLocked bind:isActive bind:creature={creature} bind:isSelected index={index}/>
+       <CreatureInputLocked bind:isActive bind:creature={creature} bind:isSelected index={index} bind:selectedIndex/>
     </td>
     <td>
         <CurrentHpInput bind:entity={creature}/>
@@ -74,4 +65,4 @@
 </tr>
 
 <!-- <svelte:window on:keydown={e => selectCreature(e)}/> -->
-<CreatureModal bind:isSelected bind:creature/>
+<CreatureModal bind:isSelected bind:creature bind:selectedIndex={selectedIndex}/>

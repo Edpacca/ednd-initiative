@@ -14,16 +14,9 @@
     let isConditionGridOpen = false;
     $: isHighlighted = isConditionGridOpen && $activeEntityContextIndex === parentIndex;
 
-    const selectIndex = (i: number) => {
-        selectedIndex = i;
-    }
-
     const select = (i: number) => {
-        if (isSelected) {
-            selectIndex(i);
-        } else {
-            isSelected = true;
-        }
+        selectedIndex = i;
+        isSelected = true;
     }
 
     const openConditionGrid = (i: number) => {

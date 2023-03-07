@@ -12,8 +12,8 @@
     import HpValue from "./HpValue.svelte";
     export let creature: Creature;
     export let isSelected = false;
+    export let selectedIndex = 0;
     let index = 0;
-    let selectedIndex = 0;
 
     const submitCondition = (condition: string) => {
         if (condition && !creature.conditions[index].includes(condition)) {

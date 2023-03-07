@@ -63,8 +63,8 @@
         border: 2px solid var(--primary);
         background-color: var(--dark-grey-90);
         border-radius: var(--border-radius);
-        width: 15rem;
-        max-height: 93vh;
+        width: 15vw;
+        max-height: 90vh;
         overflow-y: scroll;
         position: relative;
         padding: calc(3rem + 2px) 0 0.5rem 0.5rem;
