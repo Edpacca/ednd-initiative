@@ -20,9 +20,13 @@
 
     const applyDamage = () => {
         if (damage) {
-            creature.hpCurrent[index] -= damage;
-            if (creature.hpCurrent[index] < 0) creature.hpCurrent[index] = 0;
-            appendDamageToCurrentLog(creature, damage * -1, index);
+            const appliedDamage = damage > creature.hpCurrent[index] ? creature.hpCurrent[index] : damage;
+            creature.hpCurrent[index] -= appliedDamage;
+            if (damage > appliedDamage) {
+                appendDamageToCurrentLog(creature, damage * -1, damage - appliedDamage);
+            } else {
+                appendDamageToCurrentLog(creature, damage * -1, index);
+            }           
             resetDamage();
         } 
     }

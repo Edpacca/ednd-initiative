@@ -1,10 +1,8 @@
 <script lang="ts">
     import Cross from "../../../graphics/symbols/cross.svelte";
-    import Undo from "../../../graphics/symbols/undo.svelte";
     export let onClick: () => void;
     export let isHidden = false;
     export let isinverted = false;
-    export let isUndo = false;
 </script>
 
 <button 
@@ -12,11 +10,7 @@
     class:hidden={isHidden}
     class:inverted={isinverted}
     on:click={onClick}>
-    {#if isUndo}
-        <Undo/>
-    {:else}
         <Cross/>
-    {/if}
 </button>
 
 <style>

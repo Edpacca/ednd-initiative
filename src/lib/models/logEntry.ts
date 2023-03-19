@@ -11,7 +11,7 @@ type LogEntity = {
     index: number
 }
 
-type Damage = { damage: number, logType: "damage" }
+type Damage = { damage: number, logType: "damage", overkill: number}
 type LegendaryAction = { actions: number, logType: "legendary" }
 type Condition = { condition: string, logType: "condition" }
 
@@ -58,21 +58,12 @@ export class LogEntry {
             (existing as Damage).damage += damage;
             this.recipients[this.recipients.indexOf(existing)] = existing;
         } else {
-            const name = getBaseName(recipient, index);
-            const playerClass = recipient.playerClass;
-            this.recipients.push({ 
-                name, 
-                damage, 
-                index,
-                playerClass, 
-                id: recipient.id,
-                type: recipient.type, 
-                logType: "damage",
-            });
+            this.addLogEntityDamage(recipient, damage, index);
         }
     }
 
-    addLogEntityDamage(recipient: Creature, damage: number, index=0) {
+    addLogEntityDamage(recipient: Creature, damage: number, index=0, overkill=0) {
+        print(overkill)
         const name = getBaseName(recipient, index);
         const playerClass = recipient.playerClass;
         this.recipients.push({ 
@@ -83,6 +74,7 @@ export class LogEntry {
             id: recipient.id,
             type: recipient.type, 
             logType: "damage",
+            overkill: overkill
         });
     }
 

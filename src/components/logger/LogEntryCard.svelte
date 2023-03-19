@@ -8,12 +8,11 @@
     import EntityIcon from "../common/icons/EntityIcon.svelte";
     import LegendaryActionsValueIcon from "../common/icons/LegendaryActionsValueIcon.svelte";
     import type { LogEntityAny, LogEntry } from "../../lib/models/logEntry";
-    import { getTimeString } from "../../lib/time";
+    import Skull from "../../graphics/icons/skull.svelte";
 
     export let logEntry: LogEntry;
     let isLogHeaderHovered = false;
     let isLogBodyHovered = false;
-    // const timeString = getTimeString(new Date(logEntry.time));
     $: isCurrentLog = logEntry.id === $currentLogId;
 
     const undoLogAction = (recipient: LogEntityAny) => {
@@ -73,6 +72,12 @@
                         {recipient.damage}
                         <Blood/>
                     </div>
+                    {#if recipient.overkill > 0}
+                        <div class="bold red damage-log-icon">
+                            {recipient.overkill}
+                            <Skull/>
+                        </div>
+                    {/if}
                 {/if}
             {:else if recipient.logType === "condition"}
                 <div class="log-icon">
@@ -81,7 +86,7 @@
             {:else if recipient.logType === "legendary"}
                 <LegendaryActionsValueIcon value={recipient.actions}/>
             {/if}
-            <RemoveButton onClick={() => undoLogAction(recipient)} isHidden={!isLogBodyHovered} isUndo={true}/>
+            <RemoveButton onClick={() => undoLogAction(recipient)} isHidden={!isLogBodyHovered}/>
         {/each}
     </div>
 </div>

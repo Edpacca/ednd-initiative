@@ -31,9 +31,9 @@ export function addNewLog() {
     currentLogId.set(newLog.id);
 }
 
-export function appendDamageToCurrentLog(entity: Creature, damage: number, index=0) {
+export function appendDamageToCurrentLog(entity: Creature, damage: number, index=0, overkill=0) {
     const log = currentLog();
-    log.buffer[log.index].addLogEntityDamage(entity, damage, index);
+    log.buffer[log.index].addLogEntityDamage(entity, damage, index, overkill);
     logs.set(log.buffer);
 }
 
