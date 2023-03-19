@@ -6,7 +6,7 @@ import { logs, currentLogId, currentRound, entities, activeEntityTurnIndex } fro
 // to be called when the currentEntityIndex has changed
 export function updateLogs(activeEntityTurnIndex: number) {
     const logEntries = get(logs);
-    const latestEntityId = get(entities)[activeEntityTurnIndex].id
+    const latestEntityId = get(entities)[activeEntityTurnIndex]?.id
     const thisRound = get(currentRound);
     const currentRoundLogs = logEntries.filter(l => l.round === thisRound);
     const activeEntityTurnLog = currentRoundLogs.find(l => l.owner.id === latestEntityId)

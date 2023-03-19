@@ -11,7 +11,7 @@
     $: isDead = entity.hpCurrent[0] <= 0;
     $: isBloodied = entity.hpCurrent <= entity.hpMax / 2 && !isDead;
 
-    const logHealthChange = (difference: number, index = 0) => { 
+    const logHealthChange = (difference: number, index = 0) => {
         appendSumDamageToCurrentLog(entity, difference, index);
     }
 </script>
