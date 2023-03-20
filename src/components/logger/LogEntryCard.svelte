@@ -71,13 +71,11 @@
                     <div class="bold red damage-log-icon">
                         {recipient.damage}
                         <Blood/>
-                    </div>
-                    {#if recipient.overkill > 0}
-                        <div class="bold red damage-log-icon">
+                        {#if recipient.overkill > 0}
                             {recipient.overkill}
                             <Skull/>
-                        </div>
-                    {/if}
+                        {/if}
+                    </div>
                 {/if}
             {:else if recipient.logType === "condition"}
                 <div class="log-icon">
