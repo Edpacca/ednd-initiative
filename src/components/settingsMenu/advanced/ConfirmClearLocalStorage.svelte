@@ -1,5 +1,6 @@
 <script lang="ts">
     import { clearLocalStorage } from "../../../lib/persistance";
+    import { isLocked, isStarted } from "../../../store";
     import ConfirmationModal from "../../common/modal/ConfirmationModal.svelte";
     import { clearLogs } from "../../logger/logger";
     import { reset } from "./reset";
@@ -11,6 +12,8 @@
         clearLogs();
         reset();
         close();
+        $isStarted = false;
+        $isLocked = false;
     }
 
     const text = [

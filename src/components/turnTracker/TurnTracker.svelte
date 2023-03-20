@@ -22,6 +22,7 @@
         }
 
         storeCurrentRound();
+        updateLogs($activeEntityTurnIndex);
     }
 
     const previous = () => {
@@ -34,6 +35,7 @@
         }
         
         storeCurrentRound();
+        updateLogs($activeEntityTurnIndex);
     }
 
     const onArrows = (event: KeyboardEvent) => {
@@ -51,7 +53,6 @@
         }
     }
 
-    $: updateLogs($activeEntityTurnIndex);
     $: setLocalStorageLogs($logs);
     $: setLocalStorageCurrentLogId($currentLogId);
 </script>

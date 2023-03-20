@@ -63,7 +63,6 @@ export class LogEntry {
     }
 
     addLogEntityDamage(recipient: Creature, damage: number, index=0, overkill=0) {
-        print(overkill)
         const name = getBaseName(recipient, index);
         const playerClass = recipient.playerClass;
         this.recipients.push({ 

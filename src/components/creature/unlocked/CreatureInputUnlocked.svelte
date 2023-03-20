@@ -48,7 +48,7 @@
                 filteredIndex = Math.max(filteredIndex - 1, 0);
             } else if (event.key === "ArrowDown") {
                 filteredIndex = Math.min(filteredIndex + 1, filteredCreatures.length - 1);
-            } else if (event.key === "Enter" || event.key === "Tab") {
+            } else if (!isPlayer && (event.key === "Enter" || event.key === "Tab")) {
                 setFromCreatureData(filteredCreatures[filteredIndex]);
                 event.preventDefault();
                 event.stopPropagation();
