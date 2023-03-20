@@ -1,3 +1,7 @@
 export function dRoll(die: number) {
-    return Math.ceil( Math.random() * die);
+    const roll = Math.ceil(Math.random() * die);
+    if (roll > die) {
+        throw new Error("Erkk - the gods intervened with the die roll")
+    }
+    return roll;
 }
