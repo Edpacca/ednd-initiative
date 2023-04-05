@@ -15,9 +15,9 @@
     let isInputFocused = false;
     let filteredIndex = 0;
 
-    $: isMinion = creature.type === CreatureType.Minion;
-    $: isPlayer = creature.type === CreatureType.Player;
-    $: isBoss = creature.type === CreatureType.Boss;
+    const isMinion = creature.type === CreatureType.Minion;
+    const isPlayer = creature.type === CreatureType.Player;
+    const isBoss = creature.type === CreatureType.Boss;
     $: creature, setLocalStorageEntities($entities);
     $: filteredCreatures = CREATURES.filter(c => c.name.toLowerCase().startsWith(creature.name.toLowerCase())).slice(0, 7);
 

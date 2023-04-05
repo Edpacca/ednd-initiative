@@ -12,9 +12,9 @@
     export let index = 0;
     export let selectedIndex = 0;
 
-    $: isMinion = creature.type === CreatureType.Minion;
-    $: isPlayer = creature.type === CreatureType.Player;
-    $: isBoss = creature.type === CreatureType.Boss;
+    const isMinion = creature.type === CreatureType.Minion;
+    const isPlayer = creature.type === CreatureType.Player;
+    const isBoss = creature.type === CreatureType.Boss;
 
     const logLegendaryAction = () => {
         if (isBoss) {

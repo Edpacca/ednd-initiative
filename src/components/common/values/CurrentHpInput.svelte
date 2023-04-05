@@ -6,8 +6,7 @@
     import { appendSumDamageToCurrentLog } from "../../logger/logger";
 
     export let entity;
-
-    $: isMinion = entity.type === CreatureType.Minion;
+    const isMinion = entity.type === CreatureType.Minion;
     $: isDead = entity.hpCurrent[0] <= 0;
     $: isBloodied = entity.hpCurrent <= entity.hpMax / 2 && !isDead;
 
@@ -21,8 +20,7 @@
         bind:value={entity.hpCurrent[0]}
         class={isBloodied ? "bloodied" : isDead ? "dead" : ""}
         isHidden={isMinion}
-        onValueChange={logHealthChange}
-        />
+        onValueChange={logHealthChange}/>
     {#if isDead && !isMinion}
         <div class="skull"><Skull/></div>
     {:else if isMinion}

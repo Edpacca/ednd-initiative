@@ -19,14 +19,8 @@
 
 <div class="relative">
     <NumberInput bind:value={hp} class={extraClasses} onValueChange={onValueChange}/>
-    <div class="spacer"></div>
+    <div class="healthbar-height-spacer"></div>
     {#if hp <= 0}
         <div class="skull" style={`--i: ${minion_index + 1}`}><Skull/></div>
     {/if}
 </div>
-
-<style>
-    .spacer {
-        height: var(--healthbar-height);
-    }
-</style>

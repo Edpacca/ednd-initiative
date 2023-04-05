@@ -32,7 +32,7 @@
 
     let focused: FocusType = "damage";
     let conditionInputValue = "";
-    $: isMinion = creature.type === CreatureType.Minion
+    const isMinion = creature.type === CreatureType.Minion
 
     const keyboardInput = async (event: KeyboardEvent) => {
         if (isSelected) {

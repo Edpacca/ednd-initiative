@@ -15,6 +15,8 @@
     export let creature: Creature;
     export let index = 0;
     export let isActive = false;
+    
+    const isMinion = creature.type === CreatureType.Minion;
     let isSelected = false;
     let selectedIndex = 0;
     let isConditionGridOpen = false;
@@ -57,7 +59,15 @@
         <CurrentHpInput bind:entity={creature}/>
     </td>
     <td>
-        <AcValue value={creature.ac}/>
+        {#if isMinion}
+            <div class="minion-icon-spacer"></div>
+            {#each Array(creature.quantity) as i}
+                <AcValue value={creature.ac}/>
+                <div class="healthbar-height-spacer"></div>
+            {/each}
+        {:else}
+            <AcValue value={creature.ac}/>
+        {/if}
     </td>   
     <td>
         <InitiativeValue bind:initiative={creature.initiative} bind:bonus={creature.bonus}/>

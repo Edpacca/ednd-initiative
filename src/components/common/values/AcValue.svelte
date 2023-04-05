@@ -1,9 +1,11 @@
 <script lang="ts">
     import { scale } from "svelte/transition";
     import ShieldBroken from "../../../graphics/icons/shield-broken.svelte";
-import Shield from "../../../graphics/icons/shield.svelte";
+    import Shield from "../../../graphics/icons/shield.svelte";
     import NumberStringInput from "./NumberStringInput.svelte";
+    
     export let value;
+    
     let isBonusOpen = false;
     let bonus = 0;
     $: isEnchanted = bonus > 0;

@@ -25,6 +25,7 @@
     }
 
     const rotatePlayerIcon = () => {
+        isIconGridOpen = false;
         if (creature.type === CreatureType.Player) {
             creature.playerClass = 
             creature.playerClass === "Artificer" ? "Barbarian" :
@@ -57,8 +58,8 @@ $: if ($activeEntityContextIndex !== index) {
                 bind:isIconGridOpen
                 index={index}
                 class="gold"
-                onClick={rotatePlayerIcon}
-                onRightClick={toggleIconGrid}/>
+                onClick={toggleIconGrid}
+                onRightClick={rotatePlayerIcon}/>
         {:else}
             <CreatureToggle bind:type={creature.type} allowedTypes={[CreatureType.Enemy, CreatureType.Minion, CreatureType.Boss]}/>
         {/if}
