@@ -8,7 +8,7 @@
     import Minions from "../minion/Minions.svelte";
     import LegendaryActionsInput from "../../common/values/LegendaryActionsInput.svelte";
     import { CREATURES, type CreatureData } from "../../../lib/creatureData";
-    import FilterList from "../../common/FilterList.svelte";
+    import DropdownList from "../../common/DropdownList.svelte";
 
     export let removeCreature: (e: Creature) => void;
     export let creature: Creature;
@@ -42,6 +42,11 @@
         isInputFocused = false;
     }
 
+    const setFromCreatureName = (name: string) => {
+        const creatureData = filteredCreatures.find(c => c.name === name);
+        if (creatureData) setFromCreatureData(creatureData);
+    }
+
     const onKeydown = (event: KeyboardEvent) => {
         if (isInputFocused) {
             if (event.key === "ArrowUp") {
@@ -70,11 +75,11 @@
             class:minion-input={creature.type === CreatureType.Minion}
             placeholder={isPlayer ? creature.playerClass : "Creature"}/>
         {#if !isPlayer && isInputFocused && creature.name}
-            <FilterList 
-                filtered={filteredCreatures}
-                filteredIndex={filteredIndex}              
+            <DropdownList 
+                list={filteredCreatures}
+                bind:highlightedIndex={filteredIndex}              
                 key="name"
-                onLiClick={setFromCreatureData}/>
+                onLiClick={setFromCreatureName}/>
         {/if}
         {#if !isMinion}
             <HealthBar max={creature.hpMax} current={creature.hpCurrent}/>

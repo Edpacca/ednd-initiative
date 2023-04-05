@@ -1,17 +1,19 @@
 <script lang="ts">
-    export let filtered: any[];
+    export let list: unknown[];
     export let key: string | undefined = undefined;
-    export let filteredIndex = 0;
-    // export let highlightedCondition: (index: number) => boolean;
-    export let onLiClick: (t: any) => void;
+    export let highlightedIndex = 0;
+    export let onLiClick: (t: unknown) => void;
 </script>
 
 <div class="filter-list">
     <ul>
-        {#each filtered as f, i}
+        {#each list as item, i}
             <!-- svelte-ignore a11y-click-events-have-key-events -->
-            <li on:click={() => onLiClick(f)} class:highlighted={i === filteredIndex}>
-                {key ? f[key] : f}
+            <li 
+                class:highlighted={i === highlightedIndex}
+                on:mouseenter={() => highlightedIndex = i}
+                on:click={() => onLiClick(key ? item[key] : item)}> 
+                {key ? item[key] : item}
             </li>
         {/each}
     </ul>
@@ -37,11 +39,7 @@
         border-top: 1px solid var(--light-grey);
         text-transform: capitalize;
         cursor: pointer;
-    }
-
-    li:hover {
-        color: var(--white);
-        background-color: var(--light-grey);
+        z-index: 21;
     }
 
     ul {

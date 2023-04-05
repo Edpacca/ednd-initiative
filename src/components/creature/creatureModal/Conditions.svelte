@@ -1,7 +1,7 @@
 <script lang="ts">
     import { CONDITIONS } from "../../../lib/conditions";
     import PlusMinusButton from "../../common/buttons/PlusMinusButton.svelte";
-    import FilterList from "../../common/FilterList.svelte";
+    import FilterList from "../../common/DropdownList.svelte";
     import ConditionIcon from "../../common/icons/ConditionIcon.svelte";
     import type { FocusType } from "./focusType";
     export let conditions: string[];
@@ -58,13 +58,14 @@
             <input 
                 bind:value
                 bind:this={conditionInput}
+                on:click={() => listHasFocus = true}
                 on:focusin={() => focused = "condition"}
                 on:keydown={e => onKeydown(e)}
                 tabindex={1}/>
-            <PlusMinusButton type="+" onClick={() => submit(value)} width="2rem"/>
+                <PlusMinusButton type="+" onClick={() => submit(value)} width="2rem"/>
         </div>
         {#if (value || listHasFocus) && focused === "condition" && filteredConditions.length > 0}
-            <FilterList filtered={filteredConditions} onLiClick={submit} filteredIndex={filteredIndex}/>    
+        <FilterList list={filteredConditions} onLiClick={submit} bind:highlightedIndex={filteredIndex}/>    
         {/if}
     </div>
     {#if conditions && conditions.length > 0}
