@@ -16,7 +16,7 @@
     <div class="icon-grid">
         {#each PLAYER_CLASSES as pc}
             <button class="blank-button" on:click={() => handleClick(pc)}>
-                <PlayerClassIcon playerClass={pc} width="2rem"/>
+                <PlayerClassIcon playerClass={pc} width="2rem" hasTooltip={true}/>
             </button>
         {/each}
     </div>

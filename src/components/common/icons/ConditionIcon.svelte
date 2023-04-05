@@ -34,16 +34,6 @@
         opacity: 0.5;
     }
     
-    .tooltip {
-        position: fixed;
-        z-index: 50;
-        background-color: var(--dark-grey-90);
-        color: var(--white);
-        padding: 0.2rem;
-        margin: 0.2rem 0;
-        text-transform: capitalize;
-    }
-
     text {
         stroke: var(--white);
         font-size: 3rem;

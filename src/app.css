@@ -449,3 +449,21 @@ input[type="checkbox"]:focus {
 .name {
     text-transform: capitalize;
 }
+
+.tooltip {
+    position: fixed;
+    z-index: 50;
+    background-color: var(--dark-grey-90);
+    color: var(--white);
+    padding: 0.2rem;
+    margin: 0.2rem 0;
+    text-transform: capitalize;
+}
+
+.healthbar-height-spacer {
+    height: var(--healthbar-height);
+}
+
+.minion-icon-spacer {
+    height: 2.5rem;
+}
