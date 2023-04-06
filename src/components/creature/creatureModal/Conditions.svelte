@@ -1,9 +1,11 @@
 <script lang="ts">
     import { CONDITIONS } from "../../../lib/conditions";
     import PlusMinusButton from "../../common/buttons/PlusMinusButton.svelte";
-    import FilterList from "../../common/DropdownList.svelte";
+    import DropdownFilter from "../../common/DropdownFilter.svelte";
     import ConditionIcon from "../../common/icons/ConditionIcon.svelte";
+    import InputDropdownFilter from "../../common/InputDropdownFilter.svelte";
     import type { FocusType } from "./focusType";
+    
     export let conditions: string[];
     export let conditionInput: HTMLInputElement;
     export let focused: FocusType = "none";
@@ -11,7 +13,7 @@
     export let removeCondition: (condition: string) => void;
     export let value = "";
     let listHasFocus = false;
-    let filteredIndex = 0;
+    let filterIndex = 0;
 
     $: filteredConditions = CONDITIONS.filter(c => c.startsWith(value.toLowerCase()) && !conditions.includes(c));
     
@@ -20,41 +22,70 @@
         value = "";
         listHasFocus = false;
     }
+
+    const ascendList = () => {
+        filterIndex = Math.max(filterIndex - 1, 0);
+    }
+
+    const descendList = () => {
+        filterIndex = Math.min(
+            filterIndex + 1, filteredConditions.length - 1);
+    }
    
     const onKeydown = (event: KeyboardEvent) => {
-        if (event.key === "ArrowUp") {
-            filteredIndex = Math.max(filteredIndex - 1, 0);
-            listHasFocus = true;
-        } else if (event.key === "ArrowDown") {
-            if (listHasFocus) {
-                filteredIndex = Math.min(filteredIndex + 1, filteredConditions.length - 1);
-            } else {
+        switch(event.key) {
+            case "ArrowUp":
+                ascendList();
                 listHasFocus = true;
-            }
-        } else if (event.key === "Enter") {
-            if (listHasFocus) {
-                submit(filteredConditions[filteredIndex]);
-            } else {
-                submit(value);
-            }
-        } else if (event.key === "Tab") {
-         if(value && filteredConditions.length > 0) {
-            value = filteredConditions[0];
-            conditionInput.select();
-        } else {
-            listHasFocus = false;
+                break;
+            case "ArrowDown":
+                if (listHasFocus) { 
+                    descendList();
+                }    
+                listHasFocus = true;
+                break;
+            case "Enter":
+                listHasFocus 
+                    ? submit(filteredConditions[filterIndex])
+                    : submit(value);
+                break;
+            case "Tab":
+                if (value && filteredConditions.length > 0) {
+                    value = filteredConditions[filterIndex];
+                    conditionInput.select();
+                } else {
+                    listHasFocus = false;
+                }
+                break;
+            case "Backspace":
+                if (!value) {
+                    listHasFocus = false;
+                }
+                break;
+            default:
+                break;
         }
-    } else if (event.key === "Backspace" && !value) {
-            listHasFocus = false;
     }
-}
+
+    $: listFocusCondition = focused === "condition";
 </script>
 <div class="effects-conditions">
     <div class="header-small underline">Effects & Conditions</div>
     <slot>
     </slot>
     <div class="search-header">
-        <div class="controls">
+        <InputDropdownFilter 
+            divClass="conditions-controls"
+            inputClass="conditions-input"
+            onFocusIn={() => focused = "condition"}
+            listFocusCondition={listFocusCondition}
+            submit={submit}
+            list={filteredConditions}
+            >
+            <PlusMinusButton type="+" onClick={() => submit(value)} width="2rem"/>
+        </InputDropdownFilter>
+
+        <!-- <div class="controls">
             <input 
                 bind:value
                 bind:this={conditionInput}
@@ -65,8 +96,8 @@
                 <PlusMinusButton type="+" onClick={() => submit(value)} width="2rem"/>
         </div>
         {#if (value || listHasFocus) && focused === "condition" && filteredConditions.length > 0}
-        <FilterList list={filteredConditions} onLiClick={submit} bind:highlightedIndex={filteredIndex}/>    
-        {/if}
+        <DropdownFilter list={filteredConditions} onLiClick={submit} bind:highlightedIndex={filterIndex}/>    
+        {/if} -->
     </div>
     {#if conditions && conditions.length > 0}
     <div class="condition-grid">
@@ -88,19 +119,6 @@
         padding: 1rem;
     }
 
-    input {
-        height: 1.8rem;
-        text-transform: capitalize;
-    }
-
-    .controls {
-        display: flex;
-        flex-direction: row;
-        column-gap: 0.5rem;
-        align-items: center;
-        margin: 0.5rem 0;
-        padding-right: 1rem;      
-    }
 
     .condition-grid {
         display: grid;

@@ -467,3 +467,18 @@ input[type="checkbox"]:focus {
 .minion-icon-spacer {
     height: 2.5rem;
 }
+
+
+.conditions-input {
+    height: 1.8rem;
+    text-transform: capitalize;
+}
+
+.conditions-controls {
+    display: flex;
+    flex-direction: row;
+    column-gap: 0.5rem;
+    align-items: center;
+    margin: 0.5rem 0;
+    padding-right: 1rem;      
+}

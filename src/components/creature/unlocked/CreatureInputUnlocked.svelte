@@ -8,19 +8,25 @@
     import Minions from "../minion/Minions.svelte";
     import LegendaryActionsInput from "../../common/values/LegendaryActionsInput.svelte";
     import { CREATURES, type CreatureData } from "../../../lib/creatureData";
-    import DropdownList from "../../common/DropdownList.svelte";
+    import DropdownFilter from "../../common/DropdownFilter.svelte";
 
     export let removeCreature: (e: Creature) => void;
     export let creature: Creature;
-    let isInputFocused = false;
-    let filteredIndex = 0;
+
+    let inputHasFocus = false;
+    let listHasFocus = false;
+    let filterIndex = 0;
+    let nameInput: HTMLInputElement;
 
     const isMinion = creature.type === CreatureType.Minion;
     const isPlayer = creature.type === CreatureType.Player;
     const isBoss = creature.type === CreatureType.Boss;
+    
     $: creature, setLocalStorageEntities($entities);
-    $: filteredCreatures = CREATURES.filter(c => c.name.toLowerCase().startsWith(creature.name.toLowerCase())).slice(0, 7);
-
+    $: filteredCreatures = CREATURES.filter(c => 
+            c.name.toLowerCase()
+            .startsWith(creature.name.toLowerCase()));
+            
     const addMinion = () => {
         creature.quantity++;
         creature.hpCurrent = [...creature.hpCurrent, creature.hpMax];
@@ -39,7 +45,7 @@
         creature.hpMax = creatureData.hp;
         creature.hpCurrent.fill(creatureData.hp);
         creature.bonus = Math.floor((creatureData.dex - 10) / 2);
-        isInputFocused = false;
+        inputHasFocus = false;
     }
 
     const setFromCreatureName = (name: string) => {
@@ -47,16 +53,29 @@
         if (creatureData) setFromCreatureData(creatureData);
     }
 
+    const ascendList = () => {
+        filterIndex = Math.max(filterIndex - 1, 0);
+    }
+
+    const descendList = () => {
+        filterIndex = Math.min(
+            filterIndex + 1, filteredCreatures.length - 1);
+    }
+
     const onKeydown = (event: KeyboardEvent) => {
-        if (isInputFocused) {
+        if (inputHasFocus) {
+            listHasFocus = true;
             if (event.key === "ArrowUp") {
-                filteredIndex = Math.max(filteredIndex - 1, 0);
+                // move up list
+                filterIndex = Math.max(filterIndex - 1, 0);
             } else if (event.key === "ArrowDown") {
-                filteredIndex = Math.min(filteredIndex + 1, filteredCreatures.length - 1);
+                // move down list
+                filterIndex = Math.min(filterIndex + 1, filteredCreatures.length - 1);
             } else if (!isPlayer && (event.key === "Enter" || event.key === "Tab")) {
-                setFromCreatureData(filteredCreatures[filteredIndex]);
+                setFromCreatureData(filteredCreatures[filterIndex]);
                 event.preventDefault();
                 event.stopPropagation();
+                listHasFocus = false;
             }
         }
     }
@@ -66,18 +85,19 @@
 
     <div class="name-input-container">
         <input 
+            bind:this={nameInput}
             bind:value={creature.name}
-            on:focusin={() => isInputFocused = true}
-            on:focusout={() => isInputFocused = false}
+            on:focusin={() => inputHasFocus = true}
             on:keydown={e => onKeydown(e)}
+            on:click={() => listHasFocus = true}
             tabindex={1}
             type="text"
             class:minion-input={creature.type === CreatureType.Minion}
             placeholder={isPlayer ? creature.playerClass : "Creature"}/>
-        {#if !isPlayer && isInputFocused && creature.name}
-            <DropdownList 
+        {#if !isPlayer && listHasFocus && filteredCreatures.length > 0}
+            <DropdownFilter 
                 list={filteredCreatures}
-                bind:highlightedIndex={filteredIndex}              
+                bind:highlightedIndex={filterIndex}              
                 key="name"
                 onLiClick={setFromCreatureName}/>
         {/if}

@@ -26,6 +26,7 @@
         color: var(--light-grey);
         border: 1px solid var(--light-grey);
         width: calc(100%);
+        max-height: 20rem;
         text-align: left;
         top: 1.8rem;
         border-radius: var(--border-radius);
