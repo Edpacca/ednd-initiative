@@ -482,3 +482,19 @@ input[type="checkbox"]:focus {
     margin: 0.5rem 0;
     padding-right: 1rem;      
 }
+
+.clear-button {
+    background: var(--primary);
+    border: 2px solid var(--secondary);
+    border-radius: var(--border-radius);
+    color: var(--secondary);
+}
+
+input[type="text"] {
+    font-style: italic;
+}
+
+.minion-input {
+    background: var(--dark-grey);
+    color: var(--secondary);
+}

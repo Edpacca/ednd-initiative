@@ -1,6 +1,5 @@
 <script lang="ts">
-    export let list: unknown[];
-    export let key: string | undefined = undefined;
+    export let list: string[];
     export let highlightedIndex = 0;
     export let onLiClick: (t: unknown) => void;
 </script>
@@ -12,8 +11,8 @@
             <li 
                 class:highlighted={i === highlightedIndex}
                 on:mouseenter={() => highlightedIndex = i}
-                on:click={() => onLiClick(key ? item[key] : item)}> 
-                {key ? item[key] : item}
+                on:click={() => onLiClick(item)}> 
+                {item}
             </li>
         {/each}
     </ul>
@@ -25,11 +24,12 @@
         background: var(--dark-grey);
         color: var(--light-grey);
         border: 1px solid var(--light-grey);
+        border-top: none;
+        border-radius: 0 0 var(--border-radius) var(--border-radius);
         width: calc(100%);
-        max-height: 20rem;
+        max-height: 15rem;
         text-align: left;
-        top: 1.8rem;
-        border-radius: var(--border-radius);
+        top: 2.7rem;
         display: flex;
         flex-direction: column;
         z-index: 20;

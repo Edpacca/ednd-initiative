@@ -606,3 +606,5 @@ export const CREATURES: CreatureData[] = [
     { name: "Zombie", ac: 8, hp: 22, dex: 6},
     { name: "Zorak Lightdrinker", ac: 18, hp: 144, dex: 18},
 ];
+
+export const CREATURE_NAMES = CREATURES.map(c => c.name);

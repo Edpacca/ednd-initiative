@@ -7,25 +7,18 @@
     import { CreatureType, type Creature } from "../../../lib/models/creature";
     import Minions from "../minion/Minions.svelte";
     import LegendaryActionsInput from "../../common/values/LegendaryActionsInput.svelte";
-    import { CREATURES, type CreatureData } from "../../../lib/creatureData";
-    import DropdownFilter from "../../common/DropdownFilter.svelte";
+    import { CREATURES, CREATURE_NAMES, type CreatureData } from "../../../lib/creatureData";
+    import InputDropdownFilter from "../../common/InputDropdownFilter.svelte";
 
     export let removeCreature: (e: Creature) => void;
     export let creature: Creature;
+    let input: HTMLInputElement;
 
-    let inputHasFocus = false;
-    let listHasFocus = false;
-    let filterIndex = 0;
-    let nameInput: HTMLInputElement;
-
-    const isMinion = creature.type === CreatureType.Minion;
-    const isPlayer = creature.type === CreatureType.Player;
-    const isBoss = creature.type === CreatureType.Boss;
+    $: isMinion = creature.type === CreatureType.Minion;
+    $: isPlayer = creature.type === CreatureType.Player;
+    $: isBoss = creature.type === CreatureType.Boss;
     
     $: creature, setLocalStorageEntities($entities);
-    $: filteredCreatures = CREATURES.filter(c => 
-            c.name.toLowerCase()
-            .startsWith(creature.name.toLowerCase()));
             
     const addMinion = () => {
         creature.quantity++;
@@ -45,62 +38,27 @@
         creature.hpMax = creatureData.hp;
         creature.hpCurrent.fill(creatureData.hp);
         creature.bonus = Math.floor((creatureData.dex - 10) / 2);
-        inputHasFocus = false;
+        if (input) {
+            input.blur();
+        }
     }
 
     const setFromCreatureName = (name: string) => {
-        const creatureData = filteredCreatures.find(c => c.name === name);
+        const creatureData = CREATURES.find(c => c.name === name);
         if (creatureData) setFromCreatureData(creatureData);
-    }
-
-    const ascendList = () => {
-        filterIndex = Math.max(filterIndex - 1, 0);
-    }
-
-    const descendList = () => {
-        filterIndex = Math.min(
-            filterIndex + 1, filteredCreatures.length - 1);
-    }
-
-    const onKeydown = (event: KeyboardEvent) => {
-        if (inputHasFocus) {
-            listHasFocus = true;
-            if (event.key === "ArrowUp") {
-                // move up list
-                filterIndex = Math.max(filterIndex - 1, 0);
-            } else if (event.key === "ArrowDown") {
-                // move down list
-                filterIndex = Math.min(filterIndex + 1, filteredCreatures.length - 1);
-            } else if (!isPlayer && (event.key === "Enter" || event.key === "Tab")) {
-                setFromCreatureData(filteredCreatures[filterIndex]);
-                event.preventDefault();
-                event.stopPropagation();
-                listHasFocus = false;
-            }
-        }
     }
 </script>
 
 <div class="entity-area" class:minion-grid={isMinion} class:boss-grid={isBoss}>
-
     <div class="name-input-container">
-        <input 
-            bind:this={nameInput}
+        <InputDropdownFilter
+            list={CREATURE_NAMES}
+            key="name"
+            submit={setFromCreatureName}
             bind:value={creature.name}
-            on:focusin={() => inputHasFocus = true}
-            on:keydown={e => onKeydown(e)}
-            on:click={() => listHasFocus = true}
-            tabindex={1}
-            type="text"
-            class:minion-input={creature.type === CreatureType.Minion}
-            placeholder={isPlayer ? creature.playerClass : "Creature"}/>
-        {#if !isPlayer && listHasFocus && filteredCreatures.length > 0}
-            <DropdownFilter 
-                list={filteredCreatures}
-                bind:highlightedIndex={filterIndex}              
-                key="name"
-                onLiClick={setFromCreatureName}/>
-        {/if}
+            bind:input={input}
+            inputPlaceholder={isPlayer ? creature.playerClass : "Creature"}
+            listFocusCondition={!isPlayer}/>
         {#if !isMinion}
             <HealthBar max={creature.hpMax} current={creature.hpCurrent}/>
         {/if}
@@ -111,12 +69,12 @@
             <Minions bind:name={creature.name} bind:quantity={creature.quantity} bind:hpMax={creature.hpMax} bind:hpCurrent={creature.hpCurrent} />
         {/if}
     </div>
-    {#if isBoss}
-        <LegendaryActionsInput bind:valueMax={creature.laMax} bind:valueCurrent={creature.laCurrent}/>
-    {/if}
-    {#if isMinion}
-        <AddRemove add={addMinion} remove={removeMinion} vertical={true}/>
-    {/if}
+        {#if isBoss}
+            <LegendaryActionsInput bind:valueMax={creature.laMax} bind:valueCurrent={creature.laCurrent}/>
+        {/if}
+        {#if isMinion}
+            <AddRemove add={addMinion} remove={removeMinion} vertical={true}/>
+        {/if}
 </div>
 
 
@@ -124,9 +82,6 @@
 <style>
     .name-input-container {
         position: relative;
-    }
-      input[type="text"] {
-        font-style: italic;
     }
 
     .entity-area {
@@ -144,11 +99,6 @@
         grid-template-columns: 3em 1fr;
         column-gap: 0.5em;
     } */
-
-    .minion-input {
-        background: var(--dark-grey);
-        color: var(--secondary);
-    }
 
     .xbutton {
         position: absolute;

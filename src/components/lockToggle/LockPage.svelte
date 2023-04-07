@@ -5,7 +5,7 @@
     const toggleLock = () => {
         if (!$isStarted) {
             $isStarted = true;
-            $isLogsOpen = true;
+            // $isLogsOpen = true;
         }
         $isLocked = !$isLocked;
     }

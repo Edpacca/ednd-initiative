@@ -1,7 +1,7 @@
 <script lang="ts">
     import { CONDITIONS } from "../../../lib/conditions";
     import PlusMinusButton from "../../common/buttons/PlusMinusButton.svelte";
-    import DropdownFilter from "../../common/DropdownFilter.svelte";
+    import RemoveButton from "../../common/buttons/RemoveButton.svelte";
     import ConditionIcon from "../../common/icons/ConditionIcon.svelte";
     import InputDropdownFilter from "../../common/InputDropdownFilter.svelte";
     import type { FocusType } from "./focusType";
@@ -12,92 +12,39 @@
     export let submitCondition: (condition: string) => void;
     export let removeCondition: (condition: string) => void;
     export let value = "";
-    let listHasFocus = false;
-    let filterIndex = 0;
-
-    $: filteredConditions = CONDITIONS.filter(c => c.startsWith(value.toLowerCase()) && !conditions.includes(c));
     
     const submit = (condition: string) => {
         submitCondition(condition);
         value = "";
-        listHasFocus = false;
     }
 
-    const ascendList = () => {
-        filterIndex = Math.max(filterIndex - 1, 0);
-    }
-
-    const descendList = () => {
-        filterIndex = Math.min(
-            filterIndex + 1, filteredConditions.length - 1);
-    }
-   
-    const onKeydown = (event: KeyboardEvent) => {
-        switch(event.key) {
-            case "ArrowUp":
-                ascendList();
-                listHasFocus = true;
-                break;
-            case "ArrowDown":
-                if (listHasFocus) { 
-                    descendList();
-                }    
-                listHasFocus = true;
-                break;
-            case "Enter":
-                listHasFocus 
-                    ? submit(filteredConditions[filterIndex])
-                    : submit(value);
-                break;
-            case "Tab":
-                if (value && filteredConditions.length > 0) {
-                    value = filteredConditions[filterIndex];
-                    conditionInput.select();
-                } else {
-                    listHasFocus = false;
-                }
-                break;
-            case "Backspace":
-                if (!value) {
-                    listHasFocus = false;
-                }
-                break;
-            default:
-                break;
-        }
+    const clearConditions = () => {
+        conditions.forEach(condition => removeCondition(condition));
     }
 
     $: listFocusCondition = focused === "condition";
 </script>
 <div class="effects-conditions">
-    <div class="header-small underline">Effects & Conditions</div>
+    <div class="header-line">
+        <div class="header-small underline">Effects & Conditions</div>
+        <RemoveButton onClick={clearConditions}/>
+    </div>
     <slot>
     </slot>
     <div class="search-header">
-        <InputDropdownFilter 
+        <InputDropdownFilter
+            bind:input={conditionInput}
+            bind:value={value}
             divClass="conditions-controls"
             inputClass="conditions-input"
             onFocusIn={() => focused = "condition"}
             listFocusCondition={listFocusCondition}
             submit={submit}
-            list={filteredConditions}
+            list={CONDITIONS}
+            exclude={conditions}
             >
             <PlusMinusButton type="+" onClick={() => submit(value)} width="2rem"/>
         </InputDropdownFilter>
-
-        <!-- <div class="controls">
-            <input 
-                bind:value
-                bind:this={conditionInput}
-                on:click={() => listHasFocus = true}
-                on:focusin={() => focused = "condition"}
-                on:keydown={e => onKeydown(e)}
-                tabindex={1}/>
-                <PlusMinusButton type="+" onClick={() => submit(value)} width="2rem"/>
-        </div>
-        {#if (value || listHasFocus) && focused === "condition" && filteredConditions.length > 0}
-        <DropdownFilter list={filteredConditions} onLiClick={submit} bind:highlightedIndex={filterIndex}/>    
-        {/if} -->
     </div>
     {#if conditions && conditions.length > 0}
     <div class="condition-grid">
@@ -108,7 +55,7 @@
         {/each}
     </div>
     {:else}
-        <div>No effects</div>
+        <div>No conditions</div>
     {/if}
 </div>
 
@@ -135,5 +82,13 @@
 
     .search-header {
         position: relative;
+    }
+
+    .header-line {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        column-gap: 1.5rem;
     }
 </style> 
