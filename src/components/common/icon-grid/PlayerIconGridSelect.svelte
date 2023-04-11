@@ -1,6 +1,7 @@
 <script lang="ts">
-    import { PLAYER_CLASSES, type PlayerClass } from "../../lib/models/playerClass";
-    import PlayerClassIcon from "./icons/PlayerClassIcon.svelte";
+    import { PLAYER_CLASSES, type PlayerClass } from "../../../lib/models/playerClass";
+    import Tooltip from "../tooltip/Tooltip.svelte";
+    import PlayerClassIcon from "../icons/PlayerClassIcon.svelte";
 
     export let playerClass: PlayerClass;
     export let isOpen = false;
@@ -16,7 +17,9 @@
     <div class="icon-grid">
         {#each PLAYER_CLASSES as pc}
             <button class="blank-button" on:click={() => handleClick(pc)}>
-                <PlayerClassIcon playerClass={pc} width="2rem" hasTooltip={true}/>
+                <Tooltip title={pc}>
+                    <PlayerClassIcon playerClass={pc} width="2rem"/>
+                </Tooltip>
             </button>
         {/each}
     </div>

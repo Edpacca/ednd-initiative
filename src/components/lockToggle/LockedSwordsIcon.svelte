@@ -11,7 +11,9 @@
     <div class="sword sword-R" class:locked-R={isLocked}>
         <Sword/>
     </div>
-<div class="tooltip" class:locked-tooltip={isLocked}>{isLocked ? "Unlock" : "Start"}</div>
+    <div class="start-tooltip" class:locked-tooltip={isLocked}>
+        {isLocked ? "Unlock" : "Start"}
+    </div>
 </button>
 
 <style>
@@ -65,7 +67,7 @@
         scale: 1;
     }
     
-    .tooltip {
+    .start-tooltip {
         color: var(--white);
         font-weight: bold;
         text-align: center;

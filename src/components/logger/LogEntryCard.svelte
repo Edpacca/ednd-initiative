@@ -60,14 +60,14 @@
     <div class="damage-log" on:mouseenter={() => isLogBodyHovered = true} on:mouseleave={() => isLogBodyHovered = false}>
         {#each logEntry.recipients as recipient}
             <div class="log-icon"><EntityIcon type={recipient.type} playerClass={recipient.playerClass}/></div>
-            <div class="name">{recipient.name}</div>
+            <div class="name overflow-ellipses">{recipient.name}</div>
             {#if recipient.logType === "damage"}
                 {#if recipient.damage > 0}
                     <div class="bold green damage-log-icon">
                         {recipient.damage}
                         <Heart/>
                     </div>
-                    {:else}
+                {:else}
                     <div class="bold red damage-log-icon">
                         {recipient.damage}
                         <Blood/>
@@ -138,6 +138,7 @@
         color: var(--gold);
         font-weight: bold;
         text-transform: capitalize;
+        text-align: center;
     }
 
     hr {

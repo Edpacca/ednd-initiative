@@ -1,6 +1,6 @@
 <script lang="ts">
-    import { CONDITIONS } from "../../lib/conditions";
-    import ConditionIcon from "./icons/ConditionIcon.svelte";
+    import { CONDITIONS } from "../../../lib/conditions";
+    import ConditionIcon from "../icons/ConditionIcon.svelte";
 
     export let conditions: string[];
     export let name = "";

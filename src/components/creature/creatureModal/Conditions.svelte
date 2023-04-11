@@ -3,7 +3,7 @@
     import PlusMinusButton from "../../common/buttons/PlusMinusButton.svelte";
     import RemoveButton from "../../common/buttons/RemoveButton.svelte";
     import ConditionIcon from "../../common/icons/ConditionIcon.svelte";
-    import InputDropdownFilter from "../../common/InputDropdownFilter.svelte";
+    import InputDropdownFilter from "../../common/dropdown/InputDropdownFilter.svelte";
     import type { FocusType } from "./focusType";
     
     export let conditions: string[];

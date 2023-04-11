@@ -1,6 +1,6 @@
 <script lang="ts">
     import { activeEntityContextIndex, isLocked } from "../../../store";
-    import ConditionIconGridSelect from "../../common/ConditionIconGridSelect.svelte";
+    import ConditionIconGridSelect from "../../common/icon-grid/ConditionIconGridSelect.svelte";
     import ConditionIcon from "../../common/icons/ConditionIcon.svelte";
     import HealthBar from "../../common/values/HealthBar.svelte";
     export let quantity: number;

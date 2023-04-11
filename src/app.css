@@ -498,3 +498,9 @@ input[type="text"] {
     background: var(--dark-grey);
     color: var(--secondary);
 }
+
+.overflow-ellipses {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

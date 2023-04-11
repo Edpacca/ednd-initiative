@@ -9,7 +9,7 @@
     import { CreatureType, type Creature } from "../../../lib/models/creature";
     import CreatureModal from "../creatureModal/CreatureModal.svelte";
     import ActiveEntityIndicator from "../../initiativeTable/ActiveEntityIndicator.svelte";
-    import ConditionIconGridSelect from "../../common/ConditionIconGridSelect.svelte";
+    import ConditionIconGridSelect from "../../common/icon-grid/ConditionIconGridSelect.svelte";
     import { getBaseName } from "../../../lib/models/entity";
 
     export let creature: Creature;
