@@ -9,8 +9,8 @@
     export let listFocusCondition = false;
     export let input: HTMLInputElement;
     export let inputPlaceholder = ""
-    let listHasFocus = false;
 
+    let listHasFocus = false;
     let filterIndex = 0;
 
     $: filteredList = list.filter(item => 
@@ -48,7 +48,7 @@
                 break;
             case "ArrowDown":
                 if (listHasFocus) { 
-                    descendList(); 
+                    descendList();
                 }    
                 listHasFocus = true;
                 break;
@@ -112,8 +112,29 @@
         placeholder={inputPlaceholder}/>
 {/if}
 {#if (value || listHasFocus) && listFocusCondition && filteredList.length > 0 && value !== filteredList[filterIndex]}
-    <DropdownFilter 
-        list={filteredList}
-        onLiClick={onSubmit}
-        bind:highlightedIndex={filterIndex}/>
+    <div class="filter-list">
+        <DropdownFilter 
+            list={filteredList}
+            onLiClick={onSubmit}
+            bind:highlightedIndex={filterIndex}/>
+    </div>
 {/if}
+
+<style>
+    .filter-list {
+        position: absolute;
+        background: var(--dark-grey);
+        color: var(--light-grey);
+        border: 1px solid var(--light-grey);
+        border-top: none;
+        border-radius: 0 0 var(--border-radius) var(--border-radius);
+        width: calc(100%);
+        max-height: 12rem;
+        text-align: left;
+        top: 2.7rem;
+        display: flex;
+        flex-direction: column;
+        z-index: 20;
+        overflow-y: scroll;
+    }
+</style>

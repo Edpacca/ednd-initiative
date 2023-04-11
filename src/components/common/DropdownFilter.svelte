@@ -4,7 +4,6 @@
     export let onLiClick: (t: unknown) => void;
 </script>
 
-<div class="filter-list">
     <ul>
         {#each list as item, i}
             <!-- svelte-ignore a11y-click-events-have-key-events -->
@@ -16,24 +15,8 @@
             </li>
         {/each}
     </ul>
-</div>
 
 <style>
-    .filter-list {
-        position: absolute;
-        background: var(--dark-grey);
-        color: var(--light-grey);
-        border: 1px solid var(--light-grey);
-        border-top: none;
-        border-radius: 0 0 var(--border-radius) var(--border-radius);
-        width: calc(100%);
-        max-height: 15rem;
-        text-align: left;
-        top: 2.7rem;
-        display: flex;
-        flex-direction: column;
-        z-index: 20;
-    }
 
     li {
         list-style: none;
@@ -45,8 +28,6 @@
 
     ul {
         padding: 0 0.5rem;
-        max-height: 20rem;
-        overflow-y: scroll;
         margin: 0.5rem 0;
     }
 
