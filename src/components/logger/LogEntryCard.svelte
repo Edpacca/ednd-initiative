@@ -9,6 +9,7 @@
     import LegendaryActionsValueIcon from "../common/icons/LegendaryActionsValueIcon.svelte";
     import type { LogEntityAny, LogEntry } from "../../lib/models/logEntry";
     import Skull from "../../graphics/icons/skull.svelte";
+    import Tooltip from "../common/tooltip/Tooltip.svelte";
 
     export let logEntry: LogEntry;
     let isLogHeaderHovered = false;
@@ -51,7 +52,9 @@
             <div class="time">{timeString}</div>
         </div> -->
         {#if removeLogEntry !== undefined}
-            <RemoveButton onClick={removeLogEntry} isHidden={!isLogHeaderHovered}/>
+            <Tooltip title="delete log">
+                <RemoveButton onClick={removeLogEntry} isHidden={!isLogHeaderHovered}/>
+            </Tooltip>
         {/if}
     </div>
     {#if logEntry.recipients.length > 0 || logEntry.messages.length > 0}
@@ -79,12 +82,14 @@
                 {/if}
             {:else if recipient.logType === "condition"}
                 <div class="log-icon">
-                    <ConditionIcon condition={recipient.condition} class="white"/>
+                    <ConditionIcon condition={recipient.condition} class="white" width="1.5rem"/>
                 </div>
             {:else if recipient.logType === "legendary"}
                 <LegendaryActionsValueIcon value={recipient.actions}/>
             {/if}
-            <RemoveButton onClick={() => undoLogAction(recipient)} isHidden={!isLogBodyHovered}/>
+            <Tooltip title="undo">
+                <RemoveButton onClick={() => undoLogAction(recipient)} isHidden={!isLogBodyHovered}/>
+            </Tooltip>
         {/each}
     </div>
 </div>
@@ -94,16 +99,16 @@
         border-bottom: 2px solid var(--primary);
     }
 
+    .log-entry {
+        padding: 0.25rem;
+        margin-top: 0.25rem;
+    }
+
     .current-log {
         border: 2px solid var(--gold);
         border-radius: var(--border-radius);
         background-color: var(--super-dark-grey);
         padding: 0.5rem 0;
-    }
-
-    .log-entry {
-        padding: 0.25rem;
-        margin-top: 0.25rem;
     }
 
     .log-header {
@@ -115,22 +120,6 @@
     
     .current-log-header {
         grid-template-columns: 20% 1fr 30%;
-    }
-
-    .log-icon {
-        height: 2rem;
-    }
-
-    .damage-log .log-icon {
-        height: 1.2rem;
-    }
-
-    .damage-log-icon {
-        display: flex;
-        flex-direction: row;
-        column-gap: 0.25rem;
-        height: 1rem;
-        justify-content: left;
     }
 
     .log-name {
@@ -150,8 +139,25 @@
     .damage-log {
         padding: 0.75rem;
         display: grid;
-        grid-template-columns: 1.2rem 1fr auto 1rem;
+        grid-template-columns: 1.2rem 1fr 2rem 1rem;
         column-gap: 0.5rem;
         align-items: center;
     }
+
+    .log-icon {
+        height: 2rem;
+    }
+
+    .damage-log .log-icon {
+        height: 1.2rem;
+    }
+
+    .damage-log-icon {
+        display: flex;
+        flex-direction: row;
+        column-gap: 0.25rem;
+        height: 1rem;
+        justify-content: left;
+    }
+
 </style>

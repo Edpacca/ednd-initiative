@@ -3,7 +3,6 @@
 	let isHovered = false;
 	let x;
 	let y;
-	export let width = "100%";
 
 	const mouseOver = (event) => {
 		isHovered = true;
