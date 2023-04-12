@@ -1,10 +1,10 @@
 <script lang="ts">
     import { setLocalStorageTheme } from "../../../lib/persistance";
     import { currentTheme } from "../../../store";
-    import { setTheme } from "./setTheme";
-    import { THEMES } from "./themes";
+    import { setTheme } from "./themeLib";
+    import { THEMES, Themes } from "./themeData";
 
-    const selectTheme = (theme: string) => {
+    const selectTheme = (theme: Themes) => {
         setTheme(theme);
         setLocalStorageTheme(theme);
     }
@@ -21,6 +21,8 @@
 </select>
 
 <style>
-
+    option, select {
+        text-transform: capitalize;
+    }
 </style>
 

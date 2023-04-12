@@ -1,6 +1,7 @@
 import { LogEntry, logEntryFromData } from "./models/logEntry";
 import type { Encounter } from "./models/encounter";
 import type { Entity, EntityType } from "./models/entity";
+import { DEFAULT_THEME, Themes } from "../components/settingsMenu/selectTheme/themeData";
 
 export class SaveError extends Error {}
 
@@ -86,8 +87,20 @@ export function setLocalStorageTheme(theme: string) {
     setLocalStorage(StorageType.Theme, theme);
 }
 
-export function getLocalStorageTheme(): string {
-    return getLocalStorage(StorageType.Theme);
+export function getLocalStorageTheme(): Themes {
+
+    const storedTheme = getLocalStorage(StorageType.Theme);
+
+    if (storedTheme) {
+        if (Object.values(Themes).includes(storedTheme)) {
+            return storedTheme;
+        } else {
+            console.error("Invalid theme retrieved from local storage. Setting default theme instead.");
+            setLocalStorageTheme(DEFAULT_THEME);
+        }
+    }
+
+    return DEFAULT_THEME;
 }
 
 export function clearLocalStorage() {

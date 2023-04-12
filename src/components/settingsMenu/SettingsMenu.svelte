@@ -1,7 +1,7 @@
 <script lang="ts">
     import Fa from 'svelte-fa/src/fa.svelte'
-    import { faGear } from '@fortawesome/free-solid-svg-icons'
-    import { fade, slide } from "svelte/transition";
+    import { faGear, faSave, faQuestion, faPaintBrush, faMagnifyingGlass, faGears } from '@fortawesome/free-solid-svg-icons'
+    import { slide } from "svelte/transition";
     import { isSettingsOpen } from "../../store";
     import BurgerButton from "../common/buttons/BurgerButton.svelte";
     import AccordionTool from "./AccordionTool.svelte";
@@ -20,32 +20,29 @@
     <div class="settings-menu" transition:slide>
         <h1>Settings <Fa icon={faGear}/></h1>
         <div>
-            <AccordionTool text={"Help"}>
+            <AccordionTool text={"Help"} icon={faQuestion}>
                 <Help/>
             </AccordionTool>
         </div>
         <div>
-            <AccordionTool text={"Theme"}>
+            <AccordionTool text={"Theme"} icon={faPaintBrush}>
                 <SelectTheme/>
             </AccordionTool>
         </div>
         <div>
-            <AccordionTool text={"View"}>
+            <AccordionTool text={"View"} icon={faMagnifyingGlass}>
                 <ViewSettings/>
             </AccordionTool>
         </div>
         <div>
-            <AccordionTool text={"Save"}>
+            <AccordionTool text={"Save / Load"} icon={faSave}>
                 <Save/>
-            </AccordionTool>
-        </div>
-        <div>
-            <AccordionTool text={"Load"}>
+                <hr class="sub-hr"/>
                 <Load/>
             </AccordionTool>
         </div>
         <div>
-            <AccordionTool text={"Advanced"}>
+            <AccordionTool text={"Advanced"} icon={faGears}>
                 <Advanced/>
             </AccordionTool> 
         </div>
@@ -73,5 +70,10 @@
         position: absolute;
         z-index: 11;
         margin: var(--margin);
+    }
+
+    .sub-hr {
+        margin: 1rem 20%;
+        border-color: var(--dark-grey-90);
     }
 </style>

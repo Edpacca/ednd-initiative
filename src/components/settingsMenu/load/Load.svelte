@@ -4,13 +4,12 @@
     import Player from "../../../graphics/entity-types/player.svelte";
     import { getLocalStorageEncounters } from "../../../lib/persistance";
     import RemoveButton from "../../common/buttons/RemoveButton.svelte";
-    import { Creature, CreatureType } from "../../../lib/models/creature";
+    import { CreatureType } from "../../../lib/models/creature";
     import type { Encounter } from "../../../lib/models/encounter";
     import ConfirmDelete from "./ConfirmDelete.svelte";
     import ConfirmLoad from "./ConfirmLoad.svelte";
     import { EffectType } from "../../../lib/models/effect";
     import Cave from "../../../graphics/icons/cave.svelte";
-    import { ENEMY_CREATURE_TYPES } from "../../../lib/typeFilters";
     import type { EntityType } from "../../../lib/models/entity";
 
     enum State { None, Load, Delete }
@@ -18,10 +17,6 @@
     let state: State = State.None;
     let encounters: Encounter[];
     let slecectedEncounter: Encounter | undefined = undefined;
-    
-
-
-   
 
     const getEncounters = () => {
         encounters = getLocalStorageEncounters();
@@ -57,10 +52,11 @@
     const hasEnemies =  (encounter: EntityType[]): boolean => {
         return encounter.includes(CreatureType.Enemy || CreatureType.Boss || CreatureType.Minion);
     }
+    
 </script>
 
+<h2>Load Group</h2>
 <div class="load-container">
-    <div>Saved groups</div>
     {#if encounters.length > 0}
         {#each encounters as encounter}
             <div class="party-container">

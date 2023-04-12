@@ -1,11 +1,16 @@
 :root {
     --zoom-level: 1;
     font-size: calc(14px * var(--zoom-level));
+
+    --theme-background: url('/background/stone.webp');
 }
 
 :root {
     --primary: brown;
     --secondary: burlywood;
+ 
+    --default-primary: brown;
+    --default-secondary: burlywood;
 
     --white: antiquewhite;
     --black: rgb(30, 30, 30);
@@ -60,7 +65,7 @@
 
 body {
     background-color: var(--dark-grey);
-    background-image: url('/background/stone.webp');
+    background-image: var(--theme-background);
     background-attachment: fixed;
     font-family: 'Roboto Condensed', 'Arial', 'sans-serif';
     color: antiquewhite;

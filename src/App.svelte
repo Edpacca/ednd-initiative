@@ -1,7 +1,7 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import { currentTheme, entities, isLocked, isStarted, zoomLevel } from "./store";
-    import { setTheme } from "./components/settingsMenu/selectTheme/setTheme";
+    import { setTheme } from "./components/settingsMenu/selectTheme/themeLib";
     import { CreatureType } from "./lib/models/creature";
     import TurnTracker from "./components/turnTracker/TurnTracker.svelte";
     import EffectTable from "./components/effects/EffectTable.svelte";

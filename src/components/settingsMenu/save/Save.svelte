@@ -2,7 +2,6 @@
     import { SaveError, setLocalStorageEncounter } from "../../../lib/persistance";
     import ConfirmOverwrite from "./ConfirmOverwrite.svelte";
     import { entities } from "../../../store";
-    import type { EntityType } from "../../../lib/models/entity";
     import { CreatureType } from "../../../lib/models/creature";
     import { EffectType } from "../../../lib/models/effect";
     import CheckboxIcon from "../../common/buttons/CheckboxIcon.svelte";
@@ -64,10 +63,11 @@
 
 </script>
 
+<h2>Save Group</h2>
 <div class="setting-container">
     <div class="checkboxes">
         <div>
-            <label for="save-all">All</label>
+            <label for="save-all">Save All</label>
             <input type="checkbox" id="save-all" bind:checked={checkedAll}/>
         </div>
         <CheckboxIcon 
@@ -92,7 +92,7 @@
             <Cave/>
         </CheckboxIcon>
     </div>
-    <input type="text" placeholder="Encounter Name" bind:value={name} on:input={() => messageName = ""} on:keydown={e => onEnter(e)}>
+    <input type="text" placeholder="Group Name" bind:value={name} on:input={() => messageName = ""} on:keydown={e => onEnter(e)}>
     {#if state === State.Saved}
         <div>{messageName} saved to local storage!</div>
     {:else if state === State.None && hasName}
