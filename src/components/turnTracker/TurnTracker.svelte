@@ -3,6 +3,7 @@
     import { Creature, CreatureType } from "../../lib/models/creature";
     import { setLocalStorageCurrentLogId, setLocalStorageLogs } from "../../lib/persistance";
     import { currentRound, entities, activeEntityTurnIndex, isModalOpen, logs, storeCurrentRound, currentLogId } from "../../store";
+    import Tooltip from "../common/tooltip/Tooltip.svelte";
     import { updateLogs } from "../logger/logger";
     
     $: max = $entities.length - 1;
@@ -60,8 +61,12 @@
 <div class="turn-tracker">
     <div class="header">Round {$currentRound}</div>
     <div class="tt-buttons flex-row" >
-        <button on:click={previous}><ArrowPlain class="left"/></button>
-        <button on:click={next}><ArrowPlain/></button>
+        <Tooltip text="previous" type="help">
+            <button on:click={previous}><ArrowPlain class="left"/></button>
+        </Tooltip>
+        <Tooltip text="next" type="help">
+            <button on:click={next}><ArrowPlain/></button>
+    </Tooltip>
     </div>
 </div>
 <svelte:window on:keydown={e => onArrows(e)}/>

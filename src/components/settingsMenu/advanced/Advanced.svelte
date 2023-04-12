@@ -18,24 +18,17 @@
 
 <div class="flex-col">
     <button
-        class="submit-button" on:click={() => state = State.ClearStorage}>
+        class="submit-button settings-button" on:click={() => state = State.ClearStorage}>
         Clear local storage
     </button>
     <button
-        class="submit-button" on:click={() => state = State.ClearLogs}>
+        class="submit-button settings-button" on:click={() => state = State.ClearLogs}>
         Clear logs
     </button>
-    <button class="submit-button" on:click={() => state= State.Reset}>
+    <button class="submit-button settings-button" on:click={() => state= State.Reset}>
         Reset page
     </button>
 </div>
 <ConfirmClearLocalStorage isOpen={state === State.ClearStorage} close={close}/>
 <ConfirmReset isOpen={state === State.Reset} close={close}/>
 <ConfirmClearLogs isOpen={state === State.ClearLogs} close={close}/>
-
-<style>
-    button {
-        width: 80%;
-        margin-bottom: 0.5rem;
-    }
-</style>

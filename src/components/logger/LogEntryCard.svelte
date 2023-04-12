@@ -52,7 +52,7 @@
             <div class="time">{timeString}</div>
         </div> -->
         {#if removeLogEntry !== undefined}
-            <Tooltip title="delete log">
+            <Tooltip text="delete log" type="help">
                 <RemoveButton onClick={removeLogEntry} isHidden={!isLogHeaderHovered}/>
             </Tooltip>
         {/if}
@@ -87,7 +87,7 @@
             {:else if recipient.logType === "legendary"}
                 <LegendaryActionsValueIcon value={recipient.actions}/>
             {/if}
-            <Tooltip title="undo">
+            <Tooltip text="undo" type="help">
                 <RemoveButton onClick={() => undoLogAction(recipient)} isHidden={!isLogBodyHovered}/>
             </Tooltip>
         {/each}

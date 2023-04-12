@@ -18,6 +18,8 @@ export const currentTheme: Writable<string> = writable(getLocalStorageTheme() ??
 export const logs: Writable<LogEntry[]> = writable(getLocalStorageLogs());
 export const currentLogId: Writable<string> = writable(getLocalStorageCurrentLogId() ?? ""  );
 export const zoomLevel: Writable<number> = writable(1);
+export const hasHelpTooltips: Writable<boolean> = writable(true);
+export const hasInfoTooltips: Writable<boolean> = writable(true);
 
 export function getActiveEntity(): Entity {
     return get(entities)[get(activeEntityTurnIndex)]

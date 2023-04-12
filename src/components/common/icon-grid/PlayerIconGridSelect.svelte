@@ -17,7 +17,7 @@
     <div class="icon-grid">
         {#each PLAYER_CLASSES as pc}
             <button class="blank-button" on:click={() => handleClick(pc)}>
-                <Tooltip title={pc}>
+                <Tooltip text={pc} type="info">
                     <PlayerClassIcon playerClass={pc} width="2rem"/>
                 </Tooltip>
             </button>

@@ -1,4 +1,6 @@
 <script lang="ts">
+    import Fa from 'svelte-fa/src/fa.svelte'
+    import { faGear } from '@fortawesome/free-solid-svg-icons'
     import { fade, slide } from "svelte/transition";
     import { isSettingsOpen } from "../../store";
     import BurgerButton from "../common/buttons/BurgerButton.svelte";
@@ -8,6 +10,7 @@
     import Save from "./save/Save.svelte";
     import SelectTheme from "./selectTheme/SelectTheme.svelte";
     import ViewSettings from "./viewSettings/ViewSettings.svelte";
+    import Help from "./help/Help.svelte";
 </script>
 
 <div class="menu-button">
@@ -15,7 +18,12 @@
 </div>
 {#if $isSettingsOpen}
     <div class="settings-menu" transition:slide>
-        <h1>Settings</h1>
+        <h1>Settings <Fa icon={faGear}/></h1>
+        <div>
+            <AccordionTool text={"Help"}>
+                <Help/>
+            </AccordionTool>
+        </div>
         <div>
             <AccordionTool text={"Theme"}>
                 <SelectTheme/>

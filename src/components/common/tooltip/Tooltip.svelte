@@ -1,8 +1,16 @@
-<script>
-	export let title = "";
+<script lang="ts">
+    import { fade } from "svelte/transition";
+    import { hasHelpTooltips, hasInfoTooltips } from "../../../store";
+	
+	export let type: "info" | "help";
+	export let text = "";
+
+	const delayTime = type === "help" ? 800 : 0;
 	let isHovered = false;
 	let x;
 	let y;
+
+	$: canShow = type === "help" && $hasHelpTooltips || type === "info" && $hasInfoTooltips;
 
 	const mouseOver = (event) => {
 		isHovered = true;
@@ -25,6 +33,11 @@
 	<slot/>
 </div>
 
-{#if isHovered}
-	<div style="top: {y}px; left: {x}px;" class="tooltip">{title}</div>
+{#if canShow && isHovered}
+	<div 
+		style="top: {y}px; left: {x}px;"
+		class="tooltip"
+		in:fade="{{ delay: delayTime, duration: 0 }}">
+		{text}
+	</div>
 {/if}

@@ -5,6 +5,7 @@
     import { CreatureType } from "../../../lib/models/creature";
     import type { EntityType } from "../../../lib/models/entity";
     import type { PlayerClass } from "../../../lib/models/playerClass";
+    import Tooltip from "../tooltip/Tooltip.svelte";
     import PlayerIcon from "./PlayerIcon.svelte";
 
     export let type: EntityType;
