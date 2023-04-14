@@ -31,13 +31,15 @@
         color: var(--white);
         font-size: 1rem;
         height: 2rem;
-        width: 100%;
+        width: calc(100% - var(--border-radius));
         transition: 200ms;
     }
 
     button:hover {
+        border-radius: var(--border-radius);
         border-top: 2px solid var(--secondary);
         background-color: var(--secondary);
         color: var(--dark-grey);
+        width: 100%;
     }
 </style>
