@@ -16,8 +16,8 @@
     let index = 0;
 
     const submitCondition = (condition: string) => {
-        if (condition && !creature.conditions[index].includes(condition)) {
-            creature.conditions[index] = [...creature.conditions[index], condition];
+        if (condition && !creature.conditions[selectedIndex].includes(condition)) {
+            creature.conditions[selectedIndex] = [...creature.conditions[selectedIndex], condition];
             appendConditionToCurrentLog(creature, condition, selectedIndex);
         }
     }
