@@ -5,10 +5,10 @@
     import RemoveButton from "../../common/buttons/RemoveButton.svelte";
     import Modal from "../../common/modal/Modal.svelte";
     import Damage from "../../damage/Damage.svelte";
-    import { appendConditionToCurrentLog } from "../../logger/logger";
+    import { appendConditionToCurrentLog } from "../../../lib/logger";
     import CreatureInputLocked from "../locked/CreatureInputLocked.svelte";
     import Conditions from "./Conditions.svelte";
-    import type { FocusType } from "./focusType";
+    import type { FocusType } from "../../../lib/focusType";
     import HpValue from "./HpValue.svelte";
     export let creature: Creature;
     export let isSelected = false;

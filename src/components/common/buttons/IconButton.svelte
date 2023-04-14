@@ -1,7 +1,8 @@
 <script lang="ts">
+    import type { IconDefinition } from '@fortawesome/free-solid-svg-icons';
     import Fa from 'svelte-fa/src/fa.svelte'
     export let onClick: () => void;
-    export let icon;
+    export let icon: IconDefinition;
     export let spin = false;
     let isHovered = false;
 

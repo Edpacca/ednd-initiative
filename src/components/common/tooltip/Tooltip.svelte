@@ -1,10 +1,13 @@
 <script lang="ts">
     import { fade } from "svelte/transition";
+    import type { IconDescription } from "../../../lib/models/iconDescription";
     import { hasHelpTooltips, hasInfoTooltips } from "../../../store";
+    import IconControl from "./IconControl.svelte";
 	
 	export let type: "info" | "help";
 	export let text = "";
 	export let capitalise = false;
+	export let controls: IconDescription[] = []
 
 	const delayTime = type === "help" ? 800 : 0;
 	let isHovered = false;
@@ -30,7 +33,13 @@
 
 </script>
 
-<div on:mouseover={mouseOver} on:mouseleave={mouseLeave} on:mousemove={mouseMove} on:focus={mouseOver} on:focusout={mouseLeave} class={`${$$props.class}`}>
+<div
+	on:mouseover={mouseOver}
+	on:mouseleave={mouseLeave}
+	on:mousemove={mouseMove}
+	on:focus={mouseOver}
+	on:focusout={mouseLeave}
+	class={`${$$props.class}`}>
 	<slot/>
 </div>
 
@@ -42,6 +51,9 @@
 		in:fade="{{ delay: delayTime, duration: 0 }}">
 		{text}
 	</div>
+	{#each controls as control}
+		<IconControl control={control}/>
+	{/each}
 {/if}
 
 <style>

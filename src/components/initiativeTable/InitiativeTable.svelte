@@ -7,7 +7,7 @@
     import { CREATURE_TYPES } from "../../lib/typeFilters";
     import { EffectType } from "../../lib/models/effect";
     import { fade } from "svelte/transition";
-    import { updateLogs } from "../logger/logger";
+    import { updateLogs } from "../../lib/logger";
     import Tooltip from "../common/tooltip/Tooltip.svelte";
 
     const sortByInitiative = () => {
@@ -29,7 +29,7 @@
         <th class="value-col"></th>
         <th>Name</th>
         <th class="value-col">
-            <Tooltip text="Max HP" type="help">
+            <Tooltip text="Current HP" type="help">
                 <div class="icon-header svg-fit-container">
                     <div class="svg-fit">
                         <Heart/>
@@ -39,9 +39,6 @@
         </th>
         <th class="value-col">
         </th>
-        {#if !$isLocked}
-            <th class="value-col">Bonus</th>
-        {/if}
         <th class="value-col">
             <Tooltip text="Initiative value" type="help">
                 <div class="icon-header svg-fit-container">
@@ -49,9 +46,6 @@
                 </div>
             </Tooltip>
         </th>
-        {#if !$isLocked}
-            <th class="fn-col"></th>
-        {/if}
     </thead>
     <tbody class="relative">
         {#each $entities as entity, i}

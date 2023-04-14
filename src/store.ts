@@ -2,7 +2,7 @@ import { get, writable, type Writable } from "svelte/store";
 import { getLocalStorageEntities, getLocalStorageLogs, getLocalStorageTurn, getLocalStorageTheme, setLocalStorageTurn, getLocalStorageCurrentLogId } from "./lib/persistance";
 import type { Entity } from "./lib/models/entity";
 import type { LogEntry } from "./lib/models/logEntry";
-import type { Themes } from "./components/settingsMenu/selectTheme/themeData";
+import type { Themes } from "./data/themeData";
 
 const currentTurn = getLocalStorageTurn();
 

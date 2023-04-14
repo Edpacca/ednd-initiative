@@ -1,8 +1,8 @@
 <script lang="ts">
     import { setLocalStorageTheme } from "../../../lib/persistance";
     import { currentTheme } from "../../../store";
-    import { setTheme } from "./themeLib";
-    import { THEMES, Themes } from "./themeData";
+    import { setTheme } from "../../../lib/themeLib";
+    import { THEMES, Themes } from "../../../data/themeData";
 
     const selectTheme = (theme: Themes) => {
         setTheme(theme);

@@ -1,7 +1,7 @@
 import { get } from "svelte/store";
-import type { Creature } from "../../lib/models/creature";
-import { LogEntry } from "../../lib/models/logEntry";
-import { logs, currentLogId, currentRound, entities, activeEntityTurnIndex } from "../../store";
+import type { Creature } from "./models/creature";
+import { LogEntry } from "./models/logEntry";
+import { logs, currentLogId, currentRound, entities, activeEntityTurnIndex } from "../store";
 
 // to be called when the currentEntityIndex has changed
 export function updateLogs(activeEntityTurnIndex: number) {

@@ -4,7 +4,7 @@
     import { setLocalStorageCurrentLogId, setLocalStorageLogs } from "../../lib/persistance";
     import { currentRound, entities, activeEntityTurnIndex, isModalOpen, logs, storeCurrentRound, currentLogId } from "../../store";
     import Tooltip from "../common/tooltip/Tooltip.svelte";
-    import { updateLogs } from "../logger/logger";
+    import { updateLogs } from "../../lib/logger";
     
     $: max = $entities.length - 1;
     

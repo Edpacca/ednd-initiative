@@ -1,6 +1,6 @@
 <script lang="ts">
     import ConfirmationModal from "../../common/modal/ConfirmationModal.svelte";
-    import { reset } from "./reset";
+    import { reset } from "../../../lib/reset";
 
     export let isOpen = false;
     export let close: () => void;

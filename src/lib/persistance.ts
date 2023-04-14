@@ -1,7 +1,7 @@
 import { LogEntry, logEntryFromData } from "./models/logEntry";
 import type { Encounter } from "./models/encounter";
 import type { Entity, EntityType } from "./models/entity";
-import { DEFAULT_THEME, Themes } from "../components/settingsMenu/selectTheme/themeData";
+import { DEFAULT_THEME, Themes } from "../data/themeData";
 
 export class SaveError extends Error {}
 

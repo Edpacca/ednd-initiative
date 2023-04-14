@@ -1,4 +1,4 @@
-import { COLOURS, Themes } from "./themeData";
+import { COLOURS, Themes } from "../data/themeData";
 
 const root = document.querySelector(":root") as HTMLElement;
 

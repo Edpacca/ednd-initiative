@@ -4,7 +4,7 @@
     import Minions from "../minion/Minions.svelte";
     import LegendaryActionsValue from "../../common/values/LegendaryActionsValue.svelte";
     import ConditionIcon from "../../common/icons/ConditionIcon.svelte";
-    import { appendLegendaryActionsToCurrentLog } from "../../logger/logger";
+    import { appendLegendaryActionsToCurrentLog } from "../../../lib/logger";
 
     export let creature: Creature;
     export let isActive = false;

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { getThemePath } from "../settingsMenu/selectTheme/themeLib";
+    import { getThemePath } from "../../lib/themeLib";
     import type { Effect } from "../../lib/models/effect";
     import { isLocked } from "../../store";
     export let effect: Effect;

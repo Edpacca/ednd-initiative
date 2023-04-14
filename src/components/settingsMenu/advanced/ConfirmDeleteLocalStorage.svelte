@@ -2,8 +2,8 @@
     import { clearLocalStorage } from "../../../lib/persistance";
     import { isLocked, isStarted } from "../../../store";
     import ConfirmationModal from "../../common/modal/ConfirmationModal.svelte";
-    import { clearLogs } from "../../logger/logger";
-    import { reset } from "./reset";
+    import { clearLogs } from "../../../lib/logger";
+    import { reset } from "../../../lib/reset";
     export let isOpen;
     export let close: () => void;
 

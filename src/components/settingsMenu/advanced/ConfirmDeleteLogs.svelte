@@ -1,7 +1,7 @@
 <script lang="ts">
     import { activeEntityTurnIndex } from "../../../store";
     import ConfirmationModal from "../../common/modal/ConfirmationModal.svelte";
-    import { addNewLog, clearLogs } from "../../logger/logger";
+    import { addNewLog, clearLogs } from "../../../lib/logger";
     export let isOpen;
     export let close: () => void;
 

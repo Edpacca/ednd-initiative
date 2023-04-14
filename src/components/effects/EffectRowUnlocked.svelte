@@ -1,7 +1,7 @@
 <script lang="ts">
     import { dRoll } from "../../lib/dieRoll";
     import type { Effect } from "../../lib/models/effect";
-    import { THEMES } from "../settingsMenu/selectTheme/themeData";
+    import { THEMES } from "../../data/themeData";
     import Cave from "../../graphics/icons/cave.svelte";
     import AddRemove from "../common/buttons/AddRemove.svelte";
     import D20Button from "../common/buttons/D20Button.svelte";

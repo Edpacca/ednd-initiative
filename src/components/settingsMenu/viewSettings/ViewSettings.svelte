@@ -1,6 +1,6 @@
 <script lang="ts">
     import PlusMinusButton from "../../common/buttons/PlusMinusButton.svelte";
-    import { setZoom } from "./setZoom";
+    import { setZoom } from "../../../lib/setZoom";
 
     let level = 100;
     const delta = 5;
