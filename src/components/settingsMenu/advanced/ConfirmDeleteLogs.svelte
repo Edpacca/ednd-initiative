@@ -13,7 +13,7 @@
     }
 
     const text = [
-        "Are you sure you want to permanently clear all log history? This will also reset the current round",
+        "Are you sure you want to permanently clear all log history? This will also reset the current round. This will not delete your saved entity data.",
     ]
 </script>
 

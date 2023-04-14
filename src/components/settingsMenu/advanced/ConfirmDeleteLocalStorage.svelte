@@ -9,8 +9,6 @@
 
     const clear = () => {
         clearLocalStorage();
-        clearLogs();
-        reset();
         close();
         $isStarted = false;
         $isLocked = false;
@@ -18,7 +16,7 @@
 
     const text = [
         "Are you sure you want to permanently delete all saved data?",
-        "This will also remove everything that is currently in the tracker."
+        "This will also not clear the tracker or your log data."
     ]
 </script>
 
