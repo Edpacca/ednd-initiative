@@ -1,6 +1,6 @@
 <script lang="ts">
     import { logs } from "../../store";
-    import ConfirmClearLogs from "../settingsMenu/advanced/ConfirmClearLogs.svelte";
+    import ConfirmClearLogs from "../settingsMenu/advanced/ConfirmDeleteLogs.svelte";
     import type { LogEntry } from "../../lib/models/logEntry";
     import LogTurn from "./LogEntryCard.svelte";
 

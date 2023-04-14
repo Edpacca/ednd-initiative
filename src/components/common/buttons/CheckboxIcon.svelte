@@ -24,7 +24,7 @@
     }
 
     .checkbox-icon {
-        fill: var(--grey);
+        fill: var(--mid-grey);
         width: var(--width);
         height: var(--height);
     }

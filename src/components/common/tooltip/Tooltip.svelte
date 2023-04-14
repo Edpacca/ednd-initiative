@@ -4,6 +4,7 @@
 	
 	export let type: "info" | "help";
 	export let text = "";
+	export let capitalise = false;
 
 	const delayTime = type === "help" ? 800 : 0;
 	let isHovered = false;
@@ -37,7 +38,14 @@
 	<div 
 		style="top: {y}px; left: {x}px;"
 		class="tooltip"
+		class:capitalise={capitalise}
 		in:fade="{{ delay: delayTime, duration: 0 }}">
 		{text}
 	</div>
 {/if}
+
+<style>
+	.capitalise {
+		text-transform: capitalize;
+	}
+</style>

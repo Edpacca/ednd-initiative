@@ -2,6 +2,7 @@
     import { scale } from "svelte/transition";
     import ShieldBroken from "../../../graphics/icons/shield-broken.svelte";
     import Shield from "../../../graphics/icons/shield.svelte";
+    import Tooltip from "../tooltip/Tooltip.svelte";
     import NumberStringInput from "./NumberStringInput.svelte";
     
     export let value;
@@ -26,16 +27,18 @@
     $: bonus, closeTimeout();
 </script>
 
-<button class="ac svg-fit-container" class:enchanted={isEnchanted} class:cursed={isCursed} on:click={handleClick} on:contextmenu|preventDefault={() => isBonusOpen = !isBonusOpen}>
-    <div class="svg-fit">
-        {#if isCursed}
-            <ShieldBroken/>    
-        {:else}
-            <Shield/>
-        {/if}
-    </div>
-    <div class="value">{value + bonus}</div>
-</button>
+<Tooltip text="Armor Class (r-click to add mod)" type="help">
+    <button class="ac svg-fit-container" class:enchanted={isEnchanted} class:cursed={isCursed} on:click={handleClick} on:contextmenu|preventDefault={() => isBonusOpen = !isBonusOpen}>
+        <div class="svg-fit">
+            {#if isCursed}
+                <ShieldBroken/>    
+            {:else}
+                <Shield/>
+            {/if}
+        </div>
+        <div class="value">{value + bonus}</div>
+    </button>
+</Tooltip>
 {#if isBonusOpen}
     <div class="bonus-popup" in:scale out:scale>
         <div class="bonus-text">mod</div>

@@ -1,9 +1,8 @@
 <script lang="ts">
     import Fa from 'svelte-fa/src/fa.svelte'
-    import { faGear, faSave, faQuestion, faPaintBrush, faMagnifyingGlass, faGears } from '@fortawesome/free-solid-svg-icons'
+    import { faGear, faSave, faQuestion, faPaintBrush, faMagnifyingGlass, faGears, faCross, faXmark } from '@fortawesome/free-solid-svg-icons'
     import { slide } from "svelte/transition";
     import { isSettingsOpen } from "../../store";
-    import BurgerButton from "../common/buttons/BurgerButton.svelte";
     import AccordionTool from "./AccordionTool.svelte";
     import Advanced from "./advanced/Advanced.svelte";
     import Load from "./load/Load.svelte";
@@ -11,16 +10,17 @@
     import SelectTheme from "./selectTheme/SelectTheme.svelte";
     import ViewSettings from "./viewSettings/ViewSettings.svelte";
     import Help from "./help/Help.svelte";
+    import IconButton from '../common/buttons/IconButton.svelte';
 </script>
 
 <div class="menu-button">
-    <BurgerButton onClick={() => $isSettingsOpen = !$isSettingsOpen}/>
+    <IconButton icon={$isSettingsOpen ? faXmark : faGear} onClick={() => $isSettingsOpen = !$isSettingsOpen} spin={!$isSettingsOpen}/>
 </div>
 {#if $isSettingsOpen}
     <div class="settings-menu" transition:slide>
-        <h1>Settings <Fa icon={faGear}/></h1>
+        <h2>Settings</h2>
         <div>
-            <AccordionTool text={"Help"} icon={faQuestion}>
+            <AccordionTool text={"Help settings"} icon={faQuestion}>
                 <Help/>
             </AccordionTool>
         </div>

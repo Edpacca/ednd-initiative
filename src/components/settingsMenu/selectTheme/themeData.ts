@@ -33,7 +33,7 @@ export const COLOURS: {[key in Themes]: ColourPallete} = {
     "cobbles": DEFAULT_COLOURS,
 
     "dirt": {
-        primary: "darkGreen",
+        primary: "green",
         secondary: DEFAULT_SECONDARY
     },
 

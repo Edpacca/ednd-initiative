@@ -7,16 +7,17 @@
     import { CreatureType } from "../../lib/models/creature";
     import { EffectType } from "../../lib/models/effect";
     import { ENEMY_CREATURE_TYPES } from "../../lib/typeFilters";
-    import { activeEntityTurnIndex, currentRound, entities } from "../../store";
+    import { activeEntityTurnIndex, currentRound, entities, hasHelpTooltips } from "../../store";
     import CheckboxIcon from "../common/buttons/CheckboxIcon.svelte";
     import D20Button from "../common/buttons/D20Button.svelte";
+    import Tooltip from "../common/tooltip/Tooltip.svelte";
 
     let rollingPlayers = false;
     let rollingEnemies = true;
     let rollingEffects = false;
     let override = false;
     $: rollingAll = rollingPlayers && rollingEnemies && rollingEffects;
-    $: messageFirst = override ? "Override initiative rolls for" : rollingAll ? "Roll initiative for all unrolled entities" : "Roll initiative for unrolled";
+    $: messageFirst = override ? "Re-roll initiative rolls for" : rollingAll ? "Roll initiative for all unrolled entities" : "Roll initiative for unrolled";
     $: messageSecond = rollingAll ? !override ? "" : "all entities" : `${rollingPlayers ? " Players" : ""}${rollingEnemies ? " Enemies" : ""}${rollingEffects ? " Effects" : ""}`;
     $: message = `${messageFirst} ${messageSecond}`;
 
@@ -41,30 +42,42 @@
 </script>
 
 <div class="roll-all-container" transition:slide>
-    <D20Button primary="var(--gold)" secondary="var(--white)" width="5rem" onClick={() => rollAll()}/>
-    <div class="text-center message">{message}</div>
+    <Tooltip text="Roll initiative for selected" type="help">
+        <D20Button primary="var(--gold)" secondary="var(--white)" width="5rem" onClick={() => rollAll()}/>
+    </Tooltip>
+    {#if $hasHelpTooltips}
+        <div class="text-center message">{message}</div>
+    {/if}
     <div class="roll-all-icons">
-        <CheckboxIcon 
-            bind:isChecked={rollingPlayers}
-            isDisabled={!rollingEnemies && !rollingEffects}
-            checkedColor="var(--gold)">
-            <Player/>
-        </CheckboxIcon>
-        <CheckboxIcon 
-            bind:isChecked={rollingEnemies}
-            isDisabled={!rollingPlayers && !rollingEffects}
-            checkedColor="var(--primary)">
-            <Enemy/>
-        </CheckboxIcon>   
-        <CheckboxIcon 
-            bind:isChecked={rollingEffects}
-            isDisabled={!rollingPlayers && !rollingEnemies}
-            checkedColor="var(--blue)">
-            <Cave/>
-        </CheckboxIcon>
+        <Tooltip text="select all PCs" type="help">
+            <CheckboxIcon 
+                bind:isChecked={rollingPlayers}
+                isDisabled={!rollingEnemies && !rollingEffects}
+                checkedColor="var(--gold)">
+                <Player/>
+            </CheckboxIcon>
+        </Tooltip>
+        <Tooltip text="select all enemies" type="help">
+            <CheckboxIcon 
+                bind:isChecked={rollingEnemies}
+                isDisabled={!rollingPlayers && !rollingEffects}
+                checkedColor="var(--primary)">
+                <Enemy/>
+            </CheckboxIcon>   
+        </Tooltip>
+        <Tooltip text="select all effects" type="help">
+            <CheckboxIcon 
+                bind:isChecked={rollingEffects}
+                isDisabled={!rollingPlayers && !rollingEnemies}
+                checkedColor="var(--blue)">
+                <Cave/>
+            </CheckboxIcon>
+        </Tooltip>
         <div class="checkbox">
-            <label for="overwrite-initiative">Override</label>
-            <input type="checkbox" id="overwrite-initiative" bind:checked={override}/>
+            <label for="overwrite-initiative">Re-roll</label>
+            <Tooltip text="Overwrite already rolled values" type="help">
+                <input type="checkbox" id="overwrite-initiative" bind:checked={override}/>
+            </Tooltip>
         </div>
     </div>
 </div>

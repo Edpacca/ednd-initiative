@@ -28,6 +28,7 @@
         border: none;
         background: none;
         fill: var(--primary-color);
+        transition: var(--transition-time)
     }
 
     .d20:hover {

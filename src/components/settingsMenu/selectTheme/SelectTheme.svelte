@@ -23,6 +23,7 @@
 <style>
     option, select {
         text-transform: capitalize;
+        color: var(--white);
     }
 </style>
 

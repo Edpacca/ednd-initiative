@@ -8,6 +8,7 @@
     import { EffectType } from "../../lib/models/effect";
     import { fade } from "svelte/transition";
     import { updateLogs } from "../logger/logger";
+    import Tooltip from "../common/tooltip/Tooltip.svelte";
 
     const sortByInitiative = () => {
         $entities.sort((a, b) => {
@@ -28,18 +29,26 @@
         <th class="value-col"></th>
         <th>Name</th>
         <th class="value-col">
-            <div class="icon-header svg-fit-container">
-                <div class="svg-fit">
-                    <Heart/>
+            <Tooltip text="Max HP" type="help">
+                <div class="icon-header svg-fit-container">
+                    <div class="svg-fit">
+                        <Heart/>
+                    </div>
                 </div>
-            </div>
+            </Tooltip>
         </th>
         <th class="value-col">
         </th>
         {#if !$isLocked}
             <th class="value-col">Bonus</th>
         {/if}
-        <th class="value-col"><div class="icon-header svg-fit-containe"><Speed/></div></th>
+        <th class="value-col">
+            <Tooltip text="Initiative value" type="help">
+                <div class="icon-header svg-fit-container">
+                    <Speed/>
+                </div>
+            </Tooltip>
+        </th>
         {#if !$isLocked}
             <th class="fn-col"></th>
         {/if}

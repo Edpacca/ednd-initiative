@@ -9,7 +9,7 @@
 
 
 {#if hasTooltip}
-    <Tooltip text={condition} class={$$props.class} type="info">
+    <Tooltip text={condition} class={$$props.class} type="info" capitalise={true}>
         <svg
             class={$$props.class}
             width={width} height={width}

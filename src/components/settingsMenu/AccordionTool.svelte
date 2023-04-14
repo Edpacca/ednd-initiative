@@ -23,4 +23,21 @@
     .accordion {
         margin: 1rem 0;
     }
+    
+    button {
+        background: none;
+        border: none;
+        border-top: 2px solid var(--light-grey);
+        color: var(--white);
+        font-size: 1rem;
+        height: 2rem;
+        width: 100%;
+        transition: 200ms;
+    }
+
+    button:hover {
+        border-top: 2px solid var(--secondary);
+        background-color: var(--secondary);
+        color: var(--dark-grey);
+    }
 </style>
