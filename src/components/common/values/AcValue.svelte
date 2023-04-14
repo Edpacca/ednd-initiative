@@ -1,5 +1,6 @@
 <script lang="ts">
     import { scale } from "svelte/transition";
+    import { AC_rClick } from "../../../data/controlData";
     import ShieldBroken from "../../../graphics/icons/shield-broken.svelte";
     import Shield from "../../../graphics/icons/shield.svelte";
     import Tooltip from "../tooltip/Tooltip.svelte";
@@ -27,7 +28,7 @@
     $: bonus, closeTimeout();
 </script>
 
-<Tooltip text="Armor Class (r-click to add mod)" type="help">
+<Tooltip text="Armor Class" type="help" controls={[AC_rClick]}>
     <button class="ac svg-fit-container" class:enchanted={isEnchanted} class:cursed={isCursed} on:click={handleClick} on:contextmenu|preventDefault={() => isBonusOpen = !isBonusOpen}>
         <div class="svg-fit">
             {#if isCursed}

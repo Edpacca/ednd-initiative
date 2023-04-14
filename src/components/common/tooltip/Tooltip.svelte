@@ -50,10 +50,11 @@
 		class:capitalise={capitalise}
 		in:fade="{{ delay: delayTime, duration: 0 }}">
 		{text}
-	</div>
-	{#each controls as control}
+		{#each controls as control}
 		<IconControl control={control}/>
-	{/each}
+		{/each}
+	</div>
+
 {/if}
 
 <style>
