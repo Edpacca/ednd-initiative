@@ -1,5 +1,6 @@
-import { activeEntityTurnIndex, currentTheme, entities, isStarted } from "../store";
+import { activeEntityTurnIndex, entities, isStarted } from "../store";
 import { clearLogs } from "./logger";
+
 export function reset() {
     entities.set([]);
     activeEntityTurnIndex.set(0);

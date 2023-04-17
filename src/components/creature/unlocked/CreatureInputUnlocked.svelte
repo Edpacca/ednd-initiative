@@ -7,7 +7,7 @@
     import { CreatureType, type Creature } from "../../../lib/models/creature";
     import Minions from "../minion/Minions.svelte";
     import LegendaryActionsInput from "../../common/values/LegendaryActionsInput.svelte";
-    import { CREATURES, CREATURE_NAMES, type CreatureData } from "../../../lib/creatureData";
+    import { CREATURES, CREATURE_NAMES, type CreatureData } from "../../../data/creatureData";
     import InputDropdownFilter from "../../common/dropdown/InputDropdownFilter.svelte";
 
     export let removeCreature: (e: Creature) => void;

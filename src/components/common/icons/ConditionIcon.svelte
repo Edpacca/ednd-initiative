@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { CONDITIONS } from "../../../lib/conditions";
+    import { CONDITIONS } from "../../../data/conditionsData";
     import Tooltip from "../tooltip/Tooltip.svelte";
 
     export let condition: string;

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { CONDITIONS } from "../../../lib/conditions";
+    import { CONDITIONS } from "../../../data/conditionsData";
     import ConditionIcon from "../icons/ConditionIcon.svelte";
 
     export let conditions: string[];

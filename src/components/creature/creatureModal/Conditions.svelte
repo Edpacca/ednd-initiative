@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { CONDITIONS } from "../../../lib/conditions";
+    import { CONDITIONS } from "../../../data/conditionsData";
     import PlusMinusButton from "../../common/buttons/PlusMinusButton.svelte";
     import RemoveButton from "../../common/buttons/RemoveButton.svelte";
     import ConditionIcon from "../../common/icons/ConditionIcon.svelte";

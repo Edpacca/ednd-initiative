@@ -1,4 +1,3 @@
-import type { CreatureData } from "../creatureData";
 import { Entity } from "./entity";
 import { getRandomClass, type PlayerClass } from "./playerClass";
 
