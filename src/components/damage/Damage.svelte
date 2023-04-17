@@ -63,7 +63,6 @@
     }
 
     onMount(() => damageInput.focus());
-
 </script>
 
 <div class="damage-tool-container">
