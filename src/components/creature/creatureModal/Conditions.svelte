@@ -4,7 +4,7 @@
     import RemoveButton from "../../common/buttons/RemoveButton.svelte";
     import ConditionIcon from "../../common/icons/ConditionIcon.svelte";
     import InputDropdownFilter from "../../common/dropdown/InputDropdownFilter.svelte";
-    import type { FocusType } from "../../../lib/focusType";
+    import type { FocusType } from "../../../lib/models/focusType";
     
     export let conditions: string[];
     export let conditionInput: HTMLInputElement;

@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { DEFAULT, type AnimationValue } from "../../../lib/animationValue";
+    import { DEFAULT, type AnimationValue } from "../../../data/animationValue";
     export let av: AnimationValue = DEFAULT;
     export let color = "red";
 </script>

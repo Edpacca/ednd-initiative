@@ -3,9 +3,9 @@
     import Heart from "../../graphics/icons/heart.svelte";
     import Skull from "../../graphics/icons/skull.svelte";
     import type { Creature } from "../../lib/models/creature";
-    import { FLOATERS } from "../../lib/animationValue";
+    import { FLOATERS } from "../../data/animationValue";
     import Floater from "../common/floater/Floater.svelte";
-    import type { FocusType } from "../../lib/focusType";
+    import type { FocusType } from "../../lib/models/focusType";
     import { appendDamageToCurrentLog } from "../../lib/logger";
 
     export let creature: Creature;

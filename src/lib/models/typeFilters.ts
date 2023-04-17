@@ -1,5 +1,5 @@
-import { CreatureType } from "./models/creature";
-import type { EntityType } from "./models/entity";
+import { CreatureType } from "./creature";
+import type { EntityType } from "./entity";
 
 export const CREATURE_TYPES: EntityType[] = [
     CreatureType.Player,

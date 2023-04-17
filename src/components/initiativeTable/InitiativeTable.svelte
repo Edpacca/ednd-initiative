@@ -4,7 +4,7 @@
     import CreatureRowLocked from "../creature/locked/CreatureRowLocked.svelte";
     import EffectRowLocked from "../effects/EffectRowLocked.svelte";
     import Speed from "../../graphics/icons/speed.svelte";
-    import { CREATURE_TYPES } from "../../lib/typeFilters";
+    import { CREATURE_TYPES } from "../../lib/models/typeFilters";
     import { EffectType } from "../../lib/models/effect";
     import { fade } from "svelte/transition";
     import { updateLogs } from "../../lib/logger";
