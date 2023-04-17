@@ -1,16 +1,21 @@
 <script lang="ts">
     import { CONDITIONS } from "../../../data/conditionsData";
+    import { appendConditionToCurrentLog } from "../../../lib/logger";
+    import type { Creature } from "../../../lib/models/creature";
     import ConditionIcon from "../icons/ConditionIcon.svelte";
 
     export let conditions: string[];
     export let name = "";
     export let isOpen = false;
+    export let creature: Creature;
+    export let index = 0;
 
     const handleClick = (condition: string) => {
         if (conditions.includes(condition)) {
             conditions = conditions.filter(c => c !== condition);
         } else {
             conditions = [...conditions, condition];
+            appendConditionToCurrentLog(creature, condition, index);
         }
         isOpen = false;
     }
@@ -22,7 +27,10 @@
         <div class="text-center">{name}</div>
         <div class="icon-grid">
             {#each CONDITIONS as condition}
-                <button class="blank-button" class:highlighted={conditions.includes(condition)} on:click={() => handleClick(condition)}>
+                <button 
+                    class="blank-button"
+                    class:highlighted={conditions.includes(condition)}
+                    on:click={() => handleClick(condition)}>
                     <ConditionIcon condition={condition}/>
                 </button>
             {/each}
