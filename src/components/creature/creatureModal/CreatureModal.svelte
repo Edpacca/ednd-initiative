@@ -23,7 +23,7 @@
     }
 
     const removeCondition = (condition: string) => {
-        creature.conditions[index] = creature.conditions[selectedIndex].filter(c => c !== condition);
+        creature.conditions[selectedIndex] = creature.conditions[selectedIndex].filter(c => c !== condition);
     }
 
     let damageInput: HTMLInputElement;

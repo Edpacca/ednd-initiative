@@ -21,6 +21,10 @@
             appendLegendaryActionsToCurrentLog(creature, 1);
         }
     }
+
+    const removeCondition = (condition: string) => {
+        creature.conditions[selectedIndex] = creature.conditions[selectedIndex].filter(c => c !== condition);
+    }
 </script>
 
 <div class="entity-area" class:boss-grid={isBoss}>
@@ -48,7 +52,9 @@
                 {#if creature.conditions[0].length > 0}
                     <div class="conditions">
                         {#each creature.conditions[0] as condition}
-                            <ConditionIcon condition={condition} width="2rem"/>
+                            <button on:click={() => removeCondition(condition)} class="blank-button">
+                                <ConditionIcon condition={condition} width="2rem"/>
+                            </button>
                         {/each}
                     </div>
                 {/if}
