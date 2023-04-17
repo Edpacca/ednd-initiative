@@ -6,7 +6,7 @@
     import { dRoll } from "../../lib/dieRoll";
     import { CreatureType } from "../../lib/models/creature";
     import { EffectType } from "../../lib/models/effect";
-    import { ENEMY_CREATURE_TYPES } from "../../lib/typeFilters";
+    import { ENEMY_CREATURE_TYPES } from "../../lib/models/typeFilters";
     import { activeEntityTurnIndex, currentRound, entities, hasHelpTooltips } from "../../store";
     import CheckboxIcon from "../common/buttons/CheckboxIcon.svelte";
     import D20Button from "../common/buttons/D20Button.svelte";

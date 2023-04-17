@@ -8,7 +8,7 @@
     import { appendConditionToCurrentLog } from "../../../lib/logger";
     import CreatureInputLocked from "../locked/CreatureInputLocked.svelte";
     import Conditions from "./Conditions.svelte";
-    import type { FocusType } from "../../../lib/focusType";
+    import type { FocusType } from "../../../lib/models/focusType";
     import HpValue from "./HpValue.svelte";
     export let creature: Creature;
     export let isSelected = false;

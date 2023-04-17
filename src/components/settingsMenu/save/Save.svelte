@@ -8,7 +8,7 @@
     import Player from "../../../graphics/entity-types/player.svelte";
     import Enemy from "../../../graphics/entity-types/enemy.svelte";
     import Cave from "../../../graphics/icons/cave.svelte";
-    import { ENEMY_CREATURE_TYPES } from "../../../lib/typeFilters";
+    import { ENEMY_CREATURE_TYPES } from "../../../lib/models/typeFilters";
 
     enum State { None, Saved, Overwrite }
 
