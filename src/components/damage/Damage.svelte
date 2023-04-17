@@ -7,6 +7,7 @@
     import Floater from "../common/floater/Floater.svelte";
     import type { FocusType } from "../../lib/models/focusType";
     import { appendDamageToCurrentLog } from "../../lib/logger";
+    import { onMount } from "svelte";
 
     export let creature: Creature;
     export let damageInput: HTMLInputElement;
@@ -61,6 +62,7 @@
         }
     }
 
+    onMount(() => damageInput.focus());
 
 </script>
 

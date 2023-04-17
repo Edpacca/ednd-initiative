@@ -39,11 +39,16 @@
     }
 
     $: creature, setLocalStorageEntities($entities);
+
 </script>
 
 <tr class="relative">
     <ActiveEntityIndicator isActive={isActive}/>
-    <ConditionIconGridSelect isOpen={isHighlighted} bind:conditions={creature.conditions[0]} name={getBaseName(creature)}/>
+    <ConditionIconGridSelect
+        creature={creature}
+        isOpen={isHighlighted}
+        bind:conditions={creature.conditions[0]}
+        name={getBaseName(creature)}/>
     <td class="flex-col">
         <CreatureIconSelect 
             type={creature.type}

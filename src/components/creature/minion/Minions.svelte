@@ -1,8 +1,11 @@
 <script lang="ts">
+    import type { Creature } from "../../../lib/models/creature";
     import { activeEntityContextIndex, isLocked } from "../../../store";
     import ConditionIconGridSelect from "../../common/icon-grid/ConditionIconGridSelect.svelte";
     import ConditionIcon from "../../common/icons/ConditionIcon.svelte";
     import HealthBar from "../../common/values/HealthBar.svelte";
+
+    export let creature: Creature;
     export let quantity: number;
     export let hpMax: number;
     export let hpCurrent: number[];
@@ -11,6 +14,8 @@
     export let parentIndex = 0;
     export let selectedIndex = 0;
     export let isSelected = false;
+    export let removeCondition: (condition: string, minionIndex: number) => void = () => {};
+
     let isConditionGridOpen = false;
     $: isHighlighted = isConditionGridOpen && $activeEntityContextIndex === parentIndex;
 
@@ -28,13 +33,14 @@
             isConditionGridOpen = true;
         }
     }
-
 </script>
 
 {#if quantity}
     {#each Array(quantity) as e, i}
         <div class="relative">
             <ConditionIconGridSelect
+                creature={creature}
+                index={selectedIndex}
                 isOpen={isHighlighted && i === selectedIndex}
                 bind:conditions={conditions[i]}
                 name={`${name} #${i + 1}`}/>
@@ -59,7 +65,9 @@
             {#if conditions.length === quantity && conditions[i].length > 0}
                 <div class="conditions">
                     {#each conditions[i] as condition}
-                        <ConditionIcon condition={condition} width="2rem"/>
+                        <button on:click={() => removeCondition(condition, i)} class="blank-button">
+                            <ConditionIcon condition={condition} width="2rem"/>
+                        </button>
                     {/each}
                 </div>
             {/if}

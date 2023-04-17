@@ -66,7 +66,7 @@
             <RemoveButton onClick={() => removeCreature(creature)} isinverted={isMinion}/>
         </div>
         {#if isMinion}
-            <Minions bind:name={creature.name} bind:quantity={creature.quantity} bind:hpMax={creature.hpMax} bind:hpCurrent={creature.hpCurrent} />
+            <Minions creature={creature} bind:name={creature.name} bind:quantity={creature.quantity} bind:hpMax={creature.hpMax} bind:hpCurrent={creature.hpCurrent} />
         {/if}
     </div>
         {#if isBoss}

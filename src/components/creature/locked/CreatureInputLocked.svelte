@@ -22,8 +22,8 @@
         }
     }
 
-    const removeCondition = (condition: string) => {
-        creature.conditions[selectedIndex] = creature.conditions[selectedIndex].filter(c => c !== condition);
+    const removeCondition = (condition: string, i: number) => {
+        creature.conditions[i] = creature.conditions[i].filter(c => c !== condition);
     }
 </script>
 
@@ -39,10 +39,12 @@
             on:click={() => isSelected = true}/>
             {#if isMinion}
                 <Minions
+                    creature={creature}
                     bind:selectedIndex
                     bind:isSelected
                     bind:name={creature.name}
                     bind:quantity={creature.quantity}
+                    removeCondition={removeCondition}
                     parentIndex={index}
                     hpMax={creature.hpMax}
                     hpCurrent={creature.hpCurrent}
@@ -52,7 +54,7 @@
                 {#if creature.conditions[0].length > 0}
                     <div class="conditions">
                         {#each creature.conditions[0] as condition}
-                            <button on:click={() => removeCondition(condition)} class="blank-button">
+                            <button on:click={() => removeCondition(condition, 0)} class="blank-button">
                                 <ConditionIcon condition={condition} width="2rem"/>
                             </button>
                         {/each}

@@ -10,6 +10,7 @@
     import Conditions from "./Conditions.svelte";
     import type { FocusType } from "../../../lib/models/focusType";
     import HpValue from "./HpValue.svelte";
+    import { onMount } from "svelte";
     export let creature: Creature;
     export let isSelected = false;
     export let selectedIndex = 0;
