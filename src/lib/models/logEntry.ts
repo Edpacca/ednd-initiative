@@ -52,7 +52,10 @@ export class LogEntry {
 
     addLogEntitySumDamage(recipient: Creature, damage: number, index=0) {
 
-        const existing = this.recipients.find(r => r.id === recipient.id && r.logType === "damage");
+        const existing = this.recipients.find(r => 
+            r.id === recipient.id &&
+            r.index === index &&
+            r.logType === "damage");
 
         if (existing) {
             (existing as Damage).damage += damage;
