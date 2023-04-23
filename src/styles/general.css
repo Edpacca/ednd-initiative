@@ -1,0 +1,91 @@
+.hidden {
+    display: none;
+    visibility: hidden;
+}
+
+.relative {
+    position: relative;
+}
+
+.bloodied {
+    animation: pulse-red 1.6s linear infinite;
+    animation-direction: alternate;
+    transition: 0.5s;
+}
+
+.dead {
+    background: var(--dark-grey);
+    color: transparent;
+}
+
+.skull {
+    position: absolute;
+    height: 2.5rem;
+    z-index: 5;
+    top: 0;
+    fill: rgba(250, 235, 215, 0.729);
+}
+
+.conditions {
+    fill: var(--white);
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 0.25rem;
+    display: flex;
+    column-gap: 0.2rem;
+}
+
+.conditions-controls {
+    display: flex;
+    flex-direction: row;
+    column-gap: 0.5rem;
+    align-items: center;
+    margin: 0.5rem 0;
+    padding-right: 1rem;      
+}
+
+.condition-icon {
+    fill: var(--white);
+}
+
+.tooltip {
+    position: fixed;
+    z-index: 50;
+    background-color: var(--dark-grey-90);
+    color: var(--white);
+    padding: 0.2rem;
+    margin: 0.2rem 0;
+}
+
+.blank-input, .blank-input:active, .blank-input:focus, .blank-button {
+    background: none;
+    border: none;
+    outline: none;
+    margin: 0;
+    padding: 0;
+}
+
+.counters {
+    display: flex;
+    flex-direction: row;
+    column-gap: 0.1rem;
+}
+
+.small-counter {
+    max-width: 2rem;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
