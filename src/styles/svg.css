@@ -1,0 +1,18 @@
+.svg-fit {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    fill: inherit;
+}
+
+.svg-fit-container {
+    position: relative;
+}
+
+.bloodied-svg {
+    animation: pulse-red-svg 1.6s linear infinite;
+    animation-direction: alternate;
+    transition: 0.5s;
+}

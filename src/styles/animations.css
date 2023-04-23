@@ -1,0 +1,31 @@
+@keyframes pulse-red {
+    from {
+        background-color: rgba(255, 255, 255, 0.9);
+    } to {
+        background-color: var(--red);
+    }
+}
+
+@keyframes pulse-red-svg {
+    from {
+        fill: var(--secondary);
+    } to {
+        fill: var(--red);
+    }
+}
+
+@keyframes point-L {
+    from {
+        transform: translateX(-0.5rem);
+    } to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes point-R {
+    from {
+        transform: translateX(0.5rem);
+    } to {
+        transform: translateX(0);
+    }
+}

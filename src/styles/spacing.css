@@ -1,0 +1,13 @@
+
+.healthbar-height-spacer {
+    height: var(--healthbar-height);
+}
+
+.minion-icon-spacer {
+    height: 2.5rem;
+}
+
+.icon-header {
+    height: 1.5rem;
+    width: 3rem;
+}
