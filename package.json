@@ -21,6 +21,7 @@
   },
   "dependencies": {
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
+    "gh-pages": "^5.0.0",
     "svelte-fa": "^3.0.3",
     "uuid": "^9.0.0"
   }
