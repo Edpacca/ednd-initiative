@@ -53,18 +53,19 @@
                 listHasFocus = true;
                 break;
             case "Enter":
-                if (value) {
-                    onSubmit(value)
-                } else if (listHasFocus) {
-                    onSubmit(filteredList[filterIndex] ?? "")
+                if (listHasFocus && filteredList.length > 0) {
+                    value = filteredList[filterIndex] ?? "";
+                    if (value) onSubmit(value);
                 }
-                listHasFocus = false;
+                else if (value) {
+                    onSubmit(value);
+                } 
                 killEvent(event);
                 break;
             case "Tab":
                 if (value && filteredList.length > 0) {
                     value = filteredList[filterIndex] ?? "";
-                    input.select();
+                    if (value) onSubmit(value);
                 } else {
                     listHasFocus = false;
                 }
@@ -111,7 +112,7 @@
         tabindex={1}
         placeholder={inputPlaceholder}/>
 {/if}
-{#if (value || listHasFocus) && listFocusCondition && filteredList.length > 0 && value !== filteredList[filterIndex]}
+{#if (listHasFocus) && listFocusCondition && filteredList.length > 0}
     <div class="filter-list">
         <DropdownFilter 
             list={filteredList}
