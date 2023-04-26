@@ -1,1 +1,0 @@
-export type FocusType = "damage" | "healing" | "condition" | "none"
