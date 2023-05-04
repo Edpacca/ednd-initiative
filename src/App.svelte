@@ -62,9 +62,9 @@
     align-items: center;
     justify-content: center;
     border: 2px solid var(--primary);
-    border-radius: 4px;
+    border-radius: var(--border-radius);
     position: relative;
-    max-width: 50rem;
+    width: var(--main-width);
     margin: auto;
     background: var(--dark-grey-90);
     z-index: 0;

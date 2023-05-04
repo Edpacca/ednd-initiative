@@ -50,23 +50,23 @@
 
 <style>
     .settings-menu {
-        position: absolute;
+        position: fixed;
         padding: 2rem;
         top: 0;
         left: 0;
         border: 2px solid var(--primary);
         border-radius: var(--border-radius);
-        background-color: var(--dark-grey-90);
+        background-color: var(--dark-grey);
         z-index: 10;
         display: flex;
         flex-direction: column;
         text-align: center;
-        width: 18rem;
+        width: var(--settings-menu-width);
         margin: var(--margin);
     }
 
     .menu-button {
-        position: absolute;
+        position: fixed;
         z-index: 11;
         margin: var(--margin);
     }
