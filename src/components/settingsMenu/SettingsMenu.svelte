@@ -1,5 +1,4 @@
 <script lang="ts">
-    import Fa from 'svelte-fa/src/fa.svelte'
     import { faGear, faSave, faQuestion, faPaintBrush, faMagnifyingGlass, faGears, faCross, faXmark } from '@fortawesome/free-solid-svg-icons'
     import { slide } from "svelte/transition";
     import { isSettingsOpen } from "../../store";
