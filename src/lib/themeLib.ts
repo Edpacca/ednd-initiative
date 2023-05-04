@@ -3,7 +3,7 @@ import { COLOURS, Themes } from "../data/themeData";
 const root = document.querySelector(":root") as HTMLElement;
 
 export function setTheme(theme: Themes) {
-    const path = `url(/background/${theme}.webp)`;
+    const path = `url(/ednd-initiative/background/${theme}.webp)`;
     root.style.setProperty("--theme-background", path);
     setColours(theme);
 }
@@ -15,5 +15,5 @@ function setColours(theme: Themes) {
 }
 
 export function getThemePath(theme: string) {
-    return `url(/background/${theme}.webp)`;
+    return `url(/ednd-initiative/background/${theme}.webp)`;
 }

@@ -7,7 +7,7 @@
     import EffectTable from "./components/effects/EffectTable.svelte";
     import CreatureTable from "./components/initiativeTable/CreatureTable.svelte";
     import InitiativeTable from "./components/initiativeTable/InitiativeTable.svelte";
-    import LogPanel from "./components/logs/LogPanel.svelte";
+    import LogPanel from "./components/logger/LogPanel.svelte";
     import RollAll from "./components/rollAll/RollAll.svelte";
     import SettingsMenu from "./components/settingsMenu/SettingsMenu.svelte";
     import LockPage from "./components/lockToggle/LockPage.svelte";
