@@ -1,5 +1,6 @@
 :root {
     --margin: 0.5rem;
+    --padding: 2rem;
     --input-height: 2.5rem;
     --healthbar-height: 0.25rem;
 }

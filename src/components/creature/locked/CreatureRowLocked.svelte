@@ -42,7 +42,7 @@
 
 </script>
 
-<tr class="relative">
+<tr>
     <ActiveEntityIndicator isActive={isActive}/>
     <ConditionIconGridSelect
         creature={creature}

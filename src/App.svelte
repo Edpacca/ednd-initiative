@@ -55,32 +55,18 @@
 {/if}
 
 <style>
-  main {
-    padding: 2rem 6rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid var(--primary);
-    border-radius: var(--border-radius);
-    position: relative;
-    width: var(--main-width);
-    margin: auto;
-    background: var(--dark-grey-90);
-    z-index: 0;
-  }
+
+  .top-right-icon {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: var(--padding);
+    }
 
   .toolbar {
     display: grid;
     grid-template-columns: 1fr auto;
     width: 100%;
-  }
-
-  .top-right-icon {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 2rem;
   }
 
   hr {

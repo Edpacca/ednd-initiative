@@ -11,6 +11,9 @@
 @import "styles/text.css";
 
 :root {
+    /* --mobile-breakpoint: 480px; */
+    /* --tablet-breakpoint: 986px; */
+
     --zoom-level: 1;
     --theme-background: url('/ednd-initiative/background/stone.webp');
     
@@ -19,6 +22,9 @@
     
     --z-modal-bkg: 49;
     --z-modal: 50;
+
+    --main-width: 50rem;
+    --settings-menu-width: 18rem;
     
     font-size: calc(14px * var(--zoom-level));
 }   
@@ -32,11 +38,35 @@ body {
     margin: var(--margin);
 }
 
-@media only screen and (max-width:  986px) {
+main {
+    padding: 2rem 6rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--primary);
+    border-radius: var(--border-radius);
+    position: relative;
+    max-width: var(--main-width);
+    background: var(--dark-grey-90);
+    z-index: 0;
+    margin: auto;
+  }
+
+@media only screen and (max-width: 986px) {
     body {
-        margin: 0px;
+        margin: 0;
+        padding: 0;
+        max-width: none;
+        width: 100vw;
+    }
+
+    main {
+        max-width: none;
+        width: 100vw;
     }
 }
+
 
 
 
