@@ -21,7 +21,8 @@ export const currentLogId: Writable<string> = writable(getLocalStorageCurrentLog
 export const zoomLevel: Writable<number> = writable(1);
 export const hasHelpTooltips: Writable<boolean> = writable(true);
 export const hasInfoTooltips: Writable<boolean> = writable(true);
-export const showTutorial: Writable<boolean> = writable(false);
+export const showTutorial: Writable<boolean> = writable(true);
+export const openedOnce: Writable<boolean> = writable(false);
 
 export function getActiveEntity(): Entity {
     return get(entities)[get(activeEntityTurnIndex)]
