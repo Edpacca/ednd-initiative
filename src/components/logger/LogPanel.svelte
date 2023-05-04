@@ -32,10 +32,10 @@
 
 <style>
     .log-panel-container {
-        position: absolute;
+        position: fixed;
         top: 0;
         right: 0;
-        margin: 0.5rem;
+        margin: var(--margin);
     }
 
     .panel-button-container {
