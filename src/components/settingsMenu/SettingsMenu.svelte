@@ -10,6 +10,8 @@
     import ViewSettings from "./viewSettings/ViewSettings.svelte";
     import Help from "./help/Help.svelte";
     import IconButton from '../common/buttons/IconButton.svelte';
+
+    let isExperimentalEnabled = false;
 </script>
 
 <div class="menu-button">
@@ -28,11 +30,13 @@
                 <SelectTheme/>
             </AccordionTool>
         </div>
-        <div>
-            <AccordionTool text={"View"} icon={faMagnifyingGlass}>
-                <ViewSettings/>
-            </AccordionTool>
-        </div>
+        {#if isExperimentalEnabled}
+            <div>
+                <AccordionTool text={"View"} icon={faMagnifyingGlass}>
+                    <ViewSettings/>
+                </AccordionTool>
+            </div>
+        {/if}
         <div>
             <AccordionTool text={"Save / Load"} icon={faSave}>
                 <Save/>
@@ -42,7 +46,7 @@
         </div>
         <div>
             <AccordionTool text={"Advanced"} icon={faGears}>
-                <Advanced/>
+                <Advanced bind:isExperimentalEnabled={isExperimentalEnabled}/>
             </AccordionTool> 
         </div>
     </div>
@@ -51,24 +55,37 @@
 <style>
     .settings-menu {
         position: fixed;
-        padding: 2rem;
+        padding: var(--padding);
         top: 0;
         left: 0;
         border: 2px solid var(--primary);
         border-radius: var(--border-radius);
-        background-color: var(--dark-grey);
+        background-color: var(--dark-grey-90);
         z-index: 10;
         display: flex;
         flex-direction: column;
         text-align: center;
-        width: var(--settings-menu-width);
+        min-width: var(--settings-menu-width);
         margin: var(--margin);
     }
 
+    @media only screen and (max-width: 986px) {
+        .settings-menu {
+            width: 40rem;
+            left: 0;
+            right: 0;
+            margin: auto;
+            margin-top: var(--margin);
+            background-color: var(--dark-grey);
+        }
+    }   
+
     .menu-button {
         position: fixed;
+        padding: var(--padding);
+        top: 0;
+        left: 0;
         z-index: 11;
-        margin: var(--margin);
     }
 
     .sub-hr {
