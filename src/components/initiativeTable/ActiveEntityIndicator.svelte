@@ -6,12 +6,9 @@
 {#if isActive}
     <div class="indicator-container">
         <div class="active-icon left-side">
-            <Arrow class="left"/>
+            <Arrow/>
         </div>
         <div class=active-initiative>
-        </div>
-        <div class="active-icon right-side">
-            <Arrow/>
         </div>
     </div>
 
