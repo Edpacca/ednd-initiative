@@ -1,3 +1,8 @@
+:root {
+    --transition-time: 400ms;
+    --sword-transition: var(--transition-time) cubic-bezier(.13, 0, .57, .1);
+}   
+
 @keyframes pulse-red {
     from {
         background-color: rgba(255, 255, 255, 0.9);

@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { currentTheme, entities, isLocked, isStarted, zoomLevel } from "./store";
+    import { currentTheme, entities, isLocked, isStarted } from "./store";
     import { setTheme } from "./lib/themeLib";
     import { CreatureType } from "./lib/models/creature";
     import TurnTracker from "./components/turnTracker/TurnTracker.svelte";
@@ -55,32 +55,18 @@
 {/if}
 
 <style>
-  main {
-    padding: 2rem 6rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid var(--primary);
-    border-radius: 4px;
-    position: relative;
-    max-width: 50rem;
-    margin: auto;
-    background: var(--dark-grey-90);
-    z-index: 0;
-  }
+
+  .top-right-icon {
+      position: absolute;
+      top: 0;
+      right: 0;
+      padding: var(--padding);
+    }
 
   .toolbar {
     display: grid;
     grid-template-columns: 1fr auto;
     width: 100%;
-  }
-
-  .top-right-icon {
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin: 2rem;
   }
 
   hr {

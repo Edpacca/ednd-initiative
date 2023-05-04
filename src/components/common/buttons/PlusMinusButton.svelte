@@ -3,7 +3,7 @@
     import Plus from "../../../graphics/symbols/plus.svelte";
     export let type: "+" | "-";
     export let onClick: () => void;
-    export let width = "1.75rem";
+    export let width = "2rem";
     export let disabled = false;
 </script>
 
@@ -38,5 +38,4 @@
         outline: 1px solid var(--primary);
         transition: 0.3s ease-out;
     }
-
 </style>

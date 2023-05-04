@@ -44,3 +44,9 @@ button:active, button:focus {
     border-color: var(--light-grey);
     color: var(--white);
 }
+
+@media only screen and (max-width: 986px) {
+    .submit-button {
+        height: 2.5rem;
+    }
+} 

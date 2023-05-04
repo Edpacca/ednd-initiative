@@ -13,10 +13,14 @@
     let state = State.None;
 
     const close = () => state = State.None;
-    
+    export let isExperimentalEnabled = false;
 </script>
 
 <div class="flex-col">
+    <div class="checkboxes">
+        <input type="checkbox" id="toggle-experimental" bind:checked={isExperimentalEnabled}/>
+        <label for="toggle-tooltips">hexperimental features</label>
+    </div>
     <button class="submit-button settings-button" on:click={() => state= State.ClearTracker}>
         Clear tracker
     </button>

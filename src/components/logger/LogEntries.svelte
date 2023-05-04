@@ -64,11 +64,17 @@
         background-color: var(--dark-grey-90);
         border-radius: var(--border-radius);
         width: calc(max(15vw, 15vh));
-        min-width: 15rem;
+        min-width: 20rem;
         max-height: 90vh;
         overflow-y: scroll;
         position: relative;
         padding: calc(3rem + 2px) 0 0.5rem 0.5rem;
+    }
+
+    @media screen and (max-width: 986px) {
+        .log-panel {
+            min-width: 50vw;
+        }
     }
 
     .submit-button {
