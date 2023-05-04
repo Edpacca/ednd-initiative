@@ -12,7 +12,7 @@
 
 :root {
     --zoom-level: 1;
-    --theme-background: url('/background/stone.webp');
+    --theme-background: url('/ednd-initiative/background/stone.webp');
     font-size: calc(14px * var(--zoom-level));
 }
 
