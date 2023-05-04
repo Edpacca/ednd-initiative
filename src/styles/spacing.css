@@ -1,3 +1,9 @@
+:root {
+    --margin: 0.5rem;
+    --input-height: 2.5rem;
+    --healthbar-height: 0.25rem;
+}
+
 
 .healthbar-height-spacer {
     height: var(--healthbar-height);

@@ -13,34 +13,14 @@
 :root {
     --zoom-level: 1;
     --theme-background: url('/background/stone.webp');
-    font-size: calc(14px * var(--zoom-level));
-}
-
-
-:root {
+    
     --border-radius: 0.25rem;
-    --margin: 0.5rem;
-
-    --mobile-breakpoint: 480px;
-    --tablet-breakpoint: 769px;
-
-    --healthbar-height: 0.25rem;
-
-    --fontsize-S: 0.825rem;
-    --fontsize-M: 1rem;
-    --fontsize-L: 1.125rem;
-    --fontsize-XL: 1.25rem;
-    --fontsize-XXL: 1.75rem;
-
-
-
     --dropshadow-size: 0.75rem;
-
+    
     --z-modal-bkg: 49;
     --z-modal: 50;
-
-    --transition-time: 400ms;
-    --sword-transition: var(--transition-time) cubic-bezier(.13, 0, .57, .1);
+    
+    font-size: calc(14px * var(--zoom-level));
 }   
 
 body {
