@@ -3,7 +3,6 @@
 @import "styles/colours.css";
 @import "styles/general.css";
 @import "styles/inputs.css";
-@import "styles/layout.css";
 @import "styles/scrollbar.css";
 @import "styles/spacing.css";
 @import "styles/svg.css";
@@ -22,6 +21,7 @@
     
     --z-modal-bkg: 49;
     --z-modal: 50;
+    --z-tutorial: 100;
 
     --main-width: 50rem;
     --settings-menu-width: 18rem;
@@ -67,9 +67,31 @@ main {
     }
 }
 
+.guide-container {
+    position: absolute;
+    border: 1px solid white;
+    left: 0;
+}
 
+li {
+    margin-bottom: var(--margin);
+}
 
+span.inline {
+    display: inline-block;
+    margin: 0 0.5rem;
+}
 
+.line-height {
+    height: 2rem;
+}
 
-
-
+.scroll-window {
+    overflow-y: scroll;
+    margin-top: var(--margin);
+    border: 2px solid var(--secondary);
+    border-radius: var(--border-radius);
+    width: auto;
+    padding: var(--padding);
+    max-height: 30rem;
+}
