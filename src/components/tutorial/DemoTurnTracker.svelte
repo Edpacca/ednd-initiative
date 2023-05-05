@@ -40,7 +40,7 @@
     }
 
     const onArrows = (event: KeyboardEvent) => {
-        if (!$isModalOpen && !$showTutorial) {
+        if (!$isModalOpen) {
             switch(event.key) {
                 case "ArrowLeft":
                     previous();

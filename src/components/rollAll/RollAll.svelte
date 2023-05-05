@@ -7,7 +7,7 @@
     import { CreatureType } from "../../lib/models/creature";
     import { EffectType } from "../../lib/models/effect";
     import { ENEMY_CREATURE_TYPES } from "../../lib/models/typeFilters";
-    import { activeEntityTurnIndex, currentRound, entities, hasHelpTooltips } from "../../store";
+    import { activeEntityTurnIndex, currentRound, entities, hasHelpTooltips, showTutorial } from "../../store";
     import CheckboxIcon from "../common/buttons/CheckboxIcon.svelte";
     import D20Button from "../common/buttons/D20Button.svelte";
     import Tooltip from "../common/tooltip/Tooltip.svelte";
@@ -41,7 +41,7 @@
     }
 </script>
 
-<div class="roll-all-container" transition:slide>
+<div class="roll-all-container" transition:slide={{duration: $showTutorial ? 0 : 400}}>
     <Tooltip text="Roll initiative for selected" type="help">
         <D20Button primary="var(--gold)" secondary="var(--white)" width="5rem" onClick={() => rollAll()}/>
     </Tooltip>

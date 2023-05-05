@@ -8,14 +8,19 @@
     import { EffectType } from "../../lib/models/effect";
     import { fade } from "svelte/transition";
     import Tooltip from "../common/tooltip/Tooltip.svelte";
+    import { clearLogs, updateLogs } from "../../lib/logger";
 
     const sortByInitiative = () => {
+        clearLogs();
+        $activeEntityTurnIndex = 0;
+
         $entities.sort((a, b) => {
             const aTotal = a.initiative + a.bonus;
             const bTotal = b.initiative + b.bonus;
             
             return aTotal === bTotal ? b.bonus - a.bonus : bTotal - aTotal;
         });
+        updateLogs($activeEntityTurnIndex);
     }
 
     $: $isLocked, sortByInitiative();
