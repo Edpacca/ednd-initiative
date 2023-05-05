@@ -11,7 +11,7 @@
 </script>
 
 <Tooltip text="use legendary action" type="help">
-    <button class="legendary svg-fit-container" on:click={reduceValue} class:spent={value === 0} disabled={value === 0} on:contextmenu|preventDefault={() => value++}>
+    <button class="legendary svg-fit-container" on:click={reduceValue} class:spent={value === 0} on:contextmenu|preventDefault={() => value++}>
         <div class="svg-fit">
             <Legendary/>
         </div>
@@ -31,7 +31,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-
     }
 
     .legendary:hover:not(.spent) {

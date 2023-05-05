@@ -9,20 +9,11 @@
     import RollAllTutorial from "./RollAllTutorial.svelte";
     import { onMount } from "svelte";
     import RemoveButton from "../common/buttons/RemoveButton.svelte";
+    import { TutorialStage } from "../../data/tutorialData";
 
-    enum Stage {
-        None,
-        AddingPlayers,
-        AddingMonsters,
-        AddingEffects,
-        RollAll,
-        Ready,
+    let stage: TutorialStage = 0;
 
-    }
-
-    let stage: Stage = Stage.RollAll
-
-    const numberOfStages = Object.keys(Stage).length / 2;
+    const numberOfStages = Object.keys(TutorialStage).length / 2;
 
     const nextStage = () => {
         stage = (stage + 1) % numberOfStages;
@@ -46,7 +37,7 @@
         <p>
             This is a DM tool for tracking combat in DnD, designed for simplicity with a bit of flair.
         </p>
-        {#if stage === Stage.None}
+        {#if stage === TutorialStage.None}
         <p>Looks like you're new here so let me take a second to show you around...</p>
         <div class="option-buttons">
             <button class="option-button" on:click={() => $showTutorial = false}>Silence fool! (close)</button>
@@ -63,16 +54,16 @@
                 </button>
             </div>
             <div class="full-width">
-                {#if stage === Stage.AddingPlayers}
+                {#if stage === TutorialStage.AddingPlayers}
                     <AddPlayers/>
-                {:else if stage === Stage.AddingMonsters}
+                {:else if stage === TutorialStage.AddingMonsters}
                     <AddMonsters/>
-                {:else if stage === Stage.AddingEffects}
+                {:else if stage === TutorialStage.AddingEffects}
                     <AddEffects/>
-                {:else if stage === Stage.RollAll}
+                {:else if stage === TutorialStage.RollAll}
                     <RollAllTutorial/>
-                {:else if stage === Stage.Ready}
-                    <ReadyTutorial/>
+                {:else if stage === TutorialStage.Ready || stage === TutorialStage.Combat}
+                    <ReadyTutorial stage={stage}/>
                 {/if}
             </div>
         {/if}

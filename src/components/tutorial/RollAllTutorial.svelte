@@ -14,8 +14,7 @@
 <hr/>
 <RollAll/>
 <div class="scroll-window">
-    <DemoCreatureTable typeFilter={[CreatureType.Player]}/>
-    <DemoCreatureTable typeFilter={[CreatureType.Enemy, CreatureType.Minion, CreatureType.Boss]} disableHeaders={true}/>
+    <DemoCreatureTable/>
     <DemoEffectTable/>
 </div>
 

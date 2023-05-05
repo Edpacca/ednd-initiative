@@ -10,10 +10,6 @@
     import Tooltip from "../common/tooltip/Tooltip.svelte";
 
     const sortByInitiative = () => {
-        if ($entities.length > 3) {
-            $entities = $entities.slice(0, 3);
-        }
-
         $entities.sort((a, b) => {
             const aTotal = a.initiative + a.bonus;
             const bTotal = b.initiative + b.bonus;
@@ -23,7 +19,6 @@
     }
 
     $: $isLocked, sortByInitiative();
-
 </script>
 
 <table in:fade>

@@ -5,18 +5,18 @@
     import EffectRowUnlocked from "../effects/EffectRowUnlocked.svelte";
     import { onMount } from "svelte";
 
-    const addEffect = () => {
-        $entities = [...$entities, new Effect()]
-    }
-
     $: effects = $entities.filter(e => e.type === EffectType.Effect);
 
     onMount(() => {
-        if (effects && effects.length === 0) {
-            addEffect();
-        } else {
-            
+        const effect = $entities.find(e => e.type === EffectType.Effect);
+        const newEffect: Effect = effect ? effect : new Effect();
+        if (!newEffect.name) {
+            newEffect.name = "Lava!";
+            newEffect.theme = "lava";
         }
+
+        $entities = $entities.filter(e => e.type !== EffectType.Effect);
+        $entities = [...$entities, newEffect];
     })
 
 </script>

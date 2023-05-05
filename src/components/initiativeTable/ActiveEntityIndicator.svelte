@@ -47,9 +47,4 @@
         left: -6rem;
         animation: point-L 1.5s ease-in infinite alternate;
     }
-
-    .right-side {
-        right: -6rem;
-        animation: point-R 1.5s ease-in infinite alternate;
-    }
 </style>

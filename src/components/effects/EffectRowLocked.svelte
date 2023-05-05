@@ -1,8 +1,6 @@
 <script lang="ts">
-    import Arrow from "../../graphics/icons/arrow.svelte";
     import Cave from "../../graphics/icons/cave.svelte";
     import type { Effect } from "../../lib/models/effect";
-    import NumberInput from "../common/values/NumberInput.svelte";
     import InitiativeValue from "../common/values/InitiativeValue.svelte";
     import EffectCounter from "./EffectCounter.svelte";
     import EffectInput from "./EffectInput.svelte";
