@@ -52,7 +52,7 @@
         <h1 class="gold">Welcome Traveller!</h1>
         {#if ready}
             <div class="wizard-popup" in:fly="{{ y: 50, delay: 500, duration: 1000, easing: elasticOut }}">
-                <img src="/public/images/edpacca_wizard.png" alt="wizard-friend" class="wizard"/>
+                <img src="/images/edpacca_wizard.png" alt="wizard-friend" class="wizard"/>
             </div>
         {/if}
         <p class="text-block">
