@@ -3,6 +3,7 @@ import { getLocalStorageEntities, getLocalStorageLogs, getLocalStorageTurn, getL
 import type { Entity } from "./lib/models/entity";
 import type { LogEntry } from "./lib/models/logEntry";
 import type { Themes } from "./data/themeData";
+import { SaveState } from "./lib/models/saveState";
 
 const currentTurn = getLocalStorageTurn();
 
@@ -21,7 +22,9 @@ export const currentLogId: Writable<string> = writable(getLocalStorageCurrentLog
 export const zoomLevel: Writable<number> = writable(1);
 export const hasHelpTooltips: Writable<boolean> = writable(true);
 export const hasInfoTooltips: Writable<boolean> = writable(true);
-export const showTutorial: Writable<boolean> = writable(false);
+export const showTutorial: Writable<boolean> = writable(true);
+export const openedOnce: Writable<boolean> = writable(false);
+export const saveState: Writable<SaveState> = writable(SaveState.None);
 
 export function getActiveEntity(): Entity {
     return get(entities)[get(activeEntityTurnIndex)]

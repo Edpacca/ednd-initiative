@@ -51,6 +51,7 @@
             </div>
         </th>
         <th class="value-col">
+            Init.
             Bonus
         </th>
         <th class="value-col"><div class="icon-header svg-fit-containe"><Speed/></div></th>

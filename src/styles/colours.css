@@ -5,6 +5,7 @@
     --default-secondary: burlywood;
     --white: antiquewhite;
     --black: rgb(30, 30, 30);
+    --black-50: rgb(0, 0, 0, 0.5);
     --light-grey: rgb(150, 150, 150);
     --mid-grey: rgb(85, 85, 85);    
     --grey: rgb(50, 50, 50);
@@ -55,4 +56,9 @@
 .white {
     color: var(--white);
     fill: var(--white);
+}
+
+.light-grey {
+    color: var(--light-grey);
+    fill: var(--light-grey);
 }

@@ -11,6 +11,8 @@
     import type { FocusType } from "../../../lib/models/focusType";
     import HpValue from "./HpValue.svelte";
     import { onMount } from "svelte";
+    import { showTutorial } from "../../../store";
+    import PlusMinusButton from "../../common/buttons/PlusMinusButton.svelte";
     export let creature: Creature;
     export let isSelected = false;
     export let selectedIndex = 0;
@@ -68,8 +70,22 @@
 </script>
 
 {#if isSelected}
+
     <div class="relative creature-modal">
         <Modal bind:isOpen={isSelected} width="40rem">
+            {#if $showTutorial}
+                <div class="tutorial-modal">
+                    <ul>
+                        <li>Press tab to cycle between damage healing and conditions</li>
+                        <li>You can scroll or enter a number in the damage or heal icons</li>
+                        <li>Press the button or hit enter to submit the damage / healing</li>
+                        <li>Start typing a condition or enter a custom one</li>
+                        <li>Hit enter or click the <span class="inline"><PlusMinusButton type="+" onClick={undefined} width="1.5rem"/></span> to add a condition</li>
+                        <li>For minions, select which one you want to target first by clicking the number</li>
+                        <li>Press ESC to close</li>
+                    </ul> 
+                </div>
+            {/if}
             <div class="close-button">
                 <RemoveButton onClick={() => isSelected = false}/>
             </div>
@@ -87,6 +103,7 @@
                         <HpValue value={creature.hpCurrent[0]} valueMax={creature.hpMax}/>
                     {/if}
                 </div>
+
                 <div class="modal-control-grid">
                     <div class="damage-container">
                         <Damage bind:creature bind:damageInput bind:healingInput bind:focused index={selectedIndex}/>
@@ -110,6 +127,16 @@
 <svelte:window on:keyup={e => keyboardInput(e)}/>
 
 <style>
+.tutorial-modal {
+    position: absolute;
+    z-index: 150;
+    border: 2px solid var(--white);
+    top: -18rem;
+    background-color: var(--black);
+    padding: 1rem;
+    border-radius: var(--border-radius);
+}
+
 .creature-modal {
     z-index: 50;
 }

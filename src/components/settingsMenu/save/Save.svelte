@@ -1,7 +1,7 @@
 <script lang="ts">
     import { SaveError, setLocalStorageEncounter } from "../../../lib/persistance";
     import ConfirmOverwrite from "./ConfirmOverwrite.svelte";
-    import { entities } from "../../../store";
+    import { entities, saveState } from "../../../store";
     import { CreatureType } from "../../../lib/models/creature";
     import { EffectType } from "../../../lib/models/effect";
     import CheckboxIcon from "../../common/buttons/CheckboxIcon.svelte";
@@ -9,11 +9,9 @@
     import Enemy from "../../../graphics/entity-types/enemy.svelte";
     import Cave from "../../../graphics/icons/cave.svelte";
     import { ENEMY_CREATURE_TYPES } from "../../../lib/models/typeFilters";
-
-    enum State { None, Saved, Overwrite }
+    import { SaveState } from "../../../lib/models/saveState";
 
     let name: string;
-    let state = State.None;
     let messageName = "";
     $: hasName = name ? name.length > 0 : false;
 
@@ -32,13 +30,13 @@
             setLocalStorageEncounter(name, $entities, filteredTypes, override)
             messageName = name;
             name = "";
-            state = State.Saved;
+            $saveState = SaveState.Saved;
         } catch (e) {
-            if (e instanceof SaveError) state = State.Overwrite;
+            if (e instanceof SaveError) $saveState = SaveState.Overwrite;
         }
     }
 
-    const cancel = () => state = State.None;
+    const cancel = () => $saveState = SaveState.None;
     
     const onEnter = (event: KeyboardEvent) => {
         if (event.key === "Enter") {
@@ -46,9 +44,9 @@
         }
     }
     
-    $: if(state === State.Saved) {
+    $: if($saveState === SaveState.Saved) {
         setTimeout(() => { 
-            state = State.None;
+            $saveState = SaveState.None;
             messageName = "";
         }, 4000);
     }
@@ -93,13 +91,13 @@
         </CheckboxIcon>
     </div>
     <input type="text" placeholder="Group Name" bind:value={name} on:input={() => messageName = ""} on:keydown={e => onEnter(e)}>
-    {#if state === State.Saved}
+    {#if $saveState === SaveState.Saved}
         <div>{messageName} saved to local storage!</div>
-    {:else if state === State.None && hasName}
+    {:else if $saveState === SaveState.None && hasName}
         <button on:click={() => saveEncounter()} class="submit-button">Save</button>
     {/if}
 </div>
-<ConfirmOverwrite overwrite={() => saveEncounter(true)} cancel={cancel} name={name} isOpen={state === State.Overwrite}/>
+<ConfirmOverwrite overwrite={() => saveEncounter(true)} cancel={cancel} name={name} isOpen={$saveState === SaveState.Overwrite}/>
 
 <style>
     .setting-container {

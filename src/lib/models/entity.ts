@@ -5,7 +5,7 @@ import type { EffectType } from "./effect";
 export class Entity {
     name: string = "";
     initiative?: number;
-    bonus?: number;
+    bonus?: number = 0;
     type: EntityType;
     id: string;
 

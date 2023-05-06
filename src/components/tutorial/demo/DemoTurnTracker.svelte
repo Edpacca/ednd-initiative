@@ -1,10 +1,10 @@
 <script lang="ts">
-    import ArrowPlain from "../../graphics/icons/arrow-plain.svelte";
-    import { Creature, CreatureType } from "../../lib/models/creature";
-    import { setLocalStorageCurrentLogId, setLocalStorageLogs } from "../../lib/persistance";
-    import { currentRound, entities, activeEntityTurnIndex, isModalOpen, logs, storeCurrentRound, currentLogId, showTutorial } from "../../store";
-    import Tooltip from "../common/tooltip/Tooltip.svelte";
-    import { updateLogs } from "../../lib/logger";
+    import ArrowPlain from "../../../graphics/icons/arrow-plain.svelte";
+    import { Creature, CreatureType } from "../../../lib/models/creature";
+    import { setLocalStorageCurrentLogId, setLocalStorageLogs } from "../../../lib/persistance";
+    import { currentRound, entities, activeEntityTurnIndex, isModalOpen, logs, storeCurrentRound, currentLogId, showTutorial } from "../../../store";
+    import Tooltip from "../../common/tooltip/Tooltip.svelte";
+    import { updateLogs } from "../../../lib/logger";
     
     $: max = $entities.length - 1;
     
@@ -40,7 +40,7 @@
     }
 
     const onArrows = (event: KeyboardEvent) => {
-        if (!$isModalOpen && !$showTutorial) {
+        if (!$isModalOpen) {
             switch(event.key) {
                 case "ArrowLeft":
                     previous();

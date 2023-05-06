@@ -2,7 +2,7 @@
     import { isLocked } from "../../../store";
 
 
-    export let initiative;
+    export let initiative: number;
     export let bonus = 0;
 
     $: total = initiative + bonus;

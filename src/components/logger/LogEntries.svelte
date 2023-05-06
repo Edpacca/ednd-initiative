@@ -2,7 +2,7 @@
     import { logs } from "../../store";
     import ConfirmClearLogs from "../settingsMenu/advanced/ConfirmDeleteLogs.svelte";
     import type { LogEntry } from "../../lib/models/logEntry";
-    import LogTurn from "./LogEntryCard.svelte";
+    import LogEntryCard from "./LogEntryCard.svelte";
 
     let isClearingLogs = false;
     $: maxRound = Math.max(...$logs.map(l => l.round))
@@ -27,7 +27,7 @@
             <div class="log-round">
                 <div class="header text-center">Round {i + 1}</div>
                 {#each $logs.filter(l => l.round === i + 1) as log}
-                    <LogTurn logEntry={log} removeLogEntry={() => removeLogEntry(log)}/>
+                    <LogEntryCard logEntry={log} removeLogEntry={() => removeLogEntry(log)}/>
                 {/each}
             </div>
         {/each}

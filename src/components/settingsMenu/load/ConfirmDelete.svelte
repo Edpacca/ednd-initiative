@@ -12,6 +12,7 @@
             removeLocalStorageParty(party.name);
         }
         party = undefined;
+        cancel();
     }
 
     const text = [

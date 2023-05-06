@@ -26,9 +26,11 @@ function currentLog() {
 }
 
 export function addNewLog() {
-    const newLog = new LogEntry(get(entities)[get(activeEntityTurnIndex)], get(currentRound));
-    logs.update(l => [...l, newLog]);
-    currentLogId.set(newLog.id);
+    if (get(entities).length > 0) {
+        const newLog = new LogEntry(get(entities)[get(activeEntityTurnIndex)], get(currentRound));
+        logs.update(l => [...l, newLog]);
+        currentLogId.set(newLog.id);
+    }
 }
 
 export function appendDamageToCurrentLog(entity: Creature, damage: number, index=0, overkill=0) {
