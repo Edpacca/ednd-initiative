@@ -95,3 +95,12 @@ span.inline {
     padding: var(--padding);
     max-height: 30rem;
 }
+
+.demo-container {
+    padding-top: 0.5rem;
+    border: 2px solid var(--white);
+    border-radius: var(--border-radius);
+    padding: var(--padding);
+    padding-top: var(--margin);
+    margin: auto;
+}

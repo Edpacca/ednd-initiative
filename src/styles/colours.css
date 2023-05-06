@@ -57,3 +57,8 @@
     color: var(--white);
     fill: var(--white);
 }
+
+.light-grey {
+    color: var(--light-grey);
+    fill: var(--light-grey);
+}

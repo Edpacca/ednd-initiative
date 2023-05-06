@@ -1,12 +1,12 @@
 <script lang="ts">
-    import { isLocked, entities } from "../../store";
-    import Heart from "../../graphics/icons/heart.svelte";
-    import Shield from "../../graphics/icons/shield.svelte";
-    import { Creature, CreatureType } from "../../lib/models/creature";
-    import CreatureRowUnlocked from "../creature/unlocked/CreatureRowUnlocked.svelte";
-    import Speed from "../../graphics/icons/speed.svelte";
+    import { isLocked, entities } from "../../../store";
+    import Heart from "../../../graphics/icons/heart.svelte";
+    import Shield from "../../../graphics/icons/shield.svelte";
+    import { Creature, CreatureType } from "../../../lib/models/creature";
+    import CreatureRowUnlocked from "../../creature/unlocked/CreatureRowUnlocked.svelte";
+    import Speed from "../../../graphics/icons/speed.svelte";
     import { onMount } from "svelte";
-    import { EffectType } from "../../lib/models/effect";
+    import { EffectType } from "../../../lib/models/effect";
     
     const checkAndAdd = (entity: Creature | undefined, type: CreatureType) => {
         const newCreature = entity ? entity : new Creature(type);

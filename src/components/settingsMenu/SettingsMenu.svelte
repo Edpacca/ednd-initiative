@@ -1,7 +1,7 @@
 <script lang="ts">
     import { faGear, faSave, faQuestion, faPaintBrush, faMagnifyingGlass, faGears, faCross, faXmark } from '@fortawesome/free-solid-svg-icons'
     import { slide } from "svelte/transition";
-    import { isSettingsOpen } from "../../store";
+    import { isSettingsOpen, saveState } from "../../store";
     import AccordionTool from "./AccordionTool.svelte";
     import Advanced from "./advanced/Advanced.svelte";
     import Load from "./load/Load.svelte";
@@ -10,8 +10,10 @@
     import ViewSettings from "./viewSettings/ViewSettings.svelte";
     import Help from "./help/Help.svelte";
     import IconButton from '../common/buttons/IconButton.svelte';
+    import SaveLoad from './save/SaveLoad.svelte';
 
     let isExperimentalEnabled = false;
+    let justSaved = false;
 </script>
 
 <div class="menu-button">
@@ -39,9 +41,7 @@
         {/if}
         <div>
             <AccordionTool text={"Save / Load"} icon={faSave}>
-                <Save/>
-                <hr class="sub-hr"/>
-                <Load/>
+                <SaveLoad/>
             </AccordionTool>
         </div>
         <div>
@@ -88,8 +88,5 @@
         z-index: 11;
     }
 
-    .sub-hr {
-        margin: 1rem 20%;
-        border-color: var(--dark-grey-90);
-    }
+
 </style>

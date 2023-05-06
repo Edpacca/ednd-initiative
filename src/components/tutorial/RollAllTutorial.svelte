@@ -1,9 +1,8 @@
 <script>
     import { CreatureType } from "../../lib/models/creature";
     import RollAll from "../rollAll/RollAll.svelte";
-    import DemoCreatureTable from "./DemoCreatureTable.svelte";
-    import DemoEffectTable from "./DemoEffectTable.svelte";
-
+    import DemoCreatureTable from "./demo/DemoCreatureTable.svelte";
+    import DemoEffectTable from "./demo/DemoEffectTable.svelte";
 </script>
 <ul>
     <li>The big D20 button lets you can roll initiative for everything!</li>

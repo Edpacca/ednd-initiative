@@ -1,13 +1,13 @@
 <script lang="ts">
     import { onMount } from "svelte";
     import { activeEntityTurnIndex, isLocked } from "../../store";
-    import LockPage from "../lockToggle/LockPage.svelte";
-    import DemoCreatureTable from "./DemoCreatureTable.svelte";
-    import DemoEffectTable from "./DemoEffectTable.svelte";
-    import DemoInitiativeTable from "./DemoInitiativeTable.svelte";
     import { addNewLog, clearLogs } from "../../lib/logger";
+    import LockPage from "../lockToggle/LockPage.svelte";
+    import DemoCreatureTable from "./demo/DemoCreatureTable.svelte";
+    import DemoEffectTable from "./demo/DemoEffectTable.svelte";
+    import DemoInitiativeTable from "./demo/DemoInitiativeTable.svelte";
     import { TutorialStage } from "../../data/tutorialData";
-    import DemoTurnTracker from "./DemoTurnTracker.svelte";
+    import DemoTurnTracker from "./demo/DemoTurnTracker.svelte";
     import Minion from "../../graphics/entity-types/minion.svelte";
 
     onMount(() => {

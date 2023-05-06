@@ -1,8 +1,8 @@
 <script lang="ts">
-    import Speed from "../../graphics/icons/speed.svelte";
-    import { entities } from "../../store";
-    import { Effect, EffectType } from "../../lib/models/effect";
-    import EffectRowUnlocked from "../effects/EffectRowUnlocked.svelte";
+    import Speed from "../../../graphics/icons/speed.svelte";
+    import { entities } from "../../../store";
+    import { Effect, EffectType } from "../../../lib/models/effect";
+    import EffectRowUnlocked from "../../effects/EffectRowUnlocked.svelte";
     import { onMount } from "svelte";
 
     $: effects = $entities.filter(e => e.type === EffectType.Effect);

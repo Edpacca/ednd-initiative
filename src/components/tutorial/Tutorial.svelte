@@ -3,14 +3,19 @@
     import { elasticOut } from "svelte/easing";
     import { isLocked, openedOnce, showTutorial } from "../../store";
     import Arrow from "../../graphics/icons/arrow.svelte";
-    import AddPlayers from "./AddPlayers.svelte";
-    import AddMonsters from "./AddMonsters.svelte";
-    import AddEffects from "./AddEffects.svelte";
+    import AddPlayers from "./AddPlayersTutorial.svelte";
+    import AddMonsters from "./AddEnemiesTutorial.svelte";
+    import AddEffects from "./AddEffectsTutorial.svelte";
     import CombatTutorial from "./CombatTutorial.svelte";
     import RollAllTutorial from "./RollAllTutorial.svelte";
     import { onMount } from "svelte";
     import RemoveButton from "../common/buttons/RemoveButton.svelte";
     import { TutorialStage, getTutorialStageString } from "../../data/tutorialData";
+    import LogsTutorial from "./LogsTutorial.svelte";
+    import SaveLoadTutorial from "./SaveLoadTutorial.svelte";
+    import TutorialEnd from "./demo/TutorialEnd.svelte";
+    import Wizard from "./Wizard.svelte";
+    import ConfirmContinueTutorial from "./ConfirmContinueTutorial.svelte";
 
     let stage: TutorialStage = 0;
     let ready = false;
@@ -29,18 +34,6 @@
         $openedOnce = true;
         ready = true;
     });
-
-    const hideNext = (_stage: TutorialStage, locked: boolean) => {
-        if (stage === TutorialStage.Ready) {
-            showRightArrow = locked;
-        } else {
-            showRightArrow = true;
-        }
-    }
-
-    let showRightArrow = true;
-
-    $: hideNext(stage, $isLocked);
 </script>
 
 <div class="tutorial-container" transition:slide >
@@ -52,32 +45,34 @@
         <h1 class="gold">Welcome Traveller!</h1>
         {#if ready}
             <div class="wizard-popup" in:fly="{{ y: 50, delay: 500, duration: 1000, easing: elasticOut }}">
-                <img src="/images/edpacca_wizard.png" alt="wizard-friend" class="wizard"/>
+                <Wizard/>
             </div>
         {/if}
-        <p class="text-block">
+        <p class="text-block gold">
             I'm Edpacca - and this is my Initiative Tracker! <br> A DM's tool for tracking combat in DnD, designed for simplicity with a bit of flair.
         </p>
-        <p>Looks like you're new here so let me take a second to show you around...</p>
+        <p class="gold">Looks like you're new here so let me take a second to show you around...</p>
         <div class="option-buttons">
             <button class="option-button" on:click={() => $showTutorial = false}>Silence fool! (close)</button>
             <button class="option-button" on:click={nextStage}>Sure, I could use a hand...</button>
         </div>
+        <p>Replay this tutorial any time from the settings menu under "Help"</p>
         {:else}
             <div class="stage-buttons" in:slide>
                 <button class="arrow-button" class:transparent={stage === 1} on:click={previousStage}>
                     <Arrow class="left"/>
                 </button>
                 <div class="tutorial-stage left-align">{getTutorialStageString(stage - 1)}</div>
-                {#if showRightArrow}
+                {#if stage !== TutorialStage.End}
                 <div class="tutorial-stage right-align">{getTutorialStageString(stage + 1)}</div>
                 <button class="arrow-button" on:click={nextStage}>
                     <Arrow/>
                 </button>
                 {/if}
             </div>
+            
             <h1 class="gold underline">{getTutorialStageString(stage)}</h1>
-            <div class="full-width">
+            <div>
                 {#if stage === TutorialStage.AddingPlayers}
                     <AddPlayers/>
                 {:else if stage === TutorialStage.AddingEnemies}
@@ -88,6 +83,15 @@
                     <RollAllTutorial/>
                 {:else if stage === TutorialStage.Ready || stage === TutorialStage.Combat}
                     <CombatTutorial stage={stage}/>
+                {:else if  stage === TutorialStage.ConfirmContinue}
+                    <ConfirmContinueTutorial nextStage={nextStage}/>
+                {:else if stage === TutorialStage.Logs}
+                    <LogsTutorial/>
+                {:else if stage === TutorialStage.Saving}
+                    <SaveLoadTutorial/>
+                {:else if stage === TutorialStage.End}
+
+                <TutorialEnd/>
                 {/if}
             </div>
         {/if}
@@ -100,13 +104,7 @@
         margin-right: 28rem;
     }
 
-    .wizard {
-        height: 6rem;
-        image-rendering: pixelated;
-        image-rendering: -moz-crisp-edges;
-        image-rendering: crisp-edges;
-        animation: rotate 1000ms ease-out;
-    }
+ 
 
     h1 {
         margin-bottom: var(--margin)
@@ -134,7 +132,7 @@
     }
 
     .top-left {
-        position: fixed;
+        position: absolute;
         left: 0;
         top: 0;
         padding: var(--padding);
@@ -149,13 +147,18 @@
         right: 0;
         bottom: 0;
         padding: var(--margin);
-        padding-bottom: 10rem;
+        padding-bottom: 8rem;
         z-index: var(--z-tutorial);
         background-color: var(--black-50);
     }
 
     .tutorial-canvas {
         position: relative;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
         background-color: var(--black);
         border: 2px solid var(--gold);
         border-radius: var(--border-radius);
@@ -165,37 +168,12 @@
         flex-direction: column;
         align-items: center;
         font-size: 1.2rem;
+        overflow-y: scroll;
+        max-width: 60rem;
     }
 
     .small-canvas {
         height: initial;
-    }
-
-    .option-button {
-        background: var(--grey);
-        height: 3rem;
-        padding: 1rem;
-        color: var(--secondary);
-        border: 1px solid var(--grey);
-        border-radius: var(--border-radius);
-        font-weight: bold;
-        transition: var(--transition-time);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .option-button:hover {
-        border-color: var(--light-grey);
-        background-color: var(--dark-grey);
-        color: var(--white);
-    }
-
-    .option-buttons {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        column-gap: 2rem;
-        margin: var(--margin);
     }
 
     .stage-buttons {
@@ -203,7 +181,7 @@
         grid-template-columns: auto 1fr 1fr auto;
         justify-content: center;
         width: 50%;
-        margin: var(--padding);
+        margin: var(--margin);
         align-items: center;
     }
 
@@ -234,9 +212,5 @@
 
     .arrow-button:hover {
         fill: var(--white);
-    }
-
-    .full-width {
-        min-width: 60vw;
     }
 </style>

@@ -50,3 +50,30 @@ button:active, button:focus {
         height: 2.5rem;
     }
 } 
+
+.option-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2rem;
+    margin: var(--margin);
+}
+
+.option-button {
+    background: var(--grey);
+    height: 3rem;
+    padding: 1rem;
+    color: var(--secondary);
+    border: 1px solid var(--grey);
+    border-radius: var(--border-radius);
+    font-weight: bold;
+    transition: var(--transition-time);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.option-button:hover {
+    border-color: var(--light-grey);
+    background-color: var(--dark-grey);
+    color: var(--white);
+}

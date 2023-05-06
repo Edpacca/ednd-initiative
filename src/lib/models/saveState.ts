@@ -1,0 +1,1 @@
+export enum SaveState { None, Saved, Overwrite }

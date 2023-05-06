@@ -6,6 +6,10 @@ export enum TutorialStage {
     RollAll,
     Ready,
     Combat,
+    ConfirmContinue,
+    Logs,
+    Saving,
+    End
 }
 
 export function getTutorialStageString(stage: TutorialStage): string {
@@ -22,6 +26,10 @@ export function getTutorialStageString(stage: TutorialStage): string {
             return "Starting Combat";
         case TutorialStage.Combat:
             return "Combat Tools";
+        case TutorialStage.Logs:
+            return "Turn History";
+        case TutorialStage.Saving:
+            return "Saving/Loading";
         default:
             return ""
     }

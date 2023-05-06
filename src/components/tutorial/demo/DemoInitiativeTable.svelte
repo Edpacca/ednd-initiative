@@ -1,14 +1,14 @@
 <script lang="ts">
-    import { isLocked, entities, activeEntityTurnIndex } from "../../store";
-    import Heart from "../../graphics/icons/heart.svelte";
-    import CreatureRowLocked from "../creature/locked/CreatureRowLocked.svelte";
-    import EffectRowLocked from "../effects/EffectRowLocked.svelte";
-    import Speed from "../../graphics/icons/speed.svelte";
-    import { CREATURE_TYPES } from "../../lib/models/typeFilters";
-    import { EffectType } from "../../lib/models/effect";
     import { fade } from "svelte/transition";
-    import Tooltip from "../common/tooltip/Tooltip.svelte";
-    import { clearLogs, updateLogs } from "../../lib/logger";
+    import { isLocked, entities, activeEntityTurnIndex } from "../../../store";
+    import Heart from "../../../graphics/icons/heart.svelte";
+    import CreatureRowLocked from "../../creature/locked/CreatureRowLocked.svelte";
+    import EffectRowLocked from "../../effects/EffectRowLocked.svelte";
+    import Speed from "../../../graphics/icons/speed.svelte";
+    import { CREATURE_TYPES } from "../../../lib/models/typeFilters";
+    import { EffectType } from "../../../lib/models/effect";
+    import Tooltip from "../../common/tooltip/Tooltip.svelte";
+    import { clearLogs, updateLogs } from "../../../lib/logger";
 
     const sortByInitiative = () => {
         clearLogs();

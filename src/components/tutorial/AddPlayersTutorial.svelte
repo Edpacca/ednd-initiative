@@ -2,8 +2,6 @@
     import { CreatureType } from "../../lib/models/creature";
     import D20Button from "../common/buttons/D20Button.svelte";
     import PlayerIcon from "../common/buttons/PlayerIcon.svelte";
-
-
     import PlusMinusButton from "../common/buttons/PlusMinusButton.svelte";
     import RemoveButton from "../common/buttons/RemoveButton.svelte";
     import CreatureTable from "../initiativeTable/CreatureTable.svelte";
