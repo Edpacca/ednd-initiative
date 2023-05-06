@@ -1,7 +1,7 @@
 <script lang="ts">
     import { fade, fly, slide } from "svelte/transition";
     import { elasticOut } from "svelte/easing";
-    import { isLocked, openedOnce, showTutorial } from "../../store";
+    import { isLocked, isTutorialCompleted, isTutorialOpen } from "../../store";
     import Arrow from "../../graphics/icons/arrow.svelte";
     import AddPlayers from "./AddPlayersTutorial.svelte";
     import AddMonsters from "./AddEnemiesTutorial.svelte";
@@ -16,6 +16,7 @@
     import TutorialEnd from "./demo/TutorialEnd.svelte";
     import Wizard from "./Wizard.svelte";
     import ConfirmContinueTutorial from "./ConfirmContinueTutorial.svelte";
+    import { setLocalStorageTutorialCompleted } from "../../lib/persistance";
 
     let stage: TutorialStage = 0;
     let ready = false;
@@ -30,8 +31,13 @@
         stage = stage === 0 ? 0 : stage - 1;
     }
 
+    const closeTutorial = () => {
+        $isTutorialOpen = false;
+        $isTutorialCompleted = true;
+        setLocalStorageTutorialCompleted($isTutorialCompleted);
+    }
+
     onMount(() => {
-        $openedOnce = true;
         ready = true;
     });
 </script>
@@ -39,7 +45,7 @@
 <div class="tutorial-container" transition:slide >
     <div class="tutorial-canvas" class:small-canvas={stage === TutorialStage.None}>
         <div class="top-left">
-            <RemoveButton onClick={() => $showTutorial = false}/>
+            <RemoveButton onClick={closeTutorial}/>
         </div>
         {#if stage === TutorialStage.None}
         <h1 class="gold">Welcome Traveller!</h1>
@@ -53,7 +59,7 @@
         </p>
         <p class="gold">Looks like you're new here so let me take a second to show you around...</p>
         <div class="option-buttons">
-            <button class="option-button" on:click={() => $showTutorial = false}>Silence fool! (close)</button>
+            <button class="option-button" on:click={closeTutorial}>Silence fool! (close)</button>
             <button class="option-button" on:click={nextStage}>Sure, I could use a hand...</button>
         </div>
         <p>Replay this tutorial any time from the settings menu under "Help"</p>

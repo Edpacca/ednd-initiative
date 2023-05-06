@@ -1,9 +1,9 @@
 <script lang="ts">
-    import { isLocked, isLogsOpen, isStarted, showTutorial } from "../../store";
+    import { isLocked, isLogsOpen, isStarted, isTutorialOpen } from "../../store";
     import LockedSwordsIcon from "./LockedSwordsIcon.svelte";
 
     const toggleLock = () => {
-        if (!$isStarted && !$showTutorial) {
+        if (!$isStarted && !$isTutorialOpen) {
             $isStarted = true;
             // $isLogsOpen = true;
         }

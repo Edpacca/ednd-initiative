@@ -1,10 +1,10 @@
 <script>
     import { faArrowUpRightFromSquare } from '@fortawesome/free-solid-svg-icons'
     import SettingsIconButton from '../../common/buttons/TextIconButton.svelte';
-    import { hasHelpTooltips, hasInfoTooltips, isLocked, isSettingsOpen, isStarted, showTutorial } from '../../../store';
+    import { hasHelpTooltips, hasInfoTooltips, isLocked, isSettingsOpen, isStarted, isTutorialOpen } from '../../../store';
 
     const runTutorial = () => {
-        $showTutorial = true;
+        $isTutorialOpen = true;
         $isSettingsOpen = false;
         $isLocked = false;
         $isStarted = false;

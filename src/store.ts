@@ -1,5 +1,5 @@
 import { get, writable, type Writable } from "svelte/store";
-import { getLocalStorageEntities, getLocalStorageLogs, getLocalStorageTurn, getLocalStorageTheme, setLocalStorageTurn, getLocalStorageCurrentLogId } from "./lib/persistance";
+import { getLocalStorageEntities, getLocalStorageLogs, getLocalStorageTurn, getLocalStorageTheme, setLocalStorageTurn, getLocalStorageCurrentLogId, getLocalStorageTutorialCompleted } from "./lib/persistance";
 import type { Entity } from "./lib/models/entity";
 import type { LogEntry } from "./lib/models/logEntry";
 import type { Themes } from "./data/themeData";
@@ -22,8 +22,8 @@ export const currentLogId: Writable<string> = writable(getLocalStorageCurrentLog
 export const zoomLevel: Writable<number> = writable(1);
 export const hasHelpTooltips: Writable<boolean> = writable(true);
 export const hasInfoTooltips: Writable<boolean> = writable(true);
-export const showTutorial: Writable<boolean> = writable(true);
-export const openedOnce: Writable<boolean> = writable(false);
+export const isTutorialOpen: Writable<boolean> = writable(false);
+export const isTutorialCompleted: Writable<boolean> = writable(getLocalStorageTutorialCompleted());
 export const saveState: Writable<SaveState> = writable(SaveState.None);
 
 export function getActiveEntity(): Entity {

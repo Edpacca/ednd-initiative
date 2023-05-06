@@ -1,6 +1,6 @@
 <script lang="ts">
     import { onMount } from "svelte";
-    import { currentTheme, entities, isLocked, isStarted, openedOnce, showTutorial } from "./store";
+    import { currentTheme, entities, isLocked, isStarted, isTutorialCompleted, isTutorialOpen } from "./store";
     import { setTheme } from "./lib/themeLib";
     import { CreatureType } from "./lib/models/creature";
     import TurnTracker from "./components/turnTracker/TurnTracker.svelte";
@@ -17,8 +17,8 @@
     onMount(async () => {
       setTheme($currentTheme);
 
-      if (!$openedOnce) {
-        $showTutorial = true;
+      if (!$isTutorialCompleted) {
+        $isTutorialOpen = true;
       }
     });
 </script>
@@ -58,7 +58,7 @@
 {#if $isStarted}
   <LogPanel/>
 {/if}
-{#if $showTutorial}
+{#if $isTutorialOpen}
   <Tutorial/>
 {/if}
 

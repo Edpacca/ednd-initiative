@@ -12,6 +12,16 @@ enum StorageType {
     Logs = "logs",
     CurrentLogId = "CurrentLogId",
     Turn = "turn",
+    Tutorial = "tutorial-completed"
+}
+
+export function getLocalStorageTutorialCompleted(): boolean {
+    const result = getLocalStorage(StorageType.Tutorial);
+    return result !== undefined ? result : false;
+}
+
+export function setLocalStorageTutorialCompleted(tutorialCompleted: boolean) {
+    setLocalStorage(StorageType.Tutorial, tutorialCompleted);
 }
 
 export function getLocalStorageEntities(): Entity[] {
