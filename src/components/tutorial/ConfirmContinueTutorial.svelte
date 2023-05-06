@@ -4,9 +4,16 @@
 
     import Wizard from "./Wizard.svelte";
     import { elasticOut } from "svelte/easing";
-    import { showTutorial } from "../../store";
+    import { isTutorialCompleted, isTutorialOpen } from "../../store";
+    import { setLocalStorageTutorialCompleted } from "../../lib/persistance";
 
     export let nextStage;
+
+    const closeTutorial = () => {
+        $isTutorialOpen = false;
+        $isTutorialCompleted = true;
+        setLocalStorageTutorialCompleted($isTutorialCompleted);
+    }
 
 </script>
 <div class="upside-down-swing">
@@ -17,7 +24,7 @@
 
 <p class="gold">Oh, eager to learn more? An avid student of the arcane!</p>
 <div class="option-buttons">
-    <button class="option-button" on:click={() => $showTutorial = false}>No, I get it already!</button>
+    <button class="option-button" on:click={closeTutorial}>No, I get it already!</button>
     <button class="option-button" on:click={nextStage}>Gain more XP</button>
 </div>
 

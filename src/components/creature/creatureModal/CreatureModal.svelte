@@ -11,7 +11,7 @@
     import type { FocusType } from "../../../lib/models/focusType";
     import HpValue from "./HpValue.svelte";
     import { onMount } from "svelte";
-    import { showTutorial } from "../../../store";
+    import { isTutorialOpen } from "../../../store";
     import PlusMinusButton from "../../common/buttons/PlusMinusButton.svelte";
     export let creature: Creature;
     export let isSelected = false;
@@ -73,7 +73,7 @@
 
     <div class="relative creature-modal">
         <Modal bind:isOpen={isSelected} width="40rem">
-            {#if $showTutorial}
+            {#if $isTutorialOpen}
                 <div class="tutorial-modal">
                     <ul>
                         <li>Press tab to cycle between damage healing and conditions</li>

@@ -2,7 +2,7 @@
     import ArrowPlain from "../../graphics/icons/arrow-plain.svelte";
     import { Creature, CreatureType } from "../../lib/models/creature";
     import { setLocalStorageCurrentLogId, setLocalStorageLogs } from "../../lib/persistance";
-    import { currentRound, entities, activeEntityTurnIndex, isModalOpen, logs, storeCurrentRound, currentLogId, showTutorial } from "../../store";
+    import { currentRound, entities, activeEntityTurnIndex, isModalOpen, logs, storeCurrentRound, currentLogId, isTutorialOpen } from "../../store";
     import Tooltip from "../common/tooltip/Tooltip.svelte";
     import { updateLogs } from "../../lib/logger";
     
@@ -40,7 +40,7 @@
     }
 
     const onArrows = (event: KeyboardEvent) => {
-        if (!$isModalOpen && !$showTutorial) {
+        if (!$isModalOpen && !$isTutorialOpen) {
             switch(event.key) {
                 case "ArrowLeft":
                     previous();
