@@ -14,11 +14,3 @@
     <button class="option-button" on:click={() => $showTutorial = false}>Leave quietly...</button>
     <button class="option-button" on:click={() =>  $showTutorial = false}>Huzzah!</button>
 </div>
-
-<style>
-    .tutorial-end-wizard {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-</style>

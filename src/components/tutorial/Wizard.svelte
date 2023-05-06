@@ -2,7 +2,7 @@
     export let height = "6rem"
 </script>
 
-<img src="/images/edpacca_wizard.png" alt="wizard-friend" style="--wiz-height: {height}" class="wizard"/>
+<img src="/ednd-initiative/images/edpacca_wizard.png" alt="wizard-friend" style="--wiz-height: {height}" class="wizard"/>
 
 <style>
     .wizard {
