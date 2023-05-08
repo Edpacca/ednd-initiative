@@ -17,6 +17,7 @@
     import Wizard from "./Wizard.svelte";
     import ConfirmContinueTutorial from "./ConfirmContinueTutorial.svelte";
     import { setLocalStorageTutorialCompleted } from "../../lib/persistance";
+    import { closeTutorial } from "../../lib/tutorial";
 
     let stage: TutorialStage = 0;
     let ready = false;
@@ -30,13 +31,7 @@
     const previousStage = () => {
         stage = stage === 0 ? 0 : stage - 1;
     }
-
-    const closeTutorial = () => {
-        $isTutorialOpen = false;
-        $isTutorialCompleted = true;
-        setLocalStorageTutorialCompleted($isTutorialCompleted);
-    }
-
+    
     onMount(() => {
         ready = true;
     });
