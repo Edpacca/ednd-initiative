@@ -1,23 +1,34 @@
 <script lang="ts">
-    import { faGear, faSave, faQuestion, faPaintBrush, faMagnifyingGlass, faGears, faCross, faXmark } from '@fortawesome/free-solid-svg-icons'
+    import { faGear, faSave, faQuestion, faPaintBrush, faMagnifyingGlass, faGears, faCross, faXmark, faArrowRotateBack } from '@fortawesome/free-solid-svg-icons'
     import { slide } from "svelte/transition";
     import { isSettingsOpen, saveState } from "../../store";
     import AccordionTool from "./AccordionTool.svelte";
     import Advanced from "./advanced/Advanced.svelte";
-    import Load from "./load/Load.svelte";
-    import Save from "./save/Save.svelte";
     import SelectTheme from "./selectTheme/SelectTheme.svelte";
     import ViewSettings from "./viewSettings/ViewSettings.svelte";
     import Help from "./help/Help.svelte";
     import IconButton from '../common/buttons/IconButton.svelte';
     import SaveLoad from './save/SaveLoad.svelte';
+    import Tooltip from '../common/tooltip/Tooltip.svelte';
+    import ConfirmClearTracker from './advanced/ConfirmClearTracker.svelte';
+
+    enum State {
+        None,
+        Reset
+    }
+
+    let state = State.None;
 
     let isExperimentalEnabled = false;
-    let justSaved = false;
 </script>
 
 <div class="menu-button">
-    <IconButton icon={$isSettingsOpen ? faXmark : faGear} onClick={() => $isSettingsOpen = !$isSettingsOpen} spin={!$isSettingsOpen}/>
+    <Tooltip text="Settings" type="help">
+        <IconButton icon={$isSettingsOpen ? faXmark : faGear} onClick={() => $isSettingsOpen = !$isSettingsOpen} spin={!$isSettingsOpen}/>
+    </Tooltip>
+    <Tooltip text="Reset" type="help">
+        <IconButton icon={faArrowRotateBack} onClick={() => state = State.Reset}/>
+    </Tooltip>
 </div>
 {#if $isSettingsOpen}
     <div class="settings-menu" transition:slide>
@@ -51,6 +62,8 @@
         </div>
     </div>
 {/if}
+
+<ConfirmClearTracker isOpen={state === State.Reset} close={() => state = State.None}/>
 
 <style>
     .settings-menu {
@@ -86,6 +99,9 @@
         top: 0;
         left: 0;
         z-index: 11;
+        display: flex;
+        flex-direction: row;
+        column-gap: 0.5rem;
     }
 
 
