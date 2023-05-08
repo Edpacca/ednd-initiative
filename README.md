@@ -7,4 +7,4 @@ I give you the DM's new best friend - a stylish initiative tracker capable of tr
 A number of handy features ahve been baked in, such as temporary modifiers for AC values and tracking different environment effects with as many counters as you can fit on the screen (spoilers it's not as many as you'd think - but I'm not going to stop you from squeezing them on there).
 
 Play around with the beta version here on github pages: https://edpacca.github.io/ednd-initiative/.
-For now post any non-code related feedback on this reddit post: https://www.reddit.com/r/DnDBehindTheScreen/comments/13bnrgx/edpaccas_initiative_tracker_my_free_dm_tool_that/
+For now post any non-code related feedback on this reddit post: https://www.reddit.com/r/DMAcademy/comments/13brppc/edpaccas_initiative_tracker_my_free_dm_tool_that/
