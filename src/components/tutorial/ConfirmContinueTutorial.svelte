@@ -6,14 +6,9 @@
     import { elasticOut } from "svelte/easing";
     import { isTutorialCompleted, isTutorialOpen } from "../../store";
     import { setLocalStorageTutorialCompleted } from "../../lib/persistance";
+    import { closeTutorial } from "../../lib/tutorial";
 
     export let nextStage;
-
-    const closeTutorial = () => {
-        $isTutorialOpen = false;
-        $isTutorialCompleted = true;
-        setLocalStorageTutorialCompleted($isTutorialCompleted);
-    }
 
 </script>
 <div class="upside-down-swing">

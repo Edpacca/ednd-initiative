@@ -4,12 +4,7 @@
     import Wizard from "../Wizard.svelte";
     import { fly } from "svelte/transition";
     import { setLocalStorageTutorialCompleted } from "../../../lib/persistance";
-
-    const closeTutorial = () => {
-        $isTutorialOpen = false;
-        $isTutorialCompleted = true;
-        setLocalStorageTutorialCompleted($isTutorialCompleted);
-    }
+    import { closeTutorial } from "../../../lib/tutorial";
 </script>
 
 <div class="flex-col" in:fly="{{ y: 50, delay: 500, duration: 1000, easing: elasticOut }}">
