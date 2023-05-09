@@ -17,7 +17,7 @@
 
 <Modal isOpen={isOpen}>
     {#each text as line}
-        <p>{line}</p>
+        <p>{@html line}</p>
     {/each}
     <div class="button-container">
         <button class="submit-button" on:click={confirm} >Confirm</button>
