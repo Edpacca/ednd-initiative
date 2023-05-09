@@ -75,8 +75,8 @@
     {/if}
 </div>
 
-<ConfirmDelete party={slecectedEncounter} isOpen={state === State.Delete} cancel={cancel}/>
-<ConfirmLoad encounter={slecectedEncounter} isOpen={state === State.Load} cancel={cancel}/>
+<ConfirmDelete bind:party={slecectedEncounter} isOpen={state === State.Delete} cancel={cancel}/>
+<ConfirmLoad bind:encounter={slecectedEncounter} isOpen={state === State.Load} cancel={cancel}/>
 
 <style>
     .load-container {

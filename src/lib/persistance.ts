@@ -69,21 +69,21 @@ export function setLocalStorageEncounter(name: string, entities: Entity[], filte
     
     let party = entities.filter(e => filteredTypes.includes(e.type));
     party.forEach(e => e.initiative === undefined);
-    const existingParties: Encounter[] = getLocalStorageArr(StorageType.Encounter);
+    const existingEncounters: Encounter[] = getLocalStorageArr(StorageType.Encounter);
 
-    if (!existingParties) {
+    if (!existingEncounters) {
         setLocalStorageArr(StorageType.Encounter, []);
-    } else if (existingParties.find(p => p.name === name)) {
+    } else if (existingEncounters.find(p => p.name === name)) {
         if (!override) {
             throw new SaveError("A party already exists with that name. Are you sure you want to overwrite it?");
         } else {
             setLocalStorageArr(StorageType.Encounter, [
-                ...existingParties.filter(p => p.name !== name),
-                { name, party, filteredTypes }
+                ...existingEncounters.filter(p => p.name !== name),
+                { name, entities: party, filteredTypes }
             ]);
         }
     } else {
-        setLocalStorageArr(StorageType.Encounter, [...existingParties, { name, party, filteredTypes }]);
+        setLocalStorageArr(StorageType.Encounter, [...existingEncounters, { name, entities: party, filteredTypes }]);
     } 
 }
 

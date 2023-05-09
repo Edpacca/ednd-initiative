@@ -14,8 +14,8 @@
         encounter = undefined;
     }
 
-    const text = [
-        `Confirm loading ${encounter?.name} to the initiative tracker?`,
+    $: text = [
+        `Confirm loading <span class="gold">${encounter?.name}</span> to the initiative tracker?`,
         "This will not ovveride any entities that you have currently in the tracker"
     ]
 
