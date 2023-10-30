@@ -78,13 +78,12 @@
         display: flex;
         flex-direction: column;
         text-align: center;
-        min-width: var(--settings-menu-width);
+        width: var(--settings-menu-width);
         margin: var(--margin);
     }
 
-    @media only screen and (max-width: 986px) {
+    @media only screen and (max-width: 500px) {
         .settings-menu {
-            width: 40rem;
             left: 0;
             right: 0;
             margin: auto;

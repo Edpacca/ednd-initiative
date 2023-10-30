@@ -15,7 +15,7 @@
     }
 </script>
 
-<Modal isOpen={isOpen}>
+<Modal isOpen={isOpen} width={"15rem"}>
     {#each text as line}
         <p>{@html line}</p>
     {/each}

@@ -2,7 +2,7 @@
     import { onDestroy } from "svelte";
     import { isModalOpen } from "../../../store";
     export let isOpen: boolean;
-    export let width = "15rem";
+    export let width = "100%";
 
     $: $isModalOpen = isOpen;
 
@@ -24,7 +24,7 @@
         left: 0;
         right: 0;
         bottom: 0;
-        width: var(--width);
+        max-width: var(--width);
         margin: auto;
         height: fit-content;
         background-color: var(--dark-grey-90);

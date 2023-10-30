@@ -16,17 +16,16 @@
     --zoom-level: 1;
     --theme-background: url('/ednd-initiative/background/stone.webp');
     
-    --border-radius: 0.25rem;
-    --dropshadow-size: 0.75rem;
+    --border-radius: 4px;
+    --dropshadow-size: 2px;
     
     --z-modal-bkg: 49;
     --z-modal: 50;
     --z-tutorial: 100;
 
-    --main-width: 50rem;
-    --settings-menu-width: 18rem;
+    --settings-menu-width: 240px;
     
-    font-size: calc(14px * var(--zoom-level));
+    font-size: 14px;
 }   
 
 body {
@@ -39,7 +38,7 @@ body {
 }
 
 main {
-    padding: 2rem 6rem;
+    padding: 2rem 10%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -47,23 +46,23 @@ main {
     border: 2px solid var(--primary);
     border-radius: var(--border-radius);
     position: relative;
-    max-width: var(--main-width);
+    /* max-width: var(--main-width); */
     background: var(--dark-grey-90);
     z-index: 0;
-    margin: auto;
+    margin: 0 17vw;
   }
 
-@media only screen and (max-width: 986px) {
-    body {
-        margin: 0;
-        padding: 0;
-        max-width: none;
-        width: 100vw;
-    }
-
+@media only screen and (max-width: 1400px) {
+    
     main {
-        max-width: none;
-        width: 100vw;
+        margin: 0 10vw;
+    }
+}
+
+@media only screen and (max-width: 1100px) {
+  
+    main {
+        margin: 0;
     }
 }
 
