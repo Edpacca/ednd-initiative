@@ -1,5 +1,5 @@
 <script lang="ts">
-    import { faGear, faSave, faQuestion, faPaintBrush, faMagnifyingGlass, faGears, faCross, faXmark, faArrowRotateBack } from '@fortawesome/free-solid-svg-icons'
+    import { faGear, faSave, faQuestion, faPaintBrush, faMagnifyingGlass, faGears, faCross, faXmark, faArrowRotateBack, faTrash } from '@fortawesome/free-solid-svg-icons'
     import { slide } from "svelte/transition";
     import { isSettingsOpen, saveState } from "../../store";
     import AccordionTool from "./AccordionTool.svelte";
@@ -11,10 +11,12 @@
     import SaveLoad from './save/SaveLoad.svelte';
     import Tooltip from '../common/tooltip/Tooltip.svelte';
     import ConfirmClearTracker from './advanced/ConfirmClearTracker.svelte';
+    import ConfirmResetTracker from './advanced/ConfirmResetTracker.svelte';
 
     enum State {
         None,
-        Reset
+        Reset,
+        Clear
     }
 
     let state = State.None;
@@ -26,7 +28,10 @@
     <Tooltip text="Settings" type="help">
         <IconButton icon={$isSettingsOpen ? faXmark : faGear} onClick={() => $isSettingsOpen = !$isSettingsOpen} spin={!$isSettingsOpen}/>
     </Tooltip>
-    <Tooltip text="Reset" type="help">
+    <Tooltip text="Clear" type="help">
+        <IconButton icon={faTrash} onClick={() => state = State.Clear}/>
+    </Tooltip>
+    <Tooltip text="Reset turns" type="help">
         <IconButton icon={faArrowRotateBack} onClick={() => state = State.Reset}/>
     </Tooltip>
 </div>
@@ -63,7 +68,8 @@
     </div>
 {/if}
 
-<ConfirmClearTracker isOpen={state === State.Reset} close={() => state = State.None}/>
+<ConfirmClearTracker isOpen={state === State.Clear} close={() => state = State.None}/>
+<ConfirmResetTracker isOpen={state === State.Reset} close={() => state = State.None}/>
 
 <style>
     .settings-menu {

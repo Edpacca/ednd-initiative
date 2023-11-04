@@ -3,7 +3,7 @@
     import { isLocked, isStarted } from "../../../store";
     import ConfirmationModal from "../../common/modal/ConfirmationModal.svelte";
     import { clearLogs } from "../../../lib/logger";
-    import { reset } from "../../../lib/reset";
+    import { resetAll } from "../../../lib/reset";
     export let isOpen;
     export let close: () => void;
 
